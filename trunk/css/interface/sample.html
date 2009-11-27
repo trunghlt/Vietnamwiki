@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC
+          "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="sample.css" />
+
+<script type="text/javascript" src="popup.js">
+</script>
+
+</head>
+<body>
+
+<h3>DHTML Popup Window</h3>
+
+<form>
+<input type="button" value="Corner"
+       onclick="popup_show('popup', 'popup_drag', 'popup_exit', 'screen-corner', 10, 10);" />
+<input type="button" value="Center"
+       onclick="popup_show('popup', 'popup_drag', 'popup_exit', 'screen-center', 10, 10);" />
+<input type="button" value="Mouse"
+       onclick="popup_show('popup', 'popup_drag', 'popup_exit', 'mouse-corner', -10, -10);" />
+<input type="button" value="Right"  id="pos_right"
+       onclick="popup_show('popup', 'popup_drag', 'popup_exit', 'element-right' , 10, 0, 'pos_right');" />
+<input type="button" value="Bottom" id="pos_bottom"
+       onclick="popup_show('popup', 'popup_drag', 'popup_exit', 'element-bottom', 0, 10, 'pos_bottom');" />
+<input type="button" value="Default"
+       onclick="popup_show('popup', 'popup_drag', 'popup_exit');" />
+</form>
+
+<br />
+<br />
+<div style="font-stile: Arial, Sans-Serif; font-size: 75%;">
+<a href="http://www.hotscripts.com/Detailed/62154.html">Vote</a> for the script.
+<br />
+Web scripts <a href="http://www.php-development.ru/products/collection/">collection</a>.
+</div>
+
+<div class="sample_popup"     id="popup" style="visibility: hidden; display: none;">
+<div class="menu_form_header" id="popup_drag">
+<img class="menu_form_exit"   id="popup_exit" src="interface/form_exit.png" />
+&nbsp;&nbsp;&nbsp;Login
+</div>
+<div class="menu_form_body">
+<form method="post" action="popup.php">
+<table>
+<tr>
+  <th>Username:</th>
+  <td><input class="field" type="text" onfocus="select();" /></td>
+</tr>
+<tr>
+  <th>Password:</th>
+  <td><input class="field" type="password" onfocus="select();" /></td>
+</tr>
+<tr>
+  <th>&nbsp;</th>
+  <td><input class="btn" type="submit" value="Submit" /></td>
+</tr>
+</table>
+</form>
+</div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Googlemaps</title>
+	<script type="text/javascript" src="../../tiny_mce_popup.js?v=307"></script>
+	<script type="text/javascript" src="../../utils/mctabs.js"></script>
+	<script type="text/javascript" src="js/dialog.js?v=307"></script>
+	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=ABQIAAAAV1hMY6P-vcrStESIcmxsyBSg0YMtASE5KdM7LALqADHM9SZ_PBTZqozQ8fKlIDHry-cBnAxWYeYpSw" type="text/javascript"></script>
+
+<script type="text/javascript">
+   //<![CDATA[
+
+   var map;
+
+function showAddress(address)
+{
+	var map = null;
+	var geocoder = null;
+	map = new GMap2(document.getElementById("map"));
+	map.setCenter(new GLatLng(37.4419, -122.1419), 13);
+	geocoder = new GClientGeocoder();
+	if (geocoder)
+	{
+	  geocoder.getLatLng(address,
+	          function(point) {
+	            if (!point) {
+	              alert(address + " not found");
+	            } else {
+					map.setCenter(point, 13);
+					var customUI = map.getDefaultUI();
+					customUI.maptypes.hybrid = false;
+					map.setUI(customUI)
+					var marker = new GMarker(point, {icon:G_DEFAULT_ICON, draggable: true});
+					map.addOverlay(marker);
+					document.getElementById("coords").value=marker.getPoint().lat()+","+marker.getPoint().lng();
+					document.getElementById("zoomlevel").value = map.getZoom();
+	            }
+	          }
+	        );
+	}
+
+}
+
+   function load() {
+     if (GBrowserIsCompatible()) {
+		var map = new GMap2(document.getElementById("map"));
+		map.setCenter(new GLatLng(48.123351,11.54353), 4);
+//		map.addControl(new GMapTypeControl(2));
+//		map.addControl(new GLargeMapControl());
+		 var customUI = map.getDefaultUI();
+        // Remove MapType.G_HYBRID_MAP
+        customUI.maptypes.hybrid = false;
+        map.setUI(customUI)
+
+		map.enableContinuousZoom();
+		map.enableDoubleClickZoom();
+
+		// "tiny" marker icon
+		var vnwkIcon = new GIcon();
+		//icon.image = "http://labs.google.com/ridefinder/images/mm_20_red.png";
+		//icon.shadow = "http://labs.google.com/ridefinder/images/mm_20_shadow.png";
+		vnwkIcon.image = "/images/marker.png";
+		vnwkIcon.iconSize = new GSize(32, 32);
+		vnwkIcon.shadowSize = new GSize(0, 0);
+		vnwkIcon.iconAnchor = new GPoint(10, 24);
+		vnwkIcon.infoWindowAnchor = new GPoint(5, 1);
+
+		/////Draggable markers
+		var point = new GLatLng(48.123351,11.54353);
+		var markerD2 = new GMarker(point, {icon:vnwkIcon, draggable: true});
+		map.addOverlay(markerD2);
+
+		markerD2.enableDragging();
+
+		GEvent.addListener(markerD2, "drag", function(){
+		document.getElementById("coords").value=markerD2.getPoint().lat()+","+markerD2.getPoint().lng();
+		document.getElementById("zoomlevel").value = map.getZoom();
+		});
+
+     }
+}
+
+   //]]>
+   </script>
+
+
+</head>
+ <body onload="load()" onunload="GUnload()">
+
+
+<form onsubmit="ExampleDialog.insert();return false;" action="#">
+
+		<div class="tabs">
+			<ul>
+				<li id="general_tab" class="current"><span><a href="javascript:mcTabs.displayTab('general_tab','general_panel');" onmousedown="return false;">General</a></span></li>
+				<li id="advanced_tab"><span><a href="javascript:mcTabs.displayTab('advanced_tab','advanced_panel');" onmousedown="return false;">Advanced</a></span></li>
+			</ul>
+		</div>
+
+		<div class="panel_wrapper">
+
+			<div id="general_panel" class="panel current" style="height:420px">
+				<fieldset>
+					<legend>Map</legend>
+						<table border="0" cellspacing="0" cellpadding="4">
+							<tr>
+								<td colspan="2"><div id="map" style="width:575px;height:300px;overflow:hidden"></div></td>
+							</tr>
+						</table>
+				</fieldset>
+				<fieldset style="margin-top:10px">
+					<legend>Location</legend>
+					<table border="0" cellspacing="0" cellpadding="4">
+						<tr>
+							<td>Coordinates:</td><td><input style="width:500px;" id="coords" name="coords" type="text" class="text" /></td>
+						</tr>
+						<tr>
+							<td>Address:</td><td><input size="60" id="address" name="address" value="1600 Amphitheatre Pky, Mountain View, CA" type="text" onblur="showAddress(this.value);return false;"><input type="button" onclick="showAddress(document.getElementById('address').value);return false;" style="border:1px solid #555;background:white;margin-left:10px;" value="Search" /></td>
+						</tr>
+					</table>
+				</fieldset>
+			</div>
+
+			<div id="advanced_panel" class="panel">
+				<fieldset>
+					<legend>Map-Size</legend>
+					<table border="0" cellspacing="0" cellpadding="4">
+							<tr>
+								<td colspan="2">
+									<table border="0" cellspacing="0" cellpadding="0" width="575">
+										<td width="50%">
+											Width: <input style="width:180px;" id="width" name="width" type="text" class="text" value="300" /> Pixel
+										</td>
+										<td align="right" width="50%">
+											Height: <input style="width:180px;" id="height" name="height" type="text" class="text" value="300" /> Pixel
+										</td>
+									</table>
+								</td>
+								<td></td>
+							</tr>
+					</table>
+				</fieldset>
+
+
+				<fieldset style="margin-top:10px">
+					<legend>Map-Options</legend>
+					<table border="0" cellspacing="0" cellpadding="4">
+						<tr>
+							<td>Zoom-Level:</td>
+							<td><input type="text" value="13" name="zoomlevel" id="zoomlevel" class="text" /> <small>(Updates after the marker is placed or moved)</small></td>
+						</tr>
+						<tr>
+							<td>Map-Style:</td>
+							<td>
+								<select name="mapsytle" id="mapstyle">
+									<option value="1" selected>Normal Map</option>
+									<option value="2">Satellite Map</option>
+									<option value="3">Hybrid Map</option>
+									<option value="4">Physical Map</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>Map-Controls:</td>
+							<td>
+								<select name="hud" id="hud">
+									<option value="1">Simple controls</option>
+									<option value="2" selected>3D Controls</option>
+									<option value="3">No controls</option>
+								</select>
+							</td>
+						</tr>
+					</table>
+				</fieldset>
+
+				<fieldset style="margin-top:10px">
+					<legend>Div ID</legend>
+							<div style="padding:4px">ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input style="width:530px;" value="map" id="divnaam" name="divnaam" type="text" class="text" /></div>
+				</fieldset>
+
+				<fieldset style="margin-top:10px">
+					<legend>API-KEY:</legend>
+						<div style="padding:4px"><input id="akey" name="akey" type="text" value="ABQIAAAAV1hMY6P-vcrStESIcmxsyBSg0YMtASE5KdM7LALqADHM9SZ_PBTZqozQ8fKlIDHry-cBnAxWYeYpSw" class="text" style="width:570px" /></div>
+				</fieldset>
+
+
+
+
+
+			</div>
+		</div>
+
+	<div class="mceActionPanel">
+		<div style="float: left">
+			<input type="button" id="insert" name="insert" value="{#insert}" onclick="ExampleDialog.insert();" />
+		</div>
+
+		<div style="float: right">
+			<input type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" />
+		</div>
+	</div>
+
+</form>
+
+</body>
+</html>

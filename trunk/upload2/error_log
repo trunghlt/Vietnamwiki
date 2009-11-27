@@ -1,0 +1,136 @@
+[12-Aug-2009 23:22:47] PHP Warning:  imagesx(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 24
+[12-Aug-2009 23:22:47] PHP Warning:  imagesy(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 25
+[12-Aug-2009 23:22:47] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 27
+[12-Aug-2009 23:22:47] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 28
+[12-Aug-2009 23:22:47] PHP Warning:  imagecreatetruecolor() [<a href='function.imagecreatetruecolor'>function.imagecreatetruecolor</a>]: Invalid image dimensions in /home/vietnamw/public_html/upload2/resize.php on line 35
+[12-Aug-2009 23:22:47] PHP Warning:  imagecopyresampled(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 37
+[12-Aug-2009 23:22:47] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/vietnamw/public_html/upload2/resize.php:24) in /home/vietnamw/public_html/upload2/resize.php on line 56
+[12-Aug-2009 23:22:47] PHP Warning:  imagejpeg(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 51
+[12-Aug-2009 23:58:43] PHP Warning:  imagesx(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 24
+[12-Aug-2009 23:58:43] PHP Warning:  imagesy(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 25
+[12-Aug-2009 23:58:43] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 27
+[12-Aug-2009 23:58:43] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 28
+[12-Aug-2009 23:58:43] PHP Warning:  imagecreatetruecolor() [<a href='function.imagecreatetruecolor'>function.imagecreatetruecolor</a>]: Invalid image dimensions in /home/vietnamw/public_html/upload2/resize.php on line 35
+[12-Aug-2009 23:58:43] PHP Warning:  imagecopyresampled(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 37
+[12-Aug-2009 23:58:43] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/vietnamw/public_html/upload2/resize.php:24) in /home/vietnamw/public_html/upload2/resize.php on line 56
+[12-Aug-2009 23:58:43] PHP Warning:  imagejpeg(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 51
+[13-Aug-2009 19:35:18] PHP Warning:  imagesx(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 24
+[13-Aug-2009 19:35:18] PHP Warning:  imagesy(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 25
+[13-Aug-2009 19:35:18] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 27
+[13-Aug-2009 19:35:18] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 28
+[13-Aug-2009 19:35:18] PHP Warning:  imagecreatetruecolor() [<a href='function.imagecreatetruecolor'>function.imagecreatetruecolor</a>]: Invalid image dimensions in /home/vietnamw/public_html/upload2/resize.php on line 35
+[13-Aug-2009 19:35:18] PHP Warning:  imagecopyresampled(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 37
+[13-Aug-2009 19:35:18] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/vietnamw/public_html/upload2/resize.php:24) in /home/vietnamw/public_html/upload2/resize.php on line 56
+[13-Aug-2009 19:35:18] PHP Warning:  imagejpeg(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 51
+[14-Aug-2009 23:24:52] PHP Warning:  imagesx(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 24
+[14-Aug-2009 23:24:52] PHP Warning:  imagesy(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 25
+[14-Aug-2009 23:24:52] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 27
+[14-Aug-2009 23:24:52] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 28
+[14-Aug-2009 23:24:52] PHP Warning:  imagecreatetruecolor() [<a href='function.imagecreatetruecolor'>function.imagecreatetruecolor</a>]: Invalid image dimensions in /home/vietnamw/public_html/upload2/resize.php on line 35
+[14-Aug-2009 23:24:52] PHP Warning:  imagecopyresampled(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 37
+[14-Aug-2009 23:24:52] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/vietnamw/public_html/upload2/resize.php:24) in /home/vietnamw/public_html/upload2/resize.php on line 56
+[14-Aug-2009 23:24:52] PHP Warning:  imagejpeg(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 51
+[14-Aug-2009 23:25:22] PHP Warning:  imagesx(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 24
+[14-Aug-2009 23:25:22] PHP Warning:  imagesy(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 25
+[14-Aug-2009 23:25:22] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 27
+[14-Aug-2009 23:25:22] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 28
+[14-Aug-2009 23:25:22] PHP Warning:  imagecreatetruecolor() [<a href='function.imagecreatetruecolor'>function.imagecreatetruecolor</a>]: Invalid image dimensions in /home/vietnamw/public_html/upload2/resize.php on line 35
+[14-Aug-2009 23:25:22] PHP Warning:  imagecopyresampled(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 37
+[14-Aug-2009 23:25:22] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/vietnamw/public_html/upload2/resize.php:24) in /home/vietnamw/public_html/upload2/resize.php on line 56
+[14-Aug-2009 23:25:22] PHP Warning:  imagejpeg(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 51
+[14-Aug-2009 23:26:04] PHP Warning:  imagesx(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 24
+[14-Aug-2009 23:26:04] PHP Warning:  imagesy(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 25
+[14-Aug-2009 23:26:04] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 27
+[14-Aug-2009 23:26:04] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 28
+[14-Aug-2009 23:26:04] PHP Warning:  imagecreatetruecolor() [<a href='function.imagecreatetruecolor'>function.imagecreatetruecolor</a>]: Invalid image dimensions in /home/vietnamw/public_html/upload2/resize.php on line 35
+[14-Aug-2009 23:26:04] PHP Warning:  imagecopyresampled(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 37
+[14-Aug-2009 23:26:04] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/vietnamw/public_html/upload2/resize.php:24) in /home/vietnamw/public_html/upload2/resize.php on line 56
+[14-Aug-2009 23:26:04] PHP Warning:  imagejpeg(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 51
+[14-Aug-2009 23:26:24] PHP Warning:  imagesx(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 24
+[14-Aug-2009 23:26:24] PHP Warning:  imagesy(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 25
+[14-Aug-2009 23:26:24] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 27
+[14-Aug-2009 23:26:24] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 28
+[14-Aug-2009 23:26:24] PHP Warning:  imagecreatetruecolor() [<a href='function.imagecreatetruecolor'>function.imagecreatetruecolor</a>]: Invalid image dimensions in /home/vietnamw/public_html/upload2/resize.php on line 35
+[14-Aug-2009 23:26:24] PHP Warning:  imagecopyresampled(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 37
+[14-Aug-2009 23:26:24] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/vietnamw/public_html/upload2/resize.php:24) in /home/vietnamw/public_html/upload2/resize.php on line 56
+[14-Aug-2009 23:26:24] PHP Warning:  imagejpeg(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 51
+[17-Aug-2009 11:30:32] PHP Warning:  imagesx(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 24
+[17-Aug-2009 11:30:32] PHP Warning:  imagesy(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 25
+[17-Aug-2009 11:30:32] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 27
+[17-Aug-2009 11:30:32] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 28
+[17-Aug-2009 11:30:32] PHP Warning:  imagecreatetruecolor() [<a href='function.imagecreatetruecolor'>function.imagecreatetruecolor</a>]: Invalid image dimensions in /home/vietnamw/public_html/upload2/resize.php on line 35
+[17-Aug-2009 11:30:32] PHP Warning:  imagecopyresampled(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 37
+[17-Aug-2009 11:30:32] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/vietnamw/public_html/upload2/resize.php:24) in /home/vietnamw/public_html/upload2/resize.php on line 56
+[17-Aug-2009 11:30:32] PHP Warning:  imagejpeg(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 51
+[17-Aug-2009 11:30:48] PHP Warning:  imagesx(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 24
+[17-Aug-2009 11:30:48] PHP Warning:  imagesy(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 25
+[17-Aug-2009 11:30:48] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 27
+[17-Aug-2009 11:30:48] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 28
+[17-Aug-2009 11:30:48] PHP Warning:  imagecreatetruecolor() [<a href='function.imagecreatetruecolor'>function.imagecreatetruecolor</a>]: Invalid image dimensions in /home/vietnamw/public_html/upload2/resize.php on line 35
+[17-Aug-2009 11:30:48] PHP Warning:  imagecopyresampled(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 37
+[17-Aug-2009 11:30:48] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/vietnamw/public_html/upload2/resize.php:24) in /home/vietnamw/public_html/upload2/resize.php on line 56
+[17-Aug-2009 11:30:48] PHP Warning:  imagejpeg(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 51
+[17-Aug-2009 21:54:07] PHP Warning:  imagesx(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 24
+[17-Aug-2009 21:54:07] PHP Warning:  imagesy(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 25
+[17-Aug-2009 21:54:07] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 27
+[17-Aug-2009 21:54:07] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 28
+[17-Aug-2009 21:54:07] PHP Warning:  imagecreatetruecolor() [<a href='function.imagecreatetruecolor'>function.imagecreatetruecolor</a>]: Invalid image dimensions in /home/vietnamw/public_html/upload2/resize.php on line 35
+[17-Aug-2009 21:54:07] PHP Warning:  imagecopyresampled(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 37
+[17-Aug-2009 21:54:07] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/vietnamw/public_html/upload2/resize.php:24) in /home/vietnamw/public_html/upload2/resize.php on line 56
+[17-Aug-2009 21:54:07] PHP Warning:  imagejpeg(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 51
+[17-Aug-2009 21:57:40] PHP Warning:  imagesx(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 24
+[17-Aug-2009 21:57:40] PHP Warning:  imagesy(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 25
+[17-Aug-2009 21:57:40] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 27
+[17-Aug-2009 21:57:40] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 28
+[17-Aug-2009 21:57:40] PHP Warning:  imagecreatetruecolor() [<a href='function.imagecreatetruecolor'>function.imagecreatetruecolor</a>]: Invalid image dimensions in /home/vietnamw/public_html/upload2/resize.php on line 35
+[17-Aug-2009 21:57:40] PHP Warning:  imagecopyresampled(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 37
+[17-Aug-2009 21:57:40] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/vietnamw/public_html/upload2/resize.php:24) in /home/vietnamw/public_html/upload2/resize.php on line 56
+[17-Aug-2009 21:57:40] PHP Warning:  imagejpeg(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 51
+[17-Aug-2009 22:05:07] PHP Warning:  imagesx(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 24
+[17-Aug-2009 22:05:07] PHP Warning:  imagesy(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 25
+[17-Aug-2009 22:05:07] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 27
+[17-Aug-2009 22:05:07] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 28
+[17-Aug-2009 22:05:07] PHP Warning:  imagecreatetruecolor() [<a href='function.imagecreatetruecolor'>function.imagecreatetruecolor</a>]: Invalid image dimensions in /home/vietnamw/public_html/upload2/resize.php on line 35
+[17-Aug-2009 22:05:07] PHP Warning:  imagecopyresampled(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 37
+[17-Aug-2009 22:05:07] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/vietnamw/public_html/upload2/resize.php:24) in /home/vietnamw/public_html/upload2/resize.php on line 56
+[17-Aug-2009 22:05:07] PHP Warning:  imagejpeg(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 51
+[20-Aug-2009 23:37:32] PHP Warning:  imagesx(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 24
+[20-Aug-2009 23:37:32] PHP Warning:  imagesy(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 25
+[20-Aug-2009 23:37:32] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 27
+[20-Aug-2009 23:37:32] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 28
+[20-Aug-2009 23:37:32] PHP Warning:  imagecreatetruecolor() [<a href='function.imagecreatetruecolor'>function.imagecreatetruecolor</a>]: Invalid image dimensions in /home/vietnamw/public_html/upload2/resize.php on line 35
+[20-Aug-2009 23:37:32] PHP Warning:  imagecopyresampled(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 37
+[20-Aug-2009 23:37:32] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/vietnamw/public_html/upload2/resize.php:24) in /home/vietnamw/public_html/upload2/resize.php on line 56
+[20-Aug-2009 23:37:32] PHP Warning:  imagejpeg(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 51
+[25-Aug-2009 16:19:09] PHP Warning:  imagesx(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 24
+[25-Aug-2009 16:19:09] PHP Warning:  imagesy(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 25
+[25-Aug-2009 16:19:09] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 27
+[25-Aug-2009 16:19:09] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 28
+[25-Aug-2009 16:19:09] PHP Warning:  imagecreatetruecolor() [<a href='function.imagecreatetruecolor'>function.imagecreatetruecolor</a>]: Invalid image dimensions in /home/vietnamw/public_html/upload2/resize.php on line 35
+[25-Aug-2009 16:19:09] PHP Warning:  imagecopyresampled(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 37
+[25-Aug-2009 16:19:09] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/vietnamw/public_html/upload2/resize.php:24) in /home/vietnamw/public_html/upload2/resize.php on line 56
+[25-Aug-2009 16:19:09] PHP Warning:  imagejpeg(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 51
+[30-Sep-2009 18:25:55] PHP Warning:  imagesx(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 24
+[30-Sep-2009 18:25:55] PHP Warning:  imagesy(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 25
+[30-Sep-2009 18:25:55] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 27
+[30-Sep-2009 18:25:55] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 28
+[30-Sep-2009 18:25:55] PHP Warning:  imagecreatetruecolor() [<a href='function.imagecreatetruecolor'>function.imagecreatetruecolor</a>]: Invalid image dimensions in /home/vietnamw/public_html/upload2/resize.php on line 35
+[30-Sep-2009 18:25:55] PHP Warning:  imagecopyresampled(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 37
+[30-Sep-2009 18:25:55] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/vietnamw/public_html/upload2/resize.php:24) in /home/vietnamw/public_html/upload2/resize.php on line 56
+[30-Sep-2009 18:25:55] PHP Warning:  imagejpeg(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 51
+[30-Sep-2009 18:54:31] PHP Warning:  imagesx(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 24
+[30-Sep-2009 18:54:31] PHP Warning:  imagesy(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 25
+[30-Sep-2009 18:54:31] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 27
+[30-Sep-2009 18:54:31] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 28
+[30-Sep-2009 18:54:31] PHP Warning:  imagecreatetruecolor() [<a href='function.imagecreatetruecolor'>function.imagecreatetruecolor</a>]: Invalid image dimensions in /home/vietnamw/public_html/upload2/resize.php on line 35
+[30-Sep-2009 18:54:31] PHP Warning:  imagecopyresampled(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 37
+[30-Sep-2009 18:54:31] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/vietnamw/public_html/upload2/resize.php:24) in /home/vietnamw/public_html/upload2/resize.php on line 56
+[30-Sep-2009 18:54:31] PHP Warning:  imagejpeg(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 51
+[30-Sep-2009 18:56:54] PHP Warning:  imagesx(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 24
+[30-Sep-2009 18:56:54] PHP Warning:  imagesy(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 25
+[30-Sep-2009 18:56:54] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 27
+[30-Sep-2009 18:56:54] PHP Warning:  Division by zero in /home/vietnamw/public_html/upload2/resize.php on line 28
+[30-Sep-2009 18:56:54] PHP Warning:  imagecreatetruecolor() [<a href='function.imagecreatetruecolor'>function.imagecreatetruecolor</a>]: Invalid image dimensions in /home/vietnamw/public_html/upload2/resize.php on line 35
+[30-Sep-2009 18:56:54] PHP Warning:  imagecopyresampled(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 37
+[30-Sep-2009 18:56:54] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/vietnamw/public_html/upload2/resize.php:24) in /home/vietnamw/public_html/upload2/resize.php on line 56
+[30-Sep-2009 18:56:54] PHP Warning:  imagejpeg(): supplied argument is not a valid Image resource in /home/vietnamw/public_html/upload2/resize.php on line 51
