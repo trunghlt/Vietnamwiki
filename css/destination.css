@@ -1,0 +1,9 @@
+ul.itemList {
+	list-style-image: url("images/bg/arrow.jpg");
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+ul.itemList > li.indexItem {
+	padding: 3px;
+}

@@ -1,0 +1,274 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Corner.js (with IE 6/7 support)</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-language" content="en">	<link rel="bookmark" type="text/html" title="Corner.js" href="http://www.netzgesta.de/corner/">
+	<meta name="Author" lang="en" content="corner.netzgesta.de - Christian Effenberger">	<meta name="Publisher" lang="en" content="www.netzgesta.de">	<meta name="Copyright" lang="en" content="www.netzgesta.de - Christian Effenberger">	<meta name="Generator" lang="en" content="Christian Effenberger">
+	<meta name="Description" lang="en" content="Corner.js 1.8 allows you to add corners (and also shading and shadow) to images on your webpages through unobtrusive javascript">
+	<meta name="Keywords" lang="en" content="corner.js, justcorners.js, images, corners, shading, shadow, unobtrusive javascript, Mozilla, Firefox, Opera, Safari, public domain">
+	<meta http-equiv="imagetoolbar" content="no">
+	<meta http-equiv="Content-Style-Type" content="text/css">
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+<script type="text/javascript" src="justcorners.js"></script>
+<script type="text/javascript" src="corner.js"></script>
+<style type="text/css">
+a { color: blue; font-style:italic; text-decoration:none; }
+tt {color: green;}
+b {color: #a00000;}
+body { background: url(backgrnd.jpg) white; color: black; font-family: Georgia; line-height: 1.5; margin: 0.5em 1em;}
+h2 { line-height: 1; }
+.demo { float: left; padding: 10px; }
+#guru { float: none; padding: 4px; width: 99%; height: auto; text-align: center; background-color: black; }
+#guru div { float: none; border: solid 3px red; padding: 4px; font-family: monospace; font-size: 1.25em; width: auto; height: auto; color: red; text-align: center; text-decoration: blink; }
+.bookmarks { white-space: nowrap; width: 98%; margin: 0; padding-top: 10px; border-top: 1px dotted gray;}
+</style>
+</head>
+<body><noscript><div id="guru" title="By this you can recognize the Amiga fan!"><div><b>Guru Meditation</b> - With deactivated JavaScript: Images stay unmodified!</div></div></noscript>
+
+<table>
+<tr><td valign="top" style="padding-top: 0.5em"><a href="corner.zip" title="download corner.js"><img src="corner.jpg" border="0" class="corner iradius16 ishadow30 inverse" alt="corner.js"></a></td>
+<td style="padding: 0 0 0 15px; margin: 0; line-height: 1.5; font-style: italic;">
+<p><strong>Corner.js 1.8</strong> allows you to add corners (and also shading and shadow) to images on your webpages (alternatively: <a href="http://glossy.netzgesta.de/" title="glossy images">glossy.js</a>). It uses unobtrusive javascript to keep your code clean.</p>
+<p>It works in all the major browsers - Mozilla Firefox 1.5+, Opera 9+, IE 6+ and Safari. On older browsers, it'll degrade and your visitors won't notice a thing.</p>
+<p><small><a href="http://lab.netzgesta.de/" title="showcase">CVI-lab</a>: Get a fast impression of the effects and their illustration qualities.</small></p>
+</td></tr>
+</table>
+
+<h2>Setting Up</h2>
+
+<p>Download "corner.js" and include it into your webpage.</p>
+
+<code>
+&lt;script type="text/javascript" src="<tt>corner.js</tt>"&gt;&lt;/script&gt;
+</code>
+
+<h2>Using It</h2>
+
+<p>To add corners just add a class="<tt>corner</tt>" and an additonal class like "<tt>iradius16</tt>" to the image.</p>
+
+<h2>Classes</h2>
+
+<ul>
+<li>Initialisation class "<tt>corner</tt>"</li>
+<li><small><em>vary the radius by adding iradius followed by the desired <b>radius</b> in pixel:</em></small><br>
+Corner radius class "<tt>iradius24</tt>" - min=0 max=100 default=0</li>
+<li><small><em>vary the shading by adding ishade followed by the desired <b>opacity</b> in percentage:</em></small><br>
+Image shading class "<tt>ishade50</tt>" - min=0 max=100 default=0</li>
+<li><small><em>vary the shadow by adding ishadow followed by the desired <b>opacity</b> in percentage:</em></small><br>
+Image shadow class "<tt>ishadow33</tt>" - min=0 max=100 default=0</li>
+<li><small><em>vary the shadow by adding inverse:</em></small><br>
+Shadow invert class "<tt>inverse</tt>"</li>
+</ul>
+
+<h2>Scripting</h2>
+
+<p>If you want flexibility, use "<b>cvi_corner_lib.js</b>" instead of "<b>corner.js</b>". 
+You can make your images respond to user actions (e.g. changing one or more options when the image is hovered over).</p>
+<dl>
+	<dt><strong>Set</strong> defaults using Javascript</dt>
+	<dd>
+		<code>
+		cvi_corner.defaultRadius = 0; <tt>//INT 0-100 (px)</tt><br>
+		cvi_corner.defaultShadow = 0; <tt>//INT 0-100 (% opacity)</tt><br>
+		cvi_corner.defaultShade = 0; <tt>//INT 0-100 (% opacity)</tt><br>
+		cvi_corner.defaultInverse = false; <tt>//BOOLEAN</tt>
+		</code>
+  		<p></p>
+	</dd>
+	<dt><strong>Add</strong> images using Javascript</dt>
+  	<dd>
+  		<code>cvi_corner.add(<tt>image</tt>, <tt>options</tt>);</code><br><small>
+		<tt>image</tt> should be an image element: document.getElementById(<b>"myimg"</b>)<br>
+		<tt>options</tt> can contain one or more values: {<tt>radius</tt>: <b>value</b>, <tt>shadow</tt>: <b>value</b>, <tt>shade</tt>: <b>value</b>, <tt>inverse</tt>: <b>value</b>}</small>
+		<dl><dt>Example:</dt>
+		<dd>
+			<code>cvi_corner.add(document.getElementById(<b>"myimg"</b>), { <tt>shadow</tt>: <b>75</b>, <tt>shade</tt>: <b>0</b> });</code>  		</dd></dl>
+  		<p></p>
+  	</dd>
+	<dt><strong>Modify</strong> images using Javascript</dt>
+  	<dd>
+  		<code>cvi_corner.modify(<tt>image</tt>, <tt>options</tt>);</code><br>
+  		<small>If the image has already an effect but a <tt>option</tt> value has changed, the effect will be changed accordingly.</small><br>
+		<dl><dt>Example:</dt>
+		<dd>
+			<code>cvi_corner.modify(document.getElementById(<b>"myimg"</b>), { <tt>radius</tt>: <b>50</b> });</code>
+  		</dd></dl>
+		<p></p>
+  	</dd>
+	<dt><strong>Remove</strong> effect from an image using Javascript</dt>
+	<dd>
+		<code>cvi_corner.remove(<tt>image</tt>);</code>
+  		<p></p>
+	</dd>
+</dl>
+	
+<p><br>Alternatively use "<b>cvi_corners_lib.js</b>" instead of "<b>justcorners.js</b>".</p> 
+	
+<dl>
+	<dt><strong>Set</strong> defaults using Javascript</dt>
+	<dd>
+		<code>
+		cvi_corners.defaultXradius = 16; <tt>//INT 0-100 (px)</tt><br>
+		cvi_corners.defaultYradius = 0; <tt>//INT 0-100 (px)</tt><br>
+		cvi_corners.defaultCorners = "1111"; <tt>//STR "0000"-"1111" [top left|top right|bottom left|bottom right]</tt><br>
+		cvi_corners.defaultBorder = 0; <tt>//INT 0-100 (px borderwidth)</tt><br>
+		cvi_corners.defaultColor = "#0000ff"; <tt>//STR "#000000"-"#ffffff" bordercolor</tt><br>
+		cvi_corners.defaultOpacity = 100; <tt>//INT 0-100 (% borderopacity)</tt><br>
+		</code>
+  		<p></p>
+	</dd>
+	<dt><strong>Add</strong> images using Javascript</dt>
+  	<dd>
+  		<code>cvi_corners.add(<tt>image</tt>, <tt>options</tt>);</code><br><small>
+		<tt>image</tt> should be an image element: document.getElementById(<b>"myimg"</b>)<br>
+		<tt>options</tt> can contain one or more values: {<tt>xradius</tt>: <b>value</b>, <tt>yradius</tt>: <b>value</b>, <tt>corners</tt>: <b>value</b>}</small>
+		<dl><dt>Example:</dt>
+		<dd>
+			<code>cvi_corners.add(document.getElementById(<b>"myimg"</b>), { <tt>corners</tt>: <b>"1010"</b> });</code>  		</dd></dl>
+  		<p></p>
+  	</dd>
+	<dt><strong>Modify</strong> images using Javascript</dt>
+  	<dd>
+  		<code>cvi_corners.modify(<tt>image</tt>, <tt>options</tt>);</code><br>
+  		<small>If the image has already an effect but a <tt>option</tt> value has changed, the effect will be changed accordingly.</small><br>
+		<dl><dt>Example:</dt>
+		<dd>
+			<code>cvi_corners.modify(document.getElementById(<b>"myimg"</b>), { <tt>xradius</tt>: <b>20</b>, <tt>yradius</tt>: <b>10</b> });</code>
+  		</dd></dl>
+		<p></p>
+  	</dd>
+	<dt><strong>Remove</strong> effect from an image using Javascript</dt>
+	<dd>
+		<code>cvi_corners.remove(<tt>image</tt>);</code>
+  		<p></p>
+	</dd>
+</dl>
+</div>
+
+<h2>Demonstration</h2>
+
+<p style="clear: left">Shows some of the things "corner.js" does.</p>
+
+<div class="demo"><img src="example.jpg" class="corner" alt="" /><p>class = "<tt>corner</tt>"</p></div>
+<div class="demo"><img src="example.jpg" class="corner ishade50" alt="" /><p>class = "<tt>corner ishade50</tt>"</p></div>
+<div class="demo"><img src="example.jpg" class="corner ishadow20" alt="" /><p>class = "<tt>corner ishadow20</tt>"</p></div>
+<div class="demo"><img src="example.jpg" class="corner ishade50 ishadow20" alt="" /><p>class = "<tt>corner ishade50 ishadow20</tt>"</p></div>
+
+<div class="demo"><img src="example.jpg" class="corner ishadow40 inverse" alt="" /><p>class = "<tt>corner ishadow40 inverse</tt>"</p></div>
+<div class="demo"><img src="example.jpg" class="corner iradius16" alt="" /><p>class = "<tt>corner iradius16</tt>"</p></div>
+<div class="demo"><img src="example.jpg" class="corner iradius24 ishadow33 inverse" alt="" /><p><small>class =</small><br>"<tt>corner iradius24 ishadow33 inverse</tt>"</p></div>
+<div class="demo"><img src="example.jpg" class="corner iradius20 ishadow33" alt="" /><p><small>class =</small><br>"<tt>corner iradius20 ishadow33</tt>"</p></div>
+
+<div class="demo"><img src="example.jpg" class="corner iradius8 ishade75 ishadow33" title="tooltip support" alt="" /><p><small>class =</small><br>"<tt>corner iradius8 ishade75 ishadow33</tt>"</p></div>
+<div class="demo"><img src="example.jpg" class="corner iradius16 ishade66 ishadow30"  title="onClick event" onClick="alert('image dimension '+this.width+'x'+this.height);" alt="" /><p><small>class =</small><br>"<tt>corner iradius16 ishade66 ishadow30</tt>"</p></div>
+<div class="demo"><img src="example.jpg" class="corner iradius32 ishade50 ishadow25" title="onClick event" onClick="alert('ALT=\''+this.alt+'\'');" alt="beautiful landscape" /><p><small>class =</small><br>"<tt>corner iradius32 ishade50 ishadow25</tt>"</p></div>
+<div class="demo"><img src="example.jpg" class="corner iradius48 ishade33" title="onClick event" onClick="alert('ID='+this.id);" id="landscape_image" alt="" /><p><small>class =</small><br>"<tt>corner iradius48 ishade33</tt>"</p></div>
+
+<p style="clear: left;"></p>
+
+<h2>Scaled and linked</h2>
+
+<div class="demo"><p>2/3 image width and height</p><a href="example.jpg"><img src="example.jpg" style="width: 200px; height: 135px;" class="corner iradius12 ishade50 ishadow20" alt="" /></a><p><small>class =</small><br>"<tt>corner iradius12</tt><br><tt>ishade50 ishadow20</tt>"</p></div>
+<div class="demo"><p>1/2 image width &amp; height</p><a href="example.jpg"><img src="example.jpg" style="width: 150px; height: 101px;" class="corner iradius10 ishade66 ishadow25" alt="" /></a><p><br><small>class =</small><br>"<tt>corner iradius10</tt><br><tt>ishade66 ishadow25</tt>"</p></div>
+<div class="demo"><p>1/3 width &amp; height</p><a href="example.jpg"><img src="example.jpg" style="width: 100px; height: 67px;" class="corner iradius8 ishade75 ishadow30" alt="" /></a><p><br><small>class =</small><br>"<tt>corner</tt><br><tt>iradius8</tt><br><tt>ishade75</tt><br><tt>ishadow30</tt>"</p></div>
+
+<p style="clear: left;"></p>
+
+<h2>justcorners.js instead of corner.js </h2>
+
+<ul>
+<li>Initialisation class "<tt>corners</tt>"</li>
+<li><small><em>vary the radius by adding iradius followed by the desired <b>radius</b> in pixel:</em></small><br>
+Corner radius class "<tt>iradius24</tt>" - min=0 max=100 default=16</li>
+<li><small><em>vary the corners by adding iradiae followed by the desired <b>bits</b> as bitchain:</em></small><br>
+Corner selection class "<tt>iradiae1010</tt>" - default=1111 [top left|top right|bottom left|bottom right]</li>
+<li><small><em>vary the border by adding iborder followed by the desired <b>width</b> in pixel:</em></small><br>
+Corner border class "<tt>iborder2</tt>" - min=0 max=100 default=0</li>
+<li><small><em>vary the border color by adding icolor followed by the <b>color</b> as string:</em></small><br>
+Border color class "<tt>icolor0000ff</tt>" - min=000000 max=ffffff default=0000ff</li>
+</ul>
+
+<div class="demo"><img src="example.jpg" style="width: 200px; height: 135px;" class="corners iradius32" alt=""><p><small>class =</small><br>"<tt>corners iradius32</tt>"</p></div>
+<div class="demo"><img src="example.jpg" style="width: 150px; height: 101px;" class="corners iradiae1010" alt=""><p><br><small>class =</small><br>"<tt>corners iradiae1010</tt>"</p></div>
+<div class="demo"><img src="example.jpg" style="width: 100px; height: 67px;" class="corners iborder1 icolorffffff" alt=""><p><br><small>class =</small><br>"<tt>corners iborder1 icolorffffff</tt>"</p></div>
+
+<p style="clear: left;"></p>
+
+<h2>Supports "usemap"</h2>
+
+<map name="Landkarte">
+    <area shape="rect" coords="11,10,59,29" href="http://www.koblenz.de/" alt="Koblenz">
+    <area shape="rect" coords="42,36,96,57" href="http://www.wiesbaden.de/" alt="Wiesbaden">
+    <area shape="rect" coords="42,59,78,80" href="http://www.mainz.de/" alt="Mainz">
+    <area shape="rect" coords="100,26,152,58" href="http://www.frankfurt.de/" alt="Frankfurt">
+    <area shape="rect" coords="27,113,93,134" href="http://www.mannheim.de/" alt="Mannheim">
+    <area shape="rect" coords="100,138,163,159" href="http://www.heidelberg.de/" alt="Heidelberg">
+    <area shape="rect" coords="207,77,266,101" href="http://www.wuerzburg.de/" alt="W&uuml;rzburg">
+    <area shape="rect" coords="282,62,344,85" href="http://www.bamberg.de/" alt="Bamberg">
+    <area shape="rect" coords="255,132,316,150" href="http://www.nuernberg.de/" alt="N&uuml;rnberg">
+    <area shape="rect" coords="78,182,132,200" href="http://www.karlsruhe.de/" alt="Karlsruhe">
+    <area shape="rect" coords="142,169,200,193" href="http://www.heilbronn.de/" alt="Heilbronn">
+    <area shape="rect" coords="140,209,198,230" href="http://www.stuttgart.de/" alt="Stuttgart">
+    <area shape="rect" coords="187,263,222,281" href="http://www.ulm.de/" alt="Ulm">
+    <area shape="rect" coords="249,278,304,297" href="http://www.augsburg.de/" alt="Augsburg">
+    <area shape="poly" coords="48,311,105,248,96,210,75,205,38,234,8,310" href="http://www.baden-aktuell.de/" alt="Baden">
+</map>
+<p><img class="corners" src="karte.png" width="345" height="312" title="check the map" alt="Karte" border="0" usemap="#Landkarte"></p>
+
+<p style="clear: left;"><br></p>
+
+<h2>Why use Javascript Image Corners?</h2>
+
+<ul>
+<li>Fast and easy to implement. Just add class="corner iradius[n]" to the image and your good to go.</li>
+<li>Don't need to spend time in an image editor creating images with corners.</li>
+<li>Works really well with forum avatars. Doesn't require additional server work.</li>
+<li>It's dead easy to change the attributes of the corners.</li>
+<li>Free of charge use on non-commercial and private web sites.</li>
+</ul>
+
+<p>In older browsers, the script degrades and your visitors won't notice a thing.</p>
+
+<h2>Restrictions</h2>
+
+<p>Opera do not support printing of canvas.</p>
+
+<h2>Credits</h2>
+
+<p>Original idea is mine but the inspiration for the script came from <a href="http://cow.neondragon.net/stuff/reflection/">reflection.js</a>.</p>
+
+<h2>History</h2>
+
+Version 1.8<ul><li>Added smooth border shading and shining</li></ul>
+
+Version 1.7<ul><li>Added border support for <b>cvi_corners_lib.js</b> and <b>justcorners.js</b></li></ul>
+
+Version 1.6<ul><li>Added scriptable lib versions <b>cvi_corner_lib.js</b> and <b>cvi_corners_lib.js</b></li></ul>
+
+Version 1.5<ul><li>Added soft shadows for Internet Explorer 6/7</li></ul>
+
+Version 1.4<ul><li>Added support for img attributes:<br /><tt>id alt title src onclick</tt></li><li>Added Internet Explorer support for <tt>iradiae</tt></li></ul>
+				
+Version 1.3<ul><li>Added support for Internet Explorer 6/7<br>(<tt>iradiae</tt> is missing and shading isn't complete)</li></ul>
+
+Version 1.2<ul><li>Added usemap support for block element surrounded images</li></ul>
+
+Version 1.1<ul><li>Added soft shadows</li><li>Appended justcorners.js</li></ul>
+
+Version 1.0<ul><li>Initial Release</li></ul>
+
+<h2>License</h2>
+
+<p>Corner.js, justcorners.js, cvi_corner_lib.js and cvi_corners_lib.js are distributed under this <a href="LICENSE.txt">LICENSE</a>. License permits free of charge use on non-commercial and private web sites only under special conditions <em>(as described in the license)</em>. This license equals neither "<span style="text-decoration: line-through;">open source</span>" nor "<span style="text-decoration: line-through;">public domain</span>". There are also <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#099;&#118;&#105;&#064;&#110;&#101;&#116;&#122;&#103;&#101;&#115;&#116;&#097;&#046;&#100;&#101;">Commercial Software Licenses</a> available.</p>
+
+<h6>YOU AGREE TO ALL CONDITIONS OF THIS LICENCE AGREEMENT CONCERNING THE USE OF THE SOFTWARE BY ACCEPTING THIS LICENCE.
+<br>IF YOU DO NOT AGREE TO ALL CONDITIONS OF THIS AGREEMENT, YOU SHALL NOT INSTALL THE SOFTWARE, OR USE IT IN OTHER WAYS.</h6>
+
+<p><strong>Images used are copyrighted and are used for demonstration only.</strong></p>
+
+<p><a href="http://cvi.netzgesta.de/">cvi.netzgesta.de</a>&nbsp;&nbsp;also visit&nbsp;&nbsp;<a href="http://lab.netzgesta.de/">CVI-lab</a>, <a href="http://dev.netzgesta.de/">CVI-dev</a>, <a href="http://s5.netzgesta.de/">S5 Reloaded</a> and <a href="http://ajaxfilmdb.sourceforge.net/">AJAX-FilmDB</a></p>
+
+</body>
+</html>

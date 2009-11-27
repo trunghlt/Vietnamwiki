@@ -1,0 +1,9 @@
+
+RewriteEngine On
+
+RewriteRule ^.*-I([0-9]+)$ /index2.php?index_id=$1 [L]
+RewriteRule ^.*-I([0-9]+)-Sview$ /index2.php?index_id=$1&sort=view [L]
+RewriteRule ^.*-I([0-9]+)-Srate$ /index2.php?index_id=$1&sort=rate [L]
+
+RewriteRule ^.*-P([0-9]+)-L(([a-zA-Z]|-)+)$ /viewtopic.php?id=$1&lang=$2 [L]
+RewriteRule ^.*-P([0-9]+)$ /viewtopic.php?id=$1 [L]
