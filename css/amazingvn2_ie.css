@@ -1,0 +1,767 @@
+p.linkitem{
+	margin-top: 5px; 
+	margin-bottom: 5px;
+	font-weight:bold; 
+}
+
+tr.linkitem{
+	background:url(images/bg/t3.jpg);
+	margin-top: 5px; 
+	margin-bottom:5px;
+}
+
+table.search {
+margin-top:20px; 
+margin-left:5px; 
+margin-right: 5px; 
+width: 90%;
+}
+
+td.left {
+	width : 15%;
+}
+
+table.leftmenu{
+	width: 100%;
+	margin-top: 5px;
+}
+
+a.linksmall:hover {
+	color:#139500;
+	font-family:Verdana;
+	font-size:11px;
+	text-decoration:none;
+}
+
+a.linksmall{
+	color:black;
+	font-family:Verdana;
+	font-size:11px;
+	text-decoration:none;
+}
+
+
+.head3  {
+	color : white;
+	font-size : 13px;
+	font-weight : bold;
+	font-family : Arial, Helvetica, serif;
+	background:url(images/bg/t1.jpg);
+	text-align: center;
+}
+
+p.topmenu {
+	margin-top: 5px; 
+	margin-bottom: 5px; 
+	font-family: Tahoma; 
+	font-size: 11px; 
+	font-weight: bold;
+	color: rgb(203, 252, 145);
+}
+
+div.content{
+	margin: 5 5 5 0;
+}
+
+a.none{
+	color: white;
+}
+
+body{
+	color: black;
+}
+
+div.comment_block {
+	background:#CCCCCC none repeat scroll 0%;
+	border:1px solid #7B9EBD;
+}
+
+div.comment{
+	border-bottom:1px solid #B4B4B4;
+	background:white none repeat scroll 0%;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 5px;	
+	margin-bottom : 5px;
+}
+
+h1  {
+	color : #990000;
+	font-size : 20px;
+	font-weight : normal;
+	font-family : Arial, Helvetica, serif;
+	border-bottom-style : solid;
+	border-bottom-width : 1px;
+	border-color : gray;
+}
+
+h2  {
+	color : #990000;
+	font-size : 16px;
+	font-weight : bold;
+	font-family : Arial, Helvetica, serif;
+}
+
+h3  {
+	color : white;
+	font-size : 13px;
+	font-weight : bold;
+	font-family : Arial, Helvetica, serif;
+	background-color : #990000;
+}
+
+b  {
+	color : black;
+	font-weight : bold;
+	font-size : 12px;
+	font-family : Arial, Helvetica, serif;
+	line-height : 18px;
+}
+
+
+span.style5 {
+	color : gray;
+	font-weight : normal;
+	font-size : 11px;
+	font-family : Arial, Helvetica, serif;	
+}
+span.style4 {
+	color : black;
+	font-weight : normal;
+	font-size : 11px;
+	font-style: italic;
+	color : gray;
+	font-family : Arial, Helvetica, serif;	
+}
+
+span.style3 {
+	color : black;
+	font-weight : normal;
+	font-size : 9px;
+	font-style: italic;
+	font-family : Arial, Helvetica, serif;	
+}
+
+span.style2  {
+	color : black;
+	font-weight : normal;
+	font-size : 11px;
+	font-family : Arial, Helvetica, serif;	
+}
+
+p  {
+	color : Black;
+	font-weight : normal;
+	font-size : 12px;
+	font-family : Arial, Helvetica, serif;
+	line-height : 16px;
+}
+
+td  {
+	color : black;
+	font-size : 12px;
+	font-family : Arial, Helvetica, serif;
+}
+
+a.latestact {
+	color : Olive;
+	font-size : 11px;
+	font-weight : normal;
+	font-family : Arial, Helvetica, serif;
+	text-decoration : none;
+	cursor: pointer;
+}
+
+a.active {
+	color : black;
+	font-size : 13px;
+	font-weight : bold;
+	margin-left: 5px;
+	font-family : Arial, Helvetica, serif;
+	text-decoration : none;
+	cursor: pointer;
+}
+
+a.destmenu {
+	color : Olive;
+	font-size : 13px;
+	font-weight : normal;
+	font-family : Arial, Helvetica, serif;
+	text-decoration : none;
+	cursor: pointer;
+}
+
+a.destmenu:hover {
+	color : #990000;
+	font-size : 13px;
+	font-weight : bold;
+	font-family : Arial, Helvetica, serif;
+	text-decoration : none;
+	cursor: pointer;
+}
+
+a.destmenu:active {
+	color : #990000;
+	font-size : 13px;
+	font-weight : bold;
+	font-family : Arial, Helvetica, serif;
+	text-decoration : none;
+	cursor: pointer;
+}
+
+a.destmenu:visited {
+	color : #669933;
+	font-size : 11px;
+	font-weight : normal;
+	font-family : Arial, Helvetica, serif;
+	text-decoration : none;
+	cursor: pointer;
+}
+
+a.submenu  {
+	color : Black;
+	font-size : 10px;
+	font-weight : normal;
+	font-family : Arial, Helvetica, serif;
+	text-decoration : none;
+}
+
+a.submenu:hover  {
+	color : blue;
+	font-size : 10px;
+	font-weight : normal;
+	font-family : Arial, Helvetica, serif;
+	text-decoration : none;
+}
+
+a.nodec  {
+	color : white;
+	font-size : 1px;
+	font-weight : normal;
+	font-family : Arial, Helvetica, serif;
+	text-decoration : none;
+}
+
+a.nodec:active  {
+	color : white;
+	font-size : 1px;
+	font-family : Arial, Helvetica, serif;
+	font-weight : normal;
+}
+a.nodec:visited  {
+	color : white;
+	font-size : 1px;
+	font-family : Arial, Helvetica, serif;
+	font-weight : normal;
+}
+.banner  {
+	color : white;
+	font-size : 12px;
+	font-weight : bold;
+	font-family : Arial, Helvetica, serif;
+}
+
+.banner:hover  {
+	color : orange;
+	font-size : 12px;
+	font-weight : bold;
+	font-family : Arial, Helvetica, serif;
+}
+
+.text  {
+	color : black;
+	font-size : 12px;
+	font-weight : normal;
+	font-family : Arial, Helvetica, serif;
+}
+
+.artname  {
+	color : black;
+	font-size : 12px;
+	font-weight : normal;
+	font-family : Arial, Helvetica, serif;
+}
+
+.arttext  {
+	color : Black;
+	font-size : 12px;
+	font-weight : normal;
+	font-family : Arial, Helvetica, serif;
+}
+
+.artdate  {
+	color : black;
+	font-size : 10px;
+	font-weight : normal;
+	font-family : Arial, Helvetica, serif;
+}
+
+.head2  {
+	color : #990000;
+	font-size : 16px;
+	font-weight : bold;
+	font-family : Arial, Helvetica, serif;
+}
+.head  {
+	color : Black;
+	font-size : 16px;
+	font-weight : bold;
+	font-family : Arial, Helvetica, serif;
+}
+
+.headlines  {
+	color : white;
+	font-size : 13px;
+	font-weight : bold;
+	font-family : Arial, Helvetica, serif;
+	background-color : Olive;
+}
+
+.comment_head  {
+	color : white;
+	font-size : 13px;
+	font-weight : bold;
+	font-family : Arial, Helvetica, serif;
+	background-color : #3366CC;
+}
+
+
+.destmenu  {
+	font-weight : normal;
+	font-family : Verdana,Arial, Helvetica, serif;
+	border-bottom-style : dotted;
+	border-bottom-width : 1px;
+	border-color : gray;
+	text-decoration : none;
+	color : black;
+	margin-left: 3px;
+}
+
+.menu  {
+	font-weight : normal;
+	font-family : Verdana,Arial, Helvetica, serif;
+	border-bottom-style : dotted;
+	border-bottom-width : 1px;
+	border-color : gray;
+	text-decoration : none;
+	color : black;
+	
+}
+
+a:hover.submenu  {
+	color : #990000;
+	font-size : 10px;
+	border-bottom-style : solid;
+	border-bottom-width : 1px;
+	border-color : gray;
+}
+
+.main  {
+
+}
+
+.text10  {
+	font-weight : bold;
+	color : Black;
+}
+
+a.head2:hover  {
+	font-size : 16px;
+	font-family : Arial,Helvetica;
+	color : Navy;
+	font-weight : bold;
+	cursor: pointer;
+}
+
+p.byline  {
+	font-size : 12px;
+	font-family : Arial, Helvetica;
+	font-style : italic;
+}
+
+td.article  {
+	border-bottom-style : dotted;
+	border-bottom-width : 1px;
+	border-color : gray;
+}
+
+a.head2:active  {
+	font-size : 16px;
+}
+
+a.link  {
+	color	: Blue;
+	font-size : 12px;	
+	cursor	: pointer;
+	text-decoration : none;
+}
+
+a.link:hover  {
+	font-size : 12px;
+	font-family : Arial,Helvetica;
+	color : Navy;
+	font-weight : bold;
+	text-decoration: underline overline; 
+	cursor: pointer;
+}
+
+/* <style> */
+
+div.waiting_popup 
+{
+  z-index: +2;
+  border: 1px solid black;
+  width: 200px;
+  background: url('interface/waiting_form.png') left bottom;
+}
+
+div.sample_popup { z-index: +1; }
+
+div.sample_popup div.menu_form_header
+{
+  border: 1px solid black;
+  border-bottom: 0px;
+
+  cursor: default;
+
+  width: 200px;
+
+  height:      20px;
+  line-height: 19px;
+  vertical-align: middle;
+
+  background: url('interface/form_header.png') no-repeat;
+
+  text-decoration: none;
+  font-family: "Times New Roman", Serif;
+  font-weight: 900;
+  font-size: 13px;
+  color: #206040;
+}
+
+ 
+div.sample_popup div.menu_form_body
+{
+  border: 1px solid black;
+  width: 200px;
+  background: url('interface/form.png') left bottom;
+}
+
+div.sample_popup img.menu_form_exit
+{
+  float: right;
+  margin: 4px 5px 0px 0px;
+  cursor: pointer;
+}
+
+div.sample_popup table
+{
+  border-collapse: collapse;
+  width: 100%;
+}
+
+div.sample_popup th
+{
+  width: 1%;
+  padding: 0px 5px 1px 0px;
+
+  text-align: left;
+
+  font-family: "Times New Roman", Serif;
+  font-weight: 900;
+  font-size: 13px;
+  color: #004060;
+}
+
+div.sample_popup td
+{
+  width: 99%;
+  padding: 0px 0px 1px 0px;
+}
+
+div.sample_popup form
+{
+  margin: 0px;
+  padding: 8px 10px 10px 10px;
+}
+
+div.sample_popup input.field
+{
+  border: 1px solid #808080;
+  width: 95%;
+  font-family: Arial, Sans-Serif;
+  font-size: 12px;
+}
+
+div.sample_popup input.btn
+{
+  margin-top: 2px;
+  border: 1px solid #808080;
+  background-color: #DDFFDD;
+  font-family: Verdana, Sans-Serif;
+  font-size: 11px;
+}
+
+/* <style> */
+
+div.compose_popup { z-index: +1; }
+
+div.compose_popup div.menu_form_header
+{
+  border: 1px solid black;
+  border-bottom: 0px;
+
+  cursor: default;
+
+  width: 530px;
+
+  height:      20px;
+  line-height: 19px;
+  vertical-align: middle;
+
+  background: url('interface/compose_form_header.png');
+
+  text-decoration: none;
+  font-family: "Times New Roman", Serif;
+  font-weight: 900;
+  font-size: 13px;
+  color: White;
+}
+
+div.compose_popup div.menu_form_body
+{
+  border: 1px solid black;
+  width: 530px;
+  background: url('interface/compose_form.png') left bottom;
+}
+
+div.compose_popup img.menu_form_exit
+{
+  float: right;
+  margin: 4px 5px 0px 0px;
+  cursor: pointer;
+}
+
+div.compose_popup table
+{
+  border-collapse: collapse;
+  width: 100%;
+}
+
+div.compose_popup th
+{
+  width: 1%;
+  padding: 0px 5px 1px 0px;
+
+  text-align: left;
+
+  font-family: "Times New Roman", Serif;
+  font-weight: 900;
+  font-size: 13px;
+  color: #004060;
+}
+
+div.compose_popup td
+{
+  width: 99%;
+  padding: 0px 0px 1px 0px;
+}
+
+div.compose_popup form
+{
+  margin: 0px;
+  padding: 8px 10px 10px 10px;
+}
+
+div.compose_popup input.field
+{
+  border: 1px solid #808080;
+  width: 95%;
+  font-family: Arial, Sans-Serif;
+  font-size: 12px;
+}
+
+div.compose_popup input.btn
+{
+  margin-top: 2px;
+  border: 1px solid #808080;
+  background-color: #DDFFDD;
+  font-family: Verdana, Sans-Serif;
+  font-size: 11px;
+}
+
+/* <style>  COMMENT POPUP*/
+
+div.comment_popup { z-index: +1; }
+
+div.comment_popup div.menu_form_header
+{
+  border: 1px solid black;
+  border-bottom: 0px;
+
+  cursor: default;
+
+  width: 500px;
+
+  height:      20px;
+  line-height: 19px;
+  vertical-align: middle;
+
+  background: url('interface/comment_form_header.png');
+
+  text-decoration: none;
+  font-family: "Times New Roman", Serif;
+  font-weight: 900;
+  font-size: 13px;
+  color: White;
+}
+
+div.comment_popup div.menu_form_body
+{
+  border: 1px solid black;
+  width: 500px;
+  background: url('interface/compose_form.png') left bottom;
+}
+
+div.comment_popup img.menu_form_exit
+{
+  float: right;
+  margin: 4px 5px 0px 0px;
+  cursor: pointer;
+}
+
+div.comment_popup table
+{
+  border-collapse: collapse;
+  width: 100%;
+}
+
+div.comment_popup th
+{
+  width: 1%;
+  padding: 0px 5px 1px 0px;
+
+  text-align: left;
+
+  font-family: "Times New Roman", Serif;
+  font-weight: 900;
+  font-size: 13px;
+  color: #004060;
+}
+
+div.comment_popup td
+{
+  width: 99%;
+  padding: 0px 0px 1px 0px;
+}
+
+div.comment_popup form
+{
+  margin: 0px;
+  padding: 8px 10px 10px 10px;
+}
+
+div.comment_popup input.field
+{
+  border: 1px solid #808080;
+  width: 95%;
+  font-family: Arial, Sans-Serif;
+  font-size: 12px;
+}
+
+div.comment_popup input.btn
+{
+  margin-top: 2px;
+  border: 1px solid #808080;
+  background-color: #DDFFDD;
+  font-family: Verdana, Sans-Serif;
+  font-size: 11px;
+}
+
+/* PRIVATE POPUP */
+
+div.private_popup { z-index: +1; }
+
+div.private_popup div.menu_form_header
+{
+  border: 1px solid black;
+  border-bottom: 0px;
+
+  cursor: default;
+
+  width: 400px;
+
+  height:      20px;
+  line-height: 19px;
+  vertical-align: middle;
+
+  background: url('interface/compose_form_header.png');
+
+  text-decoration: none;
+  font-family: "Times New Roman", Serif;
+  font-weight: 900;
+  font-size: 13px;
+  color: White;
+}
+
+div.private_popup div.menu_form_body
+{
+  border: 1px solid black;
+  width: 400px;
+  background: url('interface/compose_form.png') left bottom;
+}
+
+div.private_popup img.menu_form_exit
+{
+  float: right;
+  margin: 4px 5px 0px 0px;
+  cursor: pointer;
+}
+
+div.private_popup table
+{
+  border-collapse: collapse;
+  width: 100%;
+}
+
+div.private_popup th
+{
+  width: 1%;
+  padding: 0px 5px 1px 0px;
+
+  text-align: left;
+
+  font-family: "Times New Roman", Serif;
+  font-weight: 900;
+  font-size: 13px;
+  color: #004060;
+}
+
+div.private_popup td
+{
+  width: 99%;
+  padding: 0px 0px 1px 0px;
+}
+
+div.private_popup form
+{
+  margin: 0px;
+  padding: 8px 10px 10px 10px;
+}
+
+div.private_popup input.field
+{
+  border: 1px solid #808080;
+  width: 95%;
+  font-family: Arial, Sans-Serif;
+  font-size: 12px;
+}
+
+div.private_popup input.btn
+{
+  margin-top: 2px;
+  border: 1px solid #808080;
+  background-color: #DDFFDD;
+  font-family: Verdana, Sans-Serif;
+  font-size: 11px;
+}
