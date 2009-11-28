@@ -2,8 +2,7 @@
 require_once("ajaxLoad.php");
 //require_once("widgets/GoogleTranslate.php");
 
-if (isset($_GET["page"])) $page = $_GET["page"];
-if (!isset($page)) $page = 1;
+$page = isset($_GET["page"])? $_GET["page"] : 1;
 
 $page = pagePostFilter($page);		
 

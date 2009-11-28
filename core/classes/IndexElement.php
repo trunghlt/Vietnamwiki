@@ -18,7 +18,7 @@ class IndexElement{
 	}	 
 	
 	public static function filterId($id) {
-		return $id;
+		return filterNumeric($id);
 	}
 }
 

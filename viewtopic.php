@@ -13,10 +13,10 @@
     <td class="center">			
 		<div id="menuWrapper">
 			<?php
-			$post_id = postIdFilter($_GET["id"]);
+			$post_id = PostElement::filterId($_GET["id"]);
 			echo getMainMenu(0, $post_id);
 			?>
-			<div id="toolbar"><?php echo getToolbarHTML();?></div>
+			<div id="toolbar"><?php getToolbarHTML();?></div>
 		</div>
 		<div id="contentTable">			
 			<?php include("viewtopicBody.php") ?>
