@@ -21,15 +21,16 @@ include('fbconnect.php');
 
 
 function dieToInvalidInput() {
-	?>
-	<script type="text/javascript">
-		window.location = "index.php";
-	</script>	
-	<?php
+	header("location: /");		
 }
 
-function isNumeric($n) {
-	return preg_match("/[+-]?[0-9]+/", $n);
+function isNumeric($s) {
+	return preg_match("/^[+-]?[0-9]+$/", $s);
+}
+
+function filterNumeric($s) {
+	if (!isNumeric($s)) dieToInvalidInput();
+	return $s;		
 }
 
 function dbquery($sql) {

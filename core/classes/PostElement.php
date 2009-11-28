@@ -23,7 +23,7 @@ class PostElement {
 	}
 	
 	public static function filterId($id) {
-		return $id;
+		return filterNumeric($id);
 	}	
 	
 	public static function filterImgURL($url) {
