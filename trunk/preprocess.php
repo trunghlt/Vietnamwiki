@@ -22,7 +22,7 @@ if (strpos(selfURL(), "photo") > 0) {
 function get_dest() {
 	global $numrow;
 	global $index_id;
-	$id = (isset($_GET["id"]))? $_GET["id"] : 3;
+	$id = (isset($_GET["id"]))? PostElement::filterId($_GET["id"]) : 3;	
 	$URL = selfURL();
 	if (strpos($URL, "photo") > 0) {
 		return (isset($_GET["dest_id"]))? $_GET["dest_id"] : 0;
@@ -35,7 +35,7 @@ function get_dest() {
 				FROM index_menu
 				WHERE id = (SELECT index_id
 							FROM posts
-							WHERE post_id = $id)";
+							WHERE post_id = {$id})";
 		$result = mysql_query($sql) or die(mysql_error());
 		$row = mysql_fetch_array($result);
 		$index_id = $row["id"];
@@ -46,7 +46,7 @@ function get_dest() {
 	}
 }
  
-if (isset($_GET["index_id"])) $index_id = $_GET["index_id"];
+if (isset($_GET["index_id"])) $index_id = IndexElement::filterId($_GET["index_id"]);
 
 if (!isset($index_id)) {
 	$destination = get_dest();
