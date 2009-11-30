@@ -16,10 +16,12 @@
 </style>
 </head>
 <body>
-<div class="logo">VietnamWiki.net</div>
-<div>
-	<div><a href="/vhcs2/">VHCS2</a></div>
-	<div><a href="https://109.123.66.160:10000">Webmin</a></div>
+<div style="border: 1px">
+	<span class="logo"> VietnamWiki.net </span>
+	<div>
+		<p><a href="/vhcs2/">VHCS2</a></p>
+		<p><a href="https://109.123.66.160:10000">Webmin</a></p>
+	</div>
 </div>
 </body>
 </html>
