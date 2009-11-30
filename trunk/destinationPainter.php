@@ -4,8 +4,9 @@
 <!--DESTINATION MENU-->
 <tr><td colspan="2" class="head3" >Destinations</td></tr>
 <?php
-
 if (!isset($destination)) { $destination = 0; $index_id = 0; $photo = 0;}
+
+if (!isset($photo)) $photo = 0;
 
 $indexMenus = Array();
 $q->query("	SELECT *
@@ -27,17 +28,17 @@ While ($row = mysql_fetch_array($result)) {
 	$destId = $row["id"];
     $n++; ?>
  	<tr>
- 	<td width="23px">
-	 	<img style="margin-left: 5px;" src="css/images/bg/arrow.jpg"/>
-	 </td>
-		<?php 	 
-		$class = ($row["id"] == $destination)? "active" : "linksmall";
-		$href = ($n < $numrow)? ("index2.php?id=".$row['id']) : "about.php";
-		?>
+	 	<td width="23px">
+		 	<img style="margin-left: 5px;" src="css/images/bg/arrow.jpg"/>
+		 </td>
+			<?php 	 
+			$class = ($row["id"] == $destination)? "active" : "linksmall";
+			$href = ($n < $numrow)? ("index2.php?id=".$row['id']) : "about.php";
+			?>
 		<td>
-		<p style='margin-bottom: 2px; margin-top: 2px;'>
-			<a id="destItem_<?php echo $row["id"]?>" class='<?php echo $class?>' href='#' ><?php echo $row["EngName"]?></a>
-		</p>
+			<p style='margin-bottom: 2px; margin-top: 2px;'>
+				<a id="destItem_<?php echo $row["id"]?>" class='<?php echo $class?>' href='#' ><?php echo $row["EngName"]?></a>
+			</p>
 		</td>
 	</tr>		
 	<tr><td colspan="2" height="0">
