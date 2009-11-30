@@ -5,20 +5,21 @@
 
 <style type="text/css">
 .logo {
-	font-size: 2.6em;
+	font-size: 2.0em;
 	font-weight: bold; 
 	font-family: Arial,Helvetica,serif;
 	color: #FFFFFF;
 	cursor:default;
 	font-family: Arial,Helvetica,serif;
+	background: #8C0003;
 }
 </style>
 </head>
 <body>
 <div class="logo">VietnamWiki.net</div>
 <div>
-	<a href="/vhcs2/">VHCS2</a>
-	<a href="https://109.123.66.160:10000">Webmin</a>
+	<div><a href="/vhcs2/">VHCS2</a></div>
+	<div><a href="https://109.123.66.160:10000">Webmin</a></div>
 </div>
 </body>
 </html>
