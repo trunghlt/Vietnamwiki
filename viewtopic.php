@@ -4,8 +4,16 @@
 	include('core/classes.php');
 	include('core/session.php');
 	include('core/filters.php');
-	include("preprocess.php");
-	include('header.php'); 
+	
+	$postElement = new PostElement;
+	$postElement->query(PostElement::filterId($_GET["id"]));
+	$indexElement = new IndexElement;
+	$indexElement->query($postElement->indexId);
+	$destination = $indexElement->destId;
+	$index_id = $indexElement->id;
+	$post_id = $postElement->id;		
+	
+	include('header.php');	
 	include('destination.php');
 	$q = new Db;	
 	$user_info = new User;
@@ -13,7 +21,6 @@
     <td class="center">			
 		<div id="menuWrapper">
 			<?php
-			$post_id = PostElement::filterId($_GET["id"]);
 			echo getMainMenu(0, $post_id);
 			?>
 			<div id="toolbar"><?php getToolbarHTML();?></div>
