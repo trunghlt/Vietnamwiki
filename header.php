@@ -53,7 +53,7 @@ the user send to our website will be checked and confirmed before posted to offi
 </script>
 
 <!-- Google Translate -->
-<script src="http://www.google.com/jsapi?key=ABQIAAAAV1hMY6P-vcrStESIcmxsyBSg0YMtASE5KdM7LALqADHM9SZ_PBTZqozQ8fKlIDHry-cBnAxWYeYpSw"></script>									 
+<script src="http://www.google.com/jsapi?key=ABQIAAAAV1hMY6P-vcrStESIcmxsyBQlNdnj7jTOpTnl4Nkq2CnWa36LSRSzhRIQvUz3LkcE_A5gHk7QVRq4gw"></script>									 
 <script type="text/javascript">
 	google.load("language", "1");
 </script>
