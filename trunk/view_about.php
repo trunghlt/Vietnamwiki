@@ -39,7 +39,7 @@ div.teamProfile {
 	</div>
 	<div class="description">
 		<div class="name">Trung Huynh</div>
-		Trung has achieved a Master degree in Computer Science from the University of Oxford and is now currently living in London. He spent 19 years in Vietnam and then went to the UK for further education. He goes back to Vietnam
+		Trung has achieved a Master degree in Computer Science from the University of Oxford and is now currently living in London. He spent 19 years in Vietnam and then went to the UK for his further education. He goes back to Vietnam
 		every summer and enjoys going to beaches and his favourite food <a href="/Da_Nang-Eat-Beef_noodle_soup-P124">Bun Bo</a> in his home city, <a href="/Da_Nang-General-I50">Da Nang</a>. Even though he likes fish and chips, pizza or pasta, 
 		he has always obsessed about Vietnamese food when he lives in the UK. His favourite places in Vietnam are <a href="/Da_Lat-General-I52">Da Lat</a>, <a href="/Sapa-General-Sapa-P129">Sa Pa</a>, <a href="/Hoi_An__My_Son-General-Hoi_An-P9">Hoi An</a>, 
 		and of course, <a href="/Da_Nang-General-Da_Nang_general_information-P10">Da Nang</a>.
