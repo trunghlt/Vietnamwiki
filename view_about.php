@@ -55,7 +55,7 @@ div.teamProfile {
 	<div class="description">
 		<div class="name">Quoc Nguyen</div>
 		Quoc's got his BEng in Computer Engineering from the Nanyang Technology University, Singapore. He spent 20 years in Vietnam and then went to Singapore. He now looks more like a Singaporean 
-		but deep inside, he is still a true Vietnamese. test
+		but deep inside, he is still a true Vietnamese. testing
 	</div>
 </div>
 
