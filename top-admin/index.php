@@ -24,9 +24,9 @@
 <div>
 	<a href="/"><img src="http://farm4.static.flickr.com/3135/3744384473_08041bfdfe_o.png"/></a>
 	<div class="menu">
-		<p><img src="http://avlux.net/images/trac.jpg"/ width="50" height="50"/><a href="http://109.123.66.160:8000/project/">Trac</a></p>
-		<p><img src="http://bits.ohloh.net/attachments/4011/vhcs_med.png" width="50" height="50"/><a href="/vhcs2/">VHCS2</a></p>
-		<p><img src="http://www.raqtweak.com/gfx/icons/webmin.gif" width="50" height="50"/><a href="https://109.123.66.160:10000">Webmin</a></p>
+		<p><img src="http://avlux.net/images/trac.jpg"/ width="20" height="20"/>&nbsp;<a href="http://109.123.66.160:8000/project/">Trac</a></p>
+		<p><img src="http://bits.ohloh.net/attachments/4011/vhcs_med.png" width="20" height="20"/>&nbsp;<a href="/vhcs2/">VHCS2</a></p>
+		<p><img src="http://www.raqtweak.com/gfx/icons/webmin.gif" width="20" height="20"/>&nbsp;<a href="https://109.123.66.160:10000">Webmin</a></p>
 	</div>
 </div>
 </body>
