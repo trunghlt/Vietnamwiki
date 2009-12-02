@@ -424,12 +424,9 @@ body{
 		width:500px;
 	}
 	
-	#header #right {
+	#header #right form{
 		padding-top: 6px;
-		_padding-bottom:0;
 		float:right;
-		_height:0;
-		_clear:both;
 	}
 
 #toolbar{
