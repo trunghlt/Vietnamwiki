@@ -398,7 +398,7 @@ img.center, dl.boxes dd img, .t_cond .c1 img, .t_longfore img, .t_half img {
 /* MAIN SITE */
 body{
 	color: black;
-	background: #830003 url(/css/images/bg/bg.gif) repeat-y scroll center center;
+	background: #830003 url(css/images/bg/bg.gif) repeat-y scroll center center;
 	font-family: Arial,Helvetica,serif;
 	font-size: 12px;
 	margin: 0 0;
@@ -406,32 +406,33 @@ body{
 }
 
 
-
 #header {
-	float: center;
 	width: 100%;
 	background-color: #600003;
 	padding-left: 10px;	
-	padding-right: 10px;
+	padding-right: 2px;
 	margin-top: -3px;
 	margin-left: -10px;
 	border-bottom: 2px solid white;
-	background: url(/css/images/topBar.gif) repeat-x scroll;
+	background: url(css/images/topBar.gif) repeat-x scroll;
 	height: 35px;
-	
 }
 
 	#header #left {
 		margin-top: 6px;	
 		float: left;
+		width:500px;
 	}
 	
 	#header #right {
-		float: right;
 		padding-top: 6px;
+		_padding-bottom:0;
+		float:right;
+		_height:0;
+		_clear:both;
 	}
-	
-#toolbar{ 
+
+#toolbar{
 }
 
 #menuWrapper {
@@ -442,11 +443,13 @@ body{
 }
 
 #mainMenu {
-	margin-top: -8px;
+	margin-top: 4px;
+
 }
 	#mainMenu ul {
 		list-style-type : none;
-		margin-left: -20px;
+		margin:0;
+		padding:0;
 	}
 		#mainMenu ul li.selected {
 			-moz-background-clip:border;
@@ -473,7 +476,7 @@ body{
 		#mainMenu ul li {
 			background-color : #D8DFEA;
 			float : left;
-			margin : 0 2px 0 0;
+			margin : 0px 2px 0 20px;
 			overflow : hidden;
 			position : relative;
 		}
@@ -502,11 +505,13 @@ body{
 			
 #contentTable{
 	background-color: white;
+	clear:both;
 }
 
 	#contentTable #postContent {
 		margin-top: 20px;
 		padding: 5px 5px 5px 5px;
+		_margin-top: 0px;
 	}
 	
 #reviewList {
@@ -603,15 +608,21 @@ img.postSmallImg {
 .bookmarks {
 	text-align: right;
 }
+.bookmarks ul{
+	margin:0;
+	padding:0;
+	list-style-type:none;
+	list-style-position:inside;	
+}
 
 .bookmarks ul li {
 	margin-right: 6px;
 }
-
+/*
 .bookmarks ul li div {
 	display: inline-block;
 }
-
+*/
 .bookmarks ul li div.delicious{
 	background: url("../images/vnwkImageMap.gif") -358px -256px;
 	width: 16px;
@@ -647,7 +658,9 @@ img.postSmallImg {
 	padding: 0 4px 6px 0;
 	text-align: center;
 }
-
+.bookmarks ul div {
+	display: inline;
+}
 .logo {
 	font-size: 2.5em; 
 	font-weight: bold;
