@@ -13,13 +13,18 @@
 	font-family: Arial,Helvetica,serif;
 	background: #8C0003;
 }
+
+.menu {
+	font-size: 1.5em;
+}
+
 </style>
 </head>
 <body>
 <div>
 	<a href="/"><img src="http://farm4.static.flickr.com/3135/3744384473_08041bfdfe_o.png"/></a>
-	<div>
-		<p><a href="http:/109.123.66.160:8000/project/">Trac</a></p>
+	<div class="menu">
+		<p><a href="http://109.123.66.160:8000/project/">Trac</a></p>
 		<p><a href="/vhcs2/">VHCS2</a></p>
 		<p><a href="https://109.123.66.160:10000">Webmin</a></p>
 	</div>
