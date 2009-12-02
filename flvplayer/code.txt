@@ -1,0 +1,6 @@
+http://www.tintuconline.vietnamnet.vn/vn/thethao/171092/
+<embed width="320" height="260" flashvars="file=http://www.ttol.vn/Library/myImages/14/2007/11/clip/mu.flv" allowfullscreen="true" type="application/x-shockwave-flash" src="http://www.tintuconline.vietnamnet.vn/Library/flash/2007/10/mediaplayer.swf"/>
+
+<embed width="300" height="250" flashvars="file=http://www.vietnamwiki.net/images/intro.flv" allowfullscreen="true" type="application/x-shockwave-flash" src="http://www.vietnamwiki.net/flvplayer/mediaplayer.swf"/>
+
+//http://www.tintuconline.vietnamnet.vn/Library/flash/2007/10/mediaplayer.swf
