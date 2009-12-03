@@ -4,8 +4,20 @@ include('core/init.php');
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>VietnamWiki.net - A complete travel guide to Vietnam</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="google-site-verification" content="q881hf8rrSH1ilmcOwIR3Mz1Ue-UULkCj-qlxzp8KiE" />
+<meta name = "KEYWORDS" 
+content = "vietnam, Viet Nam, vietnamwiki, wiki, guide, travel, Sapa, Hanoi, 
+Ha Noi, Hue, Hoian, Hoi an, Myson, My Son, Ha Long, halong, phong nha, ke bang,
+Nha Trang, Nhatrang, Dalat, Da Lat, Mui ne, muine, Vung tau, Saigon, Sai Gon, 
+Ho Chi Minh, Mekong delta, Phu Quoc"> 
+
+<meta name="Description" 
+content = "VietnamWiki.net is an open encyclopedia where experienced travelers share
+their knowledge about Vietnam under the supervision of VietnamWiki.net team. Every information
+the user send to our website will be checked and confirmed before posted to official pages">
 
 <style type="text/css">
 body {
