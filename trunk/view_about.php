@@ -70,8 +70,9 @@ div.teamProfile {
 		Trang is pursuing her MBM in the University of Bristol, UK. She spent 18 years in <a href="/Da_Nang-General-Da_Nang_general_information-P10">Da Nang</a> and 4 years in <a href="/Ho_Chi_Minh-General-Ho_Chi_Minh_general_information-P11">Ho Chi Minh</a> before coming to the UK. She loves her litle home town <a href="/Hoi_An__My_Son-General-Hoi_An-P9">Hoi An</a> and knows every bit of it.
 		Ah, believe it or not, she thinks she can fly !!!
 	</div>
-	<div>and other team members including Uyen Nguyen (editor), Hang Phan (editor) and Hieu Tran (web developer).</div>
 </div>
+<div style="clear: both"></div>
+<div>and other team members including Uyen Nguyen (editor), Hang Phan (editor) and Hieu Tran (web developer).</div>
 
 
 <br /><br /><br /> <br/>
