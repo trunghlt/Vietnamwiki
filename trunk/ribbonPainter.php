@@ -15,4 +15,7 @@ if (logged_in() || chkFbLoggedIn()) {
 			echo "|<a class='link' onClick='deleteConfirmDialog.dialog(\"open\")'> Delete </a>";
 		}		
 	}
+}
+else{
+	echo "&nbsp;";
 }?>

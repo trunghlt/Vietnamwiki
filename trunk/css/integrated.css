@@ -414,7 +414,7 @@ body{
 	margin-top: -3px;
 	margin-left: -10px;
 	border-bottom: 2px solid white;
-	background: url(images/topBar.gif) repeat-x scroll;
+	background: url(/css/images/topBar.gif) repeat-x scroll;
 	height: 35px;
 }
 
@@ -446,7 +446,7 @@ body{
 	#mainMenu ul {
 		list-style-type : none;
 		margin:0;
-		padding:0;
+		padding-left:20px;
 	}
 		#mainMenu ul li.selected {
 			-moz-background-clip:border;
@@ -473,7 +473,7 @@ body{
 		#mainMenu ul li {
 			background-color : #D8DFEA;
 			float : left;
-			margin : 0px 2px 0 20px;
+			margin : 0px 2px 0 0px;
 			overflow : hidden;
 			position : relative;
 		}
@@ -508,12 +508,13 @@ body{
 	#contentTable #postContent {
 		margin-top: 20px;
 		padding: 5px 5px 5px 5px;
-		_margin-top: 0px;
+		#margin-top: 0px;
+		#padding-top:0px;
 	}
 	
 #reviewList {
 	margin: 100px 5px 10px 5px;
-	
+	#margin-top:80px;
 }
 	
 	#reviewList div.reviewElement {
@@ -1424,5 +1425,6 @@ div.demo-description {
 .ui-draggable, .ui-droppable {
 	background-position: top left;
 }
+
 
 
