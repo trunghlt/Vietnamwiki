@@ -90,6 +90,9 @@ body {
 			width: 80px;
 			text-align: center;		
 		}
+		#realTop #search_text{
+			width:500px;
+		}
 
 #slideShowWrapper {
 	background: #440000;
@@ -344,7 +347,7 @@ function cen(a ,b) {
 <!----------------SEARCH-------------------- -->
 <div align="center" id="realTop">
 	<span class="logo">VietnamWiki.net</span>
-	<span style="font-size:1.6em; color: yellow; cursor: default;">&#223;eta</span>
+	<span style="font-size:1.6em; color: yellow; cursor: default;">&#223;eta</span><br />
 	<form id="searchForm" action="search_display.php" id="search">
 		<input id="search_text" name="search_text" size=70 type="text"/>
 		<input type="button" id="searchButton" value="Search" id="search"/>
