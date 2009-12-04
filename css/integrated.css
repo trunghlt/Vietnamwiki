@@ -398,7 +398,7 @@ img.center, dl.boxes dd img, .t_cond .c1 img, .t_longfore img, .t_half img {
 /* MAIN SITE */
 body{
 	color: black;
-	background: #830003 url(/css/images/bg/bg.gif) repeat-y scroll center center;
+	background: #830003 url(images/bg/bg.gif) repeat-y scroll center center;
 	font-family: Arial,Helvetica,serif;
 	font-size: 12px;
 	margin: 0 0;
@@ -414,7 +414,7 @@ body{
 	margin-top: -3px;
 	margin-left: -10px;
 	border-bottom: 2px solid white;
-	background: url(css/images/topBar.gif) repeat-x scroll;
+	background: url(images/topBar.gif) repeat-x scroll;
 	height: 35px;
 }
 
@@ -615,37 +615,37 @@ img.postSmallImg {
 .bookmarks ul li {
 	margin-right: 6px;
 }
-/*
+
 .bookmarks ul li div {
 	display: inline-block;
 }
-*/
+
 .bookmarks ul li div.delicious{
-	background: url("../images/vnwkImageMap.gif") -358px -256px;
+	background: url("/images/vnwkImageMap.gif") -358px -256px;
 	width: 16px;
 	height: 16px;
 }
 
 .bookmarks ul li div.digg{
-	background: url("../images/vnwkImageMap.gif") -374px -256px;
+	background: url("/images/vnwkImageMap.gif") -374px -256px;
 	width: 18px;
 	height: 16px;
 }
 
 .bookmarks ul li div.stumbleupon{
-	background: url("../images/vnwkImageMap.gif") -358px -292px;
+	background: url("/images/vnwkImageMap.gif") -358px -292px;
 	width: 16px;
 	height: 16px;
 }
 
 .bookmarks ul li div.reddit{
-	background: url("../images/vnwkImageMap.gif") -374px -274px;
+	background: url("/images/vnwkImageMap.gif") -374px -274px;
 	width: 17px;
 	height: 16px;
 }
 
 .bookmarks ul li div.facebook{
-	background: url("../images/vnwkImageMap.gif") -358px -274px;
+	background: url("/images/vnwkImageMap.gif") -358px -274px;
 	width: 16px;
 	height: 16px;
 }
