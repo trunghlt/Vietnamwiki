@@ -840,6 +840,7 @@ table.leftmenu{
 table.main {
 	width: 800px;
 	border-bottom: 1px solid #C8C8C8; 	
+	clear:both;
 }
 
 a.linksmall:hover {
