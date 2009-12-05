@@ -531,11 +531,19 @@ body{
 			font-family : Arial, Helvetica, serif;
 			background: #ECEFF5 none repeat scroll 0 0;		
 		}
+		
+		#reviewList div.reviewElement div.reviewHead div.reviewRate {
+			width: 83px;
+			height: 17px;
+			float: left;
+		}
 
 		#reviewList div.reviewElement div.reviewBody {
 			margin-bottom: 20px;
 			font-size: 12px;
 			padding: 5px 5px 5px 10px;
+			overflow: hidden;
+			display: block;
 		}
 		
 		
