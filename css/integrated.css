@@ -531,19 +531,11 @@ body{
 			font-family : Arial, Helvetica, serif;
 			background: #ECEFF5 none repeat scroll 0 0;		
 		}
-		
-		#reviewList div.reviewElement div.reviewHead div.reviewRate {
-			width: 83px;
-			height: 17px;
-			float: left;
-		}
 
 		#reviewList div.reviewElement div.reviewBody {
 			margin-bottom: 20px;
 			font-size: 12px;
 			padding: 5px 5px 5px 10px;
-			overflow: hidden;
-			display: block;
 		}
 		
 		
@@ -618,7 +610,7 @@ img.postSmallImg {
 	margin:0;
 	padding:0;
 	list-style-type:none;
-	list-style-position:inside;	
+	
 }
 
 .bookmarks ul li {
@@ -633,40 +625,45 @@ img.postSmallImg {
 	background: url("/images/vnwkImageMap.gif") -358px -256px;
 	width: 16px;
 	height: 16px;
+	float:left;	
 }
 
 .bookmarks ul li div.digg{
 	background: url("/images/vnwkImageMap.gif") -374px -256px;
 	width: 18px;
 	height: 16px;
+	float:left;	
 }
 
 .bookmarks ul li div.stumbleupon{
 	background: url("/images/vnwkImageMap.gif") -358px -292px;
 	width: 16px;
 	height: 16px;
+	float:left;	
 }
 
 .bookmarks ul li div.reddit{
 	background: url("/images/vnwkImageMap.gif") -374px -274px;
 	width: 17px;
 	height: 16px;
+	float:left;	
 }
 
 .bookmarks ul li div.facebook{
 	background: url("/images/vnwkImageMap.gif") -358px -274px;
 	width: 16px;
 	height: 16px;
+	float:left;	
 }
 
 .bookmarks ul li {
 	display: inline;
 	padding: 0 4px 6px 0;
 	text-align: center;
+	float:right;	
+	width:50x;
 }
-.bookmarks ul div {
-	display: inline;
-}
+
 .logo {
 	font-size: 2.5em; 
 	font-weight: bold;
@@ -1244,8 +1241,11 @@ ul.itemList {
 
 ul.itemList > li.indexItem {
 	padding: 3px;
+	_padding: 3px;
 }
-
+li.indexItem {
+	_padding: 3px;
+}
 
 /* DIALOG */
 body {
