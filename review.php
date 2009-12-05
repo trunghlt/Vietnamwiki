@@ -1,15 +1,15 @@
 <?php
-	include('core/common.php');
-	include('core/init.php');
-	include('core/classes.php');
-	include('core/session.php');
-	include('core/filters.php');
-	include("preprocess.php");
-	include('header.php'); 
-	include('destination.php');
-	include("ajaxLoad.php");
-	$q = new Db;	
-	$user_info = new User;
+include('core/common.php');
+include('core/init.php');
+include('core/classes.php');
+include('core/session.php');
+include('core/filters.php');
+include("preprocess.php");
+include('header.php'); 
+include('destination.php');
+include("ajaxLoad.php");
+$q = new Db;	
+$user_info = new User;
 ?>
     <td class="center">			
 		<div id="menuWrapper">

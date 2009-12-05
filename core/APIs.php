@@ -38,10 +38,7 @@ function getReviewListHTML($postId) {
 		?>					
 		<div class="reviewElement">
 			<div class="reviewHead">
-				<div style="background: url(/images/stars_map.png) 0 <?php echo -19*($review->rateValue - 1)*2 - 19 ?>px no-repeat;
-							width: 83px;
-							height: 17px;
-							float: left;"></div>
+				<div class="reviewRate" style="background: url(/images/stars_map.png) 0 <?php echo -19*($review->rateValue - 1)*2 - 19 ?>px no-repeat;"></div>
 				&nbsp; Reviewed by <?php echo $user->username?> at <?php echo $reviewDateTimeStr?></div>
 			<div class="reviewBody"><?php echo $reviewText?></div>
 		</div>
