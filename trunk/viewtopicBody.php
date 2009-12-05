@@ -149,7 +149,7 @@ $content = $post['post_text'];
 	}
 ?>
 	
-<div id="ribbon" align="right" style="width: 100%; background: #E6E6E6">&nbsp;</div>
+<div id="ribbon" align="right" style="width: 100%; background: #E6E6E6; clear:right;">&nbsp;</div>
 <div id="editorList" class="editorInfo"></div>
 <script language="javascript">
 jQuery(document).ready(function(){
