@@ -86,7 +86,8 @@
 				$bigImgURL = htmlspecialchars_decode($row["post_big_img_url"], ENT_QUOTES);
 				
 			?>
-			<div style="float: left; margin-right: 10px">				
+			<div style="clear:left;">
+			<div style="float: left; margin-right: 10px;">				
 				<?php if ( isset($smallImgURL) && (rtrim($bigImgURL) != "") ) { ?>
 					<a rel="lightbox" href="<?php echo $bigImgURL?>">
 						<img class="postSmallImg" src="<?php echo $smallImgURL?>"/>
@@ -112,6 +113,7 @@
 			$s = MakeTextViewable($s);      
 			echo $s . "<p>"; 
 			?>
+			</div>
 			</div>
 			<?php
 			mysql_free_result($re2);

@@ -825,21 +825,26 @@ td.left {
 	width : 180px;
 	vertical-align: top;
 	border-right: 1px solid #C8C8C8;
+	#width:180px;
 }
 td.center {
 	width : 620px;
 	vertical-align: top;
+	#width:620px;
 }
 
 table.leftmenu{
 	width: 100%;
 	background-color: white;
 	border: 0px;
+	#width: 180px;
 }
 
 table.main {
 	width: 800px;
-	border-bottom: 1px solid #C8C8C8; 	
+	border-bottom: 1px solid #C8C8C8;
+	clear:both;
+	#width: 800px;
 	clear:both;
 }
 
