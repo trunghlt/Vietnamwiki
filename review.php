@@ -29,11 +29,28 @@ $user_info = new User;
 <script type="text/javascript" src="./js/ratingsys.js"></script>
 <style type="text/css">
 	#rateStatus{float:left; clear:both; width:100%; height:30px; font-size: 15px; font-family: Arial, Helvetica, serif; margin-top: 5px;}
-	#rateMe{float:left; clear:both; width:100%; height:auto; padding:0px; margin-bottom: 10px; margion-top: 10px;}
+	#rateMe{float:left; clear:both; width:100%; height:auto; padding:0px; margin-bottom: 10px; margion-top: 10px; _margin-bottom:0px;}
 	#rateMe li{float:left;list-style:none;}
 	#rateMe li a:hover,
 	#rateMe .on{background:url(/images/star_on.png) no-repeat;width:50px; height:50px;}
 	#rateMe div{float:left;background:url(/images/star_off.png) no-repeat;width:50px; height:50px;}
+	#rateMe .off{float:left;background:url(/images/star_off.png) no-repeat;width:50px; height:50px;}
+	*html #rateMe .off{  /*Fix cho IE6*/       
+        background-image:none;
+        FILTER: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/star_off.png', sizingMethod='crop');
+    } 
+	*html #rateMe .none{  /*Fix cho IE6*/       
+        background-image:none;
+        FILTER: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/star_off.png', sizingMethod='crop');
+    } 
+	*html #rateMe .on{  /*Fix cho IE6*/       
+        background-image:none;
+        FILTER: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/star_on.png', sizingMethod='crop');
+    } 
+	#reviewForm{
+		_margin:0;
+		_padding:0;
+	}
 </style>
 <div id="reviewDialog" title="Add a review">
 
@@ -41,16 +58,13 @@ $user_info = new User;
 	<span id="rateStatus">Please rate...</span>
 	
 	<div id="rateMe" title="Please rate this topic">
-		<div onclick="rateIt(this)" id="_1" title="This is very bad, never try it !!!" onmouseover="rating(this)" onmouseout="off(this)"><img src="/images/transparent.png"/></div>
-		<div onclick="rateIt(this)" id="_2" title="This is bad, I don't recommend it" onmouseover="rating(this)" onmouseout="off(this)"><img src="/images/transparent.png"/></div>
-		<div onclick="rateIt(this)" id="_3" title="This is ok, no thing special" onmouseover="rating(this)" onmouseout="off(this)"><img src="/images/transparent.png"/></div>
-		<div onclick="rateIt(this)" id="_4" title="This is good, I recommend it" onmouseover="rating(this)" onmouseout="off(this)"><img src="/images/transparent.png"/></div>
-		<div onclick="rateIt(this)" id="_5" title="This is very good, highly recommend !!!" onmouseover="rating(this)" onmouseout="off(this)"><img src="/images/transparent.png"/></div>
+		<div onclick="rateIt(this)" id="_1" class="none" title="This is very bad, never try it !!!" onmouseover="rating(this)" onmouseout="off(this)">&nbsp;</div>
+		<div onclick="rateIt(this)" id="_2" class="none" title="This is bad, I don't recommend it" onmouseover="rating(this)" onmouseout="off(this)">&nbsp;</div>
+		<div onclick="rateIt(this)" id="_3" class="none" title="This is ok, no thing special" onmouseover="rating(this)" onmouseout="off(this)">&nbsp;</div>
+		<div onclick="rateIt(this)" id="_4" class="none" title="This is good, I recommend it" onmouseover="rating(this)" onmouseout="off(this)">&nbsp;</div>
+		<div onclick="rateIt(this)" id="_5" class="none" title="This is very good, highly recommend !!!" onmouseover="rating(this)" onmouseout="off(this)">&nbsp;</div>
 	</div>
-	
 	<!------------------------------------------------------------------------------------->
-	
-	
 	<form id="reviewForm">
 		<textarea 	id="reviewText" 
 					onKeyDown="updateReviewText(this)"
