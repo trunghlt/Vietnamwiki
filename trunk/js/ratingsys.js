@@ -29,7 +29,7 @@ function rating(num){
 				holder = a+1;
 				a++;
 			}else{
-				document.getElementById("_"+i).className = "";
+				document.getElementById("_"+i).className = "none";
 			}
 		}
 	}
@@ -40,7 +40,7 @@ function off(me){
 	if(!rated){
 		if(!preSet){	
 			for(i=1; i<=sMax; i++){		
-				document.getElementById("_"+i).className = "";
+				document.getElementById("_"+i).className = "off";
 				document.getElementById("rateStatus").innerHTML = me.parentNode.title;
 			}
 		}else{
