@@ -2,10 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
 <?php 
+define("DEFAULT_DES", "VietnamWiki.net is an open encyclopedia where experienced travelers share
+their knowledge about Vietnam under the supervision of VietnamWiki.net team. Every information
+the user send to our website will be checked and confirmed before posted to official pages");
 
+if (isset($_GET["id"])) {
+	$postId = postIdFilter($_GET["id"]);
+}
+	
 function getTitle() {
-	if (isset($_GET["id"])) {
-		$postId = postIdFilter($_GET["id"]);
+	global $postId;
+	if (isset($postId)) {
 		$post = new PostElement();
 		$post->query($postId);
 		return $post->title;
@@ -20,6 +27,18 @@ function getTitle() {
 		return $destElement->engName . " - " . $index->name;
 	}
 	else return "";
+}
+
+function getSummary() {
+	global $postId;
+	if (isset($postId)) {
+		$post = new PostElement();
+		$post->query($postId);
+		return $post->summary;
+	}	
+	else {
+		return DEFAULT_DES;
+	}
 }
 
 ?>
@@ -37,9 +56,7 @@ Nha Trang, Nhatrang, Dalat, Da Lat, Mui ne, muine, Vung tau, Saigon, Sai Gon,
 Ho Chi Minh, Mekong delta, Phu Quoc"> 
 
 <meta name="Description" 
-content = "VietnamWiki.net is an open encyclopedia where experienced travelers share
-their knowledge about Vietnam under the supervision of VietnamWiki.net team. Every information
-the user send to our website will be checked and confirmed before posted to official pages">
+content = "<?php echo getSummary()?>">
 
 <meta name="verify-v1" content="IyUL1eYMgjAMGDWrAeniu500lWWLUCONXP+II/s3I2s=" />
     
