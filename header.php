@@ -43,7 +43,7 @@ the user send to our website will be checked and confirmed before posted to offi
 
 <meta name="verify-v1" content="IyUL1eYMgjAMGDWrAeniu500lWWLUCONXP+II/s3I2s=" />
     
-<script type="text/javascript" src="js/mootools-1.2.3-core-yc.js"></script>
+<script type="text/javascript" src="/js/mootools-1.2.3-core-yc.js"></script>
 <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js"></script>
 <script type="text/javascript" src="/js/integrated.js"></script>
 

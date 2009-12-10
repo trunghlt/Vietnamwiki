@@ -1,9 +1,9 @@
 <?php
-include('core/common.php');
-include('core/init.php');
-include('core/classes.php');
-include('core/session.php');
-include('core/filters.php');
+include('/core/common.php');
+include('/core/init.php');
+include('/core/classes.php');
+include('/core/session.php');
+include('/core/filters.php');
 include("preprocess.php");
 include('header.php'); 
 include('destination.php');
