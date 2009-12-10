@@ -40,52 +40,14 @@ function getReviewListHTML($postId) {
 			<div class="reviewHead">
 				<div class="reviewRate" style="background: url(/images/stars_map.png) 0 <?php echo -19*($review->rateValue - 1)*2 - 19 ?>px no-repeat;">&nbsp;</div>
 				&nbsp; Reviewed by <?php echo $user->username?> at <?php echo $reviewDateTimeStr?></div>
-<? //Fix Spam
-			$str_review=trim($reviewText); //Cut space first and last of string
-			$length_review=strlen($str_review);//Check string's length
-			$str_checked;//create sub_string
-			if(strrpos($str_review," ")!==FALSE)//Find space in string.
-			{
-				$str_checked =  $str_review;
-			}
-			else//create sub_string and break line if string is spam
-			{
-				$str_checked="<span>";
-				$i=0;
-				do{
-					$str_review_sub = substr($str_review,$i,100) ;
+			<div class="reviewBody">
+				<?php
+				//delete all words with length >= 30
+				$processedText = preg_replace("/\b\w{30,}\b/e", "", $reviewText);
 
-						if(strlen($str_review_sub)==100)
-						{
-							$check_str_null = substr($str_review_sub,-1);
-							if($check_str_null == " ")
-							{
-								$str_checked .= $str_review_sub."<br />";
-								$i += strlen($str_review_sub);
-							}
-							else{
-								if(strrpos($str_review_sub," ")===FALSE)
-								{
-									$str_checked .= $str_review_sub."<br />";
-									$i += strlen($str_review_sub);
-								}
-								else{
-									$str_review_sub = substr($str_review,$i,strrpos($str_review_sub," "));
-									$str_checked .= $str_review_sub."<br />";
-									$i += strlen($str_review_sub);
-								}
-							}
-						}
-						else{
-								$str_checked .= $str_review_sub."<br />";
-								$i += strlen($str_review_sub);
-						}
-				}while($i!=$length_review);
-				$str_checked .="</span>";
-			}
-			
-?>
-			<div class="reviewBody"><?php echo $str_checked ?></div>
+				echo $processedText; 
+				?>
+			</div>
 		</div>
 	<?php }
 }
