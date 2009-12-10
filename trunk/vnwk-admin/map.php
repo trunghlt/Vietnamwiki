@@ -1,7 +1,8 @@
 <?php
 	include ("projax/projax.php");
-	include("init.php");
-	
+	include("db.php");
+	include("common.php");
+	$q = new db;
 	$id = $_GET["id"];
 	$add = $_POST["Add"];
 	$URL = $_POST["URL"];
@@ -12,6 +13,7 @@
 			$sql = "INSERT INTO map_images
 					(dest_id, URL)
 					VALUE($id, '$URL')";
+			
 			$q->query($sql);			
 		}
 		
@@ -19,15 +21,29 @@
 			$sql = "DELETE
 					FROM map_images
 					WHERE id=$del_id";
+			
 			$q->query($sql);
 		}
 		
 		$sql = "SELECT *
 				FROM map_images
 				WHERE dest_id = ($id)";
-		$q->query($sql);		
+		
+		$q->query($sql);
+?>
+<!--Confirm-->
+<script type="text/javascript" language="javascript">
+	function confir(id,del_id){
+		if(window.confirm('Do You want delete this destination?'))
+		{
+			location.href = "map.php?id="+id+"&del_id="+del_id;
+		}
+	}
+</script>
+
+<?		
 		While ($r = mysql_fetch_array($q->re)) {
-			echo "<a href='map.php?id=".$id."&del_id=".$r["id"]."'>(x)</a>";
+			echo "<a href='#' onclick='confir(".$id.",".$r["id"].");'>(x)</a>";
 			echo "<img src='".$r["URL"] . "'/></br>";
 		}
 		?>
@@ -50,6 +66,7 @@
 	$sql = "SELECT * 
 			FROM destinations
 			ORDER BY ord";
+			
 	$q->query($sql);	
 ?>
 <div id="dest">

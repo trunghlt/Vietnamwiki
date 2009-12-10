@@ -1,9 +1,10 @@
 <?php
 include ("projax/projax.php");
-include("init.php");
+include("db.php");
+include("common.php");
 
 $projax = new Projax();
-
+$q = new db;
 if (isset($_GET["action"])) {
 	$action = $_GET["action"];
 	
@@ -14,6 +15,7 @@ if (isset($_GET["action"])) {
 			$sql = "UPDATE posts
 					SET ord = ".$i."
 					WHERE post_id = ".$order[$i];
+			
 			$q->query($sql);
 		}
 		return;
@@ -24,9 +26,11 @@ if (isset($_GET["action"])) {
 		$id = $_GET["id"];
 		$sql = "DELETE FROM posts
 				WHERE post_id = '$id'";
+		
 		$q->query($sql);
 		$sql = "DELETE FROM posts_texts
 				WHERE post_id = '$id'";
+				
 		$q->query($sql);
 		return;
 	}			
@@ -37,6 +41,7 @@ if (isset($_GET["action"])) {
 		$sql = "UPDATE posts
 				SET locked = 1 - locked
 				WHERE post_id = ".$id;
+		
 		$q->query($sql);
 		return;
 	}
@@ -50,17 +55,20 @@ if (isset($_GET["moving"])) {
 	$sql = "SELECT *
 			FROM posts
 			WHERE post_id = ".$id;
+	
 	$q->query($sql);
 	$topic = mysql_fetch_array($q->re);
 	
 	$sql = "UPDATE posts
 			SET ord = ord - 1
 			WHERE (index_id = ".$topic["index_id"].") AND (ord > ".$topic["ord"].")";
+	
 	$q->query($sql);
 	
 	$sql = "SELECT MAX(ord) as 'maxord'
 			FROM posts
 			WHERE index_id = ".$to;
+	
 	$q->query($sql);
 	$ord = 0;
 	if ($q->n > 0) {
@@ -71,6 +79,7 @@ if (isset($_GET["moving"])) {
 	$sql = "UPDATE posts
 			SET index_id = ".$to.", ord = ".$ord."
 			WHERE post_id = ".$id;
+	
 	$q->query($sql);
 }
 
@@ -85,6 +94,7 @@ if (isset($_GET["task"])) {
 					FROM index_menu
 					WHERE dest_id = ".$id."
 					ORDER BY ord";
+			
 			$q->query($sql);
 			if ($q->n > 0) {
 				echo "<p><label>Index menu </label>";
@@ -112,6 +122,7 @@ if (isset($_GET["task"])) {
 			FROM posts
 			WHERE index_id = ".$index_id."
 			ORDER BY ord";
+	
 	$q->query($sql);
 	while ($r = mysql_fetch_array($q->re)) {
 		$sql = "SELECT post_subject
@@ -158,6 +169,7 @@ if (isset($_GET["task"])) {
 	$sql= "SELECT * 
 		   FROM destinations 
 		   ORDER BY ord";
+	
 	$q->query($sql);
 	while ($r = mysql_fetch_array($q->re)) {
 		echo "<option value='".$r["id"]."'>".$r["EngName"]."</option>";
@@ -174,6 +186,7 @@ if (isset($_GET["task"])) {
 		$sql= "SELECT * 
 			   FROM destinations 
 			   ORDER BY ord";
+			   
 		$q->query($sql);
 		while ($r = mysql_fetch_array($q->re)) {
 			echo "<option value='".$r["id"]."'>".$r["EngName"]."</option>";
@@ -219,12 +232,15 @@ if (isset($_GET["task"])) {
 	//delete topic
 	function delete_topic(x) {
 		//call Ajax delete function
-		new Ajax.Updater(	'test',
-							'topic.php?action=delete&id='+x,
-							{evalScripts:true});
+		if(window.confirm('Do you want delete this topic?'))
+		{
+			new Ajax.Updater(	'test',
+								'topic.php?action=delete&id='+x,
+								{evalScripts:true});
 		//update index menu
-		update_index(1);
-		return true;
+				update_index(1);
+			return true;
+		}
 	}
 	
 	//toggle lock/unlock topic
