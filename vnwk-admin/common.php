@@ -6,6 +6,7 @@
 		
 		function query($s) {
 			$this->sql = $s;
+			free_result($this->re);//free old result
 			$this->re = dbquery($s);	
 			error_reporting(0);
 			$this->n = mysql_num_rows($this->re);
@@ -17,7 +18,12 @@
 		$re = mysql_query($sql) or die(mysql_error());
 		return $re;
 	}
-	
+	function free_result($re){
+		if($re)
+		{
+			@mysql_free_result($re);
+		}
+	}	
 	function logged_in() {
 		$ip = myip();
 		$sql = "SELECT *
