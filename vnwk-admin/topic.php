@@ -2,7 +2,11 @@
 include ("projax/projax.php");
 include("db.php");
 include("common.php");
-
+include("session.php");
+	session_start();
+	process(session_id(), myip());
+	
+	if (!logged_in()) header("location: login.php");
 $projax = new Projax();
 $q = new db;
 if (isset($_GET["action"])) {
