@@ -8,7 +8,7 @@
 				rows="3" 
 				cols="120"></textarea>
 	<br/>
-	<label>Your review can't excess 140 characters.</label>
+	<label>Your comment can't excess 140 characters.</label>
 	<label id="commentLimitLbl"></label>
 	<label>Please click on <a href="review.php?id=<?php echo $post_id?>">Review</a> for any longer comments.</label>
 </form>
