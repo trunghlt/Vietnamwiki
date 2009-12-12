@@ -11,5 +11,5 @@
 <frameset cols="20%,40%,*">
 	<frame src="map.php">
 	<frame src="" name="mostright">
-</frameset>
+<noframes>Your's browser don't support Frame</noframes>
 </html>

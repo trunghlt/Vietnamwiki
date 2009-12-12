@@ -12,4 +12,5 @@
 	<frame src="control.php">
 	<frame src="" name="index_menu">
 </frameset>
+<noframes>Your's browser don't support Frame</noframes>
 </html>
