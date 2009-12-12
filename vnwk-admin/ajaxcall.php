@@ -1,9 +1,12 @@
 <?php
 	include ("projax/projax.php");
-	include ("db.php");
-	include ("common.php"); 
-
-	$projax= new Projax();
+	include("db.php");
+	include("common.php");
+	include("session.php"); 
+	session_start();
+	process(session_id(), myip());
+	
+	if (!logged_in()) header("location: login.php");	$projax= new Projax();
 	$q = new db;
 	$task=isset($_GET['task'])?$_GET['task']:'view';
 	
@@ -74,6 +77,8 @@
 		}
 	}
 ?>
+<script src="projax/js/prototype.js" type="text/javascript"></script>
+<script src="projax/js/scriptaculous.js" type="text/javascript"></script>
 <!--Confirm-->
 <script type="text/javascript" language="javascript">
 	function confir(id,index_id){
