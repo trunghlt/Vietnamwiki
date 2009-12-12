@@ -1,11 +1,16 @@
 <?php
 	include ("projax/projax.php");
 	include("db.php");
-	include("common.php"); 	
-
+	include("common.php");
+	include("session.php");	
+	session_start();
+	process(session_id(), myip());
+	
+	if (!logged_in()) header("location: login.php");
+	$q = new db;
 	$projax= new Projax();
-	$q = new db;	
 	if( isset($_GET["action"]) ) {
+	
 		$action = $_GET["action"];
 		
 		if ($action == "delete") {
@@ -75,6 +80,8 @@
 	
 	$q->query($sql);	
 ?>
+<script src="projax/js/prototype.js" type="text/javascript"></script>
+<script src="projax/js/scriptaculous.js" type="text/javascript"></script>
 <script type="text/javascript" language="javascript">
 	function confir(id){
 		if(window.confirm('Do You want delete this destination?'))
