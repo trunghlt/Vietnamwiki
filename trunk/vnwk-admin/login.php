@@ -1,13 +1,45 @@
 <?php
 	include("db.php");
-	if (isset($_POST["username"])) {
-		$un = $_POST["username"];
-		$pw = $_POST["password"];
-		if ($id = chk_authentication($un, $pw)) {
-			sign_in($id);
-			header("location: index.php");
+	if (isset($_POST["login"])) {
+		if($_POST["username"]==NULL)
+		{
+			$error[] = "<span class=error>Please enter username</span><br />";
 		}
-		echo "Invalid username or password";
+		else{
+			if(eregi("^[a-zA-Z0-9._]$",$_POST["username"]))
+				$un = $_POST["username"];
+			$error[] = "<span class=error>Please enter username</span><br />";
+		}
+		if($_POST["password"]==NULL)
+		{
+			$error[] = "<span class=error>Please enter password</span>";
+		}
+		else{
+			if(eregi("^[a-zA-Z0-9._]$",$_POST["password"]))
+				$pw = $_POST["password"];
+			else
+				$error[] = "<span class=error>Please enter password</span>";
+		}
+		if($pw && $un)
+		{
+			if ($id = chk_authentication($un, $pw)) {
+				sign_in($id);
+				header("location: index.php");
+				exit();
+			}
+			else{
+				$error[] = "<span class=error>Invalid username or password</span>";
+			}
+		}
+	}
+?>
+<?
+	if(count($error)){
+		foreach($error as $value)
+		{
+			echo "$value";
+		}
+		reset($error);
 	}
 ?>
 <h1>Login</h1>
@@ -17,7 +49,7 @@
 	<b>Password: </b>
 	<input type="password" name="password" id="password">
 	<br/><br/>
-	<input type="submit" value="Sign in" />
+	<input type="submit" value="Sign in" name='login' />
 </form> 
 <?php
 	function chk_authentication($un, $pw) {
