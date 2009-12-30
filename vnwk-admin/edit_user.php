@@ -17,9 +17,10 @@ session_start();
 <!--Confirm-->
 <script language="javascript" type="text/javascript">
 	function confir(id){
-		if(window.confirm('Do You want edit this user?'))
+		if(!window.confirm('Do You want edit this user?'))
 		{
-			alert("Success");
+			location.href = "edit_user.php?id="+id;
+			alert('Cancel!');
 		}
 	}
 </script>
