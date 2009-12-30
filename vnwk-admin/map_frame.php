@@ -8,7 +8,7 @@
 	if (!logged_in()) header("location: login.php");
 ?>
 <html>
-<frameset cols="20%,40%,*">
+<frameset cols="30%,40%">
 	<frame src="map.php">
 	<frame src="" name="mostright">
 <noframes>Your's browser don't support Frame</noframes>

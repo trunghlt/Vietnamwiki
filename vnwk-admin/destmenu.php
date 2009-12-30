@@ -8,7 +8,7 @@
 	if (!logged_in()) header("location: login.php");
 ?>
 <html>
-<frameset cols="30%,*">
+<frameset cols="30%,40%">
 	<frame src="control.php">
 	<frame src="" name="index_menu">
 </frameset>
