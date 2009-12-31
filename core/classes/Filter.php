@@ -10,5 +10,13 @@ class Filter {
 			return $s;
 		else dieToInvalidInput();
 	}
+	public static function filterInput($n,$location,$case) {
+
+			if (preg_match("/[-+]?[0-9]+/", $n) && ($case==1))
+				return $n;
+			if(preg_match("/\w{5,}/", $n) && ($case == 2))
+				return $n;
+		return (header("location:$location"));
+	}	
 }
 ?>
