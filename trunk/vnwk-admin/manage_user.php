@@ -1,12 +1,17 @@
 <?
+ob_end_clean();
+ob_start();
 session_start();
 //include file	
 	include("class_user.php");
 	include("common.php");
 	include("session.php");
+	include(".././core/classes/filter.php");
 //check logged user 
 	process(session_id(), myip());
 	if (!logged_in()) header("location: login.php");
+	if(isset($_GET['id']))
+		$id = Filter::filterInput($_GET['id'],"login.php",1);
 ?>
 <style>
 	a{
@@ -33,20 +38,20 @@ session_start();
 //--------delete user---------------//	
 	if(isset($_GET['act']) && $_GET['act']=='del')
 	{
-		$u->del_user($_GET['id']);
+		$u->del_user($id);
 	}
 	
 //---------ban user-----------------//
 	if(isset($_GET['act']) && $_GET['act']=='ban')
 	{
-		if($_GET['value']==1)
+		if(Filter::filterInput($_GET['value'],"login.php",1))
 		{
 			$arr_ban = array(ban_user=>0);
-			$u->edit_user($_GET['id'],$arr_ban);
+			$u->edit_user($id,$arr_ban);
 		}
 		else{
 			$arr_ban = array(ban_user=>1);
-			$u->edit_user($_GET['id'],$arr_ban);
+			$u->edit_user($id,$arr_ban);
 		}
 	}
 
@@ -68,7 +73,7 @@ session_start();
 //start position 
 	if(isset($_GET['s']))
 	{
-		$start = $_GET['s'];
+		$start = Filter::filterInput($_GET['s'],"login.php",1);
 	}
 	else{
 		$start = 0;
@@ -105,4 +110,5 @@ echo "<br/>";
 				echo " ".$i." ";
 		}
 	}
+ob_end_flush();
 ?>
