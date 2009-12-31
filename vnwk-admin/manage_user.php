@@ -33,7 +33,6 @@ session_start();
 	}
 </script>
 <?
-	$str ='';
 	$u = new user;
 //--------delete user---------------//	
 	if(isset($_GET['act']) && $_GET['act']=='del')

@@ -4,8 +4,8 @@ include("db.php");
 		protected $re = NULL;
 		
 		//show user
-		function show_user($command){
-			if($command == NULL)
+		function show_user($command=""){
+			if($command == "")
 			{
 				$sql = "select id,username,password,level,ban_user from users";
 				$this->re = mysql_query($sql) or die(mysql_error());
@@ -30,6 +30,7 @@ include("db.php");
 		function del_user($id){
 			$sql = "delete from users where id='".$id."'";
 			mysql_query($sql) or die(mysql_error());
+			@mysql_free_result($this->re);
 		}
 		
 		//edit user
