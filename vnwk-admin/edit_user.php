@@ -1,12 +1,18 @@
 <?
+ob_end_clean();
+ob_start();
 session_start();
 //include file	
 	include("class_user.php");
 	include("common.php");
 	include("session.php");
+	include(".././core/classes/filter.php");
 //check logged user 
 	process(session_id(), myip());
 	if (!logged_in()) header("location: login.php");
+	if(isset($_GET['id']))
+		$id = Filter::filterInput($_GET['id'],"login.php",1);
+	$local = "edit_user.php?id=".$id;
 ?>
 <style>
 	label{
@@ -25,9 +31,9 @@ session_start();
 	}
 </script>
 <?
-	$str ="where id='".$_GET['id']."'";
+	$str ="where id='".$id."'";
 	$u = new user;
-	$error=array();
+
 	//check edit user 
 	if(isset($_GET['act']) && $_GET['act']=='edit')
 	{
@@ -36,26 +42,25 @@ session_start();
 			$ur = $arr[0][username];
 		}
 		else{
-			if($u->check_user($_GET['id'],$_POST['user'])==0){
-				$ur = $_POST['user'];
-			}
-			else{
-				$error[] = "<span>Username exsisted</span><br />";
-			}
+				$filter_user = Filter::filterInput($_POST['user'],$local,2);
+				if($u->check_user($id,$filter_user)==0){
+					$ur = $filter_user;
 		}
+	}
 		
 		if($_POST['pass']==NULL){
 			$ps = $arr[0][password];
 		}
 		else{
-			if($_POST['pass'] != $_POST['re_pass']){
-				$error[] = "<span>Re_password not match </span><br />";
-			}
-			else{
-				$ps = $_POST['pass'];
+			$filter_pass = Filter::filterInput($_POST['pass'],$local,2);
+			$filter_repass = Filter::filterInput($_POST['re_pass'],$local,2);
+			
+			if($filter_pass == $filter_repass){
+				$ps = $filter_pass;
 			}
 		}
-		$level = $_POST['level'];
+		
+		$level = Filter::filterInput($_POST['level'],$local,1);
 		//Update
 		if($level && $ur && $ps)
 		{
@@ -65,14 +70,7 @@ session_start();
 			$u->edit_user($_GET['id'],$arr_edit);
 		}
 	}	
-	if(count($error)){
-		foreach($error as $value)
-		{
-			echo "$value";
-		}
-		reset($error);
-	}
-	
+
 	//show user
 	$arr = $u->show_user($str);
 	echo "Infomation User<br />";
@@ -84,7 +82,7 @@ session_start();
 <div>
 	<label>ID :</label><input type="text" name="id2" value="<? echo $arr[0][id];?>" disabled /><br />
 	<label>Username :</label><input type="text" name="user" value="<? echo $arr[0][username];?>" /><br />
-	<label>Password :</label><input type="password" name="pass" /><br />
+	<label>Password (>=5 characters):</label><input type="password" name="pass" /><br />
 	<label>Re_Password :</label><input type="password" name="re_pass" /><br />
 	<label>Level :</label>
 	<select name="level">Level:
@@ -95,3 +93,6 @@ session_start();
 	<input type="submit" name="ok" value="Send" />
 </div>
 </form>
+<?
+ob_end_flush();
+?>
