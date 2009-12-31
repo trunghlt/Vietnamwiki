@@ -1,4 +1,4 @@
-<?
+<?php
 include("db.php");
 	class user{
 		protected $re = NULL;
