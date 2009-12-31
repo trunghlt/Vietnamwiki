@@ -1,4 +1,4 @@
-<?
+<?php
 ob_end_clean();
 ob_start();
 session_start();
@@ -32,7 +32,7 @@ session_start();
 		}
 	}
 </script>
-<?
+<?php
 	$u = new user;
 //--------delete user---------------//	
 	if(isset($_GET['act']) && $_GET['act']=='del')

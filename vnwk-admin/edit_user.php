@@ -1,4 +1,4 @@
-<?
+<?php
 ob_end_clean();
 ob_start();
 session_start();
@@ -30,7 +30,7 @@ session_start();
 		}
 	}
 </script>
-<?
+<?php
 	$str ="where id='".$id."'";
 	$u = new user;
 
@@ -78,16 +78,16 @@ session_start();
 	echo "<br />";
 ?>
 
-<form method="post" action="edit_user.php?id=<? echo $arr[0][id]?>&act=edit" target="user" name="user" onsubmit="confir(<? echo $arr[0][id]?>);">
+<form method="post" action="edit_user.php?id=<?php echo $arr[0][id]?>&act=edit" target="user" name="user" onsubmit="confir(<? echo $arr[0][id]?>);">
 <div>
-	<label>ID :</label><input type="text" name="id2" value="<? echo $arr[0][id];?>" disabled /><br />
-	<label>Username :</label><input type="text" name="user" value="<? echo $arr[0][username];?>" /><br />
+	<label>ID :</label><input type="text" name="id2" value="<?php echo $arr[0][id];?>" disabled /><br />
+	<label>Username :</label><input type="text" name="user" value="<?php echo $arr[0][username];?>" /><br />
 	<label>Password (>=5 characters):</label><input type="password" name="pass" /><br />
 	<label>Re_Password :</label><input type="password" name="re_pass" /><br />
 	<label>Level :</label>
 	<select name="level">Level:
-		<option value="1" <? if($arr[0][level]==1) echo "selected";?>>1</option>
-		<option value="2" <? if($arr[0][level]==0) echo "selected";?>>0</option>
+		<option value="1" <?php if($arr[0][level]==1) echo "selected";?>>1</option>
+		<option value="2" <?php if($arr[0][level]==0) echo "selected";?>>0</option>
 	</select>
 	<br />
 	<input type="submit" name="ok" value="Send" />
