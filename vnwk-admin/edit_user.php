@@ -78,7 +78,7 @@ session_start();
 	echo "<br />";
 ?>
 
-<form method="post" action="edit_user.php?id=<?php echo $arr[0][id]?>&act=edit" target="user" name="user" onsubmit="confir(<? echo $arr[0][id]?>);">
+<form method="post" action="edit_user.php?id=<?php echo $arr[0][id]?>&act=edit" target="user" name="user" onsubmit="confir(<?php echo $arr[0][id]?>);">
 <div>
 	<label>ID :</label><input type="text" name="id2" value="<?php echo $arr[0][id];?>" disabled /><br />
 	<label>Username :</label><input type="text" name="user" value="<?php echo $arr[0][username];?>" /><br />
@@ -93,6 +93,6 @@ session_start();
 	<input type="submit" name="ok" value="Send" />
 </div>
 </form>
-<?
+<?php
 ob_end_flush();
 ?>

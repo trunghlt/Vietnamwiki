@@ -17,6 +17,11 @@ class Filter {
 			if(preg_match("/\w{5,}/", $n) && ($case == 2))
 				return $n;
 		return (header("location:$location"));
-	}	
+	}
+	public static function filterInputText($n) {
+		$n = str_replace("<script",'',$n);
+		$n = str_replace("<?php",'',$n);
+		return $n;
+	}		
 }
 ?>
