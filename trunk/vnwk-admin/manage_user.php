@@ -55,7 +55,7 @@ session_start();
 	}
 
 //----------------------------------//
-	$arr = $u->show_user($str);
+	$arr = $u->show_user();
 	
 	$row_per_page = 5;
 	$count_record = count($arr);
