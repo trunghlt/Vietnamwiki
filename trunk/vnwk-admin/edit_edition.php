@@ -21,6 +21,35 @@ session_start();
 		width:200px;
 	}
 </style>
+<script type="text/javascript" src=".././js/tiny_mce/tiny_mce.js"></script>
+<script language="javascript">
+	tinyMCE.init({
+				// General options
+				mode : "exact",
+				elements: "ptex",
+				theme : "advanced",
+				plugins : "googlemaps,safari,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
+			
+				// Theme options
+				theme_advanced_buttons1 : "insertlayer,pagebreak,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,formatselect,fontselect,fontsizeselect,|,googlemaps, googlemapsdel",
+				theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,image,cleanup,code,|preview,|,forecolor,backcolor",
+				theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,|,print,preview",
+				theme_advanced_toolbar_location : "top",
+				theme_advanced_toolbar_align : "left",
+				theme_advanced_resizing : false,
+			
+				// Drop lists for link/image/media/template dialogs
+				template_external_list_url : ".././js/template_list.js",
+				external_link_list_url : ".././js/link_list.js",
+				external_image_list_url : ".././js/image_list.js",
+				media_external_list_url : ".././js/media_list.js",
+
+				template_replace_values : {
+					username : "Some User",
+					staffid : "991234"
+				}			
+			});
+</script>	
 <!--Confirm-->
 <script language="javascript" type="text/javascript">
 	function confir(id){
@@ -57,23 +86,16 @@ session_start();
 	echo "___________________________________________________<br />";
 	echo "<br />";
 ?>
-<script type="text/javascript" src="projax/js/nicEdit.js"></script>
-<script type="text/javascript">
-	bkLib.onDomLoaded(function() { 
-	new nicEditor({fullPanel : true}).panelInstance('ptex'); 
-	
-	});
-</script>
-<form method="post" action="edit_edition.php?id=<?php echo $arr[id]?>&act=edit" target="edition" name="user" onsubmit="confir(<?php echo $arr[id]?>);">
+<form method="post" action="edit_edition.php?id=<?php echo $arr['id']?>&act=edit" target="edition" name="user" onsubmit="confir(<?php echo $arr['id']?>);">
 <div>
-	<label>Post Subject :</label><input type="text" name="PSub" value="<?php echo $arr[post_subject];?>" disabled /><br />
-	<label>Post Summary :</label><input type="text" name="PSum" value="<?php echo $arr[post_summary];?>" disabled /><br />
+	<label>Post Subject :</label><input type="text" name="PSub" value="<?php echo $arr['post_subject'];?>" disabled /><br />
+	<label>Post Summary :</label><input type="text" name="PSum" value="<?php echo $arr['post_summary'];?>" disabled /><br />
 	<label>Post Text</label><br />
-	<textarea name="PTex" id="ptex" rows="20" cols="80"><?php echo $arr[post_text];?></textarea><br />
-	<label>Small Url Img :</label><input type="text" name="SUrl" value="<?php echo $arr[post_small_img_url];?>" disabled/><br />
-	<label>Big Url Img :</label><input type="text" name="BUrl" value="<?php echo $arr[post_big_img_url];?>" disabled/><br />
+	<textarea name="PTex" id="ptex" rows="20" cols="80"><?php echo $arr['post_text'];?></textarea><br />
+	<label>Small Url Img :</label><input type="text" name="SUrl" value="<?php echo $arr['post_small_img_url'];?>" disabled/><br />
+	<label>Big Url Img :</label><input type="text" name="BUrl" value="<?php echo $arr['post_big_img_url'];?>" disabled/><br />
 	<br />
-	<input type="submit" name="ok" value="Send" />
+	<input type="submit" name="ok" value="Update Edition" />
 </div>
 </form>
 <?php
