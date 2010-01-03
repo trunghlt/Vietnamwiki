@@ -1,5 +1,4 @@
 <?php
-ob_end_clean();
 ob_start();
 session_start();
 //include file	
@@ -23,10 +22,10 @@ session_start();
 <!--Confirm-->
 <script language="javascript" type="text/javascript">
 	function confir(id){
-		if(!window.confirm('Do You want edit this user?'))
+		if(!window.confirm('Do you want edit this user?'))
 		{
 			location.href = "edit_user.php?id="+id;
-			alert('Cancel!');
+			return false;
 		}
 	}
 </script>
@@ -39,7 +38,7 @@ session_start();
 	{
 		$arr = $u->show_user($str);
 		if($_POST['user']==NULL){
-			$ur = $arr[0][username];
+			$ur = $arr[0]['username'];
 		}
 		else{
 				$filter_user = Filter::filterInput($_POST['user'],$local,2);
@@ -49,7 +48,7 @@ session_start();
 	}
 		
 		if($_POST['pass']==NULL){
-			$ps = $arr[0][password];
+			$ps = $arr[0]['password'];
 		}
 		else{
 			$filter_pass = Filter::filterInput($_POST['pass'],$local,2);
@@ -78,19 +77,19 @@ session_start();
 	echo "<br />";
 ?>
 
-<form method="post" action="edit_user.php?id=<?php echo $arr[0][id]?>&act=edit" target="user" name="user" onsubmit="confir(<?php echo $arr[0][id]?>);">
+<form method="post" action="edit_user.php?id=<?php echo $arr[0]['id']?>&act=edit" target="user" name="user" >
 <div>
-	<label>ID :</label><input type="text" name="id2" value="<?php echo $arr[0][id];?>" disabled /><br />
-	<label>Username :</label><input type="text" name="user" value="<?php echo $arr[0][username];?>" /><br />
+	<label>ID :</label><input type="text" name="id2" value="<?php echo $arr[0]['id'];?>" disabled /><br />
+	<label>Username :</label><input type="text" name="user" value="<?php echo $arr[0]['username'];?>" /><br />
 	<label>Password (>=5 characters):</label><input type="password" name="pass" /><br />
 	<label>Re_Password :</label><input type="password" name="re_pass" /><br />
 	<label>Level :</label>
 	<select name="level">Level:
-		<option value="1" <?php if($arr[0][level]==1) echo "selected";?>>1</option>
-		<option value="2" <?php if($arr[0][level]==0) echo "selected";?>>0</option>
+		<option value="1" <?php if($arr[0]['level']==1) echo "selected";?> >1</option>
+		<option value="2" <?php if($arr[0]['level']==0) echo "selected";?> >0</option>
 	</select>
 	<br />
-	<input type="submit" name="ok" value="Send" />
+	<input type="submit" name="ok" value="Edit User" onclick="return confir(<?php echo $arr[0]['id']?>);"/>
 </div>
 </form>
 <?php
