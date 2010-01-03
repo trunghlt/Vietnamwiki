@@ -1,3 +1,8 @@
+<?php
+ob_end_clean();
+ob_start();
+session_start();
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -30,10 +35,10 @@
 			if($value==1)
 				$value = 2;
 			else $value = 1;
-			mysql_query("update feature set value = $value");
+			mysql_query("update setting set property_value = $value where property_name='ALLOW_DIRECT_UPDATE'");
 			
 		}	
-		$re = mysql_query("select * from feature");
+		$re = mysql_query("select * from setting where property_name='ALLOW_DIRECT_UPDATE'");
 		$row=mysql_fetch_assoc($re);
 ?>
 <p>Sign out</p>
@@ -43,9 +48,9 @@
 <p>Slide management</p>
 <p><a href="user_frame.php" target="showframe">User management</a></p>
 <p><a href="map_frame.php" target="showframe">Map management</a></p>
-<p><a href="link.php?value=<?php echo $row['value']?>" >
+<p><a href="link.php?value=<?php echo $row['property_value']?>" >
 <?php 
-	if($row['value']==1)
+	if($row['property_value']==1)
 		echo 'Allowed_up_content';
 	else
 		echo 'Not_Allowed_up_content';
@@ -54,3 +59,6 @@
 <p>Back up</p>
 </body>
 </html>
+<?php
+ob_end_flush();
+?>
