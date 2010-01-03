@@ -1,5 +1,6 @@
 <?php
 	include("db.php");
+		$error = array();
 	if (isset($_POST["login"])) {
 		if($_POST["username"]==NULL)
 		{
