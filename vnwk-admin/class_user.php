@@ -5,6 +5,7 @@ include("db.php");
 		
 		//show user
 		function show_user($command=""){
+			$arr = array();
 			if($command == "")
 			{
 				$sql = "select id,username,password,level,ban_user from users";
@@ -35,7 +36,7 @@ include("db.php");
 		
 		//edit user
 		function edit_user($id,$arr=''){
-			$str;
+			$str='';
 			if(is_array($arr)){
 				foreach($arr as $key=>$value)
 				{
@@ -50,6 +51,7 @@ include("db.php");
 		
 		//check user exsist
 		function check_user($id,$user){
+			$row1=array();
 			$sql = "select username from users where username='".$user."'and id != $id" ;
 			$this->re = mysql_query($sql) or die(mysql_error());
 			while($row = mysql_fetch_assoc($this->re)){

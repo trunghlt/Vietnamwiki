@@ -1,5 +1,5 @@
 <?php
-ob_end_clean();
+@ob_end_clean();
 ob_start();
 session_start();
 //include file	
@@ -56,7 +56,7 @@ session_start();
 		if(!window.confirm('Do You want edit this edition?'))
 		{
 			location.href = "edit_edition.php?id="+id;
-			alert('Cancel!');
+			return false;
 		}
 	}
 </script>
@@ -86,7 +86,7 @@ session_start();
 	echo "___________________________________________________<br />";
 	echo "<br />";
 ?>
-<form method="post" action="edit_edition.php?id=<?php echo $arr['id']?>&act=edit" target="edition" name="user" onsubmit="confir(<?php echo $arr['id']?>);">
+<form method="post" action="edit_edition.php?id=<?php echo $arr['id']?>&act=edit" target="edition" name="user" onsubmit="return confir(<?php echo $arr['id']?>);">
 <div>
 	<label>Post Subject :</label><input type="text" name="PSub" value="<?php echo $arr['post_subject'];?>" disabled /><br />
 	<label>Post Summary :</label><input type="text" name="PSum" value="<?php echo $arr['post_summary'];?>" disabled /><br />

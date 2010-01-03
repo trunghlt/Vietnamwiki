@@ -1,5 +1,5 @@
 <?php
-ob_end_clean();
+@ob_end_clean();
 ob_start();
 session_start();
 ?>
@@ -39,7 +39,7 @@ session_start();
 			
 		}	
 		$re = mysql_query("select * from setting where property_name='ALLOW_DIRECT_UPDATE'");
-		$row=mysql_fetch_assoc($re);
+		$row = mysql_fetch_assoc($re);
 ?>
 <p>Sign out</p>
 <p><a href="destmenu.php" target="showframe">Destination & Index menu management</a></p>
