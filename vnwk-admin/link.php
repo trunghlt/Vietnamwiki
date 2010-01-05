@@ -46,7 +46,7 @@ session_start();
 		$re = mysql_query("select * from setting where property_name='ALLOW_DIRECT_UPDATE'");
 		$row = mysql_fetch_assoc($re);
 ?>
-<p>Sign out</p>
+<p><a href="sign_out.php">Sign out</a></p>
 <p><a href="destmenu.php" target="showframe">Destination & Index menu management</a></p>
 <p><a href="topic.php" target="showframe">Topic management</a></p>
 <p><a href="edition_frame.php" target="showframe">Revision management</a></p>
