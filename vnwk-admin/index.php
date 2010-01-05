@@ -9,7 +9,7 @@
 ?>
 <html>
 	<frameset rows="10%,*">
-		  <frame src="head.htm">
-		  <frame src="body.htm">
+		  <frame src="head.php">
+		  <frame src="body.php">
 	</frameset>
 </html>

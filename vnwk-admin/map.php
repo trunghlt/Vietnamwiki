@@ -8,10 +8,10 @@
 	
 	if (!logged_in()) header("location: login.php");
 	$q = new db;
-	$id = $_GET["id"];
-	$add = $_POST["Add"];
-	$URL = $_POST["URL"];
-	$del_id = $_GET["del_id"];
+	$id = @$_GET["id"];
+	$add = @$_POST["Add"];
+	$URL = @$_POST["URL"];
+	$del_id = @$_GET["del_id"];
 	
 	if (isset($id)) {
 		if ($add) {
