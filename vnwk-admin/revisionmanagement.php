@@ -96,18 +96,8 @@ if (!isset($post_id)) $post_id = 0;
 <script src="projax/js/prototype.js" type="text/javascript"></script>
 <script src="projax/js/scriptaculous.js" type="text/javascript"></script>
 </head>
-<style>
-	a{
-		text-decoration:none;
-	}
-	a:visited{
-		color:#000099;
-	}
-	a:hover{
-		color:#00FF66;
-	}
-</style>
-<body>
+<link href="admin.css" rel="stylesheet" type="text/css" />
+<body id='edition_manage'>
 <h3>Revision Management</h3>
 
 <p><label>Destinations</label>

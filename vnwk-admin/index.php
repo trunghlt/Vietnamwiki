@@ -8,8 +8,8 @@
 	if (!logged_in()) header("location: login.php");
 ?>
 <html>
-	<frameset rows="10%,*">
-		  <frame src="head.php">
+	<frameset rows="80,*" border="3px" bordercolor="#003366">
+		  <frame src="head.php" noresize scrolling="no">
 		  <frame src="body.php">
 	</frameset>
 </html>

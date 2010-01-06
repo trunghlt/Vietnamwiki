@@ -21,6 +21,7 @@ session_start();
 		width:200px;
 	}
 </style>
+<link href="admin.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src=".././js/tiny_mce/tiny_mce.js"></script>
 <script language="javascript">
 	tinyMCE.init({
@@ -82,6 +83,7 @@ session_start();
 
 	//show edition
 	$arr = $ed->query($id);
+	echo "<body id='e_edition'>";
 	echo "Edition<br />";
 	echo "___________________________________________________<br />";
 	echo "<br />";
@@ -90,7 +92,7 @@ session_start();
 <div>
 	<label>Post Subject :</label><input type="text" name="PSub" value="<?php echo $arr['post_subject'];?>" disabled /><br />
 	<label>Post Summary :</label><input type="text" name="PSum" value="<?php echo $arr['post_summary'];?>" disabled /><br />
-	<label>Post Text</label><br />
+	<label>Post Text:</label><br />
 	<textarea name="PTex" id="ptex" rows="20" cols="80"><?php echo $arr['post_text'];?></textarea><br />
 	<label>Small Url Img :</label><input type="text" name="SUrl" value="<?php echo $arr['post_small_img_url'];?>" disabled/><br />
 	<label>Big Url Img :</label><input type="text" name="BUrl" value="<?php echo $arr['post_big_img_url'];?>" disabled/><br />
@@ -98,6 +100,7 @@ session_start();
 	<input type="submit" name="ok" value="Update Edition" />
 </div>
 </form>
+</body>
 <?php
 ob_end_flush();
 ?>
