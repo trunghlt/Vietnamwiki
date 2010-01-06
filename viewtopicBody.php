@@ -171,12 +171,15 @@ function signOut() {
 }
 
 function submitLogin() {	
-	var loginForm = $("loginForm");
-	loginForm.set("send", {	url: "requests/postLogin.php", evalScripts: true});
-	loginForm.send();
-	loginForm.get("send").addEvent("onComplete", function(response){
-		loadToolbar("toolbar");
-		loadEdittingRibbon(<?php echo $post_id?>, "ribbon");
+	jQuery.post("/requests/postLogin.php", jQuery("#loginForm").serialize(), 
+			function(response){
+				if(response==-2)
+					alert("This user has been banned");
+				else
+				{
+					loadToolbar("toolbar");
+					loadEdittingRibbon(<?php echo $post_id?>, "ribbon");
+				}
 	});
 }
 </script>
