@@ -18,7 +18,7 @@
 	<title>Untitled 5</title>
 </head>
 
-<body>
+<body style="background:url(/images/content_admin.png) repeat-x;">
 
 Content
 

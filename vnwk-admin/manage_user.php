@@ -13,17 +13,7 @@ session_start();
 	if(isset($_GET['id']))
 		$id = Filter::filterInput($_GET['id'],"login.php",1);
 ?>
-<style>
-	a{
-		text-decoration:none;
-	}
-	a:visited{
-		color:#0000FF;
-	}
-	a:hover{
-		color:#00FF00;
-	}
-</style>
+<link href="admin.css" rel="stylesheet" type="text/css" />
 <script language="javascript" type="text/javascript">
 	function confir(id,num_page,start){
 		if(window.confirm('Do You want delete this user?'))
@@ -32,6 +22,8 @@ session_start();
 		}
 	}
 </script>
+<body id="man_user">
+<h3>Manage User</h3>
 <?php
 	$u = new user;
 //--------delete user---------------//	
@@ -109,5 +101,6 @@ echo "<br/>";
 				echo " ".$i." ";
 		}
 	}
+echo "</body>";
 ob_end_flush();
 ?>
