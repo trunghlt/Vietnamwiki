@@ -82,6 +82,7 @@
 ?>
 <script src="projax/js/prototype.js" type="text/javascript"></script>
 <script src="projax/js/scriptaculous.js" type="text/javascript"></script>
+<link href="admin.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" language="javascript">
 	function confir(id){
 		if(window.confirm('Do You want delete this destination?'))
@@ -90,6 +91,7 @@
 		}
 	}
 </script>
+<body id='dest_menu'>
 <div id="dest">
 <h3>Destinations</h3>
 <ul id="list">
@@ -112,3 +114,4 @@
 		<input type="submit" value="Add index" />
 	</form>
 </div>
+</body>

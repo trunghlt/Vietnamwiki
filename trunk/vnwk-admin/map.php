@@ -47,6 +47,8 @@
 </script>
 
 <?		
+		echo "<link href='admin.css' rel='stylesheet' type='text/css' />";
+		echo "<body id='map'>";
 		While ($r = mysql_fetch_array($q->re)) {
 			echo "<a href='#' onclick='confir(".$id.",".$r["id"].");'>(x)</a>";
 			echo "<img src='".$r["URL"] . "'/></br>";
@@ -56,7 +58,9 @@
 			URL: <input id="URL" style="float:left" type="input" name="URL" />
 			<input id="Add" name="Add" style="float:left" type="submit" value="Add" />
 		</form>
+		
 		<?php
+		echo "</body>";
 		return;
 	}
 ?>
@@ -64,8 +68,9 @@
 <head>
 <script src="projax/js/prototype.js" type="text/javascript"></script>
 <script src="projax/js/scriptaculous.js" type="text/javascript"></script>
+<link href="admin.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body id="map">
 
 <?php
 	$sql = "SELECT * 

@@ -11,9 +11,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
-<frameset cols="250,*">
+<frameset cols="200,*" border="3px" bordercolor="#003366">
 
-	<frame src="link.php" >
+	<frame src="link.php" noresize scrolling="no">
 	<frame src="content.php" name="showframe">
 
 </frameset><noframes></noframes>

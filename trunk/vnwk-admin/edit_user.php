@@ -19,6 +19,7 @@ session_start();
 		width:200px;
 	}
 </style>
+<link href="admin.css" rel="stylesheet" type="text/css" />
 <!--Confirm-->
 <script language="javascript" type="text/javascript">
 	function confir(id){
@@ -72,7 +73,8 @@ session_start();
 
 	//show user
 	$arr = $u->show_user($str);
-	echo "Infomation User<br />";
+echo "<body id='e_user'>";
+	echo "<h3>Infomation User</h3><br />";
 	echo "________________________________<br />";
 	echo "<br />";
 ?>
@@ -92,6 +94,7 @@ session_start();
 	<input type="submit" name="ok" value="Edit User" onclick="return confir(<?php echo $arr[0]['id']?>);"/>
 </div>
 </form>
+</body>
 <?php
 ob_end_flush();
 ?>

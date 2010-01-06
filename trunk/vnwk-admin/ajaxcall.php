@@ -79,6 +79,7 @@
 ?>
 <script src="projax/js/prototype.js" type="text/javascript"></script>
 <script src="projax/js/scriptaculous.js" type="text/javascript"></script>
+<link href="admin.css" rel="stylesheet" type="text/css" />
 <!--Confirm-->
 <script type="text/javascript" language="javascript">
 	function confir(id,index_id){
@@ -88,6 +89,7 @@
 		}
 	}
 </script>
+<body id="index_menu">
 <h3>Index menu</h3>
 <?php
 	$sql = "SELECT * FROM index_menu
@@ -112,3 +114,4 @@
 		<input type="text" id="name" name="name" />
 		<input type="submit" value="Add index" />
 	</form>
+</body>

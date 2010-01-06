@@ -19,20 +19,10 @@ session_start();
 	<meta name="author" content="mistake37">
 
 	<title>Untitled 6</title>
-<style>
-	a{
-		text-decoration:none;
-	}
-	a:visited{
-		color:#0000FF;
-	}
-	a:hover{
-		color:#00FF00;
-	}
-</style>
+<link href="admin.css" rel="stylesheet" type="text/css" />
 </head>
 
-<body>
+<body id='link'>
 <?php
 		if(isset($_GET['value']))
 		{
@@ -50,7 +40,7 @@ session_start();
 <p><a href="destmenu.php" target="showframe">Destination & Index menu management</a></p>
 <p><a href="topic.php" target="showframe">Topic management</a></p>
 <p><a href="edition_frame.php" target="showframe">Revision management</a></p>
-<p>Slide management</p>
+<p><a href="#">Slide management</a></p>
 <p><a href="user_frame.php" target="showframe">User management</a></p>
 <p><a href="map_frame.php" target="showframe">Map management</a></p>
 <p><a href="link.php?value=<?php echo $row['property_value']?>" >
@@ -61,7 +51,7 @@ session_start();
 		echo 'Not_Allowed_up_content';
 ?></a>
 </p>
-<p>Back up</p>
+<p><a href="#">Back up</a></p>
 </body>
 </html>
 <?php
