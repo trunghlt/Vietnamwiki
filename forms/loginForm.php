@@ -21,7 +21,7 @@ jQuery(document).ready(function(){
 			opacity: 0.5
 		},		
 		buttons: {
-			'Login': function() {
+			Login: function() {
 				submitLogin();
 				jQuery(this).dialog('close');
 			},
