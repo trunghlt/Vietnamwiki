@@ -13,7 +13,10 @@ function userid($username, $password) {
 	$row = mysql_fetch_array($result);
 	mysql_free_result($result);
 	if ($n == 0) return -1;
-	return $row["id"];
+	if($row["ban_user"]==0)
+		return $row["id"];
+	else
+		return -2;
  }
   
 $username = $_POST["username"];
@@ -26,13 +29,17 @@ function chkLogin() {
 	}
 	else {
 	  	$id = userid($username, $password);
-	  	if ($id !== -1) {
+	  	if ($id !== -1 && $id !== -2) {
 			login($id);
 			return true;
 	  	}
-		else return false;
+		else 
+			if($id === -2){
+		 		echo $id;
+			}
+		 	else 
+				return false;
 	}
 }
-
 chkLogin();
 ?>
