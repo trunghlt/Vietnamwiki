@@ -45,8 +45,8 @@ session_start();
 				$filter_user = Filter::filterInput($_POST['user'],$local,2);
 				if($u->check_user($id,$filter_user)==0){
 					$ur = $filter_user;
+				}
 		}
-	}
 		
 		if($_POST['pass']==NULL){
 			$ps = $arr[0]['password'];

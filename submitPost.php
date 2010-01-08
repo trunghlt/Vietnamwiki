@@ -11,7 +11,7 @@ $postElement->smallImgURL = htmlspecialchars($postElement->filterImgURL(urldecod
 $postElement->bigImgURL = htmlspecialchars($postElement->filterImgURL(urldecode($_POST["bigImgURL"])), ENT_QUOTES);
 $postElement->content = htmlspecialchars(PostElement::filterContent(urldecode($_POST["content"])), ENT_QUOTES);
 $postElement->indexId = $postElement->filterId(urldecode($_POST["indexId"]));
-$postElement->save();	
+$postElement->save(myUser_id(myip()));	
 
 $editionElement = new Edition();
 $editionElement->postId = $postElement->id;
@@ -22,9 +22,12 @@ $editionElement->postContent = $postElement->content;
 $editionElement->postSmallImgURL = $postElement->smallImgURL;
 $editionElement->postBigImgURL = $postElement->bigImgURL;
 $editionElement->editDateTime = time();
+$editionElement->index_id = $postElement->indexId;
+$editionElement->post_ip = myip();
+$editionElement->post_username = myUsername(myip());
 $editionElement->add();
 
-$content = htmlspecialchars_decode($postElement->content, ENT_QUOTES);
+$content = htmlspecialchars_decode($postElement->draft, ENT_QUOTES);
 $content = str_replace("|", "&", $content);
 $content = str_replace('\"', '"', $content);
 $content = str_replace("\'", "'", $content);
