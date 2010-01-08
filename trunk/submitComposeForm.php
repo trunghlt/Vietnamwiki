@@ -11,7 +11,7 @@ $postElement->indexId = htmlspecialchars($postElement->filterId(urldecode($_POST
 $postElement->smallImgURL = htmlspecialchars($postElement->filterImgURL(urldecode($_POST["smallImgURL"])));
 $postElement->bigImgURL = htmlspecialchars($postElement->filterImgURL(urldecode($_POST["bigImgURL"])));
 $postElement->authorUsername = myUsername(myip());
-$postElement->add();	
+$postElement->add(myUser_id(myip()));	
 
 $editionElement = new Edition();
 $editionElement->postId = $postElement->id;
@@ -22,6 +22,9 @@ $editionElement->postContent = $postElement->content;
 $editionElement->postSmallImgURL = $postElement->smallImgURL;
 $editionElement->postBigImgURL = $postElement->bigImgURL;
 $editionElement->editDateTime = time();
+$editionElement->index_id = $postElement->indexId;
+$editionElement->post_ip = myip();
+$editionElement->post_username = $postElement->authorUsername;
 $editionElement->add();
 
 echo $postElement->id;

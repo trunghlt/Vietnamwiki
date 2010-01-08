@@ -58,7 +58,10 @@ function submitComposeForm() {
 							+ "&content=" + content);
 							
 	submitPostRequest.addEvent('onComplete', function(response) {
-		window.location = "viewtopic.php?id=" + response;
+		if(response!=0)
+			window.location = "viewtopic.php?id=" + response;
+		else
+			window.location = "index2.php";
 	});
 }
 jQuery(document).ready(function(){ 

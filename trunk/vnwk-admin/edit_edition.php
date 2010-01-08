@@ -12,7 +12,9 @@ session_start();
 	process(session_id(), myip());
 	if (!logged_in()) header("location: login.php");
 	if(isset($_GET['id']))
+	{
 		$id = Filter::filterInput($_GET['id'],"login.php",1);
+	}
 
 ?>
 <style>
@@ -68,8 +70,13 @@ session_start();
 	//check edit edition 
 	if(isset($_GET['act']) && $_GET['act']=='edit')
 	{
+		$post_id = Filter::filterInput($_GET['post_id'],"login.php",1);
+		$post_sub = Filter::filterInputText($_POST['PostSub']);
+		$post_sum = Filter::filterInputText($_POST['PostSum']);
+		$smal_img = Filter::filterInputText($_POST['SmallUrl']);
+		$big_url = Filter::filterInputText($_POST['BigUrl']);
 		if($_POST['PTex']==NULL){
-			$e_Text = $arr[PTex];
+			$e_Text = $arr['PTex'];
 		}
 		else{
 				$e_Text = Filter::filterInputText($_POST['PTex']);
@@ -77,7 +84,12 @@ session_start();
 		//Update
 		if($e_Text)
 		{
-			$ed->edit($id,$e_Text);
+			$ed->edit($id,$e_Text,$post_id,$post_sub,$post_sum,$smal_img,$big_url);
+?>
+<script language="javascript" type="text/javascript">
+	parent.edit.location.href = 'revisionmanagement.php';
+</script>
+<?php
 		}
 	}	
 
@@ -88,16 +100,16 @@ session_start();
 	echo "___________________________________________________<br />";
 	echo "<br />";
 ?>
-<form method="post" action="edit_edition.php?id=<?php echo $arr['id']?>&act=edit" target="edition" name="user" onsubmit="return confir(<?php echo $arr['id']?>);">
+<form method="post" action="edit_edition.php?id=<?php echo $arr['id']?>&post_id=<?php echo $arr['post_id'];?>&act=edit" target="edition" name="edition" o>
 <div>
-	<label>Post Subject :</label><input type="text" name="PSub" value="<?php echo $arr['post_subject'];?>" disabled /><br />
-	<label>Post Summary :</label><input type="text" name="PSum" value="<?php echo $arr['post_summary'];?>" disabled /><br />
+	<label>Post Subject :</label><input type="text" name="PostSub" value="<?php echo $arr['post_subject'];?>" /><br />
+	<label>Post Summary :</label><input type="text" name="PostSum" value="<?php echo $arr['post_summary'];?>" /><br />
 	<label>Post Text:</label><br />
 	<textarea name="PTex" id="ptex" rows="20" cols="80"><?php echo $arr['post_text'];?></textarea><br />
-	<label>Small Url Img :</label><input type="text" name="SUrl" value="<?php echo $arr['post_small_img_url'];?>" disabled/><br />
-	<label>Big Url Img :</label><input type="text" name="BUrl" value="<?php echo $arr['post_big_img_url'];?>" disabled/><br />
+	<label>Small Url Img :</label><input type="text" name="SmallUrl" value="<?php echo $arr['post_small_img_url'];?>" /><br />
+	<label>Big Url Img :</label><input type="text" name="BigUrl" value="<?php echo $arr['post_big_img_url'];?>" /><br />
 	<br />
-	<input type="submit" name="ok" value="Update Edition" />
+	<input type="submit" name="ok" value="Update Edition" onclick="return confir(<?php echo $arr['id']?>);"/>
 </div>
 </form>
 </body>
