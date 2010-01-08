@@ -28,7 +28,7 @@ session_start();
 		{
 			$value = Filter::filterInput($_GET['value'],"login.php",1);
 			if($value==1)
-				$value = 2;
+				$value = 0;
 			else $value = 1;
 			mysql_query("update setting set property_value = $value where property_name='ALLOW_DIRECT_UPDATE'");
 			

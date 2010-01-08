@@ -9,7 +9,7 @@
 ?>
 <html>
 <frameset cols="25%,*" border="3px" bordercolor="#003366">
-	<frame src="revisionmanagement.php" noresize>
+	<frame src="revisionmanagement.php" noresize name='edit'>
 	<frame src="" name="edition">
 <noframes>Your's browser don't support Frame</noframes>
 </html>
