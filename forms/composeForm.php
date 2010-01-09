@@ -1,3 +1,6 @@
+<?php
+include('dialog.php');
+?>
 <div id="composeDialog" title="Edit entry">
 
 	<iframe style="	margin: 0px 0px 0px -10px; 
@@ -61,7 +64,10 @@ function submitComposeForm() {
 		if(response!=0)
 			window.location = "viewtopic.php?id=" + response;
 		else
+		{
+			post_review.dialog('open');
 			window.location = "index2.php";
+		}
 	});
 }
 jQuery(document).ready(function(){ 

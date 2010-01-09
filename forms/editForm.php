@@ -1,4 +1,6 @@
-<?php include("ajaxLoad.php");?>
+<?php include("ajaxLoad.php");
+include('dialog.php');
+?>
 
 <div id="editDialog" title="Edit entry">
 
