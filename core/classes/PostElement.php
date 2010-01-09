@@ -155,6 +155,7 @@ class PostElement {
 					$q->query(" UPDATE posts
 								SET index_id = ".$this->indexId."
 								WHERE post_id = ".$this->id);
+					$this->draft = $this->content;
 					return 0;				
 				}
 				else{
@@ -179,6 +180,7 @@ class PostElement {
 				$q->query(" UPDATE posts
 							SET index_id = ".$this->indexId."
 							WHERE post_id = ".$this->id);
+					$this->draft = $this->content;
 					return 0;			
 			}
 		}
