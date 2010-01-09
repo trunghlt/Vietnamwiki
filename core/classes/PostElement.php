@@ -154,14 +154,16 @@ class PostElement {
 					
 					$q->query(" UPDATE posts
 								SET index_id = ".$this->indexId."
-								WHERE post_id = ".$this->id);				
+								WHERE post_id = ".$this->id);
+					return 0;				
 				}
 				else{
 					$q->query("select *
 								from posts_texts
 								where post_id = '".$this->id."'");
 					$r = mysql_fetch_assoc($q->re);
-					$this->draft = $r['post_text'];					
+					$this->draft = $r['post_text'];
+					return 1;					
 				}
 			}
 			//allow veryone
@@ -176,7 +178,8 @@ class PostElement {
 				
 				$q->query(" UPDATE posts
 							SET index_id = ".$this->indexId."
-							WHERE post_id = ".$this->id);			
+							WHERE post_id = ".$this->id);
+					return 0;			
 			}
 		}
 	}
