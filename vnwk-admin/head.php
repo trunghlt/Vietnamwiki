@@ -18,9 +18,8 @@
 	<title>Untitled 3</title>
 </head>
 
-<body id='head'>
-<img src="/images/VNWKLogo.gif" height="60" width="120" align="left" />
-<h1 align="center">VietnamWiki Administration</h1>
+<body id='head' style="background: #EEEEEE;">
+<h1 align="center"><a href="www.vietnamwiki.net"><img style="border: 0px;" src="/images/logo.png" width="100px"/></a>Administration</h1>
 
 </body>
 </html>
