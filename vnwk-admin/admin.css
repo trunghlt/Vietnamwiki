@@ -1,59 +1,46 @@
-#head{
-	background: repeat-x url('/images/head.png');
-}
 #head h1{
-	color:#003366;
+	color:#888888;
 }
 a{
 	text-decoration:none;
-	color:#003366;
-	font-weight:bold;
-	font-size:16px;	
+	color:#AA0000;
+	font-size: 17px;
 }
-a:visited{
-	color:#003366;
-}
+
 a:hover{
-	color:#FFFF00;
+	color:#440000;
 }
-#link{
-	background:url(/images/content_admin.png) repeat-x;
+
+#link p{
+	background: #DDDDDD;
+	text-align: center;
+	padding: 5px 10px;
 }
+
 #topic{
-	background:url(/images/content_admin.png) repeat-x;
 	color:#000000;
 	font-size:16px;
-	font-weight:bold;
 }
 #topic h3{
 	font-size:20px;
-	font-weight:bold;
-	color:#FFFF00;
 }
 #dest_menu {
-	background:url(/images/content_admin.png) repeat-x;
 	color:#000000;
 	font-size:16px;
-	font-weight:bold;
 }
 #dest_menu h3{
 	font-size:20px;
-	font-weight:bold;
-	color:#FFFF00;
+	color:#888888;
 }
 #index_menu {
-	background:url(/images/content_admin.png) repeat-x;
 	color:#000000;
 	font-size:16px;
-	font-weight:bold;
 }
 #index_menu h3{
 	font-size:20px;
-	font-weight:bold;
 	color:#FFFF00;
 }
 #map{
-	background:url(/images/content_admin.png) repeat-x;
 	color:#000000;
 	font-size:16px;
 	font-weight:bold;
@@ -64,46 +51,34 @@ a:hover{
 	color:#FFFF00;
 }
 #man_user{
-	background:url(/images/content_admin.png) repeat-x;
 	color:#000000;
 	font-size:16px;
-	font-weight:bold;
 }
 #man_user h3{
 	font-size:20px;
-	font-weight:bold;
 	color:#FFFF00;
 }
 #e_user{
-	background:url(/images/content_admin.png) repeat-x;
 	color:#000000;
 	font-size:16px;
-	font-weight:bold;
 }
 #e_user h3{
 	font-size:20px;
-	font-weight:bold;
 	color:#FFFF00;
 }
 #edition_manage{
-	background:url(/images/content_admin.png) repeat-x;
 	color:#000000;
 	font-size:16px;
-	font-weight:bold;
 }
 #edition_manage h3{
 	font-size:20px;
-	font-weight:bold;
 	color:#FFFF00;
 }
 #e_edition{
-	background:url(/images/content_admin.png) repeat-x;
 	color:#000000;
 	font-size:16px;
-	font-weight:bold;
 }
 #e_edition h3{
 	font-size:20px;
-	font-weight:bold;
 	color:#FFFF00;
 }

@@ -142,7 +142,7 @@ if (isset($_GET["task"])) {
 		<a href="#" onClick="javascript:tlock(<?php echo $r["post_id"]?>)">
 		(<?php echo $r["locked"]? "unlock":"lock"?>)
 		</a>
-		<?
+		<?php
 		echo "</li>";
 		echo $projax->dragable_element('item_'.$r["post_id"],array('revert'=>'true'));
 	}
