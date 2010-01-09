@@ -11,7 +11,7 @@ $postElement->smallImgURL = htmlspecialchars($postElement->filterImgURL(urldecod
 $postElement->bigImgURL = htmlspecialchars($postElement->filterImgURL(urldecode($_POST["bigImgURL"])), ENT_QUOTES);
 $postElement->content = htmlspecialchars(PostElement::filterContent(urldecode($_POST["content"])), ENT_QUOTES);
 $postElement->indexId = $postElement->filterId(urldecode($_POST["indexId"]));
-$postElement->save(myUser_id(myip()));	
+$n = $postElement->save(myUser_id(myip()));	
 
 $editionElement = new Edition();
 $editionElement->postId = $postElement->id;
@@ -31,6 +31,16 @@ $content = htmlspecialchars_decode($postElement->draft, ENT_QUOTES);
 $content = str_replace("|", "&", $content);
 $content = str_replace('\"', '"', $content);
 $content = str_replace("\'", "'", $content);
+if($n == 1)
+{
+	echo "<script>";
+	echo "post_review.dialog('open');";
+	echo "</script>";
+	echo "<h2>". $postElement->title . "</h2>";      
+	echo $content;
+}
+else{
 echo "<h2>". $postElement->title . "</h2>";      
 echo $content;
+}
 ?>
