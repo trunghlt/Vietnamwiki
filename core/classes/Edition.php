@@ -12,6 +12,7 @@ class Edition {
 	public $post_username;
 	public $post_ip;
 	public $index_id;
+	public $checked;
 
 	public static function filterContent($content) {
 		return $content;
@@ -65,12 +66,27 @@ class Edition {
 	public function add() {
 		$mysql["postContent"] = mysql_real_escape_string($this->postContent);
 		$this->post_ip = myip();
+		$re = mysql_query("select property_value
+						   from setting
+						   where property_name = 'ALLOW_DIRECT_UPDATE'");
+		$row = mysql_fetch_assoc($re);
+		//Check if not allow will be change check'value
+		if($row['property_value']==0){				
+		mysql_query("INSERT INTO editions
+					(user_id, post_id, post_subject, post_summary, post_text, edit_date_time, post_small_img_url, post_big_img_url,index_id,post_ip,post_username,checked)
+					VALUE ('".$this->userId."', '".$this->postId."', '".$this->postTitle."', '".$this->postSummary."', '".$mysql["postContent"]."', 
+							'".$this->editDateTime."',
+							'".$this->postSmallImgURL."', '".$this->postBigImgURL."',							
+							'".$this->index_id."','".$this->post_ip."','".$this->post_username."','0')") or die(mysql_error());
+		}
+		else{
 		mysql_query("INSERT INTO editions
 					(user_id, post_id, post_subject, post_summary, post_text, edit_date_time, post_small_img_url, post_big_img_url,index_id,post_ip,post_username)
 					VALUE ('".$this->userId."', '".$this->postId."', '".$this->postTitle."', '".$this->postSummary."', '".$mysql["postContent"]."', 
 							'".$this->editDateTime."',
 							'".$this->postSmallImgURL."', '".$this->postBigImgURL."',							
 							'".$this->index_id."','".$this->post_ip."','".$this->post_username."')") or die(mysql_error());
+		}
 		$this->id = mysql_insert_id();		
 	}
 	
