@@ -25,10 +25,22 @@ Posted & editted by
 		$timeLbl = date("d M Y, H:i", $currentEdition->editDateTime);
 		?>
 		<?php if ($editorCount != 0) echo "," ?><a href="draft.php?id=<?php echo $currentEdition->id?>" title="click to view this draft"><img src="/images/draft.png" width="10px" height="10px"></a>
+<?php
+	//check value checked in db to sho username or review
+	if($currentEdition->checked==1)
+	{
+?>
 		<a class='link' href='profile.php?username=<?php echo $editor->username?>' title="Editted at <?php echo $timeLbl?>">
 			<span style="font-size: 11px;"><?php echo $editor->username?></span>
 		</a>
 		<?php
+	}
+	else{?>
+		<a class='link' href='profile.php?username=<?php echo $editor->username?>' title="Under Admin's review">
+			<span style="font-size: 11px;">Under Admin's review(<?php echo $editor->username?>)</span>
+		</a>			
+		<?php 
+		}
 		$editorCount++;
 	}
 	
@@ -39,6 +51,7 @@ Posted & editted by
 			$editionElement->id = $e["id"];
 			$editionElement->userId = $e["user_id"];
 			$editionElement->editDateTime = $e["edit_date_time"];
+			$editionElement->checked = $e["checked"];
 			printEditorInfo($editionElement);
 		}
 		?>
@@ -51,6 +64,7 @@ Posted & editted by
 				$editionElement->id = $e["id"];
 				$editionElement->userId = $e["user_id"];
 				$editionElement->editDateTime = $e["edit_date_time"];
+				$editionElement->checked = $e["checked"];
 				printEditorInfo($editionElement);
 			}
 			?>
@@ -60,7 +74,8 @@ Posted & editted by
 		$editionElement = new Edition;
 		$editionElement->id = $e["id"];
 		$editionElement->userId = $e["user_id"];
-		$editionElement->editDateTime = $e["edit_date_time"];		
+		$editionElement->editDateTime = $e["edit_date_time"];
+		$editionElement->checked = $e["checked"];		
 		printEditorInfo($editionElement);
 		?>
 		<a class="link" id="showEditors" onClick="showEditors()" style="font-size: 11px;">(show all)</a>
@@ -88,6 +103,7 @@ Posted & editted by
 			$editionElement->id = $e["id"];
 			$editionElement->userId = $e["user_id"];
 			$editionElement->editDateTime = $e["edit_date_time"];
+			$editionElement->checked = $e["checked"];
 			printEditorInfo($editionElement);
 		}
 	}	

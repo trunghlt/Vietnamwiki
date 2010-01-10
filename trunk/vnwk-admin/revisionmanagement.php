@@ -71,12 +71,22 @@ if (isset($_GET["task"])) {
 
 //-----------------------------------------------------------------	
 if (!isset($post_id)) $post_id = 0;
-	echo "<ul id='tlist'>";
-	$sql = "SELECT *
-			FROM editions
-			WHERE post_id = ".$post_id."
-			order by edit_date_time desc";
-	
+	//show edition with check = 0 in UNKNOW to review
+	if($post_id == 0){
+		echo "<ul id='tlist'>";
+		$sql = "SELECT *
+				FROM editions
+				WHERE post_id = ".$post_id." or checked='0'
+				order by edit_date_time desc";
+	}
+	else
+	{
+		echo "<ul id='tlist'>";
+		$sql = "SELECT *
+				FROM editions
+				WHERE post_id = ".$post_id."
+				order by edit_date_time desc";
+	}
 	$q->query($sql);
 	
 	while ($r = mysql_fetch_array($q->re)) {
