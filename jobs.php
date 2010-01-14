@@ -31,7 +31,7 @@ include('destination.php');
 		<li>Having a computer and internet at home.</li>
 		<li>The ability to work by yourself.</li>
 		</ul>
-		<p>You will work 20 hours/week remotely with your own computer and internet. The salary for the role varies from $50-$60/month.</p>
+		<p>You will work 20 hours/week remotely with your own computer and internet.</p>
 		
 		<p><span style="color: #FF0000;">Note:</span> Students in all academic years are welcome to apply.</p>
 
@@ -47,7 +47,7 @@ include('destination.php');
 		<li>Having a computer and internet at home.</li>
 		<li>The ability to work by yourself.</li>
 		</ul>
-		<p>You will work 20 hours/week remotely with your own computer and internet. The salary for the role varies from $60-$100/month.</p>
+		<p>You will work 20 hours/week remotely with your own computer and internet.</p>
 		
 		<p><span style="color: #FF0000;">Note:</span> Students in all academic years are welcome to apply.</p>
 
