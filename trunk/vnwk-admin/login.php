@@ -8,7 +8,7 @@
 		}
 		else{
 			if(eregi("^[a-zA-Z0-9._]+$",$_POST["username"]))
-				$un = $_POST["username"];
+				@$un = $_POST["username"];
 			else
 			$error[] = "<span class=error>Please enter username</span><br />";
 		}
@@ -18,7 +18,7 @@
 		}
 		else{
 			if(eregi("^[a-zA-Z0-9]+$",$_POST["password"]))
-				$pw = $_POST["password"];
+				@$pw = $_POST["password"];
 			else
 				$error[] = "<span class=error>Please enter password</span>";
 		}
