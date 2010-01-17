@@ -4,9 +4,7 @@ include("core/init.php");
 include("core/classes.php");
 $clean = array();
 $clean["postId"] = PostElement::filterId($_POST["postId"]);
-?>
-Posted & editted by
-<?php
+
 	$q = new db;
 	$q->query("	SELECT *
 				FROM editions
@@ -14,7 +12,12 @@ Posted & editted by
 				ORDER BY edit_date_time");
 	
 	$editions = array();	
-	while ($r = mysql_fetch_array($q->re)) {$editions[] = $r;}	
+	while ($r = mysql_fetch_array($q->re)) {
+		if($r['checked']==1)
+			$editions1[] = $r;
+		else
+			$editions2[] = $r;	
+	}	
 	
 	$editorCount = 0;
 	//Print information of a specific editor
@@ -25,25 +28,22 @@ Posted & editted by
 		$timeLbl = date("d M Y, H:i", $currentEdition->editDateTime);
 		?>
 		<?php if ($editorCount != 0) echo "," ?><a href="draft.php?id=<?php echo $currentEdition->id?>" title="click to view this draft"><img src="/images/draft.png" width="10px" height="10px"></a>
-<?php
-	//check value checked in db to sho username or review
-	if($currentEdition->checked==1)
-	{
-?>
 		<a class='link' href='profile.php?username=<?php echo $editor->username?>' title="Editted at <?php echo $timeLbl?>">
 			<span style="font-size: 11px;"><?php echo $editor->username?></span>
 		</a>
 		<?php
-	}
-	else{?>
-		<a class='link' href='profile.php?username=<?php echo $editor->username?>' title="Under Admin's review">
-			<span style="font-size: 11px;">Under Admin's review(<?php echo $editor->username?>)</span>
-		</a>			
-		<?php 
-		}
 		$editorCount++;
 	}
-	
+
+	echo "Posted & editted by";
+	show($editions1);
+if(isset($editions2)){
+	echo "<br />Under Admin's review";
+	$editorCount = 0;
+	show($editions2);
+}
+		
+function show($editions){
 	if (count($editions) > 3) {
 		for ($i = 0; $i <= 1; $i++) {
 			$e = $editions[$i];
@@ -106,5 +106,6 @@ Posted & editted by
 			$editionElement->checked = $e["checked"];
 			printEditorInfo($editionElement);
 		}
-	}	
+	}
+}	
 ?>
