@@ -38,7 +38,7 @@ $clean["postId"] = PostElement::filterId($_POST["postId"]);
 	echo "Posted & editted by";
 	show($editions1);
 if(isset($editions2)){
-	echo "<br />Under Admin's review";
+	echo "<br /><span style='color: #888888'>Under admin's review</span>";
 	$editorCount = 0;
 	show($editions2);
 }

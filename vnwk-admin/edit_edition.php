@@ -56,7 +56,7 @@ session_start();
 <!--Confirm-->
 <script language="javascript" type="text/javascript">
 	function confir(id){
-		if(!window.confirm('Do You want edit this edition?'))
+		if(!window.confirm('Are you sure you want this edition to become the formal content on the main website ?'))
 		{
 			location.href = "edit_edition.php?id="+id;
 			return false;
@@ -109,7 +109,7 @@ session_start();
 	<label>Small Url Img :</label><input type="text" name="SmallUrl" value="<?php echo $arr['post_small_img_url'];?>" /><br />
 	<label>Big Url Img :</label><input type="text" name="BigUrl" value="<?php echo $arr['post_big_img_url'];?>" /><br />
 	<br />
-	<input type="submit" name="ok" value="Update Edition" onclick="return confir(<?php echo $arr['id']?>);"/>
+	<input type="submit" name="ok" value="Accept edition" onclick="return confir(<?php echo $arr['id']?>);"/>
 </div>
 </form>
 </body>

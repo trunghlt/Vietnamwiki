@@ -46,7 +46,7 @@
 	}
 </script>
 
-<?		
+<?php		
 		echo "<link href='admin.css' rel='stylesheet' type='text/css' />";
 		echo "<body id='map'>";
 		While ($r = mysql_fetch_array($q->re)) {

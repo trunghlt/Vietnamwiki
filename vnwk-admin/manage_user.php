@@ -1,5 +1,5 @@
 <?php
-@ob_end_clean();
+ob_end_clean();
 ob_start();
 session_start();
 //include file	
@@ -37,11 +37,11 @@ session_start();
 	{
 		if(Filter::filterInput($_GET['value'],"login.php",1))
 		{
-			$arr_ban = array('ban_user'=>0);
+			$arr_ban = array("ban_user"=>0);
 			$u->edit_user($id,$arr_ban);
 		}
 		else{
-			$arr_ban = array('ban_user'=>1);
+			$arr_ban = array("ban_user"=>1);
 			$u->edit_user($id,$arr_ban);
 		}
 	}
@@ -77,9 +77,9 @@ session_start();
 	   if($value!=NULL)
 	   {
 			echo "<div style='width:400px;'>";
-			echo "<a href=edit_user.php?id=$value[id] target='user' style='width:50px;float:left;'>(Edit)</a>";
+			echo "<a href='edit_user.php?id=$value[id]' target='user' style='width:50px;float:left;'>(Edit)</a>";
 			echo "<label style='width:160px;float:left;'>$value[username]</label>";
-			if($value['ban_user']==0)
+			if($value[ban_user]==0)
 				echo "<a href='manage_user.php?id=$value[id]&act=ban&value=0&page=$num_page&s=$start' style='width:60px;float:left;'>(Allowed)</a>";
 			else
 				echo "<a href='manage_user.php?id=$value[id]&act=ban&value=1&page=$num_page&s=$start' style='width:60px;float:left;'>(Banned)</a>";
