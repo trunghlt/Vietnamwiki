@@ -2,7 +2,7 @@
 include("db.php");
 include("common.php");
 include("session.php");
-include(".././core/classes/filter.php");
+include("../core/classes/Filter.php");
 session_start();
 process(session_id(), myip());
 
