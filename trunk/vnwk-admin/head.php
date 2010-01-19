@@ -3,7 +3,7 @@
 	include("class_user.php");
 	include("common.php");
 	include("session.php");
-	include(".././core/classes/filter.php");
+	include("../../core/classes/filter.php");
 //check logged user 
 	process(session_id(), myip());
 	if (!logged_in()) header("location: login.php");
