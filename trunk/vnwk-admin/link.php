@@ -46,9 +46,9 @@ session_start();
 <p><a href="link.php?value=<?php echo $row['property_value']?>" >
 <?php 
 	if($row['property_value']==1)
-		echo 'Allowed_up_content';
+		echo 'Don\'t allow direct update';
 	else
-		echo 'Not_Allowed_up_content';
+		echo 'Allow direct update';
 ?></a>
 </p>
 <p><a href="#">Back up</a></p>
