@@ -3,12 +3,13 @@ include("db.php");
 include("common.php");
 include("session.php");
 include(".././core/classes/filter.php");
-	session_start();
-	process(session_id(), myip());
-	
-	if (!logged_in()) header("location: login.php");
+session_start();
+process(session_id(), myip());
+
+if (!logged_in()) header("location: login.php");
 
 $q = new db;
+$post_id = 0;
 
 if (isset($_GET["task"])) {
 	$task = $_GET["task"];
@@ -56,8 +57,7 @@ if (isset($_GET["task"])) {
 
 			if($q->n > 0){
 				while ($r = mysql_fetch_array($q->re)) {
-					if(!isset($_GET["post_id"]))
-						$post_id = $r["post_id"];
+					if($post_id == 0) $post_id = $r["post_id"];
 ?>
 					<option value="<?php echo $r["post_id"]?>" <?php if ($edition_id == $r["post_id"]) echo "selected"; ?>>
 						<?php echo $r["post_subject"]?>
@@ -69,14 +69,14 @@ if (isset($_GET["task"])) {
 	}
 
 
-//-----------------------------------------------------------------	
-if (!isset($post_id)) $post_id = 0;
+//-----------------------------------------------------------------
+	if (isset($_GET["post_id"])) $post_id = Filter::filterInput($_GET['post_id'],"login.php",1);	
 	//show edition with check = 0 in UNKNOW to review
 	if($post_id == 0){
 		echo "<ul id='tlist'>";
 		$sql = "SELECT *
 				FROM editions
-				WHERE post_id = ".$post_id." or checked='0'
+				WHERE checked=0
 				order by edit_date_time desc";
 	}
 	else
@@ -84,14 +84,14 @@ if (!isset($post_id)) $post_id = 0;
 		echo "<ul id='tlist'>";
 		$sql = "SELECT *
 				FROM editions
-				WHERE post_id = ".$post_id."
+				WHERE post_id = ".$post_id." AND checked=0
 				order by edit_date_time desc";
 	}
 	$q->query($sql);
 	
 	while ($r = mysql_fetch_array($q->re)) {
 		 echo "<li id='item_".$r["id"]."'>";
-		 echo date("Y-m-d",$r["edit_date_time"]);
+		 echo $r["post_subject"]. "(" . date("d/m/Y",$r["edit_date_time"]).")";
 		 ?>
 		<a href="edit_edition.php?id=<?php echo $r["id"];?>" target="edition">View</a>
 		<?php
@@ -112,7 +112,7 @@ if (!isset($post_id)) $post_id = 0;
 
 <p><label>Destinations</label>
 <select name="dest1" id="dest1" onChange="javascript:update_dest(1)">
-	<option value="0">Unknown</option>
+	<option value="0">All</option>
 	<?php
 	$sql= "SELECT * 
 		   FROM destinations 
