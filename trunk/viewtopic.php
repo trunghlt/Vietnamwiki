@@ -36,6 +36,8 @@
 include("forms/editForm.php");
 include("forms/commentForm.php");
 include("forms/composeForm.php");
+include("forms/comment_login.php");
+include("forms/edit_login.php");
 include("forms/deleteConfirmForm.php");
 include("forms/loginForm.php");
 include("footer.php");

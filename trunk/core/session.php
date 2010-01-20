@@ -12,7 +12,26 @@
 			}
 		}
 	}
+
+	function update_current_page($ip, $page) {
+		db_connect();
+		$sql = "UPDATE sessions
+				SET current_page = '".$page."'
+				WHERE ip = '".$ip."'";
+		mysql_query($sql) or die(mysql_error());				
+	}
 	
+	function get_current_page($ip) {
+		db_connect();
+		$sql = "SELECT current_page
+				FROM sessions
+				WHERE ip = '".$ip."'";				
+		$result = mysql_query($sql) or die(mysql_error());				
+		$row = mysql_fetch_array($result);
+		mysql_free_result($result);
+		return $row['current_page'];
+	}
+			
 	function update_session_page($ip, $page) {
 		db_connect();
 		$sql = "UPDATE sessions
