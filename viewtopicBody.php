@@ -1,7 +1,7 @@
-<?php 
+<?php
 require_once("ajaxLoad.php");
 //require_once("widgets/GoogleTranslate.php");
-
+update_current_page(myip(),selfURL());
 $page = isset($_GET["page"])? $_GET["page"] : 1;
 
 $page = pagePostFilter($page);		
@@ -148,7 +148,7 @@ $content = $post['post_text'];
 		$userId = -1;
 	}
 ?>
-	
+ 	
 <div id="ribbon" align="right" style="width: 100%; background: #E6E6E6; clear:right;">&nbsp;</div>
 <div id="editorList" class="editorInfo"></div>
 <script language="javascript">
@@ -170,8 +170,8 @@ function signOut() {
 				});
 }
 
-function submitLogin() {	
-	jQuery.post("/requests/postLogin.php", jQuery("#loginForm").serialize(), 
+function submitLogin(dom) {	
+	jQuery.post("/requests/postLogin.php", jQuery("#"+dom).serialize(), 
 			function(response){
 				if(response==-2)
 					alert("This user has been banned");
