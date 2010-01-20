@@ -1,5 +1,5 @@
-<div id="loginDialog" title="login">
-	<form id = "loginForm">
+<div id="commentloginDialog" title="login">
+	<form id = "loginForm_comment">
 		Username:
 		<input class="field" name="username" id="username" type="text" style="width:130px" /><br/>
 		Password:
@@ -9,7 +9,7 @@
 </div>
 <script language="javascript">
 jQuery(document).ready(function(){ 
-	loginDialog = jQuery("#loginDialog").dialog({
+	comment_login = jQuery("#commentloginDialog").dialog({
 		autoOpen: false,
 		height: 'auto',
 		width: 200,
@@ -20,15 +20,20 @@ jQuery(document).ready(function(){
 			opacity: 0.5
 		},		
 		buttons: {
-			Login: function() {
-				submitLogin('loginForm');
-				jQuery(this).dialog('close');
+			'Login': function() {
+					submitLogin('loginForm_comment');
+					jQuery(this).dialog('close');
+					commentDialog.dialog('open');
 			},
-			Cancel: function() {
+			'Sign Up': function() {
+				jQuery(this).dialog('close');
+				window.location = '/signup.php';
+				
+			},
+			'Cancel': function() {
 				jQuery(this).dialog('close');
 			}
 		}		
 	});
-
 });
 </script>

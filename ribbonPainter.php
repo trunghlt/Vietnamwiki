@@ -17,5 +17,8 @@ if (logged_in() || chkFbLoggedIn()) {
 	}
 }
 else{
-	echo "&nbsp;";
+?>
+	<a class='link'  onClick="comment_login.dialog('open')"> Comment </a>
+	|<a class='link' onClick="edit_login.dialog('open')"> Edit </a>
+<?php
 }?>

@@ -42,11 +42,12 @@ if (isset($username)) {
 	if ($x) { //all information is valid
 	    db_connect();	
 		$regdate = time();
-		$sql = "INSERT INTO users (username, password, regdate) VALUE ('".
+		$sql = "INSERT INTO users (username, password, regDateTime) VALUE ('".
 		$username."','".$password."','".$regdate."')";
 		$result = mysql_query($sql) or die(mysql_error());
 		login(mysql_insert_id());
-		header("Location: index2.php");
+		$page = get_current_page(myip());
+		header("Location: ".$page);
 	}
 	else { //if information is invalid
 		include('header.php');
