@@ -2,7 +2,7 @@
 include("core/init.php");
 include("core/common.php");
 include("core/classes.php");
-
+if($_POST["summary"] != NULL && $_POST["title"] != NULL && $_POST["content"] != NULL){
 $postElement = new PostElement();
 $postElement->summary = htmlspecialchars($postElement->filterSummary($_POST["summary"]));
 $postElement->title = htmlspecialchars($postElement->filterTitle($_POST["title"]));
@@ -28,4 +28,8 @@ $editionElement->post_username = $postElement->authorUsername;
 $editionElement->add();
 
 echo $postElement->id;
+}
+else{
+echo 'null';
+}
 ?>

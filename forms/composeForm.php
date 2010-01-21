@@ -61,12 +61,19 @@ function submitComposeForm() {
 							+ "&content=" + content);
 							
 	submitPostRequest.addEvent('onComplete', function(response) {
-		if(response!=0)
-			window.location = "viewtopic.php?id=" + response;
-		else
-		{
+		switch(response){
+		 case 'null':{
+			alert('Please insert Title, Summary, and content');
+			composeDialog.dialog("open");		 	
+		 }
+		 break;
+		 case 0:{
 			post_review.dialog('open');
 			window.location = "index2.php";
+		 }
+		 break;
+		 default:
+			window.location = "viewtopic.php?id=" + response;
 		}
 	});
 }
