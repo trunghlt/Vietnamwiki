@@ -79,7 +79,7 @@ session_start();
 			$e_Text = $arr['PTex'];
 		}
 		else{
-				$e_Text = Filter::filterInputText($_POST['PTex']);
+				$e_Text = htmlspecialchars(urldecode($_POST['PTex']),ENT_QUOTES);
 		}
 		//Update
 		if($e_Text)
@@ -99,13 +99,21 @@ session_start();
 	echo "Edition<br />";
 	echo "___________________________________________________<br />";
 	echo "<br />";
+	
+
 ?>
 <form method="post" action="edit_edition.php?id=<?php echo $arr['id']?>&post_id=<?php echo $arr['post_id'];?>&act=edit" target="edition" name="edition" o>
 <div>
 	<label>Post Subject :</label><input type="text" name="PostSub" value="<?php echo $arr['post_subject'];?>" /><br />
 	<label>Post Summary :</label><input type="text" name="PostSum" value="<?php echo $arr['post_summary'];?>" /><br />
 	<label>Post Text:</label><br />
-	<textarea name="PTex" id="ptex" rows="20" cols="80"><?php echo $arr['post_text'];?></textarea><br />
+	<textarea name="PTex" id="ptex" rows="20" cols="80"><?php
+		$content = htmlspecialchars_decode($arr['post_text'],ENT_QUOTES);
+		$content = str_replace("|", "&", $content);		 
+		$content = str_replace('\"', '"', $content);
+		$content = str_replace("\'", "'", $content);
+		echo $content;	
+	 ?></textarea><br />
 	<label>Small Url Img :</label><input type="text" name="SmallUrl" value="<?php echo $arr['post_small_img_url'];?>" /><br />
 	<label>Big Url Img :</label><input type="text" name="BigUrl" value="<?php echo $arr['post_big_img_url'];?>" /><br />
 	<br />
