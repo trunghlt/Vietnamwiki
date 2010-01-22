@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>Googlemaps</title>
+	<script type="text/javascript" src="../../tiny_mce.js"></script> 
 	<script type="text/javascript" src="../../tiny_mce_popup.js?v=307"></script>
 	<script type="text/javascript" src="../../utils/mctabs.js"></script>
 	<script type="text/javascript" src="js/dialog.js?v=307"></script>
@@ -10,14 +11,31 @@
 <script type="text/javascript">
    //<![CDATA[
 
-   var map;
+var map;
+var vnwkIcon = new GIcon();
+//icon.image = "http://labs.google.com/ridefinder/images/mm_20_red.png";
+//icon.shadow = "http://labs.google.com/ridefinder/images/mm_20_shadow.png";
+	vnwkIcon.image = "/images/marker.png";
+	vnwkIcon.iconSize = new GSize(32, 32);
+	vnwkIcon.shadowSize = new GSize(0, 0);
+	vnwkIcon.iconAnchor = new GPoint(10, 24);
+	vnwkIcon.infoWindowAnchor = new GPoint(20, 10);   
+
+function createMarker(point,args) {
+    var marker = new GMarker(point, args);
+    GEvent.addListener(marker, "click", function() {
+      marker.openInfoWindowHtml(tinyMCE.get('description').getContent());
+    });
+    return marker;
+  }
+
 
 function showAddress(address)
 {
 	var map = null;
 	var geocoder = null;
 	map = new GMap2(document.getElementById("map"));
-	map.setCenter(new GLatLng(37.4419, -122.1419), 13);
+	map.setCenter(new GLatLng(21.0271485985374,105.85206985473633), 14);
 	geocoder = new GClientGeocoder();
 	if (geocoder)
 	{
@@ -30,8 +48,14 @@ function showAddress(address)
 					var customUI = map.getDefaultUI();
 					customUI.maptypes.hybrid = false;
 					map.setUI(customUI)
-					var marker = new GMarker(point, {icon:G_DEFAULT_ICON, draggable: true});
+					var marker = createMarker(point, {icon:vnwkIcon, draggable: true});
 					map.addOverlay(marker);
+					marker.enableDragging();
+					GEvent.addListener(marker, "drag", function(){
+						document.getElementById("coords").value=marker.getPoint().lat()+","+marker.getPoint().lng();
+						document.getElementById("zoomlevel").value = map.getZoom();
+					});
+					
 					document.getElementById("coords").value=marker.getPoint().lat()+","+marker.getPoint().lng();
 					document.getElementById("zoomlevel").value = map.getZoom();
 	            }
@@ -41,10 +65,11 @@ function showAddress(address)
 
 }
 
-   function load() {
+function load() {
+	   	   
      if (GBrowserIsCompatible()) {
 		var map = new GMap2(document.getElementById("map"));
-		map.setCenter(new GLatLng(48.123351,11.54353), 4);
+		map.setCenter(new GLatLng(16.003575733881323,108.2373046875), 5);
 //		map.addControl(new GMapTypeControl(2));
 //		map.addControl(new GLargeMapControl());
 		 var customUI = map.getDefaultUI();
@@ -56,27 +81,22 @@ function showAddress(address)
 		map.enableDoubleClickZoom();
 
 		// "tiny" marker icon
-		var vnwkIcon = new GIcon();
-		//icon.image = "http://labs.google.com/ridefinder/images/mm_20_red.png";
-		//icon.shadow = "http://labs.google.com/ridefinder/images/mm_20_shadow.png";
-		vnwkIcon.image = "/images/marker.png";
-		vnwkIcon.iconSize = new GSize(32, 32);
-		vnwkIcon.shadowSize = new GSize(0, 0);
-		vnwkIcon.iconAnchor = new GPoint(10, 24);
-		vnwkIcon.infoWindowAnchor = new GPoint(5, 1);
+
 
 		/////Draggable markers
-		var point = new GLatLng(48.123351,11.54353);
-		var markerD2 = new GMarker(point, {icon:vnwkIcon, draggable: true});
+		var point = new GLatLng(21.0271485985374,105.85206985473633);
+		var markerD2 = createMarker(point, {icon:vnwkIcon, draggable: true});
 		map.addOverlay(markerD2);
 
 		markerD2.enableDragging();
 
 		GEvent.addListener(markerD2, "drag", function(){
-		document.getElementById("coords").value=markerD2.getPoint().lat()+","+markerD2.getPoint().lng();
-		document.getElementById("zoomlevel").value = map.getZoom();
+			document.getElementById("coords").value=markerD2.getPoint().lat()+","+markerD2.getPoint().lng();
+			document.getElementById("zoomlevel").value = map.getZoom();
 		});
 
+		document.getElementById("coords").value=markerD2.getPoint().lat()+","+markerD2.getPoint().lng();
+		document.getElementById("zoomlevel").value = map.getZoom();
      }
 }
 
@@ -86,8 +106,6 @@ function showAddress(address)
 
 </head>
  <body onload="load()" onunload="GUnload()">
-
-
 <form onsubmit="ExampleDialog.insert();return false;" action="#">
 
 		<div class="tabs">
@@ -99,7 +117,7 @@ function showAddress(address)
 
 		<div class="panel_wrapper">
 
-			<div id="general_panel" class="panel current" style="height:420px">
+			<div id="general_panel" class="panel current" style="height:530px">
 				<fieldset>
 					<legend>Map</legend>
 						<table border="0" cellspacing="0" cellpadding="4">
@@ -115,7 +133,10 @@ function showAddress(address)
 							<td>Coordinates:</td><td><input style="width:500px;" id="coords" name="coords" type="text" class="text" /></td>
 						</tr>
 						<tr>
-							<td>Address:</td><td><input size="60" id="address" name="address" value="1600 Amphitheatre Pky, Mountain View, CA" type="text" onblur="showAddress(this.value);return false;"><input type="button" onclick="showAddress(document.getElementById('address').value);return false;" style="border:1px solid #555;background:white;margin-left:10px;" value="Search" /></td>
+							<td>Address:</td><td><input size="60" id="address" name="address" value="Ha Noi, Viet Nam" type="text" onblur="showAddress(this.value);return false;"><input type="button" onclick="showAddress(document.getElementById('address').value);return false;" style="border:1px solid #555;background:white;margin-left:10px;" value="Search" /></td>
+						</tr>
+						<tr>
+							<td>Description</td><td><textarea cols="58" rows="3" id="description" name="description"></textarea></td>
 						</tr>
 					</table>
 				</fieldset>
@@ -132,7 +153,7 @@ function showAddress(address)
 											Width: <input style="width:180px;" id="width" name="width" type="text" class="text" value="300" /> Pixel
 										</td>
 										<td align="right" width="50%">
-											Height: <input style="width:180px;" id="height" name="height" type="text" class="text" value="300" /> Pixel
+											Height: <input style="width:180px;" id="height" name="height" type="text" class="text" value="200" /> Pixel
 										</td>
 									</table>
 								</td>
@@ -202,5 +223,14 @@ function showAddress(address)
 
 </form>
 
+<script type="text/javascript" src="../../tiny_mce.js"></script>
+<script language="javascript">
+	tinyMCE.init({
+		// General options
+		mode : "exact",
+		elements: "description",
+		theme: "simple"
+	});
+</script>
 </body>
 </html>
