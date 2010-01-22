@@ -8,4 +8,15 @@ if (logged_in()) {
 	<?php if ($currentUser->level == 1) { ?>
 		<a class='link' onClick='restoreDraft()'>Restore this draft</a>			
 	<?php }
+	$id = Edition::filterId($_REQUEST["Id"]);
+	if($id != ''){
+		$draf_edition = new Edition;
+		$row = $draf_edition->query($id);
+		if($row['checked']==0 && $row['user_id']==myUser_id(myip())){
+	?>
+			<a class='link' id='edit_link' onClick='editClick()'> Edit </a>
+	<?php
+			echo "|<a class='link' onClick='deleteConfirmDialog.dialog(\"open\")'> Delete </a>";
+		}
+	}
 }?>

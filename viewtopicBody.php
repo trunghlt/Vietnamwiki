@@ -158,7 +158,7 @@ jQuery(document).ready(function(){
 });
 
 function editClick() {
-	$("textEditFrame").contentWindow.location.reload(true);
+	//$("textEditFrame").contentWindow.location.reload(true);
 	editDialog.dialog('open');
 }
 

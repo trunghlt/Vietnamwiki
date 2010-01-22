@@ -40,5 +40,6 @@ include("forms/comment_login.php");
 include("forms/edit_login.php");
 include("forms/deleteConfirmForm.php");
 include("forms/loginForm.php");
+include('dialog.php');
 include("footer.php");
 ?>

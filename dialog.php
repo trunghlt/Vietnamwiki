@@ -14,7 +14,7 @@ jQuery(document).ready(function(){
 		buttons: {
 			'Submit': function() {
 				jQuery(this).dialog('close');
-			},
+			}
 		}
 	});
 });	

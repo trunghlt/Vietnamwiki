@@ -60,6 +60,7 @@ class Edition {
 			$this->postSmallImgURL = $row["post_small_img_url"];
 			$this->postBigImgURL = $row["post_big_img_url"];
 			$this->editDateTime = $row["edit_date_time"];
+
 			return $row;
 	}
 	
@@ -113,12 +114,11 @@ class Edition {
 						post_subject = '".$this->postTitle."',
 						post_summary = '".$this->postSummary."',
 						post_text = '".$mysql["postContent"]."',
-						edit_date_time = '".$this->editDateTime."',
 						post_small_img_url = '".$this->postSmallImgURL."',
-						post_big_img_url = '".$this->postBigImgURL."'
-						post_index_id = '".$this-index_id."'
-						post_post_ip= '".$this->post_ip."'
-						post_post_username = '".$this->post_username."'
+						post_big_img_url = '".$this->postBigImgURL."',
+						index_id = '".$this->index_id."',
+						post_ip= '".$this->post_ip."',
+						post_username = '".$this->post_username."'
 					WHERE id = ".$this->id) or die(mysql_error());		
 	}
 	
@@ -202,6 +202,12 @@ class Edition {
 						WHERE id = ".$id) or die(mysql_error());
 				}	
 		}
+	}
+	//del draf editon
+	public function remove() {
+		$q = new Db;
+		$q->query("	DELETE FROM editions
+					WHERE id = ".$this->id);
 	}
 }
 ?>
