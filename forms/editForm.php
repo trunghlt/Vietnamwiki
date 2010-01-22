@@ -11,7 +11,11 @@ include('dialog.php');
 					height: 660px;" 
 			name="textEditFrame"
 			id="textEditFrame"				
-			src="textEditor.php?id=<?php echo $currentPostElement->id?>">
+			src="textEditor.php?<?php 
+			if(isset($draf)) 
+				echo "editionId_draf=".$draf;
+			elseif(isset($currentPostElement->id))
+					echo "id=".$currentPostElement->id;?>">
 	</iframe>  	
 
 </div>
@@ -23,18 +27,20 @@ function convert(s) {
 }
 
 function submitEditForm() {
-	currentDestItem.removeClass("active");
-	currentDestItem.addClass("linksmall");	
-	currentIndexItem.removeClass("activeIndex");
-	currentIndexItem.addClass("linksmall");	
-	currentMySlide.slideOut();	
-
 	var textEditorFrame = document.getElementById("textEditFrame");
 	var frameWindow = textEditorFrame.contentWindow;
 	var frameDocument = frameWindow.document;
 	var destId = encodeURI(frameDocument.getElementById("location").value); 
 	var indexId = encodeURI(frameDocument.getElementById("index").value); 
+<?php if(isset($currentPostElement->id)) {?>
+	currentDestItem.removeClass("active");
+	currentDestItem.addClass("linksmall");	
+	currentIndexItem.removeClass("activeIndex");
+	currentIndexItem.addClass("linksmall");	
+	currentMySlide.slideOut();
+	
 
+	
 	currentDestItem = $("destItem_"+destId);
 	currentDestItem.removeClass("linksmall");
 	currentDestItem.addClass("active");
@@ -43,14 +49,19 @@ function submitEditForm() {
 	currentIndexItem.addClass("activeIndex");
 	currentMySlide = mySlide[destId];
 	currentMySlide.slideIn();
+<?php }	?>
 
 	var title = frameDocument.getElementById("title").value;
 	var smallImgURL = frameDocument.getElementById("smallImgURL").value;
 	var bigImgURL = frameDocument.getElementById("bigImgURL").value;	
 	var summary = frameDocument.getElementById("summary").value;		
 	var content = convert(frameWindow.tinyMCE.activeEditor.getContent());
-	var id = <?php echo $currentPostElement->id?>;
-
+	var id = <?php if(isset($draf)) echo $currentEdition->postId;
+					 elseif(isset($currentPostElement->id))
+							echo $currentPostElement->id;?>;
+	var type = <?php if(isset($draf)) echo '1';
+					 elseif(isset($currentPostElement->id))
+							echo '2';?>;
 /*	
 	jQuery.post("submitPost.php",
 				{id: id, indexId: indexId, title: title, smallImgURL: smallImgURL, bigImgURL: bigImgURL, summary: summary, content: content},
@@ -70,11 +81,19 @@ function submitEditForm() {
 							+ "&smallImgURL=" + smallImgURL
 							+ "&bigImgURL=" + bigImgURL
 							+ "&summary=" + summary
-							+ "&content=" + content);
+							+ "&content=" + content
+							<?php if(isset($draf)) {?>
+							+ "&id_edition=" + <?php echo $draf?>
+							<?php } ?> 
+							+ "&type=" + type);
 							
 	submitPostRequest.addEvent('onComplete', function(response) {
 		$("postContent").set('html', response);
-		loadEditorList(<?php echo $currentPostElement->id?>, "editorList");
+		<?php if(isset($draf)){?>
+			window.location = 'draft.php?id=<?php echo $draf?>';
+		<?php }elseif(isset($currentPostElement->id)){?>
+		loadEditorList(<?php echo $currentPostElement->id ?>, "editorList");
+		<?php }?>
 	});
 	
 }

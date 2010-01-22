@@ -16,9 +16,12 @@
 
 <div id="contentTable">
 	<?php 
+	
 	$currentEdition = new Edition;
 	$editionId = $currentEdition->filterId($_GET["id"]); 
+	$draf = $currentEdition->filterId($_GET["id"]);
 
+	
 	if (isset($_GET["page"])) $page = $_GET["page"];
 	if (!isset($page)) $page = 1;
 
@@ -127,7 +130,7 @@
 <script language="javascript">
 jQuery(document).ready(function(){
 	loadToolbar("toolbar");
-	loadDraftRibbon("ribbon");
+	loadDraftRibbon(<?php echo $editionId?>,"ribbon");
 	restoreConfirmDialog = jQuery("#restoreConfirmDialog").dialog({
 		autoOpen: false,
 		height: 'auto',
@@ -157,7 +160,7 @@ function signOut() {
 	jQuery.post("/requests/logout.php", {}, 
 				function(response) {
 					loadToolbar("toolbar");
-					loadDraftRibbon("ribbon");
+					loadDraftRibbon(<?php echo $editionId?>,"ribbon");
 				});
 }
 
@@ -167,7 +170,7 @@ function submitLogin() {
 	loginForm.send();
 	loginForm.get("send").addEvent("onComplete", function(response){
 		loadToolbar("toolbar");
-		loadDraftRibbon("ribbon");
+		loadDraftRibbon(<?php echo $editionId?>,"ribbon");
 	});
 }
 
@@ -179,10 +182,15 @@ function submitRestoreDraft(){
 				}, 
 				"html");
 }
+function editClick() {
 
+	editDialog.dialog('open');
+}
 </script>
 <?php
 include("forms/loginForm.php");
 include("forms/composeForm.php");
+include("forms/editForm.php");
+include("forms/deleteConfirmForm.php");
 include("footer.php");
 ?>

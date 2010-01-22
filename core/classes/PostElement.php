@@ -10,6 +10,7 @@ class PostElement {
 	public $smallImgURL;
 	public $bigImgURL;
 	public $draft;
+	public $post_edit_time;
 	
 	public static function filterContent($content) {
 		return $content;
@@ -43,7 +44,7 @@ class PostElement {
 		$this->summary = $r["post_summary"];
 		$this->smallImgURL = $r["post_small_img_url"];
 		$this->bigImgURL = $r["post_big_img_url"];
-		
+
 		$q->query("	SELECT *
 					FROM posts
 					WHERE post_id = ".$this->id);

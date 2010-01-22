@@ -48,13 +48,14 @@ Load draft ribbon
 - dom: the div filled with the returned content
 ->draft ribbon HTML text 
 ---------------------------------------------------------*/
-function loadDraftRibbon(dom) {
+function loadDraftRibbon(id,dom) {
 	jQuery.post("draftRibbonPainter.php", 
-				{}, 
+				{Id: id}, 
 				function(response) {
 					jQuery("#"+dom).html(response);
 				}, 
 				"html");
 }
+
 </script>
 
