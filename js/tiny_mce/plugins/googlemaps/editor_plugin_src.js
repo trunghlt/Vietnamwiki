@@ -16,7 +16,7 @@
 				ed.windowManager.open({
 					file : url + '/googlemaps.htm',
 					width : 640 + parseInt(ed.getLang('googlemaps.delta_width', 0)),
-					height : 480 + parseInt(ed.getLang('googlemaps.delta_height', 0)),
+					height : 550 + parseInt(ed.getLang('googlemaps.delta_height', 0)),
 					inline : 1
 				}, {
 					plugin_url : url
