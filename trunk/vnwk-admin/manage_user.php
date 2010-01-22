@@ -49,7 +49,7 @@ session_start();
 //----------------------------------//
 	$arr = $u->show_user();
 	
-	$row_per_page = 5;
+	$row_per_page = 20;
 	$count_record = count($arr);
 
 //Pages
