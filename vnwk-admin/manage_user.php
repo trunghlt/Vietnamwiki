@@ -1,12 +1,12 @@
 <?php
-ob_end_clean();
-ob_start();
+@ob_end_clean();
+@ob_start();
 session_start();
 //include file	
 	include("class_user.php");
 	include("common.php");
 	include("session.php");
-	include("../core/classes/Filter.php");
+	include(".././core/classes/filter.php");
 //check logged user 
 	process(session_id(), myip());
 	if (!logged_in()) header("location: login.php");
@@ -31,17 +31,17 @@ session_start();
 	{
 		$u->del_user($id);
 	}
-	
+
 //---------ban user-----------------//
 	if(isset($_GET['act']) && $_GET['act']=='ban')
 	{
 		if(Filter::filterInput($_GET['value'],"login.php",1))
 		{
-			$arr_ban = array("ban_user"=>0);
+			$arr_ban = array('ban_user'=>0);
 			$u->edit_user($id,$arr_ban);
 		}
 		else{
-			$arr_ban = array("ban_user"=>1);
+			$arr_ban = array('ban_user'=>1);
 			$u->edit_user($id,$arr_ban);
 		}
 	}
@@ -49,7 +49,7 @@ session_start();
 //----------------------------------//
 	$arr = $u->show_user();
 	
-	$row_per_page = 20;
+	$row_per_page = 5;
 	$count_record = count($arr);
 
 //Pages
@@ -77,9 +77,9 @@ session_start();
 	   if($value!=NULL)
 	   {
 			echo "<div style='width:400px;'>";
-			echo "<a href='edit_user.php?id=$value[id]' target='user' style='width:50px;float:left;'>(Edit)</a>";
+			echo "<a href=edit_user.php?id=$value[id] target='user' style='width:50px;float:left;'>(Edit)</a>";
 			echo "<label style='width:160px;float:left;'>$value[username]</label>";
-			if($value[ban_user]==0)
+			if($value['ban_user']==0)
 				echo "<a href='manage_user.php?id=$value[id]&act=ban&value=0&page=$num_page&s=$start' style='width:60px;float:left;'>(Allowed)</a>";
 			else
 				echo "<a href='manage_user.php?id=$value[id]&act=ban&value=1&page=$num_page&s=$start' style='width:60px;float:left;'>(Banned)</a>";
