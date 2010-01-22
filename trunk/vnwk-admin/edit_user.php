@@ -1,5 +1,5 @@
 <?php
-ob_start();
+@ob_start();
 session_start();
 //include file	
 	include("class_user.php");
@@ -11,7 +11,6 @@ session_start();
 	if (!logged_in()) header("location: login.php");
 	if(isset($_GET['id']))
 		$id = Filter::filterInput($_GET['id'],"login.php",1);
-	$local = "edit_user.php?id=".$id;
 ?>
 <style>
 	label{
@@ -38,35 +37,13 @@ session_start();
 	if(isset($_GET['act']) && $_GET['act']=='edit')
 	{
 		$arr = $u->show_user($str);
-		if($_POST['user']==NULL){
-			$ur = $arr[0]['username'];
-		}
-		else{
-				$filter_user = Filter::filterInput($_POST['user'],$local,2);
-				if($u->check_user($id,$filter_user)==0){
-					$ur = $filter_user;
-				}
-		}
-		
-		if($_POST['pass']==NULL){
-			$ps = $arr[0]['password'];
-		}
-		else{
-			$filter_pass = Filter::filterInput($_POST['pass'],$local,2);
-			$filter_repass = Filter::filterInput($_POST['re_pass'],$local,2);
-			
-			if($filter_pass == $filter_repass){
-				$ps = $filter_pass;
-			}
-		}
-		
-		$level = Filter::filterInput($_POST['level'],$local,1);
+		$level = Filter::number($_POST['level']);
 		//Update
-		if($level && $ur && $ps)
+		if($level)
 		{
 			if($level == 2)
 				$level = 0;
-			$arr_edit = array('username'=>$ur,'password'=>$ps,'level'=>$level);
+			$arr_edit = $level;
 			$u->edit_user($_GET['id'],$arr_edit);
 		}
 	}	
@@ -81,10 +58,8 @@ echo "<body id='e_user'>";
 
 <form method="post" action="edit_user.php?id=<?php echo $arr[0]['id']?>&act=edit" target="user" name="user" >
 <div>
-	<label>ID :</label><input type="text" name="id2" value="<?php echo $arr[0]["id"];?>" disabled /><br />
-	<label>Username :</label><input type="text" name="user" value="<?php echo $arr[0]["username"];?>" /><br />
-	<label>Password (>=5 characters):</label><input type="password" name="pass" /><br />
-	<label>Re_Password :</label><input type="password" name="re_pass" /><br />
+	<label>ID :</label><input type="text" name="id2" value="<?php echo $arr[0]['id'];?>" disabled /><br />
+	<label>Username :</label><input type="text" name="user" value="<?php echo $arr[0]['username']; ?>" disabled/><br />
 	<label>Level :</label>
 	<select name="level">Level:
 		<option value="1" <?php if($arr[0]["level"]==1) echo "selected";?>>1</option>
@@ -96,5 +71,5 @@ echo "<body id='e_user'>";
 </form>
 </body>
 <?php
-ob_end_flush();
+@ob_end_flush();
 ?>

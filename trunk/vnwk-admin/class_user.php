@@ -35,18 +35,10 @@ include("db.php");
 		}
 		
 		//edit user
-		function edit_user($id,$arr=''){
-			$str='';
-			if(is_array($arr)){
-				foreach($arr as $key=>$value)
-				{
-						$str .= " $key='".$value."',";
-				}
-				$str = substr($str,0, -1)." ";
-				$sql = "update users set".$str."where id='".$id."'";
+		function edit_user($id,$level){
+				$sql = "update users set level=".$level." where id='".$id."'";
 				mysql_query($sql) or die(mysql_error());
 				@mysql_free_result($this->re);
-			}
 		}
 		
 		//check user exsist
