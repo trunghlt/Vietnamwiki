@@ -4,7 +4,10 @@
 <script language="javascript">
 function submitDeletePost(){
 	var request = new Request({url: "requests/deletePost.php"})
-	request.send("postId=<?php echo $currentPostElement->id?>");
+	request.send("<?php 
+	if(isset($draf)) echo 'editionId='.$draf;
+	else if(isset($currentPostElement->id)) echo 'postId='.$currentPostElement->id;
+	?>");
 	request.addEvent("onComplete", function(response){
 		window.location = "index2.php";
 	});
