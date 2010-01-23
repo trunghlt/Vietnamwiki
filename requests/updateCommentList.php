@@ -9,6 +9,9 @@ $commentElement->postId = $_POST["postId"];
 $commentElement->userId = myUser_id(myip());
 $commentElement->posterIp = myip();
 $commentElement->commentTime = time();
+if(isset($_POST["editionId"])){
+	$commentElement->editionid = $_POST["editionId"];
+}
 $commentElement->add();
 $post_id = $commentElement->postId;
 include("../commentListPainter.php");

@@ -24,17 +24,32 @@ session_start();
 
 <body id='link'>
 <?php
-		if(isset($_GET['value']))
+		$type = isset($_GET['type']);
+		if(isset($_GET['value']) && $type)
 		{
-			$value = Filter::filterInput($_GET['value'],"login.php",1);
-			if($value==1)
-				$value = 0;
-			else $value = 1;
-			mysql_query("update setting set property_value = $value where property_name='ALLOW_DIRECT_UPDATE'");
+			$type = Filter::filterInput($_GET['type'],"login.php",3);
+			if($type == 'up_content'){
+				$value = Filter::filterInput($_GET['value'],"login.php",1);
+				if($value==1)
+					$value = 0;
+				else $value = 1;
+				$str = 'ALLOW_DIRECT_UPDATE';
+				mysql_query("update setting set property_value = $value where property_name='".$str."'");
+			}
+			else if($type == 'draft_restore'){
+				$value = Filter::filterInput($_GET['value'],"login.php",1);
+				if($value==1)
+					$value = 0;
+				else $value = 1;
+				$str = 'ALLOW_RESTORE_DRAFT';
+				mysql_query("update setting set property_value = $value where property_name='".$str."'");			
+			}
 			
 		}	
-		$re = mysql_query("select * from setting where property_name='ALLOW_DIRECT_UPDATE'");
-		$row = mysql_fetch_assoc($re);
+		$re = mysql_query("select * from setting");
+		while($row = mysql_fetch_assoc($re)){
+			$r[$row['property_name']] = $row['property_value'];
+		}
 ?>
 <p><a href="sign_out.php">Sign out</a></p>
 <p><a href="destmenu.php" target="showframe">Destination & Index menu management</a></p>
@@ -43,12 +58,20 @@ session_start();
 <p><a href="#">Slide management</a></p>
 <p><a href="user_frame.php" target="showframe">User management</a></p>
 <p><a href="map_frame.php" target="showframe">Map management</a></p>
-<p><a href="link.php?value=<?php echo $row['property_value']?>" >
+<p><a href="link.php?value=<?php echo $r['ALLOW_DIRECT_UPDATE']?>&type=up_content" >
 <?php 
-	if($row['property_value']==1)
+	if($r['ALLOW_DIRECT_UPDATE']==1)
 		echo 'Don\'t allow direct update';
 	else
 		echo 'Allow direct update';
+?></a>
+</p>
+<p><a href="link.php?value=<?php echo $r['ALLOW_RESTORE_DRAFT']?>&type=draft_restore" >
+<?php 
+	if($r['ALLOW_RESTORE_DRAFT']==1)
+		echo 'ALLOW_RESTORE_DRAFT';
+	else
+		echo 'NOT_ALLOW_RESTORE_DRAFT';
 ?></a>
 </p>
 <p><a href="#">Back up</a></p>
