@@ -6,6 +6,7 @@ class CommentElement{
 	public $posterIp;
 	public $commentTime;
 	public $commentText;
+	public $editionid;
 	
 	public function query() {
 		$q = new Db;
@@ -24,8 +25,8 @@ class CommentElement{
 	public function add() {
 		$q = new Db;
 		$q->query(" INSERT INTO comments
-					(post_id, user_id, poster_ip, comment_time, comment_text)
-					VALUES ('".$this->postId."','".$this->userId."','".$this->posterIp."','".$this->commentTime."','".$this->commentText."')");
+					(post_id, user_id, poster_ip, comment_time, comment_text,edition_id)
+					VALUES ('".$this->postId."','".$this->userId."','".$this->posterIp."','".$this->commentTime."','".$this->commentText."','".$this->editionid."')");
 		$this->id = mysql_insert_id();
 	}
 	

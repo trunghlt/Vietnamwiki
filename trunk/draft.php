@@ -20,6 +20,7 @@
 	$currentEdition = new Edition;
 	$editionId = $currentEdition->filterId($_GET["id"]); 
 	$draf = $currentEdition->filterId($_GET["id"]);
+	$post_id = $draf;
 
 	
 	if (isset($_GET["page"])) $page = $_GET["page"];
@@ -164,13 +165,16 @@ function signOut() {
 				});
 }
 
-function submitLogin() {	
-	var loginForm = $("loginForm");
-	loginForm.set("send", {	url: "requests/postLogin.php", evalScripts: true});
-	loginForm.send();
-	loginForm.get("send").addEvent("onComplete", function(response){
-		loadToolbar("toolbar");
-		loadDraftRibbon(<?php echo $editionId?>,"ribbon");
+function submitLogin(dom) {	
+	jQuery.post("/requests/postLogin.php", jQuery("#"+dom).serialize(), 
+			function(response){
+				if(response==-2)
+					alert("This user has been banned");
+				else
+				{
+					loadToolbar("toolbar");
+					loadDraftRibbon(<?php echo $editionId?>, "ribbon");
+				}
 	});
 }
 
@@ -188,9 +192,12 @@ function editClick() {
 }
 </script>
 <?php
+include("commentListPainter.php");
 include("forms/loginForm.php");
 include("forms/composeForm.php");
 include("forms/editForm.php");
+include("forms/commentForm.php");
+include("forms/comment_login.php");
 include("forms/deleteConfirmForm.php");
 include("footer.php");
 ?>
