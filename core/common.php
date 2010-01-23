@@ -174,7 +174,8 @@ function check_confirm_image($code , $right_code){
 }
 
 function check_email($s){
-     if (!strpos($s, '@')) return "your email is invalid";
+	$str = "/[a-zA-Z0-9._]+\@[a-zA-Z0-9]{2,}\.[a-zA-Z]{2,}/";	
+     if (!strpos($s, '@') || !preg_match($str,$s)) return "your email is invalid";
 	 db_connect();
 	 $result = mysql_query("SELECT * FROM users WHERE email='".$s."'") or die(mysql_error());
 	 $t = mysql_num_rows($result);
