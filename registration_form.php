@@ -58,6 +58,10 @@
     <td><input type="password" name="password" id="password" onKeyUp="ajax_check_password()"/><span id="password_check_label"></span></td>
   </tr>
   <tr>
+    <td><b>Email</b></td>
+    <td><input type="text" name="email" id="email" /><span id="email_check_label"></span></td>
+  </tr>
+  <tr>
     <td><strong>Confirm password</strong></td>
     <td><input type="password" name="confirm_password" id="confirm_password" onKeyUp="ajax_check_confirm_password()"/><span id="confirm_password_check_label"></span></td>
   </tr>
