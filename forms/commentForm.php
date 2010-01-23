@@ -1,6 +1,11 @@
 <div id="commentDialog" title="Comment">
 <form id="commentForm">
-	<input type="text" id="postId" name="postId" value="<?php echo $currentPostElement->id?>" style="visibility:hidden; display: none"/> 
+	<input type="text" id="postId" name="postId" value="<?php 
+	if(isset($draf)) echo '0';
+	elseif(isset($currentPostElement->id)) echo $currentPostElement->id;?>" style="visibility:hidden; display: none"/>
+	 <?php if(isset($draf)){ ?>
+<input type="text" id="editionId" name="editionId" value="<?php echo $draf?>" style="visibility:hidden; display: none"/> 
+	<?php } ?>
 	<textarea 	id="commentText" 
 				name="commentText" 
 				onKeyDown="updateCommentText(this)" 

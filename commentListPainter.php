@@ -1,8 +1,15 @@
 <div id="commentList">
-<?php 
+<?php
+$draft = isset($draf);
+if($draft){
+	$str_comment = "edition_id = '".$post_id."'"; 
+}
+else{
+	$str_comment = "post_id = '".$post_id."'"; 
+}
 $sql = "SELECT *
 		FROM comments
-		WHERE post_id = '".$post_id."'
+		WHERE $str_comment
         ORDER BY comment_id DESC";
 $result = mysql_query($sql) or die(mysql_error());
 $n = mysql_num_rows($result);

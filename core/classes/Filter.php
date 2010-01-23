@@ -16,6 +16,8 @@ class Filter {
 				return $n;
 			if(preg_match("/\w{5,}/", $n) && ($case == 2))
 				return $n;
+			if(preg_match("/\w+/", $n) && ($case == 3))
+				return $n;
 		return (header("location:$location"));
 	}
 	public static function filterInputText($n) {
