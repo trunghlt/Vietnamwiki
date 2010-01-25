@@ -1,5 +1,6 @@
 <div id="commentList">
 <?php
+
 $draft = isset($draf);
 if($draft){
 	$str_comment = "edition_id = '".$post_id."'"; 
