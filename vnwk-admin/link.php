@@ -7,6 +7,7 @@ session_start();
 	include("common.php");
 	include("session.php");
 	include("../core/classes/Filter.php");
+	include("../core/classes/Setting.php");
 //check logged user 
 	process(session_id(), myip());
 	if (!logged_in()) header("location: login.php");
@@ -24,32 +25,32 @@ session_start();
 
 <body id='link'>
 <?php
+$setting = new Setting;
+/*Set for function Update*/
+function set_update($value,$s){
+	$setting = new Setting;
+	if($value==1)
+		$str = 'property_value = 0';
+	else $str = 'property_value = 1';
+	$where = "property_name = '".$s."'";
+	$setting->update($str,$where);	
+}
+
+//--------------------------------
+
 		$type = isset($_GET['type']);
 		if(isset($_GET['value']) && $type)
 		{
 			$type = Filter::filterInput($_GET['type'],"login.php",3);
+			$value = Filter::filterInput($_GET['value'],"login.php",1);
 			if($type == 'up_content'){
-				$value = Filter::filterInput($_GET['value'],"login.php",1);
-				if($value==1)
-					$value = 0;
-				else $value = 1;
-				$str = 'ALLOW_DIRECT_UPDATE';
-				mysql_query("update setting set property_value = $value where property_name='".$str."'");
+				set_update($value,'ALLOW_DIRECT_UPDATE');
 			}
 			else if($type == 'draft_restore'){
-				$value = Filter::filterInput($_GET['value'],"login.php",1);
-				if($value==1)
-					$value = 0;
-				else $value = 1;
-				$str = 'ALLOW_RESTORE_DRAFT';
-				mysql_query("update setting set property_value = $value where property_name='".$str."'");			
+				set_update($value,'ALLOW_RESTORE_DRAFT');
 			}
-			
 		}	
-		$re = mysql_query("select * from setting");
-		while($row = mysql_fetch_assoc($re)){
-			$r[$row['property_name']] = $row['property_value'];
-		}
+		$r = $setting->query_get_link();
 ?>
 <p><a href="sign_out.php">Sign out</a></p>
 <p><a href="destmenu.php" target="showframe">Destination & Index menu management</a></p>
@@ -69,9 +70,9 @@ session_start();
 <p><a href="link.php?value=<?php echo $r['ALLOW_RESTORE_DRAFT']?>&type=draft_restore" >
 <?php 
 	if($r['ALLOW_RESTORE_DRAFT']==1)
-		echo 'ALLOW_RESTORE_DRAFT';
+		echo 'Don\'t allow Restore draft';
 	else
-		echo 'NOT_ALLOW_RESTORE_DRAFT';
+		echo 'allow Restore draft';
 ?></a>
 </p>
 <p><a href="#">Back up</a></p>
