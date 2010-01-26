@@ -70,9 +70,9 @@ function set_update($value,$s){
 <p><a href="link.php?value=<?php echo $r['ALLOW_RESTORE_DRAFT']?>&type=draft_restore" >
 <?php 
 	if($r['ALLOW_RESTORE_DRAFT']==1)
-		echo 'Don\'t allow Restore draft';
+		echo "Don't allow restoring draft from accepted editors";
 	else
-		echo 'allow Restore draft';
+		echo 'Allow restroing draft from accepted editors';
 ?></a>
 </p>
 <p><a href="#">Back up</a></p>
