@@ -39,7 +39,6 @@ if (isset($_FILES['image'])) {
 			var par = window.parent.document;
 			var tmp_file_name = par.getElementById("tmp_file_name");
 			tmp_file_name.value = "<?php echo $fname?>";
-			
 			var images = par.getElementById('images_container');
 			var imgdiv = images.getElementsByTagName('div')[0];
 			var image = imgdiv.getElementsByTagName('img')[0];

@@ -75,7 +75,10 @@ session_start();
 		$post_sum = Filter::filterInputText($_POST['PostSum']);
 		$smal_img = Filter::filterInputText($_POST['SmallUrl']);
 		$big_url = Filter::filterInputText($_POST['BigUrl']);
+		$reference = htmlspecialchars(urldecode($_POST['reference']),ENT_QUOTES);
+
 		if($_POST['PTex']==NULL){
+			$arr = $ed->query($id);
 			$e_Text = $arr['PTex'];
 		}
 		else{
@@ -84,7 +87,7 @@ session_start();
 		//Update
 		if($e_Text)
 		{
-			$ed->edit($id,$e_Text,$post_id,$post_sub,$post_sum,$smal_img,$big_url);
+			$ed->edit($id,$e_Text,$post_id,$post_sub,$post_sum,$smal_img,$big_url,$reference);
 ?>
 <script language="javascript" type="text/javascript">
 	parent.edit.location.href = 'revisionmanagement.php';
@@ -117,6 +120,12 @@ session_start();
 	<label>Small Url Img :</label><input type="text" name="SmallUrl" value="<?php echo $arr['post_small_img_url'];?>" /><br />
 	<label>Big Url Img :</label><input type="text" name="BigUrl" value="<?php echo $arr['post_big_img_url'];?>" /><br />
 	<br />
+	<p>
+	<b><label>Reference:</label></b>
+    <textarea name="reference" id="reference" rows="3" style="width:100%"><?php 
+		echo $arr['reference'];
+    ?></textarea><br/>	
+	</p>
 	<input type="submit" name="ok" value="Accept edition" onclick="return confir(<?php echo $arr['id']?>);"/>
 </div>
 </form>

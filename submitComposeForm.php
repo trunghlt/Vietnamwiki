@@ -11,6 +11,7 @@ $postElement->indexId = htmlspecialchars($postElement->filterId(urldecode($_POST
 $postElement->smallImgURL = htmlspecialchars($postElement->filterImgURL(urldecode($_POST["smallImgURL"])));
 $postElement->bigImgURL = htmlspecialchars($postElement->filterImgURL(urldecode($_POST["bigImgURL"])));
 $postElement->authorUsername = myUsername(myip());
+$postElement->reference = htmlspecialchars($postElement->filterReference(urldecode($_POST["ref"])));
 $postElement->add(myUser_id(myip()));	
 
 $editionElement = new Edition();
@@ -25,6 +26,7 @@ $editionElement->editDateTime = time();
 $editionElement->index_id = $postElement->indexId;
 $editionElement->post_ip = myip();
 $editionElement->post_username = $postElement->authorUsername;
+$editionElement->reference = $postElement->reference;
 $editionElement->add();
 
 echo $postElement->id;
