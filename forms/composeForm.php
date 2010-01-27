@@ -48,6 +48,7 @@ function submitComposeForm() {
 	var bigImgURL = encodeURI(frameDocument.getElementById("bigImgURL").value);
 	var summary = encodeURI(frameDocument.getElementById("summary").value);		
 	var content = convert(encodeURI(frameWindow.tinyMCE.activeEditor.getContent()));
+	var ref = encodeURI(frameDocument.getElementById("reference").value);
 	
 	var submitPostRequest = new Request({	url: "submitComposeForm.php",
 											evalResponse: false
@@ -58,7 +59,8 @@ function submitComposeForm() {
 							+ "&smallImgURL="+smallImgURL
 							+ "&bigImgURL=" + bigImgURL
 							+ "&summary=" + summary
-							+ "&content=" + content);
+							+ "&content=" + content
+							+ "&ref=" + ref);
 							
 	submitPostRequest.addEvent('onComplete', function(response) {
 		switch(response){

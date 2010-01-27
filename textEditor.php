@@ -25,12 +25,12 @@
 				theme : "advanced",
 				height : "400",
 				width: "100%",
-				plugins : "googlemaps,safari,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
+				plugins : "googlemaps,safari,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,link_url,img_url",
 			
 				// Theme options
 				theme_advanced_buttons1 : "insertlayer,pagebreak,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,formatselect,fontselect,fontsizeselect,|,googlemaps, googlemapsdel",
 				theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,image,cleanup,code,|preview,|,forecolor,backcolor",
-				theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,|,print,preview",
+				theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,|,print,preview,|,link_url,|,img_url",
 				theme_advanced_toolbar_location : "top",
 				theme_advanced_toolbar_align : "left",
 				theme_advanced_resizing : false,
@@ -248,6 +248,14 @@ function filterDestId($destId) {
 			echo $content;
 		}	
 	?></textarea>
+	<p>
+	<b><label>Reference:</label></b>
+    <textarea name="reference" id="reference" rows="3" style="width:100%"><?php 
+    	if($editting && $flag==2) echo $row1['reference'];
+		elseif($edit_draf) echo $row_edition['reference'];
+		elseif($editting) echo $currentPostElement->reference;
+    ?></textarea><br/>	
+	</p>
 </form>
 
 </body>

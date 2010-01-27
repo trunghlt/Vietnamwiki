@@ -21,6 +21,7 @@
 	$editionId = $currentEdition->filterId($_GET["id"]); 
 	$draf = $currentEdition->filterId($_GET["id"]);
 	$post_id = $draf;
+	
 
 	
 	if (isset($_GET["page"])) $page = $_GET["page"];
@@ -32,6 +33,9 @@
 
 	$title = $currentEdition->postTitle;
 	$content = $currentEdition->postContent;
+	if($currentEdition->reference!='')
+	$reference = $currentEdition->reference;
+	else $reference='';
 	?>
 
 	<div id="postContent">
@@ -68,7 +72,13 @@
 		?>
 		<div class="largeDraftIcon"></div>
 		<h2 style="padding-left: 40px;"><?php echo HtmlSpecialChars($title)?> (draft)</h2>
-		<?php echo $s;?>
+		<?php echo $s;
+		if($reference!='')
+		{
+			echo "<h2 style='color:black; font-size:9pt;'>Reference :</h2>";
+			echo HtmlSpecialChars($reference);
+		} 	
+		?>	
 	</div>
 
 	<?php if ($page < $pnum) { ?>

@@ -11,6 +11,8 @@ class PostElement {
 	public $bigImgURL;
 	public $draft;
 	public $post_edit_time;
+	public $reference;
+	
 	
 	public static function filterContent($content) {
 		return $content;
@@ -31,7 +33,11 @@ class PostElement {
 	public static function filterImgURL($url) {
 		return $url;
 	}
-	
+
+	public static function filterReference($reference) {
+		return $reference;
+	}
+		
 	public function query($id) {
 		$q = new db;
 		$this->id = $id; 
@@ -44,14 +50,16 @@ class PostElement {
 		$this->summary = $r["post_summary"];
 		$this->smallImgURL = $r["post_small_img_url"];
 		$this->bigImgURL = $r["post_big_img_url"];
-
+		$this->reference = $r['reference'];	
+		
 		$q->query("	SELECT *
 					FROM posts
 					WHERE post_id = ".$this->id);
 		$r = mysql_fetch_array($q->re);
 		$this->authorUsername = $r["post_username"];
 		$this->indexId = $r["index_id"];
-		$this->locked = $r["locked"];		
+		$this->locked = $r["locked"];
+			
 	}
 	
 	public function add($user_id="") {
@@ -72,8 +80,8 @@ class PostElement {
 				//Not allow for user has level = 0			
 				if($row2['level']==1){		
 					$q->query(" INSERT INTO posts_texts
-								(post_subject, post_summary, post_text, post_small_img_url, post_big_img_url)
-								VALUE ('".$this->title."','".$this->summary."','".$this->content."','".$this->smallImgURL."','".$this->bigImgURL."') ");
+								(post_subject, post_summary, post_text, post_small_img_url, post_big_img_url,reference)
+								VALUE ('".$this->title."','".$this->summary."','".$this->content."','".$this->smallImgURL."','".$this->bigImgURL."','".$this->reference."')");
 					$this->id = mysql_insert_id();	
 					$post_time = time();
 					$ip = myip();
@@ -98,8 +106,8 @@ class PostElement {
 			//Allow for anyone
 			else{
 					$q->query(" INSERT INTO posts_texts
-								(post_subject, post_summary, post_text, post_small_img_url, post_big_img_url)
-								VALUE ('".$this->title."','".$this->summary."','".$this->content."','".$this->smallImgURL."','".$this->bigImgURL."') ");
+								(post_subject, post_summary, post_text, post_small_img_url, post_big_img_url,reference)
+								VALUE ('".$this->title."','".$this->summary."','".$this->content."','".$this->smallImgURL."','".$this->bigImgURL."','".$this->reference."')");
 					$this->id = mysql_insert_id();	
 					$post_time = time();
 					$ip = myip();
@@ -132,6 +140,7 @@ class PostElement {
 		$q = new db;
 				
 		$mysql["content"] = mysql_real_escape_string($this->content);
+		$mysql["reference"] = mysql_real_escape_string($this->reference);
 		
 		if($user_id != ""){
 			$q->query("select property_value
@@ -150,7 +159,8 @@ class PostElement {
 									post_summary = '".$this->summary."',
 									post_text = '".$mysql["content"]."',
 									post_small_img_url = '".$this->smallImgURL."',
-									post_big_img_url = '".$this->bigImgURL."'
+									post_big_img_url = '".$this->bigImgURL."',
+									reference = '".$mysql["reference"]."'
 								WHERE post_id = ".$this->id);
 					
 					$q->query(" UPDATE posts
@@ -175,7 +185,8 @@ class PostElement {
 								post_summary = '".$this->summary."',
 								post_text = '".$mysql["content"]."',
 								post_small_img_url = '".$this->smallImgURL."',
-								post_big_img_url = '".$this->bigImgURL."'
+								post_big_img_url = '".$this->bigImgURL."',
+								reference = '".$mysql["reference"]."'
 							WHERE post_id = ".$this->id);
 				
 				$q->query(" UPDATE posts
