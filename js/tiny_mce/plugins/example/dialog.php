@@ -4,11 +4,11 @@
 	<title>Insert Link Url</title>
 	<script type="text/javascript" src="../../tiny_mce_popup.js"></script>
 	<script type="text/javascript" src="js/img_url.js"></script>
-	<script src="../../../prototype.js" type="text/javascript"></script>
-	<script src="../../../scriptaculous.js" type="text/javascript"></script>
+	<script src="../../../jquery/jquery-1.2.6.js" type="text/javascript"></script>
 </head>
 <body id='edition_manage'>
 <?php
+
 include("../../../../core/init.php");
 include("../../../../core/classes/filter.php");
 include("../../../../core/common.php");
@@ -206,7 +206,7 @@ if (isset($_GET["task"])) {
 					
 		}
 	}
-	return;
+return;	
 }
 
 ?>
@@ -253,14 +253,19 @@ if (isset($_GET["task"])) {
 	<input type="button" id="cancel" name="cancel" value="Cancel" onclick="tinyMCEPopup.close();" />
 </div>
 <script type="text/javascript">
-	update_dest(1);
 	function update_dest(x) {
 		var e = document.getElementById("dest" + x);
 		var page = document.getElementById("page");
-		new Ajax.Updater('body'+x,'dialog.php?task='+x+'&dest_id='+ e.value +'&page='+ page.value,{evalScripts:true})
+		jQuery.get('dialog.php',{task:1,dest_id:e.value,page:page.value},				
+					function(data){
+						document.getElementById('body'+x).innerHTML = data;
+					});
 	}
 	function update_body(x,id,page) {
-		new Ajax.Updater('body'+x,'dialog.php?task='+x+'&dest_id='+ id +'&page='+ page,{evalScripts:true})
+		jQuery.get('dialog.php',{task:x,dest_id:id,page:page},
+					function(data){
+						document.getElementById('body'+x).innerHTML = data;
+					});
 	}
 </script>
 </body>
