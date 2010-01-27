@@ -23,13 +23,16 @@ if ($page == 1) {
 				WHERE post_id='".$post_id."'") or die(mysql_error());
 }
 
-$sql = "SELECT post_subject, post_text
+$sql = "SELECT post_subject, post_text, reference
 		FROM posts_texts
 		WHERE post_id='".$post_id."'";
 $re2 = mysql_query($sql) or die(mysql_error());
 $post = mysql_fetch_array($re2);
 $title = $post['post_subject'];
 $content = $post['post_text'];
+if($post['reference']!=NULL)
+$reference = $post['reference'];
+else $reference = '';
 ?>
 
 <div id="postContent">
@@ -77,7 +80,14 @@ $content = $post['post_text'];
 	//title
 	echo "<h2>". HtmlSpecialChars($title) . "</h2>";      
 	
-	echo $s; 
+	echo $s;
+	
+	//reference
+	if($reference!='')
+	{
+		echo "<h2 style='color:black; font-size:9pt;'>Reference :</h2>";
+		echo HtmlSpecialChars($reference);
+	} 
 ?>
 </div>
 

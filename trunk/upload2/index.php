@@ -42,7 +42,10 @@ iframe.hidden {
 	<input style="visibility: hidden; display:none;" id="tmp_file_name" name="tmp_file_name" type="text" value="" />
 	<div id="main">
 		<div id="iframe_container">
-			<iframe src="upload2/upload.php" frameborder="0"></iframe>
+			<iframe src="upload2/upload.php" frameborder="0"></iframe><br />
+		</div>
+		<div id="iframe_container1">Upload By Url:
+			<iframe src="upload2/upload_url.php" frameborder="0"></iframe><br />
 		</div>
 		<div id="images_container">
 			<div id="image"></div>

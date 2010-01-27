@@ -11,6 +11,7 @@ $postElement->smallImgURL = htmlspecialchars($postElement->filterImgURL(urldecod
 $postElement->bigImgURL = htmlspecialchars($postElement->filterImgURL(urldecode($_POST["bigImgURL"])), ENT_QUOTES);
 $postElement->content = htmlspecialchars(PostElement::filterContent(urldecode($_POST["content"])), ENT_QUOTES);
 $postElement->indexId = $postElement->filterId(urldecode($_POST["indexId"]));
+$postElement->reference = htmlspecialchars($postElement->filterReference(urldecode($_POST["ref"])));
 if($_POST["type"]==2){
 	$n = $postElement->save(myUser_id(myip()));	
 }
@@ -25,6 +26,7 @@ $editionElement->postBigImgURL = $postElement->bigImgURL;
 $editionElement->index_id = $postElement->indexId;
 $editionElement->post_ip = myip();
 $editionElement->post_username = myUsername(myip());
+$editionElement->reference = $postElement->reference;
 if($_POST["type"]==1)
 {
 	$editionElement->id = $postElement->filterId($_POST["id_edition"]);	
@@ -36,6 +38,11 @@ if($_POST["type"]==1)
 	
 	echo "<h2>".$postElement->title. "</h2>";      
 	echo $content;
+	if($postElement->reference!='')
+	{
+		echo "<h2 style='color:black; font-size:9pt;'>Reference :</h2>";
+		echo HtmlSpecialChars($postElement->reference);
+	}
 }
 elseif($_POST["type"]==2)
 {
@@ -55,10 +62,22 @@ elseif($_POST["type"]==2)
 		echo "</script>";
 		echo "<h2>". $postElement->title . "</h2>";      
 		echo $content;
+		if($postElement->reference!='')
+		{
+			$re = mysql_query('select * from posts_texts where post_id='.$postElement->id);
+			$row = mysql_fetch_array($re);
+			echo "<h2 style='color:black; font-size:9pt;'>Reference :</h2>";
+			echo HtmlSpecialChars($row['reference']);
+		}
 	}
 	else{
 	echo "<h2>". $postElement->title . "</h2>";      
 	echo $content;
+		if($postElement->reference!='')
+		{
+			echo "<h2 style='color:black; font-size:9pt;'>Reference :</h2>";
+			echo HtmlSpecialChars($postElement->reference);
+		} 
 	}
 }
 ?>

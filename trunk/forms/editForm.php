@@ -56,6 +56,7 @@ function submitEditForm() {
 	var bigImgURL = frameDocument.getElementById("bigImgURL").value;	
 	var summary = frameDocument.getElementById("summary").value;		
 	var content = convert(frameWindow.tinyMCE.activeEditor.getContent());
+	var ref = encodeURI(frameDocument.getElementById("reference").value);
 	var id = <?php if(isset($draf)) echo $currentEdition->postId;
 					 elseif(isset($currentPostElement->id))
 							echo $currentPostElement->id;?>;
@@ -85,6 +86,7 @@ function submitEditForm() {
 							<?php if(isset($draf)) {?>
 							+ "&id_edition=" + <?php echo $draf?>
 							<?php } ?> 
+							+ "&ref=" + ref 
 							+ "&type=" + type);
 							
 	submitPostRequest.addEvent('onComplete', function(response) {
