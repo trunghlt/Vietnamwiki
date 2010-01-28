@@ -12,17 +12,19 @@ function error($msg) {
 if(isset($_POST['image'])){
 	
 	$str = '/(http|https|ftp)\:\/\/[a-zA-Z0-9._-]+\.[a-zA-Z]{2,}[a-zA-Z0-9[:punct:]]*\.(jpg|jpge)/';
-	if(preg_match($str,$_POST['image'])){
-		$size = array_change_key_case(get_headers($_POST['image'],1));
+	$link_url = $_POST['image'];
+	$link_url = substr_replace($link_url,strtolower(substr($link_url,-3,3)),-3,3);
+	if(preg_match($str,$link_url)){
+		$size = array_change_key_case(get_headers($link_url,1));
 		if($size['content-length'] > 2*(1024*1024))
 			error("Image size should not be bigger than 2MB");
 		else{
-			$image = pathinfo($_POST['image']);
+			$image = pathinfo($link_url);
 			
 			$ftmp = 'temp_'.$image['basename'];
 			$oname = $image['basename'];
 					
-			$t = file_get_contents($_POST['image']);
+			$t = file_get_contents($link_url);
 			$fp = fopen("upload/$ftmp",'wb');
 			
 			if(fwrite($fp,$t)){
@@ -31,25 +33,27 @@ if(isset($_POST['image'])){
 				$pname = "upload/". $fname;
 				fclose($fp);
 ?>
-			<html><head><script>
-			var par = window.parent.document;
-			var tmp_file_name = par.getElementById("tmp_file_name");
-			tmp_file_name.value = "<?php echo $fname?>";
-			var images = par.getElementById('images_container');
-			var imgdiv = images.getElementsByTagName('div')[0];
-			var image = imgdiv.getElementsByTagName('img')[0];
-			imgdiv.removeChild(image);
-
-			var image_new = par.createElement('img');
-			image_new.src = "upload2/resize.php?pic=<?php echo $pname?>";
-			image_new.className = 'loaded';
-			imgdiv.appendChild(image_new);
-			</script></head>
-			</html>
+					<html><head><script>
+					var par = window.parent.document;
+					var tmp_file_name = par.getElementById("tmp_file_name");
+					tmp_file_name.value = "<?php echo $fname?>";
+					var images = par.getElementById('images_container');
+					var imgdiv = images.getElementsByTagName('div')[0];
+					var image = imgdiv.getElementsByTagName('img')[0];
+					imgdiv.removeChild(image);
+		
+					var image_new = par.createElement('img');
+					image_new.src = "upload2/resize.php?pic=<?php echo $pname?>";
+					image_new.className = 'loaded';
+					imgdiv.appendChild(image_new);
+					</script></head>
+					</html>
 <?php
 			}
 			else{
 				error('not upload');
+				fclose($fp);
+				unlink("upload/$ftmp");
 			}
 			
 		}
