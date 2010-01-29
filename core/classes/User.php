@@ -99,7 +99,10 @@ class User {
 		$this->id = mysql_insert_id();
 	}
 	
-	
+	public function update_email($id,$email){
+		$q = new db;
+		$q->query("update users set email='".$email."' where id=".$id);
+	}
 }
 $user_info = new User;
 ?>
