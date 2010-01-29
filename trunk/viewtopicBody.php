@@ -188,16 +188,25 @@ function signOut() {
 function submitLogin(dom) {	
 	jQuery.post("/requests/postLogin.php", jQuery("#"+dom).serialize(), 
 			function(response){
-				if(response==-2)
+				if(response == -2)
+				{
 					alert("This user has been banned");
+				}
 				else
 				{
-					loadToolbar("toolbar");
-					loadEdittingRibbon(<?php echo $post_id?>, "ribbon");
+					if(response != '' && response != 'success'){
+						loadToolbar("toolbar");
+						loadEdittingRibbon(<?php echo $post_id?>, "ribbon");
+						document.getElementById('id_user').value = response;
+						Fill_EmailDialog.dialog('open');
+					}
+					else if(response == 'success'){
+						loadToolbar("toolbar");
+						loadEdittingRibbon(<?php echo $post_id?>, "ribbon");					
+					}
 				}
 	});
 }
 </script>
-
 
 <?php include("commentListPainter.php"); ?>
