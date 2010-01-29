@@ -62,7 +62,7 @@ if (isset($_FILES['image'])) {
 	}
 	exit();
 }
-?><html><head>
+?>
 <script language="javascript">
 function upload(){
 	var par = window.parent.document;
@@ -107,9 +107,9 @@ function upload(){
 	width: 350px;
 }
 </style>
-<head><body><center>
+<center>
 <form name="iform" action="" method="post" enctype="multipart/form-data">
 <input id="file" type="file" name="image" onChange="upload()" />
 <input type="hidden" name="imgnum" />
 </form>
-</center></html>
+</center>
