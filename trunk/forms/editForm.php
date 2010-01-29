@@ -8,7 +8,7 @@ include('dialog.php');
 					border: 0px; 
 					padding: 0px 0px 0px 0px;
 					width: 700px; 
-					height: 660px;" 
+					height: 750px;" 
 			name="textEditFrame"
 			id="textEditFrame"				
 			src="textEditor.php?<?php 
