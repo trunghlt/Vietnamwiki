@@ -46,14 +46,22 @@ function submitLogin() {
 			function(response){
 				if(response==-2)
 					alert("This user has been banned");
-				else
-					loadToolbar("toolbar");
+				else{
+					if(response != '' && response != 'success'){
+						loadToolbar("toolbar");
+						document.getElementById('id_user').value = response;
+						Fill_EmailDialog.dialog('open');
+					}
+					else if(response == 'success')
+						loadToolbar("toolbar");
+				}
 	});
 }
 </script>
 <?php
 include("forms/composeForm.php");
 include("forms/loginForm.php");
+include("forms/register_email.php");
 include("footer.php");
 ?>
 
