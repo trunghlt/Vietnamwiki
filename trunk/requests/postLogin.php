@@ -31,7 +31,14 @@ function chkLogin() {
 	  	$id = userid($username, $password);
 	  	if ($id !== -1 && $id !== -2) {
 			login($id);
-			return true;
+			$result = mysql_query('SELECT * FROM users WHERE id='.$id);
+			$row = mysql_fetch_array($result);
+			if($row['email']=='' && $row['fbId']==NULL)	
+			{
+				echo $id;
+			}
+			else		
+				echo 'success';
 	  	}
 		else 
 			if($id === -2){
