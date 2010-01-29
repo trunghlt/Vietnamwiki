@@ -1,6 +1,3 @@
-<html>
-<head>
-<title>Asynchronous image file upload without AJAX</title>
 <style>
 
 iframe {
@@ -61,19 +58,16 @@ iframe.hidden {
 	margin: 36px;
 }
 </style>
-</html>
-<body><center>
+<center>
 <!--SERCURITY NOTE-->
-<form>
 <input style="visibility: hidden; display:none;" id="tmp_file_name" name="tmp_file_name" type="text" value="" />
-</form>
 <div id="main">
-<div id="iframe_container">
-<iframe src="upload/upload.php" frameborder="0"></iframe>
+	<div id="iframe_container">
+		<iframe src="upload/upload.php" frameborder="0"></iframe>
+	</div>
+	<div id="images_container">
+		<div id="image">
+		</div>
+	</div>
 </div>
-<div id="images_container">
-<div id="image">
-</div>
-</div>
-</center></body>
-</html>
+</center>
