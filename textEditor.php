@@ -25,7 +25,7 @@
 				theme : "advanced",
 				height : "400",
 				width: "100%",
-				plugins : "googlemaps,safari,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,link_url,img_url",
+				plugins : "googlemaps,safari,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,link_url,img_url,example",
 			
 				// Theme options
 				theme_advanced_buttons1 : "insertlayer,pagebreak,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,formatselect,fontselect,fontsizeselect,|,googlemaps, googlemapsdel",
@@ -187,16 +187,16 @@ function filterDestId($destId) {
 	</p>
 	
 	<div style="float: left; margin-right: 10px;">
-	<b><label>Small image's URL:</label></b>
-	<input type="text" size=36 name="smallImgURL" id="smallImgURL" value="<?php 
+	<b><label>Thumbnail URL:</label></b>
+	<input type="text" size="32" name="smallImgURL" id="smallImgURL" value="<?php 
 	if($editting && $flag==2) echo $row1['post_small_img_url'];
 	elseif($edit_draf) echo $row_edition['post_small_img_url'];
 	elseif($editting) echo $currentPostElement->smallImgURL;?>"/>
 	</div>
 	
 	<div>
-	<b><label>Big image's URL:</label></b>
-	<input type="text" size=36 name="bigImgURL" id="bigImgURL" value="<?php 
+	<b><label>Zoomed-in thumbnail URL:</label></b>
+	<input type="text" size="32" name="bigImgURL" id="bigImgURL" value="<?php 
 	if($editting && $flag==2) echo $row1['post_big_img_url'];
 	elseif($edit_draf) echo $row_edition['post_big_img_url'];
 	elseif($editting) echo $currentPostElement->bigImgURL;?>"/>

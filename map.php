@@ -1,7 +1,59 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<style type="text/css">
+div.button {
+	float: left;
+	position: relative;
+	background-color : #D8DFEA;
+}
+	div.button a {
+		border-color : #D8DFEA;
+		border-style : solid solid none;
+		border-width : 1px 1px 0;
+		display : block;
+		font-size : 13px;
+		font-weight : bold;
+		padding : 4px 12px;
+		white-space : nowrap;
+		color:#3B5998;
+		cursor:pointer;
+		outline-style:none;
+		text-decoration:none;	
+	}
+	
+	div.button a:hover {
+		color:#FFFFFF;
+		text-decoration:none;
+		background-color:#627AAD;
+		border-color:#627AAD;	
+	}
+
+#map {
+	width: 800px; 
+	height: 500px;
+	}	
+	
+#search {
+	height: 19px;
+}
+
+#addressBox {
+	position: absolute;
+	top: 275px;
+	left: 0px;
+	background: white;
+	border: 1px solid #DDDDDD;
+	padding: 5px 5px;
+	z-index: 1000;
+	opacity: 0.8;
+	}	
+</style>
+
+ 
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=ABQIAAAAV1hMY6P-vcrStESIcmxsyBSg0YMtASE5KdM7LALqADHM9SZ_PBTZqozQ8fKlIDHry-cBnAxWYeYpSw" type="text/javascript"></script> 
+<script type="text/javascript" src="js/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js"></script>
 <script type="text/javascript">
 //<![CDATA[
 var map;
@@ -96,6 +148,41 @@ function load() {
 </script>	
 </head>
 <body onload="load()" onunload="GUnload()" style="margin: 0; padding: 0;">
-<div id="map" style="width: 800px; height: 500px;"></div>
+
+<div id="addressBox">
+<form>
+<table>
+<tbody>
+	<tr><td>Coordinates:</td><td><input type="text" size=20 id="coords" value=""/></td></tr>
+	<tr><td>Address:</td><td><input type="text" size=20 value=""/></td></tr>
+	<tr><td>Description</td><td><textarea cols="20" rows="2" id="description" name="description"></textarea></td></tr>
+	<tr><td></td><td><input type="submit" value="Add"/></td></tr>
+</tbody>		
+</table>
+</form>
+</div>
+
+<div id="map" ></div>
+<div style="margin-left: 100px; margin-top: 5px;">
+	<div class="button" ><input type="text" id="search" size="50"/></div><div class="button"><a>Search</a></div>
+	<div class="button" style="margin-left: 10px;" onclick="$('#addressBox').toggle()"><a>+ Add a new location</a></div>
+	<div class="button" style="margin-left: 10px;"><a>Print</a></div>
+</div>
+
+<script language="javascript">
+tinyMCE.init({
+	// General options
+	mode : "exact",
+	elements: "description",
+	theme: "simple"
+});
+
+$(document).ready(function(){
+	$("#addressBox").hide();	
+});
+
+</script>
+
+
 </body>
 </html>

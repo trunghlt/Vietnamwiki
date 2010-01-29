@@ -6,7 +6,7 @@
 
 			ed.addCommand('mceLink_url', function() {
 				ed.windowManager.open({
-					file : url + '/dialog.php',
+					file : url + 'dialog.php',
 					width : 420, 
 					height : 400, 
 					inline : 1

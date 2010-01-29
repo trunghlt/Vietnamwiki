@@ -83,12 +83,17 @@ else $reference = '';
 	echo $s;
 	
 	//reference
-	if($reference!='')
-	{
-		echo "<h2 style='color:black; font-size:9pt;'>Reference :</h2>";
-		echo HtmlSpecialChars($reference);
-	} 
-?>
+	if($reference!='')	{
+		$refTokens = preg_split("/\n/", $reference);?>
+		<br/>
+		<span onclick="jQuery('#refList').toggle()" style='cursor: pointer; color:black; font-weight: bold; font-size:9pt;'> <img src="css/images/bg/arrow.jpg"/> Reference</span> 
+		<ul id="refList" class="refList">
+		<?php foreach ($refTokens as $t) { ?>
+			<li><?php echo htmlspecialchars($t)?></li> 
+		<?php } ?>
+		</ul>
+		
+	<?php } ?>
 </div>
 
 <?php 
