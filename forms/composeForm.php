@@ -69,7 +69,7 @@ function submitComposeForm() {
 			composeDialog.dialog("open");		 	
 		 }
 		 break;
-		 case 0:{
+		 case '0':{
 			post_review.dialog('open');
 			window.location = "index2.php";
 		 }
