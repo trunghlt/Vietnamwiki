@@ -24,6 +24,11 @@ class Filter {
 		$n = str_replace("<script",'',$n);
 		$n = str_replace("<?php",'',$n);
 		return $n;
+	}	
+	public static function filterEmail($n) {
+		$str = "/[a-zA-Z0-9._]+\@[a-zA-Z0-9]{2,}\.[a-zA-Z]{2,}/";
+		if(preg_match($str,$n))
+			return $n;
 	}		
 }
 ?>
