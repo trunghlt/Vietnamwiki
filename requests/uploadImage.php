@@ -1,7 +1,7 @@
 <?php 
-include("../core/common.php");
 include("../core/init.php");
 include("../core/classes/Db.php");
+include("../core/common.php");
 
 function filterFtmp($ftmp){
 	return $ftmp;
