@@ -1,127 +1,133 @@
-<!--style="visibility: hidden; display: none;"-->
- <div class="private_popup"     id="private_popup" style="visibility: hidden; display: none;">
-	  <div class="menu_form_header" id="private_popup_drag">
-		  <img class="menu_form_exit"   id="private_popup_exit" src="interface/form_exit.png" />
-		  &nbsp;&nbsp;&nbsp;Personal information
-	  </div>
-	  
-	  <div class="menu_form_body">			
-	  	<div  style="margin:5 5 5 5;">
-			<table>
-			<tbody>
-			<tr>
-				<td>
-					<h1>Avatar</h1>
-					<?php include("avatar.php"); ?>
-					<br/>
-					<a href="#" name="AU_toggle" id="AU_toggle" class="link">(change)</a>
-					<br/> <br/>
-					<div id="avatar_upload">
-						<?php include("upload/index.php"); ?>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<h1>Personal information</h1>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<table>
-					<tbody>
-					<tr>
-						<td style="width: 30%">
-							First name:
-						</td> 
-						<td>
-							<input id="firstname" name="firstname" type="text" value ="<?php echo $user_info["firstname"]?>" />							
-						</td>				
-					</tr>
-					<tr>
-						<td style="width: 30%">
-							Last name:
-						</td> 
-						<td>
-							<input id="lastname" name="lastname" type="text" value ="<?php echo $user_info["familyname"]?>" />
-						</td>				
-					</tr>		
-					<tr>
-						<td style="width: 30%">
-							Date of birth:
-						</td>
-						<td>
-								<select id="DayDOB" name="DayDOB">
-									<?php
-										for ($i = 1; $i <= 31; $i++) {
-											echo '<option value="'.$i.'">'.$i.'</option>';
-										}
-									?>		
-								</select>
-
-							  <select id="MonthDOB" name="MonthDOB">
-								<option value='1'>Jan</option>
-								<option value='2'>Feb</option>
-								<option value='3'>Mar</option>
-								<option value='4'>Apr</option>
-								<option value='5'>May</option>
-								<option value='6'>June</option>
-								<option value='7'>July</option>
-								<option value='8'>Aug</option>
-								<option value='9'>Sep</option>
-								<option value='10'>Oct</option>
-								<option value='11'>Nov</option>
-								<option value='12'>Dec</option>
-							  </select>
-
-							  <select id="YearDOB" name="YearDOB">
-								<?php
-									for ($i = date("Y") - 1; $i >= 1900; $i--) {
-										echo '<option value="'.$i.'">'.$i.'</option>';
-									}
-								?>
-							  </select>
-						</td>
-					</tr>	
-					<tr>
-						<td>
-							Location :
-						</td>
-						<td>
-							<select name="loc" id="loc">
-								<?php
-									$sql = "SELECT *
-											FROM countries";
-									$result = mysql_query($sql) or die(mysql_error());
-									while ($row = mysql_fetch_array($result)) {
-										?>
-										<option value="<?php echo $row["id"]?>"><?php echo $row["country"]?></option>
-										<?php 
-									}
-								?>     
-							</select>						
-						</td>
-					</tr>	
-					</tbody>
-					</table>
-			</td>
-			</tr>
-			<tr>
-				<td align="center">
-					<br/><br/>
-					<input type="submit" value="Update" onclick="ok_click()"/>
-					<input type="submit" value="Cancel" onclick="cancel_click()"/>
-				</td>
-			</tr>
-			</tbody>
-			</table>
+<div class="privateDialog" id="privateDialog" title="Personal information">
+<form id='privateform' name="privateform">
+<input id="user_id" name="user_id" type="hidden" value="<?php echo $user_info['id']?>" />	
+	<div>
+		<h1>Avatar</h1>
+		<?php include("avatar.php"); ?>
+		<br/>
+		<a href="#" name="AU_toggle" id="AU_toggle" class="link">(change)</a>
+		<br/>
+		<div id="avatar_upload">
+			<?php include("upload/index.php"); ?>
 		</div>
-	  </div>
+	</div>
+	<br />
+	<h1>Personal information</h1>
+	<div id='error'></div>
+	<div>
+		Password:
+		<input id="pw" name="pw" type="password" onchange="return change('pw')" />							
+	</div><br />
+	<div>
+		Re_Password:
+		<input id="re_pw" name="re_pw" type="password" onchange="return change('re_pw')"/>							
+	</div><br />
+	<div>
+		Email:
+		<input id="email" name="email" type="text" value ="<?php echo $user_info["email"]?>" onchange="return change('email')"/>							
+	</div><br />
+	<div>
+		First name:
+		<input id="firstname" name="firstname" type="text" value ="<?php echo $user_info["firstName"]?>" />							
+	</div><br />
+	<div>
+		Last name:
+		<input id="lastname" name="lastname" type="text" value ="<?php echo $user_info["lastName"]?>" />
+	</div><br />
+	<div>
+		Date of birth:
+<?php
+	 $day = date("j", $user_info["dob"]);
+	 $month = date("n", $user_info["dob"]);
+	 $year = date("Y", $user_info["dob"]);
+?>
+			<select id="DayDOB" name="DayDOB">
+				<?php
+				for ($i = 1; $i <= 31; $i++) {
+						if($i==$day)
+							echo '<option value="'.$i.'" selected>'.$i.'</option>';
+						else 
+							echo '<option value="'.$i.'">'.$i.'</option>';
+					}
+				?>		
+			</select>
+
+		  <select id="MonthDOB" name="MonthDOB">
+		  <?php
+		  $arr = array('Jan','Feb','Mar','Apr','May','June','Junly','Aug','Sep','Oct','Nov','Dec');
+		  for($i = 1;$i <12; $i++){
+		  	if($i==$month)
+				echo "<option value='".$i."' selected>".$arr[$i-1]."</option>";
+			else
+				echo "<option value='".$i."'>".$arr[$i-1]."</option>";
+		  }
+		?>
+		  </select>
+
+		  <select id="YearDOB" name="YearDOB">
+			<?php
+				for ($i = date("Y") - 1; $i >= 1900; $i--) {
+					if($i == $year)
+						echo '<option value="'.$i.'" selected>'.$i.'</option>';
+					else
+						echo '<option value="'.$i.'">'.$i.'</option>';
+				}
+			?>
+		  </select>
+	</div><br />
+	<div>
+			Location :
+
+			<select name="loc" id="loc">
+				<?php
+					$sql = "SELECT *
+							FROM countries";
+					$result = mysql_query($sql) or die(mysql_error());
+					while ($row = mysql_fetch_array($result)) {
+						if($row["id"] == $user_info['locationCode']){
+						?>
+							<option value="<?php echo $row["id"]?>" selected="selected"><?php echo $row["country"]?></option>
+						<?php 
+						}
+						else{
+							?>
+							<option value="<?php echo $row["id"]?>"><?php echo $row["country"]?></option>
+							<?php
+						}
+					}
+				?>     
+			</select>
+	</div>	
+</form>					
 </div>
 
 <script type="text/javascript">
+jQuery(document).ready(function(){ 
+	private_Dialog = jQuery("#privateDialog").dialog({
+		autoOpen: false,
+		height: 'auto',
+		width: 720,
+		modal: true,
+		resizable:false,
+		overlay: {
+			backgroundColor: '#000',
+			opacity: 0.5
+		},		
+		buttons: {
+			Update: function() {
+				ok_click('privateform');
+				jQuery(this).dialog('close');
+			},
+			Cancel: function() {
+				jQuery(this).dialog('close');
+			}
+		}		
+	});
+var AU_Slide = new Fx.Slide('avatar_upload'); 
+	AU_Slide.hide();
 
-	function page_refresh(s) {
+});
+	function page_refresh() {
 		location.reload(true);		
 	}
 	
@@ -129,31 +135,66 @@
 		popup_disappear("private_popup");
 	}
 
-	function ok_click() {
-		var ftmp 	= document.getElementById("tmp_file_name").value;
-		var fn 		= document.getElementById("firstname").value;
-		var ln 		= document.getElementById("lastname").value;
-		var dd 		= document.getElementById("DayDOB").value;
-		var mm 		= document.getElementById("MonthDOB").value;
-		var yyyy	= document.getElementById("YearDOB").value;
-		var loc		= document.getElementById("loc").value;
-		x_upload_user_info(ftmp, fn, ln, dd, mm, yyyy, loc, page_refresh);
+	function change(dom){
+	
+		if(dom=='re_pw'){
+			if(document.getElementById('pw').value!="")
+			{
+				jQuery.post('/requests/check.php',{vlpw:document.getElementById('pw').value,vlre_pw:document.getElementById('re_pw').value},function(data){
+						if(data!='1'){ 
+							document.getElementById(dom).value = '';
+							document.getElementById('error').innerHTML = data;
+							document.getElementById(dom).focus;
+						}
+						else
+						{
+							document.getElementById('error').innerHTML = "<div style='height:0;'></div>";
+						}					
+				});
+			}	
+			else{
+					document.getElementById('error').innerHTML = 'Please enter password';
+					document.getElementById('re_pw').value = '';
+					document.getElementById('pw').focus;
+			}
+		}
+		else
+		{
+				jQuery.post('/requests/check.php',{value:document.getElementById(dom).value,type:dom},
+							function(data){ 
+								if(data!='1'){ 
+									document.getElementById(dom).value = '';
+									document.getElementById('error').innerHTML = data;
+									document.getElementById(dom).focus;	
+								}
+								else
+								{
+									document.getElementById('error').innerHTML = "<div style='height:0;'></div>";
+								}								
+							});
+		}
+	}
+	function ok_click(dom) {
+
+		jQuery.post('/requests/updateuser.php',jQuery('#'+dom).serialize(),
+					function (data){
+						if(data)
+							alert(data);
+						else
+							page_refresh();
+					});
 	}
 	
 	var AU_Slide = new Fx.Slide('avatar_upload'); 
-	
-	window.addEvent('domready', function(){
-		AU_Slide.hide();
-	});
 					 
 	$('AU_toggle').addEvent('click', function(e){
 		e = new Event(e);
 		if ($('AU_toggle').innerHTML == "(change)") {
-				$('AU_toggle').setHTML("(hide)");
+				$('AU_toggle').innerHTML = "(hide)";
 				AU_Slide.toggle();
 		  }
 		  else {
-				$('AU_toggle').setHTML("(change)");
+				$('AU_toggle').innerHTML = "(change)";
 		  		AU_Slide.hide();
 		  }	
 		  e.stop();

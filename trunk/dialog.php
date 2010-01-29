@@ -1,4 +1,4 @@
-<div id='confirm' title='Review'>Admin will review this post.Thanks</div>
+<div id='confirm' title='Review' >Admin will review this post.Thanks</div>
 <script>
 jQuery(document).ready(function(){ 
 	post_review = jQuery("#confirm").dialog({
