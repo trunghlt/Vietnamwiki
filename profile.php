@@ -1,6 +1,6 @@
 <?php
 include('core/common.php');
-die_to_index();
+if (!isset($_REQUEST["username"])) die_to_index();
 include('core/init.php');
 include('core/classes/Db.php');
 include('core/classes/User.php');
@@ -14,7 +14,6 @@ include('topRibbon.php');
 
 <!--User info-->
 <?php
-	if (!isset($_REQUEST["username"])) die_to_index();
 	$username = htmlspecialchars($_REQUEST["username"], ENT_QUOTES);
 	$sql = "SELECT * 
 			FROM users
@@ -36,15 +35,20 @@ include('topRibbon.php');
 		mysql_query($sql) or die(mysql_error());
 	}
 ?>
-
-<table class="contentTable">
+<style>
+	#contentTable{
+	background-color: white;
+	clear:both;
+	width:1200;
+	margin:auto;
+}
+</style>
+<table id="contentTable" cellpadding="0" cellspacing="0">
 <tbody>
 <tr>
-<td width="20%" valign="top" bgcolor="#e7e6e6" style="margin-left: 5px">
-	<?php if (!check_logged_in(myip())) die_to_index();?>
-
-	<div>
-	<table width="100%">
+<td width="20%" valign="top" bgcolor="#e7e6e6" >
+	
+	<table>
 	<tbody>
 	<tr>
 		<td colspan=2 align="center">
@@ -59,7 +63,7 @@ include('topRibbon.php');
 		<span class="style2">Full Name :</span> 
 		</td>
 		<td>
-		<span class="style3"><?php echo $user_info["firstname"] . " " . $user_info["familyname"];?></span>
+		<span class="style3"><?php echo $user_info["firstName"] . " " . $user_info["lastName"];?></span>
 		</td>
 	</tr>
 	<!--DOB-->
@@ -82,7 +86,7 @@ include('topRibbon.php');
 		<span class="style2">Location : </span>
 		</td>
 		<td>
-		<span class="style3"><?php echo $user_info["location"];?></span>
+		<span class="style3"><?php echo $user_info["locationCode"];?></span>
 		</td>
 	</tr>
 	<!--Member from-->
@@ -93,7 +97,7 @@ include('topRibbon.php');
 		<td>
 		<span class="style1">
 		<?php 
-			$timelabel = date("d M, Y", $user_info["regdate"]);
+			$timelabel = date("d M, Y", $user_info["regDateTime"]);
 			echo $timelabel;			
 		?>
 		</span>
@@ -101,7 +105,9 @@ include('topRibbon.php');
 	</tr>	
 	</tbody>
 	</table>
+	<?php if (check_logged_in(myip()) && $username==myUsername(myip())) {?>
 		<p><button onclick="update_click()">Update</button></p>
+		<?php }?>
 	</div>
 </td>
 	<td>
@@ -142,10 +148,18 @@ include('topRibbon.php');
 				$re = mysql_query($sql) or die(mysql_error());
 				$dest = mysql_fetch_array($re);
 				$dest_name = $dest["EngName"];
-				?> 
+					?> 
 				<div class='comment'>
 				<a href="viewtopic.php?id=<?php echo $row["post_id"]?>" class="link" style="margin-left: 5px"><?php echo $title?></a>,
 				<b><span style="color: gray"><?php echo $dest_name;?></span></b>
+				<?php
+				echo "<span id=".$row["post_id"].">";
+					if($row['follow']==1)
+						echo "<a onclick='changevalue($row[follow],$row[post_id])'class='link'>Follow</a>";
+					else
+						echo "<a onclick='changevalue($row[follow],$row[post_id])' class='link'>Not Follow</a>";
+				?>
+				</span>
 				<br/>
 				</div>
 				<?php
@@ -190,7 +204,7 @@ include('topRibbon.php');
 					$x = mysql_fetch_array($r1);
 					$posttime = $row['comment_time'];
 					$timelabel = date("d M, Y H:i", $posttime);
-					echo "<span class='style4'>posted by " . $x["firstname"] . " " . $x["familyname"] ." at " . $timelabel . "</span>";
+					echo "<span class='style4'>posted by " . $x["firstName"] . " " . $x["lastName"] ." at " . $timelabel . "</span>";
 					
 					echo "</div>";				
 				}
@@ -238,7 +252,7 @@ include('topRibbon.php');
 				$x = mysql_fetch_array($r1);				
 				$posttime = $row['post_time'];
 				$timelabel = date("d M, Y H:i", $posttime);
-				echo "<span class='style4'>posted by " . $x["firstname"] . " " . $x["familyname"] ." at " . $timelabel . "</span>";
+				echo "<span class='style4'>posted by " . $x["firstName"] . " " . $x["lastName"] ." at " . $timelabel . "</span>";
 				echo "</div>";
 			}
 			
@@ -246,7 +260,7 @@ include('topRibbon.php');
 			echo "<br/><br/>";				
 			if (check_logged_in(myip())) {
 				?>
-				<span class="style1">Posting new messages for <?php echo $user_info["firstname"] ?></span>
+				<span class="style1">Posting new messages for <?php echo $user_info["firstName"] ?></span>
 				<div style="border: 1px solid black; background-color:#FFFF66" >
 				<form  id="message" method="post" action="profile.php?username=<?php echo $username;?>">
 					<textarea name="message" id="message" rows="3" style="width: 98%"></textarea>					
@@ -265,16 +279,25 @@ include('topRibbon.php');
 </table>
 
 <?php
+include("private_form.php");
 include("footer.php");
 ?>
-
-<?php
-	include("private_form.php");
-?>
-
 <script type="text/javascript">
 	function update_click() {
-		popup_show('private_popup', 'private_popup_drag', 'private_popup_exit', 'long-form', 10, 10);
+		private_Dialog.dialog('open');
+	}
+	function changevalue(value,postid){
+		jQuery.post('requests/changevalue.php',{vl:value,id:postid},function(data){
+			if(data=='0'){
+				document.getElementById(postid).innerHTML = "<a onclick='changevalue(0,"+postid+")' class='link'>Not Follow</a>";
+			}
+			else if(data=='1')
+			{
+				document.getElementById(postid).innerHTML = "<a onclick='changevalue(1,"+postid+")' class='link'>Follow</a>";
+			}
+			else
+				alert(data);
+		});
 	}
 </script>
 

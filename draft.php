@@ -182,8 +182,16 @@ function submitLogin(dom) {
 					alert("This user has been banned");
 				else
 				{
-					loadToolbar("toolbar");
-					loadDraftRibbon(<?php echo $editionId?>, "ribbon");
+					if(response != '' && response != 'success'){
+						loadToolbar("toolbar");
+						loadDraftRibbon(<?php echo $editionId?>, "ribbon");
+						document.getElementById('id_user').value = response;
+						Fill_EmailDialog.dialog('open');
+					}
+					else if(response == 'success'){
+						loadToolbar("toolbar");
+						loadDraftRibbon(<?php echo $editionId?>, "ribbon");					
+					}
 				}
 	});
 }
@@ -197,7 +205,6 @@ function submitRestoreDraft(){
 				"html");
 }
 function editClick() {
-
 	editDialog.dialog('open');
 }
 </script>
@@ -209,5 +216,6 @@ include("forms/editForm.php");
 include("forms/commentForm.php");
 include("forms/comment_login.php");
 include("forms/deleteConfirmForm.php");
+include("forms/register_email.php");
 include("footer.php");
 ?>
