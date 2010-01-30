@@ -1,7 +1,7 @@
 <?php            
 require_once("core/common.php");
 require_once("core/init.php");
-require_once("core/classes/db.php");
+require_once("core/classes/Db.php");
 require_once("core/classes/DestinationElement.php");
 
 $mapIcons = array();
