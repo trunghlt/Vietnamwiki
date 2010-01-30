@@ -132,10 +132,11 @@ class Edition {
 	
 		
 	//Restore a draft
-	public function restore() {		
+	public function restore($type='') {		
 		//Update posts_texts	
 		$mysql["postContent"] = mysql_real_escape_string($this->postContent);
 		$mysql["reference"] = mysql_real_escape_string($this->reference);
+		if($type==''){
 		mysql_query("UPDATE posts_texts
 					SET post_subject = '{$this->postTitle}',
 						post_summary = '{$this->postSummary}',
@@ -147,7 +148,24 @@ class Edition {
 		
 		//Delete all later editions
 		mysql_query("DELETE FROM editions
-					WHERE (post_id = {$this->postId}) AND (edit_date_time > {$this->editDateTime})") or die(mysql_error());
+					WHERE (post_id = {$this->postId}) AND (edit_date_time > {$this->editDateTime}) AND checked=1") or die(mysql_error());
+		}
+		else if($type==2){
+		mysql_query("UPDATE posts_texts
+					SET post_subject = '{$this->postTitle}',
+						post_summary = '{$this->postSummary}',
+						post_text = '{$mysql["postContent"]}',
+						post_small_img_url = '{$this->postSmallImgURL}',
+						post_big_img_url = '{$this->postBigImgURL}',
+						reference = '".$mysql["reference"]."'
+					WHERE post_id = {$this->postId}") or die(mysql_error());
+
+		mysql_query("UPDATE editions
+					SET checked = 1
+					WHERE id = {$this->id}") or die(mysql_error());
+		}
+	
+	
 	}
 	
 	//edit
