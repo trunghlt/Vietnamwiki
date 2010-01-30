@@ -51,8 +51,12 @@ While ($row = mysql_fetch_array($result)) {
 					$indexItemClass = ($photo==0 && $r["id"] == $index_id)? "activeIndex" : "linksmall";
 					?>
 					<li class="indexItem">
-						<a id="indexLink<?php echo $r["id"]?>" class="<?php echo $indexItemClass?>" href="<?php echo getIndexPermalink($r["id"])?>">
-						<?php echo $r["name"];?>
+						<?php if ($r["name"] == "Map") { ?>
+							<a class="<?php echo $indexItemClass?> iframe" href="map.php?id=<?php echo $destId?>">Map</a>
+						<?php } else {?>
+							<a id="indexLink<?php echo $r["id"]?>" class="<?php echo $indexItemClass?>" href="<?php echo getIndexPermalink($r["id"])?>">
+							<?php echo $r["name"];?>
+						<?php } ?>
 						</a>
 					</li>
 			<?php }	
@@ -84,7 +88,5 @@ While ($row = mysql_fetch_array($result)) {
 	<?php
 }
 ?>
-
-
 </tbody>
 </table>

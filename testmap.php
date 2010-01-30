@@ -9,7 +9,7 @@
 </head>
 
 <body>
-<a class="iframe" href="map.php">This goes to iframe</a>
+<a class="iframe" href="map.php?id=10">This goes to iframe</a>
 
 <script language="javascript">
 $(document).ready(function() {
