@@ -4,6 +4,9 @@ class DestinationElement {
 	public $engName;
 	public $vnName;
 	public $forecaCode;
+	public $lat;
+	public $long;
+	public $zoomlevel; 
 
 	public function query($id) {
 		$this->id = $id;
@@ -19,6 +22,21 @@ class DestinationElement {
 		$this->engName = $r["EngName"];
 		$this->vnName = $r["VnName"];
 		$this->forecaCode = $r["forecaCode"];
+		$this->lat = $r["lat"];
+		$this->long = $r["long"];
+		$this->zoomlevel = $r["zoomlevel"];
+	}
+	
+	public function setMapDetail($lat, $long, $zoomlevel) {
+		$clean["lat"] = htmlspecialchars($lat, ENT_QUOTES);
+		$clean["long"] = htmlspecialchars($long, ENT_QUOTES);
+		$clean["zoomlevel"] = htmlspecialchars($zoomlevel, ENT_QUOTES);
+		$q = new Db;
+		$q->query(" UPDATE `destinations`
+					SET `lat`=".$clean["lat"].",
+						`long`=".$clean["long"].",
+						`zoomlevel`=".$clean["zoomlevel"]."
+					WHERE id=".$this->id);
 	}
 }
 ?>
