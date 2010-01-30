@@ -1,8 +1,8 @@
 <?php            
-require_once("/core/common.php");
-require_once("/core/init.php");
-require_once("/core/classes/db.php");
-require_once("/core/classes/DestinationElement.php");
+require_once("core/common.php");
+require_once("core/init.php");
+require_once("core/classes/db.php");
+require_once("core/classes/DestinationElement.php");
 
 $mapIcons = array();
 $mapDir = "/images/gmap/icons/";
