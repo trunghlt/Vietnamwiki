@@ -119,7 +119,7 @@
 
 	<div class="editorInfo">
 	Editted by
-	<a class='link' href='profile.php?username=<?php echo $a["username"]?>'">
+	<a class='link' href='profile.php?username=<?php echo $a["username"]?>'>
 		<?php if (isset($a["avatar"])) {
 			$ava = "images/avatars/tiny/" . $a["avatar"];		
 			?>
@@ -133,7 +133,7 @@
 	<br/><br/><br/>
 
 </div><!--contentTable-->
-
+<input type="hidden" id='type' name="type" />
 <div id="restoreConfirmDialog" title="Alert">
 	Restoring this draft will make all later drafts deleted. Are you sure you still want to restore this draft ?
 </div>
@@ -163,8 +163,9 @@ jQuery(document).ready(function(){
 	});
 });
 
-function restoreDraft() {
+function restoreDraft(c_type) {
 	restoreConfirmDialog.dialog("open");
+	document.getElementById('type').value = c_type;
 }
 
 function signOut() {
@@ -198,7 +199,7 @@ function submitLogin(dom) {
 
 function submitRestoreDraft(){
 	jQuery.post("/requests/restoreDraft.php", 
-				{editionId: <?php echo $editionId?>},
+				{editionId: <?php echo $editionId?>,type:document.getElementById('type').value},
 				function(response) {
 					window.location = "<?php echo getPostPermaLink($currentEdition->postId)?>";
 				}, 
