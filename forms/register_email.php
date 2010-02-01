@@ -1,6 +1,8 @@
-<div id="FillEmailDialog" title="Fill Email">
+<div id="FillEmailDialog" title="Add email">
 	<form id = "FillEmail">
-		Email :
+		<p>In order for us to notify you about changes in topics which you have created or editted, please register your Email address with the system.<br/>
+		 (<span style="color: red">Note:</span>We loathe spams, hence, we will never spam)</p>
+		<label for="email">Email: </label>
 		<input class="field" name="email" id="email" type="text" style="width:130px" /><br />
 		<input class="field" name="id_user" id="id_user" type="hidden" />
 	</form>
@@ -10,7 +12,7 @@ jQuery(document).ready(function(){
 	Fill_EmailDialog = jQuery("#FillEmailDialog").dialog({
 		autoOpen: false,
 		height: 'auto',
-		width: 200,
+		width: 400,
 		modal: true,
 		resizable:false,
 		overlay: {
