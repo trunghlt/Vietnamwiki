@@ -68,7 +68,7 @@ class Review {
 	}	
 	
 	public function add() {
-		$mysql["reviewText"] = mysql_real_escape_string($this->reviewText);
+		$mysql["reviewText"] = htmlspecialchars($this->reviewText, ENT_QUOTES);
 		Db::sQuery("INSERT INTO reviews
 					(user_id, post_id, rate_value, review_text, review_date_time)
 					VALUES ({$this->userId}, {$this->postId}, {$this->rateValue}, '{$mysql["reviewText"]}', {$this->reviewDateTime})");		
@@ -76,7 +76,7 @@ class Review {
 	}
 	
 	public function save() {
-		$mysql["reviewText"] = mysql_real_escape_string($this->reviewText);
+		$mysql["reviewText"] = htmlspecialchars($this->reviewText, ENT_QUOTES);
 		Db::sQuery("UPDATE reviews
 					SET user_id = {$this->userId},
 						post_id = {$this->posstId},
