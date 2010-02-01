@@ -1,6 +1,6 @@
 <div id="FillEmailDialog" title="Add email">
 	<form id = "FillEmail">
-		<p>In order for us to notify you about changes in topics which you have created or editted, please register your Email address with the system.<br/>
+		<p>In order for us to notify you of changes in topics which you have created or editted, please register your Email address with the system.<br/>
 		 (<span style="color: red">Note:</span>We loathe spams, hence, we will never spam)</p>
 		<label for="email">Email: </label>
 		<input class="field" name="email" id="email" type="text" style="width:130px" /><br />
