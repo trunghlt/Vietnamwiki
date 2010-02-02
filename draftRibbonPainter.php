@@ -22,12 +22,12 @@ if (logged_in() || chkFbLoggedIn()) {
 	<?php
 			echo "|<a class='link' onClick='deleteConfirmDialog.dialog(\"open\")'> Delete </a>";
 		}
-		if ($currentUser->level == 1 || ($r['property_value'] == 1 && $row['checked']==1 && $row['user_id']==myUser_id(myip()))) {
+		if ($currentUser->level == 1 && $row['checked']==1) {
 ?>
 		| <a class='link' onClick="restoreDraft('1')">Restore this draft</a>
 <?php
 		}
-		else if ($currentUser->level == 1 || ($r['property_value'] == 1 && $row['checked']==0 && $row['user_id']==myUser_id(myip()))){
+		else if ($currentUser->level == 1 && $row['checked']==0){
 ?>
 		| <a class='link' onClick="restoreDraft('2')">Accept this draft</a>	
 <?php		
