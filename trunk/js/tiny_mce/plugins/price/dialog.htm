@@ -1,0 +1,23 @@
+<html>
+<head>
+	<title>Add Price</title>
+	<script type="text/javascript" src="../../tiny_mce_popup.js"></script>
+	<script type="text/javascript" src="js/price.js"></script>
+</head>
+<body>
+<form onSubmit="PriceDialog.insert(); return false;" action="#">
+<select name='price' id='price'>
+<option value="1"> (< $10) </option>
+<option value="2"> ($10-$50)</option>
+<option value="3">($50-100$)</option>
+<option value="4">($100-$200)</option>
+<option value="5">($200-$500)</option>
+<option value="6"> ($500-$1000)</option>
+</select>
+<br />
+<br />
+<input type="submit" id="insert" name="insert" value="Insert"/>
+<input type="button" id="cancel" name="cancel" value="Cancel" onClick="tinyMCEPopup.close();" />
+</form>
+</body>
+</html>
