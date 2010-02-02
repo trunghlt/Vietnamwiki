@@ -1,8 +1,6 @@
-<div id="FillEmailDialog" title="Add email">
+<div id="FillEmailDialog" title="Fill Email">
 	<form id = "FillEmail">
-		<p>In order for us to notify you of changes in topics which you have created or editted, please register your Email address with the system.<br/>
-		 (<span style="color: red">Note:</span>We loathe spams, hence, we will never spam)</p>
-		<label for="email">Email: </label>
+		Email :
 		<input class="field" name="email" id="email" type="text" style="width:130px" /><br />
 		<input class="field" name="id_user" id="id_user" type="hidden" />
 	</form>
@@ -12,7 +10,7 @@ jQuery(document).ready(function(){
 	Fill_EmailDialog = jQuery("#FillEmailDialog").dialog({
 		autoOpen: false,
 		height: 'auto',
-		width: 400,
+		width: 200,
 		modal: true,
 		resizable:false,
 		overlay: {
@@ -22,7 +20,6 @@ jQuery(document).ready(function(){
 		buttons: {
 			Fill: function() {
 				submitEmail('FillEmail');
-				jQuery(this).dialog('close');
 			},
 			Cancel: function() {
 				jQuery(this).dialog('close');
@@ -34,7 +31,14 @@ jQuery(document).ready(function(){
 function submitEmail(dom){
 	jQuery.post('../requests/update_email.php',jQuery("#"+dom).serialize(),
 					function(data){
-						if(data != 'null')alert(data);
+						if(data == 'ok')
+						{
+							alert('Add Email Success');
+							Fill_EmailDialog.dialog('close');
+						}
+						else if(data != 'null'){
+							alert(data);
+						}
 				});
 }
 </script>
