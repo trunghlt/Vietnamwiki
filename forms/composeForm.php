@@ -65,17 +65,20 @@ function submitComposeForm() {
 	submitPostRequest.addEvent('onComplete', function(response) {
 		switch(response){
 		 case 'null':{
-			alert('Please insert Title, Summary, and content');
-			composeDialog.dialog("open");		 	
+				alert('Please insert Title, Summary, and content');
 		 }
 		 break;
 		 case '0':{
+		 	composeDialog.dialog('close');
 			post_review.dialog('open');
 			window.location = "index2.php";
 		 }
 		 break;
 		 default:
+		 {
 			window.location = "viewtopic.php?id=" + response;
+			composeDialog.dialog('close');
+		 }
 		}
 	});
 }
@@ -93,7 +96,6 @@ jQuery(document).ready(function(){
 		buttons: {
 			'Submit': function() {
 				submitComposeForm();
-				jQuery(this).dialog('close');
 			},
 			Cancel: function() {
 				jQuery(this).dialog('close');
