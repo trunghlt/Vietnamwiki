@@ -391,15 +391,15 @@ function cen(a ,b) {
 		</div>
 		</td>
 	<td width="263">
-		<p align="right" class="style4"> <span class="style6"><a href="index2.php" style="color:#00FFFF">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
-		<p align="right" class="style4 style6"> <a href="index2.php?index_id=39" style="color:#00FFFF">Passport & Visa&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-		<p align="right" class="style4 style6"><a href="index2.php?index_id=58" style="color:#00FFFF">Traddition &amp; Culture</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-		<p align="right" class="style4 style6"><a href="index2.php?index_id=116" style="color:#00FFFF">Travel information</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-		<p align="right" class="style4 style6"><a href="index2.php?index_id=123" style="color:#00FFFF">Food&nbsp;</a>&nbsp;&nbsp;&nbsp;</p>
-		<p align="right" class="style4 style6"><a href="index2.php?index_id=59" style="color:#00FFFF">Currency</a>&nbsp;&nbsp;&nbsp;</p>
-		<p align="right" class="style4 style6"><a href="index2.php?index_id=61" style="color:#00FFFF">Climate&nbsp;</a>&nbsp;&nbsp;</p>
-		<p align="right" class="style4 style6"><a href="index2.php?index_id=60" style="color:#00FFFF">Holiday</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-		<p align="right" class="style4 style6"><a href="index2.php?index_id=43" style="color:#00FFFF">History&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+		<p align="right" class="style4"> <span class="style6"><a href="/Vietnam_general-General-Vietnam-P32" style="color:#00FFFF">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+		<p align="right" class="style4 style6"> <a href="/Vietnam_general-Passport__Visa-I39" style="color:#00FFFF">Passport & Visa&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+		<p align="right" class="style4 style6"><a href="/Vietnam_general-Tradition__culture-I58" style="color:#00FFFF">Traddition &amp; Culture</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+		<p align="right" class="style4 style6"><a href="/Vietnam_general-Travel_information-I116" style="color:#00FFFF">Travel information</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+		<p align="right" class="style4 style6"><a href="/Vietnam_general-Food-I123" style="color:#00FFFF">Food&nbsp;</a>&nbsp;&nbsp;&nbsp;</p>
+		<p align="right" class="style4 style6"><a href="/Vietnam_general-Currency-I59" style="color:#00FFFF">Currency</a>&nbsp;&nbsp;&nbsp;</p>
+		<p align="right" class="style4 style6"><a href="/Vietnam_general-Climate-I61" style="color:#00FFFF">Climate&nbsp;</a>&nbsp;&nbsp;</p>
+		<p align="right" class="style4 style6"><a href="/Vietnam_general-Holiday-I60" style="color:#00FFFF">Holiday</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+		<p align="right" class="style4 style6"><a href="/Vietnam_general-History-I43" style="color:#00FFFF">History&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 		<p align="right" class="style4"><span class="style6"><a href="photo.php?dest_id=3&amp;page=1" style="color:#00FFFF">Photos</a>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></td>
 	</tr>
 	<tr>
