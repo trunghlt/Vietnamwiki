@@ -59,24 +59,20 @@ Ho Chi Minh, Mekong delta, Phu Quoc">
 content = "<?php echo getSummary()?>">
 
 <meta name="verify-v1" content="IyUL1eYMgjAMGDWrAeniu500lWWLUCONXP+II/s3I2s=" />
-    
-<script type="text/javascript" src="/js/mootools-1.2.3-core-yc.js"></script>
+ <script type="text/javascript" src="/js/mootools-1.2.3-core-yc.js"></script>
 <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js"></script>
 <script type="text/javascript" src="/js/integrated.js"></script>
-<script type="text/javascript" src="js/jquery/fancybox/jquery.fancybox-1.2.6.pack.js"></script>
 <script>
 	jQuery.noConflict();
 </script>
 
-<link rel="stylesheet" href="js/jquery/fancybox/jquery.fancybox-1.2.6.css" type="text/css" media="screen"/>
+<!-- Google Translate -->
+<script src="http://www.google.com/jsapi?key=ABQIAAAAV1hMY6P-vcrStESIcmxsyBQlNdnj7jTOpTnl4Nkq2CnWa36LSRSzhRIQvUz3LkcE_A5gHk7QVRq4gw"></script>									 
+<script type="text/javascript">
+	google.load("language", "1");
+</script>
+
 <link rel="stylesheet" type="text/css" href="/css/integrated.css" />
-</head>
-
-<!--  BODY -->
-<body bgcolor="#D8D8D8">
-
-<?php echo render_fbconnect_init_js();?>
-
 <script language="javascript">
 var mySlide = new Array();
 var composeDialog, editDialog, loginDialog, invalidLoginDialog, 
@@ -84,11 +80,12 @@ var composeDialog, editDialog, loginDialog, invalidLoginDialog,
 	restoreConfirmDialog, reviewDialog, mustRateAlert, reviewLowerBound;
 var currentDestItem, currentIndexItem, currentMySlide, commentSlide;
 var URL = "http://www.vietnamwiki.net";
-<?php if ($onload_js) { echo $onload_js; } ?>
-jQuery(document).ready(function(){
-	jQuery("a.iframe").fancybox({
-		'frameWidth': 	800,
-		'frameHeight': 	530
-	});	
-});
 </script>
+</head>
+ <body bgcolor="#D8D8D8">
+<?php echo render_fbconnect_init_js();?>
+<?php if ($onload_js) { ?>
+	<script type="text/javascript">
+		<?php echo $onload_js ;?>
+	</script>
+<?php } ?>
