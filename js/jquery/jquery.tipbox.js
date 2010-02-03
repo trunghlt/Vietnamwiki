@@ -8,9 +8,9 @@
 
 jQuery.fn.tipbox = function(content, allowHtml, className){
 	jQuery.fn.tipbox.created.id = "tipBox";
-	$("body").append(jQuery.fn.tipbox.created);
+	jQuery("body").append(jQuery.fn.tipbox.created);
 	//set some properties for the tipBox division
-	var tipBox = $(jQuery.fn.tipbox.created);
+	var tipBox = jQuery(jQuery.fn.tipbox.created);
 	tipBox.css({"position":"absolute","display":"none"});
 
 	//functions
@@ -23,7 +23,7 @@ jQuery.fn.tipbox = function(content, allowHtml, className){
 
 	//events for each element
 	this.each(function(){
-		$(this).mousemove(function(e){
+		jQuery(this).mousemove(function(e){
 			tipBoxShow(e);
 			//update the content
 			if(allowHtml)
@@ -35,7 +35,7 @@ jQuery.fn.tipbox = function(content, allowHtml, className){
 			//set class if specified
 			if(className) tipBox.addClass(className);
 		});
-		$(this).mouseout(function(){
+		jQuery(this).mouseout(function(){
 			tipBoxHide();
 		});
 	});	
