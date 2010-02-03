@@ -59,34 +59,24 @@ Ho Chi Minh, Mekong delta, Phu Quoc">
 content = "<?php echo getSummary()?>">
 
 <meta name="verify-v1" content="IyUL1eYMgjAMGDWrAeniu500lWWLUCONXP+II/s3I2s=" />
- <script type="text/javascript" src="/js/mootools-1.2.3-core-yc.js"></script>
+    
+<script type="text/javascript" src="/js/mootools-1.2.3-core-yc.js"></script>
 <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js"></script>
 <script type="text/javascript" src="/js/integrated.js"></script>
 <script type="text/javascript" src="js/jquery/fancybox/jquery.fancybox-1.2.6.pack.js"></script>
-<script type="text/javascript" src="js/jquery/jquery.tipbox.js"></script>
 <script>
 	jQuery.noConflict();
 </script>
- <script >
-jQuery(document).ready(function(){
-	jQuery("img.price1").tipbox("(<$10)");
-	jQuery("img.price2").tipbox("($10-$50)");
-	jQuery("img.price3").tipbox("($50-100$)");
-	jQuery("img.price4").tipbox("($100-$200)");
-	jQuery("img.price5").tipbox("($200-$500)");
-	jQuery("img.price6").tipbox("($500-$1000)");
-});
-</script>
-<!-- Google Translate -->
-<script src="http://www.google.com/jsapi?key=ABQIAAAAV1hMY6P-vcrStESIcmxsyBQlNdnj7jTOpTnl4Nkq2CnWa36LSRSzhRIQvUz3LkcE_A5gHk7QVRq4gw"></script>									 
-<script type="text/javascript">
-	google.load("language", "1");
-</script>
+
+<link rel="stylesheet" href="js/jquery/fancybox/jquery.fancybox-1.2.6.css" type="text/css" media="screen"/>
 <link rel="stylesheet" type="text/css" href="/css/integrated.css" />
 </head>
 
+<!--  BODY -->
 <body bgcolor="#D8D8D8">
+
 <?php echo render_fbconnect_init_js();?>
+
 <script language="javascript">
 var mySlide = new Array();
 var composeDialog, editDialog, loginDialog, invalidLoginDialog, 
