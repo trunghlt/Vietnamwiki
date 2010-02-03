@@ -62,10 +62,20 @@ content = "<?php echo getSummary()?>">
  <script type="text/javascript" src="/js/mootools-1.2.3-core-yc.js"></script>
 <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js"></script>
 <script type="text/javascript" src="/js/integrated.js"></script>
+<script type="text/javascript" src="js/jquery/jquery.tipbox.js"></script>
 <script>
 	jQuery.noConflict();
 </script>
-
+ <script >
+jQuery(document).ready(function(){
+	jQuery("img.price1").tipbox("(<$10)");
+	jQuery("img.price2").tipbox("($10-$50)");
+	jQuery("img.price3").tipbox("($50-100$)");
+	jQuery("img.price4").tipbox("($100-$200)");
+	jQuery("img.price5").tipbox("($200-$500)");
+	jQuery("img.price6").tipbox("($500-$1000)");
+});
+</script>
 <!-- Google Translate -->
 <script src="http://www.google.com/jsapi?key=ABQIAAAAV1hMY6P-vcrStESIcmxsyBQlNdnj7jTOpTnl4Nkq2CnWa36LSRSzhRIQvUz3LkcE_A5gHk7QVRq4gw"></script>									 
 <script type="text/javascript">
