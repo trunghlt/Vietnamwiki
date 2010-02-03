@@ -7,8 +7,8 @@
 			ed.addCommand('mcePrice', function() {
 				ed.windowManager.open({
 					file : url + '/dialog.htm',
-					width : 200, 
-					height : 100, 
+					width : 200 + parseInt(ed.getLang('price.delta_width', 0)), 
+					height : 100 + parseInt(ed.getLang('price.delta_height', 0)), 
 					inline : 1
 				}, {
 					plugin_url : url, // Plugin absolute URL
@@ -17,8 +17,8 @@
 
 		ed.addButton('price', {
 				title : 'price',
-				cmd : 'mcePrice',
-				image : url + '/img/dollar1.gif'
+				cmd : 'mcePrice_desc',
+				image : url + '/img/dollar.png'
 			});
 		
 		ed.onNodeChange.add(function(ed, cm ,n) {
