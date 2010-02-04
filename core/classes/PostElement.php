@@ -198,18 +198,5 @@ class PostElement {
 		}
 	}
 	
-	function update_follow($value,$where){
-		$q = new db;
-		if(is_array($where))
-		{
-			foreach($where as $key=>$value)
-				$s[] = "$key = $value";
-				$where = implode(' and ',$s);
-				$where = "where $where";
-		} 
-		else
-			$where = "where $where";
-		$q->query("update posts set follow=$value $where");
-	}
 }
 ?>
