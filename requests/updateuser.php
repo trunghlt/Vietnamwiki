@@ -70,12 +70,12 @@ function update_user($id,$pw,$email,$fn,$ln,$dd,$mm,$yyyy,$country,$ftmp){
 		return;
 	}
 		
-	$sql = "SELECT avatar
+	$sql = "SELECT avatar, username
 			FROM users
 			WHERE id='".$id."'";
 	$q->query($sql);
-	$row = mysql_fetch_array($q->re);
-	if($row['avatar']!=$ftmp || $row['avatar']!=NULL || $row['avatar']!='')
+	$row1 = mysql_fetch_array($q->re);
+	if($row1['avatar']!=$ftmp || $row1['avatar']!=NULL || $row1['avatar']!='')
 	{	
 		$pftmp = "../upload/upload/". $ftmp;
 		$handle = new Upload($pftmp);
@@ -151,5 +151,6 @@ else{
 					WHERE id='".$id."'";
 			$q->query($sql);	
 }
+echo $row1['username'];
 }
 ?>
