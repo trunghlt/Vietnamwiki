@@ -56,7 +56,7 @@ include("../core/classes/Db.php");
 		 echo '1';
 		 return;
 	}
-	
+
 	update_user($id,$pw,$email,$first,$last,$dob,$mob,$yob,$loc,$tmp);
 
 function update_user($id,$pw,$email,$fn,$ln,$dd,$mm,$yyyy,$country,$ftmp){	
@@ -75,7 +75,7 @@ function update_user($id,$pw,$email,$fn,$ln,$dd,$mm,$yyyy,$country,$ftmp){
 			WHERE id='".$id."'";
 	$q->query($sql);
 	$row = mysql_fetch_array($q->re);
-	if($row['avatar']!=$ftmp)
+	if($row['avatar']!=$ftmp || $row['avatar']!=NULL || $row['avatar']!='')
 	{	
 		$pftmp = "../upload/upload/". $ftmp;
 		$handle = new Upload($pftmp);
