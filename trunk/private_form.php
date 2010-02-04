@@ -116,7 +116,6 @@ jQuery(document).ready(function(){
 		buttons: {
 			Update: function() {
 				ok_click('privateform');
-				jQuery(this).dialog('close');
 			},
 			Cancel: function() {
 				jQuery(this).dialog('close');
@@ -127,8 +126,8 @@ var AU_Slide = new Fx.Slide('avatar_upload');
 	AU_Slide.hide();
 
 });
-	function page_refresh() {
-		location.reload(true);		
+	function page_refresh(user) {
+		window.location.replace("profile.php?username="+user);	
 	}
 	
 	function cancel_click() {
@@ -178,10 +177,13 @@ var AU_Slide = new Fx.Slide('avatar_upload');
 
 		jQuery.post('/requests/updateuser.php',jQuery('#'+dom).serialize(),
 					function (data){
-						if(data)
-							alert(data);
+						if(data && data=='1')
+							alert('Update your infomation fail');
 						else
-							page_refresh();
+						{
+							private_Dialog.dialog('close');
+							page_refresh(data);
+						}
 					});
 	}
 	
