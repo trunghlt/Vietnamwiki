@@ -75,6 +75,8 @@ function update_user($id,$pw,$email,$fn,$ln,$dd,$mm,$yyyy,$country,$ftmp){
 			WHERE id='".$id."'";
 	$q->query($sql);
 	$row = mysql_fetch_array($q->re);
+	echo $ftmp;
+	return;
 	if($row['avatar']!=$ftmp)
 	{	
 		$pftmp = "../upload/upload/". $ftmp;
