@@ -1,9 +1,24 @@
 <h1>Search result:</h1>
-<?php      
+<?php
+function get_value_in_text(){
+	return $arr = file('file.txt');
+}
+function change_value($v){
+		return str_replace(" ",'',strtolower($v));
+}      
       $st = $_REQUEST["search_text"];
       if (isset($st)) {
       
 		$st = htmlspecialchars($st, ENT_QUOTES);
+		
+		$str = change_value($st);
+		$row_value = get_value_in_text();
+		foreach($row_value as $value){
+			if(trim(change_value($value)) === trim($str))
+			{
+				$st = trim($value);
+			}
+		}
             
 		$dest_id = isset($_REQUEST["id"])? htmlspecialchars($_REQUEST["id"], ENT_QUOTES) : 1;
 		
@@ -144,3 +159,4 @@
 		}
             		
  }
+ ?>
