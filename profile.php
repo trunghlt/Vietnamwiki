@@ -152,12 +152,61 @@ include('topRibbon.php');
 				<div class='comment'>
 				<a href="viewtopic.php?id=<?php echo $row["post_id"]?>" class="link" style="margin-left: 5px"><?php echo $title?></a>,
 				<b><span style="color: gray"><?php echo $dest_name;?></span></b>
+				<br/>
+				</div>
 				<?php
-				echo "<span id=".$row["post_id"].">";
+			}
+			echo "</div>";
+		?>
+	</tr>
+	<!--Follow post-->
+	<tr>
+		<h1>Follow's posts</h1>
+		<?php
+			$sql = "SELECT *
+					FROM follow
+					WHERE username = '".$username."'";
+			$result = mysql_query($sql) or die(mysql_error());
+			echo "<div class='comment_block'>";					
+			
+			$numrow = mysql_num_rows($result);
+			if ($numrow == 0) {
+				echo "You haven't posted any topics yet";
+			}
+						
+			while ($row = mysql_fetch_array($result)) {
+				$sql = "SELECT post_subject, index_id
+						FROM editions
+						WHERE post_id = '".$row["post_id"]."' and checked=1";
+				$re = mysql_query($sql) or die(mysql_error());
+				$post = mysql_fetch_array($re);
+				$title = $post["post_subject"];
+				
+				if($post["index_id"] != NULL){
+					$sql = "SELECT *
+							FROM index_menu
+							WHERE id = '".$post["index_id"]."'";
+					$re = mysql_query($sql) or die(mysql_error());
+					$index = mysql_fetch_array($re);
+					$index_name = $index["name"];
+					
+					$sql = "SELECT EngName
+							FROM destinations
+							WHERE id = '".$index["dest_id"]."'";
+					$re = mysql_query($sql) or die(mysql_error());
+					$dest = mysql_fetch_array($re);
+					$dest_name = $dest["EngName"];
+			?> 
+				<div class='comment'>
+				<a href="viewtopic.php?id=<?php echo $row["post_id"]?>" class="link" style="margin-left: 5px"><?php echo $title?></a>,
+				<b><span style="color: gray"><?php echo $dest_name;?></span></b>
+				<?php
+					}
+				echo "<span id=".$row["id"].">";
 					if($row['follow']==1)
-						echo "<a onclick='changevalue($row[follow],$row[post_id])'class='link'>Follow</a>";
+						echo "<a onclick='changevalue($row[follow],$row[id])'class='link'>Follow</a>";
 					else
-						echo "<a onclick='changevalue($row[follow],$row[post_id])' class='link'>Not Follow</a>";
+						echo "<a onclick='changevalue($row[follow],$row[id])' class='link'>Not Follow</a>";
 				?>
 				</span>
 				<br/>
@@ -286,14 +335,14 @@ include("footer.php");
 	function update_click() {
 		private_Dialog.dialog('open');
 	}
-	function changevalue(value,postid){
-		jQuery.post('requests/changevalue.php',{vl:value,id:postid},function(data){
+	function changevalue(value,followid){
+		jQuery.post('requests/changevalue.php',{vl:value,id:followid},function(data){
 			if(data=='0'){
-				document.getElementById(postid).innerHTML = "<a onclick='changevalue(0,"+postid+")' class='link'>Not Follow</a>";
+				document.getElementById(followid).innerHTML = "<a onclick='changevalue(0,"+followid+")' class='link'>Not Follow</a>";
 			}
 			else if(data=='1')
 			{
-				document.getElementById(postid).innerHTML = "<a onclick='changevalue(1,"+postid+")' class='link'>Follow</a>";
+				document.getElementById(followid).innerHTML = "<a onclick='changevalue(1,"+followid+")' class='link'>Follow</a>";
 			}
 			else
 				alert(data);
