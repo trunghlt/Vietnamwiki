@@ -43,6 +43,14 @@ include('topRibbon.php');
 	margin:auto;
 }
 </style>
+<script>
+	function follow(type,dom)
+	{
+		jQuery.post('requests/profile.php',{t:type,d:dom},function(data){
+												document.getElementById(dom).innerHTML = data;
+											});
+	}
+</script>
 <table id="contentTable" cellpadding="0" cellspacing="0">
 <tbody>
 <tr>
@@ -159,63 +167,24 @@ include('topRibbon.php');
 			echo "</div>";
 		?>
 	</tr>
+	<?php if (check_logged_in(myip()) && $username==myUsername(myip())) {?>
 	<!--Follow post-->
 	<tr>
 		<h1>Follow's posts</h1>
-		<?php
-			$sql = "SELECT *
-					FROM follow
-					WHERE username = '".$username."'";
-			$result = mysql_query($sql) or die(mysql_error());
-			echo "<div class='comment_block'>";					
-			
-			$numrow = mysql_num_rows($result);
-			if ($numrow == 0) {
-				echo "You haven't posted any topics yet";
-			}
-						
-			while ($row = mysql_fetch_array($result)) {
-				$sql = "SELECT post_subject, index_id
-						FROM editions
-						WHERE post_id = '".$row["post_id"]."' and checked=1";
-				$re = mysql_query($sql) or die(mysql_error());
-				$post = mysql_fetch_array($re);
-				$title = $post["post_subject"];
-				
-				if($post["index_id"] != NULL){
-					$sql = "SELECT *
-							FROM index_menu
-							WHERE id = '".$post["index_id"]."'";
-					$re = mysql_query($sql) or die(mysql_error());
-					$index = mysql_fetch_array($re);
-					$index_name = $index["name"];
-					
-					$sql = "SELECT EngName
-							FROM destinations
-							WHERE id = '".$index["dest_id"]."'";
-					$re = mysql_query($sql) or die(mysql_error());
-					$dest = mysql_fetch_array($re);
-					$dest_name = $dest["EngName"];
-			?> 
-				<div class='comment'>
-				<a href="viewtopic.php?id=<?php echo $row["post_id"]?>" class="link" style="margin-left: 5px"><?php echo $title?></a>,
-				<b><span style="color: gray"><?php echo $dest_name;?></span></b>
-				<?php
-					}
-				echo "<span id=".$row["id"].">";
-					if($row['follow']==1)
-						echo "<a onclick='changevalue($row[follow],$row[id])'class='link'>Follow</a>";
-					else
-						echo "<a onclick='changevalue($row[follow],$row[id])' class='link'>Not Follow</a>";
-				?>
-				</span>
-				<br/>
-				</div>
-				<?php
-			}
-			echo "</div>";
-		?>
+		<div id='followpost'></div>
+		<script language="javascript">
+			follow(1,'followpost');
+		</script>
 	</tr>
+	<!--Lastest post-->
+	<tr>
+		<h1>Last edit</h1>
+		<div id='followedit'></div>
+		<script>
+			follow(0,'followedit');
+		</script>
+	</tr>
+<?php }?>
 	<!--Latest comments-->
 	<tr>
 		<h1>Latest comments</h1>
@@ -326,7 +295,6 @@ include('topRibbon.php');
 </tr>
 </tbody>
 </table>
-
 <?php
 include("private_form.php");
 include("footer.php");
@@ -335,18 +303,44 @@ include("footer.php");
 	function update_click() {
 		private_Dialog.dialog('open');
 	}
-	function changevalue(value,followid){
+	function changevalue(value,followid,numrow){
 		jQuery.post('requests/changevalue.php',{vl:value,id:followid},function(data){
 			if(data=='0'){
-				document.getElementById(followid).innerHTML = "<a onclick='changevalue(0,"+followid+")' class='link'>Not Follow</a>";
+			if(numrow==1){
+				document.getElementsByName(followid)[0].innerHTML = "<a onclick='changevalue(0,"+followid+","+numrow+")' class='link'>Not Follow</a>";
+				}
+				else{
+					for(i=0;i < numrow;i++){
+						document.getElementsByName(followid)[i].innerHTML = "<a onclick='changevalue(0,"+followid+","+numrow+")' class='link'>Not Follow</a>";					
+					}
+				}
 			}
 			else if(data=='1')
 			{
-				document.getElementById(followid).innerHTML = "<a onclick='changevalue(1,"+followid+")' class='link'>Follow</a>";
+			if(numrow==1){
+				document.getElementsByName(followid)[0].innerHTML = "<a onclick='changevalue(1,"+followid+","+numrow+")' class='link'>Follow</a>";
+				}
+				else{
+					for(i=0;i < numrow;i++){
+						document.getElementsByName(followid)[i].innerHTML = "<a onclick='changevalue(1,"+followid+","+numrow+")' class='link'>Follow</a>";					
+					}
+				}
 			}
 			else
 				alert(data);
 		});
+	}
+	function get_page(start,type,dom){
+		if(type==1){
+			jQuery.post('requests/profile.php',{s:start,t:type,d:dom},function(data){
+													document.getElementById(dom).innerHTML = data;
+												});
+		}
+		else if(type==0){
+			jQuery.post('requests/profile.php',{s1:start,t:type,d:dom},function(data){
+													document.getElementById(dom).innerHTML = data;
+												});
+		}		
 	}
 </script>
 
