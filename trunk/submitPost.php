@@ -2,6 +2,7 @@
 include("core/init.php");
 include("core/common.php");
 include("core/classes.php");
+include("libraries/sendmail.php");
 
 
 $postElement = new PostElement();
@@ -36,7 +37,6 @@ if($_POST["type"]==1)
 	$content = str_replace("|", "&", $content);
 	$content = str_replace('\"', '"', $content);
 	$content = str_replace("\'", "'", $content);
-	
 	echo "<h2>".$postElement->title. "</h2>";      
 	echo $content;
 	if($postElement->reference!='')
@@ -49,8 +49,16 @@ elseif($_POST["type"]==2)
 {
 	$editionElement->editDateTime = time();
 	$editionElement->add();
-
-
+		$row2 = Email::query(1);
+		$str = 'http://www.vietnamwiki.net/viewtopic.php?id='.$postElement->id;
+		$message = str_replace('here',$str,$row2['message']);
+		$str = $q->query('select email from users where level=1');
+		
+		while($row = mysql_fetch_assoc($q->re))
+		{
+			if($row['email']!='')
+			echo sendmail($row['email'],$row2['subject'],$message,0,$row2['from']);
+		}	
 	$content = htmlspecialchars_decode($postElement->draft, ENT_QUOTES);
 	$content = str_replace("|", "&", $content);
 	$content = str_replace('\"', '"', $content);
