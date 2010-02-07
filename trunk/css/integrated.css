@@ -741,6 +741,12 @@ div.image_edit {
 	background-color: white;
 }
 
+div.map {
+	background-color: #F0F0F0;
+	border: 1px solid #DDDDDD;
+	overflow: hidden;
+	}
+
 a.small_link {
 	font-size: 11px; 
 	font-weight: bold;

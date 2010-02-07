@@ -8,4 +8,5 @@ include('core/classes/DestinationElement.php');
 include('core/classes/ImageElement.php');
 include('core/classes/Edition.php');
 include('core/classes/Review.php');
+include('core/classes/MapSpot.php');
 ?>
