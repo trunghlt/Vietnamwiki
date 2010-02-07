@@ -53,7 +53,6 @@ class MapSpot {
 	public static function getMapSpots($HTMLContent) {
 		$html = str_get_html($HTMLContent);
 		$mapDivList = $html->find(".map");
-		echo $mapDivList;
 		$mapSpotList = array();
 		foreach ($mapDivList as $mapDiv) {
 			$divContent = $mapDiv->innertext;
@@ -64,6 +63,7 @@ class MapSpot {
 			$mp->long = Filter::getFilteredFloat($info[1]);
 			$mp->cat = Filter::getFilteredMapCat($info[2]);
 			$mp->des = Filter::getFilteredPostContent($info[4]);
+			echo $mp->lat . " " . $mp->long . "<br/>";
 			$mapSpotList[] = $mp;
 		}
 		return $mapSpotList;
