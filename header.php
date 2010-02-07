@@ -64,6 +64,7 @@ content = "<?php echo getSummary()?>">
 <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js"></script>
 <script type="text/javascript" src="/js/integrated.js"></script>
 <script type="text/javascript" src="js/jquery/fancybox/jquery.fancybox-1.2.6.pack.js"></script>
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAV1hMY6P-vcrStESIcmxsyBSg0YMtASE5KdM7LALqADHM9SZ_PBTZqozQ8fKlIDHry-cBnAxWYeYpSw" type="text/javascript"></script>
 <script>
 	jQuery.noConflict();
 </script>
@@ -71,6 +72,89 @@ content = "<?php echo getSummary()?>">
 <link rel="stylesheet" href="js/jquery/fancybox/jquery.fancybox-1.2.6.css" type="text/css" media="screen"/>
 <link rel="stylesheet" type="text/css" href="/css/integrated.css" />
 </head>
+
+<script type="text/javascript"><!--
+var mapIcons = new Array();
+mapDir = "/images/gmap/icons/";
+mapIcons["others"] = "marker.png";
+mapIcons["restaurant"] = "restaurant.png";
+mapIcons["beach"] = "beach.png";
+mapIcons["bridge"] = "bridgemodern.png";
+mapIcons["shop"] = "shoppingmall.png";
+mapIcons["bank"] = "bank.png";
+mapIcons["hotel"] = "hotel.png";
+
+
+function createMarker(point, cat, des) {
+	var vnwkIcon = new GIcon();
+	vnwkIcon.image = mapDir + mapIcons[cat];
+	vnwkIcon.shadowSize = new GSize(0, 0);
+	if (cat == "others") {
+		vnwkIcon.iconAnchor = new GPoint(10, 24);
+		vnwkIcon.iconSize = new GSize(32, 32);
+	}
+	else {
+		vnwkIcon.iconAnchor = new GPoint(16, 37);
+		vnwkIcon.iconSize = new GSize(32, 37);
+	}
+	vnwkIcon.infoWindowAnchor = new GPoint(20, 10); 	
+    var marker = new GMarker(point, {icon: vnwkIcon, draggable: false});
+    if (des && (des.trim() != "")) {
+	    GEvent.addListener(marker, "click", function() {
+		  //alert(des);
+	      marker.openInfoWindowHtml(des);
+	    });
+    }
+    return marker;
+}
+
+function load() 
+{
+  if (GBrowserIsCompatible())
+  {
+	  mapDivs = document.getElementsByClassName("map");
+	  for (i = 0; i < mapDivs.length; i++) {
+		  var info = mapDivs[i].innerHTML.split(":")[1].split(",", 5);
+		  var map = new GMap2(mapDivs[i]);
+		  var center = new GLatLng(parseFloat(info[0]),parseFloat(info[1]));
+		  map.setCenter(center, parseInt(info[3]));
+		  map.addOverlay(new createMarker(center, info[2], info[4]));
+		  var customUI = map.getDefaultUI();
+		  customUI.maptypes.hybrid = false;
+		  map.setUI(customUI);
+	  }
+  }
+}
+function addLoadEvent(func) 
+{
+var oldonload = window.onload;
+  if (typeof window.onload != 'function') 
+  {
+  window.onload = func;
+  } 
+  else 
+  {
+  window.onload = function() 
+    {
+    if (oldonload) 
+    {
+    oldonload();
+    }
+    func();
+}
+}
+}
+addLoadEvent(load);
+if (window.attachEvent) {
+	window.attachEvent("onunload", function() {
+		GUnload();      // Internet Explorer
+	});
+} else {
+	window.addEventListener("unload", function() {
+		GUnload(); // Firefox and standard browsers
+    }, false);
+}
+// --></script>
 
 <!--  BODY -->
 <body bgcolor="#D8D8D8">

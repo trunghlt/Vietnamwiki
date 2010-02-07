@@ -3,6 +3,7 @@ include("core/init.php");
 include("core/common.php");
 include("core/classes.php");
 
+
 $postElement = new PostElement();
 $postElement->id = $postElement->filterId($_POST["id"]);
 $postElement->summary = htmlspecialchars($postElement->filterSummary($_POST["summary"]), ENT_QUOTES);
