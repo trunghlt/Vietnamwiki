@@ -64,7 +64,7 @@ class PostElement {
 	
 	public function add($user_id="") {
 		//Add map spots in the post to the database
-		MapSpot::addMapSpots(htmlspecialchars_decode($this->content), $this->id);
+		MapSpot::addMapSpots(htmlspecialchars_decode($this->content, ENT_QUOTES), $this->id);
 		
 		$q = new db;
 		if($user_id!=""){
@@ -144,7 +144,7 @@ class PostElement {
 		MapSpot::removeMapSpotsByPostId($this->id);
 		
 		//Ad map spots from new content
-		MapSpot::addMapSpots(htmlspecialchars_decode($this->content), $this->id);
+		MapSpot::addMapSpots(htmlspecialchars_decode($this->content, ENT_QUOTES), $this->id);
 		
 		$q = new db;
 		$mysql["content"] = mysql_real_escape_string($this->content);
