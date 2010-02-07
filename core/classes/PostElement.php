@@ -63,6 +63,9 @@ class PostElement {
 	}
 	
 	public function add($user_id="") {
+		//Add map spots in the post to the database
+		MapSpot::addMapSpots(htmlspecialchars_decode($this->content), $this->id);
+		
 		$q = new db;
 		if($user_id!=""){
 			$q->query("select property_value
@@ -137,8 +140,13 @@ class PostElement {
 	}	
 	
 	public function save($user_id="") {
+		//Remove all map spots from the current post
+		MapSpot::removeMapSpotsByPostId($this->id);
+		
+		//Ad map spots from new content
+		MapSpot::addMapSpots(htmlspecialchars_decode($this->content), $this->id);
+		
 		$q = new db;
-				
 		$mysql["content"] = mysql_real_escape_string($this->content);
 		$mysql["reference"] = mysql_real_escape_string($this->reference);
 		

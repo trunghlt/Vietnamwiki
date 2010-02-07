@@ -1,9 +1,24 @@
 <?php
 class Filter {
 
+	//TODO
+	public static function getFilteredMapCat($cat) {
+		return $cat;
+	} 
+	
+	//TODO
+	public static function getFilteredPostContent($content) {
+		return $content;
+	} 
+	
 	public static function number($n) {
 		return preg_match("/[-+]?[0-9]+/", $n)? $n : Filter::dieToInvalidInput();
 	}	
+	
+	public static function getFilteredFloat($n) {
+		return preg_match("/[-+]?[0-9]+\.?[0-9]*/", $n)? $n : Filter::dieToInvalidInput();
+	}
+	
 	
 	public static function valueIfIsset($s) {
 		if (isset($s)) 

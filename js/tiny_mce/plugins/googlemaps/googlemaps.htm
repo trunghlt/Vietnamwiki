@@ -1,33 +1,88 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>Googlemaps</title>
-	<script type="text/javascript" src="../../tiny_mce.js"></script> 
-	<script type="text/javascript" src="../../tiny_mce_popup.js?v=307"></script>
-	<script type="text/javascript" src="../../utils/mctabs.js"></script>
-	<script type="text/javascript" src="js/dialog.js?v=307"></script>
-	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=ABQIAAAAV1hMY6P-vcrStESIcmxsyBSg0YMtASE5KdM7LALqADHM9SZ_PBTZqozQ8fKlIDHry-cBnAxWYeYpSw" type="text/javascript"></script>
+<title>Googlemaps</title>
+<script type="text/javascript" src="../../tiny_mce.js"></script> 
+<script type="text/javascript" src="../../tiny_mce_popup.js?v=307"></script>
+<script type="text/javascript" src="../../utils/mctabs.js"></script>
+<script type="text/javascript" src="js/dialog.js?v=307"></script>
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=ABQIAAAAV1hMY6P-vcrStESIcmxsyBSg0YMtASE5KdM7LALqADHM9SZ_PBTZqozQ8fKlIDHry-cBnAxWYeYpSw" type="text/javascript"></script>
+<style type="text/css">
+#cat {
+	height: 20px;
+}
 
+#cat option {
+	background-repeat: no-repeat;
+	background-position: bottom left;
+	padding-left: 40px;	
+	height: 40px;		
+	line-height: 40px;
+	vertical-align: middle;
+}
+	#cat option[value="others"] {
+		background-image: url(/images/gmap/icons/marker.png);
+	}
+	#cat option[value="restaurant"] {
+		background-image: url(/images/gmap/icons/restaurant.png);
+	}
+	#cat option[value="beach"] {
+		background-image: url(/images/gmap/icons/beach.png);
+	}
+	#cat option[value="bridge"] {
+		background-image: url(/images/gmap/icons/bridgemodern.png);
+	}
+	#cat option[value="shop"] {
+		background-image: url(/images/gmap/icons/shoppingmall.png);
+	}
+	#cat option[value="bank"] {
+		background-image: url(/images/gmap/icons/bank.png);
+	}
+	#cat option[value="hotel"] {
+		background-image: url(/images/gmap/icons/hotel.png);
+	}
+</style>
 <script type="text/javascript">
    //<![CDATA[
 
 var map;
-var vnwkIcon = new GIcon();
-//icon.image = "http://labs.google.com/ridefinder/images/mm_20_red.png";
-//icon.shadow = "http://labs.google.com/ridefinder/images/mm_20_shadow.png";
-	vnwkIcon.image = "/images/marker.png";
-	vnwkIcon.iconSize = new GSize(32, 32);
-	vnwkIcon.shadowSize = new GSize(0, 0);
-	vnwkIcon.iconAnchor = new GPoint(10, 24);
-	vnwkIcon.infoWindowAnchor = new GPoint(20, 10);   
+var markerD2;
 
-function createMarker(point,args) {
-    var marker = new GMarker(point, args);
+var mapIcons = new Array();
+mapDir = "/images/gmap/icons/";
+mapIcons["others"] = "marker.png";
+mapIcons["restaurant"] = "restaurant.png";
+mapIcons["beach"] = "beach.png";
+mapIcons["bridge"] = "bridgemodern.png";
+mapIcons["shop"] = "shoppingmall.png";
+mapIcons["bank"] = "bank.png";
+mapIcons["hotel"] = "hotel.png";
+
+
+function createMarker(point, cat) {
+	var vnwkIcon = new GIcon();
+	vnwkIcon.image = mapDir + mapIcons[cat];
+	vnwkIcon.iconSize = new GSize(32, 37);
+	vnwkIcon.shadowSize = new GSize(0, 0);
+	if (cat == "others") {
+		vnwkIcon.iconAnchor = new GPoint(10, 24);
+	}
+	else {
+		vnwkIcon.iconAnchor = new GPoint(16, 37);
+	}
+	vnwkIcon.infoWindowAnchor = new GPoint(20, 10); 	
+    var marker = new GMarker(point, {icon: vnwkIcon, draggable: true});
     GEvent.addListener(marker, "click", function() {
       marker.openInfoWindowHtml(tinyMCE.get('description').getContent());
     });
+
+	GEvent.addListener(marker, "drag", function(){
+		document.getElementById("coords").value=marker.getPoint().lat()+","+marker.getPoint().lng();
+		document.getElementById("zoomlevel").value = map.getZoom();
+	});
+    
     return marker;
-  }
+}
 
 
 function showAddress(address)
@@ -68,11 +123,11 @@ function showAddress(address)
 function load() {
 	   	   
      if (GBrowserIsCompatible()) {
-		var map = new GMap2(document.getElementById("map"));
+		map = new GMap2(document.getElementById("map"));
 		map.setCenter(new GLatLng(16.003575733881323,108.2373046875), 5);
 //		map.addControl(new GMapTypeControl(2));
 //		map.addControl(new GLargeMapControl());
-		 var customUI = map.getDefaultUI();
+		var customUI = map.getDefaultUI();
         // Remove MapType.G_HYBRID_MAP
         customUI.maptypes.hybrid = false;
         map.setUI(customUI)
@@ -85,16 +140,13 @@ function load() {
 
 		/////Draggable markers
 		var point = new GLatLng(21.0271485985374,105.85206985473633);
-		var markerD2 = createMarker(point, {icon:vnwkIcon, draggable: true});
+		markerD2 = createMarker(point, "others");
 		map.addOverlay(markerD2);
 
-		markerD2.enableDragging();
-
-		GEvent.addListener(markerD2, "drag", function(){
-			document.getElementById("coords").value=markerD2.getPoint().lat()+","+markerD2.getPoint().lng();
+		GEvent.addListener(map, "zoomend", function() {
 			document.getElementById("zoomlevel").value = map.getZoom();
-		});
-
+		});		
+		
 		document.getElementById("coords").value=markerD2.getPoint().lat()+","+markerD2.getPoint().lng();
 		document.getElementById("zoomlevel").value = map.getZoom();
      }
@@ -117,7 +169,7 @@ function load() {
 
 		<div class="panel_wrapper">
 
-			<div id="general_panel" class="panel current" style="height:530px">
+			<div id="general_panel" class="panel current" style="height:620px">
 				<fieldset>
 					<legend>Map</legend>
 						<table border="0" cellspacing="0" cellpadding="4">
@@ -134,6 +186,19 @@ function load() {
 						</tr>
 						<tr>
 							<td>Address:</td><td><input size="60" id="address" name="address" value="Ha Noi, Viet Nam" type="text" onblur="showAddress(this.value);return false;"><input type="button" onclick="showAddress(document.getElementById('address').value);return false;" style="border:1px solid #555;background:white;margin-left:10px;" value="Search" /></td>
+						</tr>
+						<tr>
+							<td>Category:</td>
+							<td>
+								<select onchange="changeMarker()" name="cat" id="cat">
+									<option value="others">Others</option>
+									<option value="restaurant">Restaurant</option>
+									<option value="beach">Beach</option>
+									<option value="bridge">Bridge</option>
+									<option value="shop">Shop</option>
+									<option value="hotel">Hotel</option>
+								</select>
+							</td>
 						</tr>
 						<tr>
 							<td>Description</td><td><textarea cols="58" rows="3" id="description" name="description"></textarea></td>
@@ -204,10 +269,6 @@ function load() {
 						<div style="padding:4px"><input id="akey" name="akey" type="text" value="ABQIAAAAV1hMY6P-vcrStESIcmxsyBSg0YMtASE5KdM7LALqADHM9SZ_PBTZqozQ8fKlIDHry-cBnAxWYeYpSw" class="text" style="width:570px" /></div>
 				</fieldset>
 
-
-
-
-
 			</div>
 		</div>
 
@@ -216,7 +277,7 @@ function load() {
 			<input type="button" id="insert" name="insert" value="{#insert}" onclick="ExampleDialog.insert();" />
 		</div>
 
-		<div style="float: right">
+		<div style="float: right">	
 			<input type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" />
 		</div>
 	</div>
@@ -225,12 +286,20 @@ function load() {
 
 <script type="text/javascript" src="../../tiny_mce.js"></script>
 <script language="javascript">
-	tinyMCE.init({
-		// General options
-		mode : "exact",
-		elements: "description",
-		theme: "simple"
-	});
+tinyMCE.init({
+	// General options
+	mode : "exact",
+	elements: "description",
+	theme: "advanced"
+});
+
+function changeMarker() {
+	cat = document.getElementById("cat").value;
+	point = markerD2.getLatLng();
+	map.removeOverlay(markerD2);
+	markerD2 = createMarker(point, cat);
+	map.addOverlay(markerD2); 		
+}
 </script>
 </body>
 </html>
