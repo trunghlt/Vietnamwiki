@@ -103,6 +103,17 @@ class User {
 		$q = new db;
 		$q->query("update users set email='".$email."' where id=".$id);
 	}
+	
+	static public function check_user($user_id,$post_id){
+		$q = new db;
+			$q->query('select * from users where id='.$user_id.' and level=1');
+			if($q->re==NULL)
+			{
+				$q->query('select * from follow where user_id='.$user_id.' and post_id='.$post_id);
+					return $q->re;
+			}
+			return $q->re;
+	}
 }
 $user_info = new User;
 ?>
