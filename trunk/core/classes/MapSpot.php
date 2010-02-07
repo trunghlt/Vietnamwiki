@@ -53,6 +53,7 @@ class MapSpot {
 	public static function getMapSpots($HTMLContent) {
 		$html = str_get_html($HTMLContent);
 		$mapDivList = $html->find("div.map");
+		echo count($mapDivList);
 		$mapSpotList = array();
 		foreach ($mapDivList as $mapDiv) {
 			$divContent = $mapDiv->innertext;
