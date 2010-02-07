@@ -56,7 +56,7 @@ class MapSpot {
 		$content = str_replace('\"', '"', $content);
 		$content = str_replace("\'", "'", $content);
 				
-		$html = str_get_html($HTMLContent);
+		$html = str_get_html($content);
 		$mapDivList = $html->find(".map");
 		$mapSpotList = array();
 		foreach ($mapDivList as $mapDiv) {
