@@ -73,6 +73,10 @@ class Edition {
 		$mysql["postContent"] = mysql_real_escape_string($this->postContent);
 		$mysql["reference"] = mysql_real_escape_string($this->reference);
 		$this->post_ip = myip();
+		//follow
+		if($this->postId != 0){
+			Follow::set($this->userId,$this->postId);
+		}
 		$re = mysql_query("select property_value
 						   from setting
 						   where property_name = 'ALLOW_DIRECT_UPDATE'");
@@ -136,6 +140,9 @@ class Edition {
 		//Update posts_texts	
 		$mysql["postContent"] = mysql_real_escape_string($this->postContent);
 		$mysql["reference"] = mysql_real_escape_string($this->reference);
+		if($this->postId != 0){
+			Follow::set($this->userId,$this->postId);
+		}
 		if($type==''){
 		mysql_query("UPDATE posts_texts
 					SET post_subject = '{$this->postTitle}',
@@ -176,9 +183,9 @@ class Edition {
 		$re = mysql_query("SELECT *
 					 FROM posts
 					 where post_id = '$post_id'") or die(mysql_error());
-
 		$row = mysql_fetch_assoc($re);
 		//Post has been exsited yet?
+
 		if(is_array($row))
 		{
 				mysql_query("UPDATE editions
@@ -223,7 +230,8 @@ class Edition {
 								VALUE ('".$r['post_username']."','create','".$post_id."','".$post_time."')");
 					mysql_query("UPDATE editions
 						SET post_id = '".$post_id."',checked = 1
-						WHERE id = ".$id) or die(mysql_error());					
+						WHERE id = ".$id) or die(mysql_error());
+					Follow::set($r['user_id'],$post_id);
 				}
 				else{
 					mysql_query("UPDATE editions
