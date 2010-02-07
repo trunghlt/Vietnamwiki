@@ -57,8 +57,7 @@ class MapSpot {
 		$content = str_replace("\'", "'", $content);
 				
 		$html = str_get_html($HTMLContent);
-		$mapDivList = $html->find("div.map");
-		echo $content;
+		$mapDivList = $html->find(".map");
 		$mapSpotList = array();
 		foreach ($mapDivList as $mapDiv) {
 			$divContent = $mapDiv->innertext;
