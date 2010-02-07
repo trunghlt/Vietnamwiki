@@ -56,6 +56,7 @@ class MapSpot {
 		$mapSpotList = array();
 		foreach ($mapDivList as $mapDiv) {
 			$divContent = $mapDiv->innertext;
+			echo $divContent;
 			$tokens = preg_split("/:/", $divContent);
 			$info = preg_split("/,/", $tokens[1], 5);
 			$mp = new MapSpot;
@@ -63,7 +64,6 @@ class MapSpot {
 			$mp->long = Filter::getFilteredFloat($info[1]);
 			$mp->cat = Filter::getFilteredMapCat($info[2]);
 			$mp->des = Filter::getFilteredPostContent($info[4]);
-			echo $mp->lat . " " . $mp->long . "<br/>";
 			$mapSpotList[] = $mp;
 		}
 		return $mapSpotList;
