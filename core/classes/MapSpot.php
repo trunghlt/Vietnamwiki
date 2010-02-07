@@ -51,6 +51,11 @@ class MapSpot {
 	 * @return A list of map spots in $HTMLContent
 	 * ----------------------------------------------------------------*/
 	public static function getMapSpots($HTMLContent) {
+		$content = $HTMLContent;
+		$content = str_replace("|", "&", $content);
+		$content = str_replace('\"', '"', $content);
+		$content = str_replace("\'", "'", $content);
+				
 		$html = str_get_html($HTMLContent);
 		$mapDivList = $html->find("div.map");
 		echo $HTMLContent;
