@@ -745,6 +745,7 @@ div.map {
 	background-color: #F0F0F0;
 	border: 1px solid #DDDDDD;
 	overflow: hidden;
+	margin-left: 50px;
 	}
 
 a.small_link {
