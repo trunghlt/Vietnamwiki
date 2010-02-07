@@ -4,10 +4,13 @@ ob_start();
 session_start();
 //include file	
 	include("db.php");
-	include("../core/classes/Edition.php");
 	include("common.php");
 	include("session.php");
+	include("../core/classes/Edition.php");
 	include("../core/classes/Filter.php");
+	include("../core/classes/Email.php");
+	include("../core/classes/Follow.php");
+	include("../libraries/sendmail.php");
 //check logged user 
 	process(session_id(), myip());
 	if (!logged_in()) header("location: login.php");
@@ -75,6 +78,7 @@ session_start();
 		$post_sum = Filter::filterInputText($_POST['PostSum']);
 		$smal_img = Filter::filterInputText($_POST['SmallUrl']);
 		$big_url = Filter::filterInputText($_POST['BigUrl']);
+		$user_id = Filter::filterInputText($_POST['User_id']);
 		$reference = htmlspecialchars(urldecode($_POST['reference']),ENT_QUOTES);
 
 		if($_POST['PTex']==NULL){
@@ -93,6 +97,17 @@ session_start();
 	parent.edit.location.href = 'revisionmanagement.php';
 </script>
 <?php
+			$row2 = Email::query(2);
+			$str = 'http://www.vietnamwiki.net/viewtopic.php?id='.$post_id;
+			$q = new db;
+			$message = str_replace('here',$str,$row2['message']);
+			$str = $q->query('select email from users where id='.$user_id);
+			
+			while($row = mysql_fetch_assoc($q->re))
+			{
+				if($row['email']!='')
+					sendmail($row['email'],$row2['subject'],$message,0,$row2['from']);
+			}	
 		}
 	}	
 
@@ -108,6 +123,7 @@ session_start();
 <form method="post" action="edit_edition.php?id=<?php echo $arr['id']?>&post_id=<?php echo $arr['post_id'];?>&act=edit" target="edition" name="edition" o>
 <div>
 	<label>Post Subject :</label><input type="text" name="PostSub" value="<?php echo $arr['post_subject'];?>" /><br />
+	<input type="hidden" name="User_id" value="<?php echo $arr['user_id'];?>" /><br />
 	<label>Post Summary :</label><input type="text" name="PostSum" value="<?php echo $arr['post_summary'];?>" /><br />
 	<label>Post Text:</label><br />
 	<textarea name="PTex" id="ptex" rows="20" cols="80"><?php
