@@ -176,7 +176,7 @@ function signOut() {
 				});
 }
 
-function submitLogin(dom) {	
+function submitLogin(dom,check) {	
 	jQuery.post("/requests/postLogin.php", jQuery("#"+dom).serialize(), 
 			function(response){
 				if(response==-2)
@@ -187,12 +187,24 @@ function submitLogin(dom) {
 						loadToolbar("toolbar");
 						loadDraftRibbon(<?php echo $editionId?>, "ribbon");
 						document.getElementById('id_user').value = response;
+						if(check==2){
+							document.getElementById('editpost').value = 'editpost';
+						}						
 						Fill_EmailDialog.dialog('open');
 					}
 					else if(response == 'success'){
 						loadToolbar("toolbar");
+						if(check==2){
+							edit_login.dialog('close');
+							editDialog.dialog('open');						
+						}						
 						loadDraftRibbon(<?php echo $editionId?>, "ribbon");					
 					}
+					else
+					{
+						if(check==2)
+							edit_login.dialog('close');							
+					}					
 				}
 	});
 }

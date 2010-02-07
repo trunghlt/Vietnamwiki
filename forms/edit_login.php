@@ -21,9 +21,7 @@ jQuery(document).ready(function(){
 		},		
 		buttons: {
 			'Login': function() {
-					submitLogin('loginForm_edit');
-					jQuery(this).dialog('close');
-					editDialog.dialog('open');
+					submitLogin('loginForm_edit',2);
 			},
 			'Sign Up': function() {
 				jQuery(this).dialog('close');
