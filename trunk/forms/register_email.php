@@ -4,6 +4,7 @@
 		<label for="email">Email: </label>
 		<input class="field" name="email" id="email" type="text" style="width:250px" /><br />
 		<input class="field" name="id_user" id="id_user" type="hidden" />
+		<input class="field" name="editpost" id="editpost" value='login' type="hidden" />
 	</form>
 </div>
 <script language="javascript">
@@ -23,6 +24,11 @@ jQuery(document).ready(function(){
 				submitEmail('FillEmail');
 			},
 			Cancel: function() {
+				if(document.getElementById('editpost').value == 'editpost'){
+							document.getElementById('editpost').value = 'value';
+							edit_login.dialog('close');
+							editDialog.dialog('open');			
+				}
 				jQuery(this).dialog('close');
 			}
 		}		
@@ -36,6 +42,12 @@ function submitEmail(dom){
 						{
 							alert('Add Email Success');
 							Fill_EmailDialog.dialog('close');
+							if(document.getElementById('editpost').value == 'editpost'){
+									document.getElementById('editpost').value = 'value';
+									edit_login.dialog('close');
+									editDialog.dialog('open');
+							}
+							
 						}
 						else if(data != 'null'){
 							alert(data);
