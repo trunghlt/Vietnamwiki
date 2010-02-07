@@ -101,6 +101,7 @@ class PostElement {
 					$q->query("	INSERT INTO acts
 								(act_username, type, target, time) 
 								VALUE ('".$this->authorUsername."','create','".$this->id."','".time()."')");
+					Follow::set($user_id,$this->id);
 				}
 				else{
 					$this->id = 0;					
@@ -126,7 +127,8 @@ class PostElement {
 								VALUE ("'.$this->id.'","'.$this->indexId.'","'.$post_time.'","'.$ip.'","'.$this->authorUsername.'","'.$edittime.'","'.$ord.'")');
 					$q->query("	INSERT INTO acts
 								(act_username, type, target, time) 
-								VALUE ('".$this->authorUsername."','create','".$this->id."','".time()."')");				
+								VALUE ('".$this->authorUsername."','create','".$this->id."','".time()."')");
+						Follow::set($user_id,$this->id);				
 			}
 		}
 	}
@@ -175,6 +177,7 @@ class PostElement {
 								SET index_id = ".$this->indexId."
 								WHERE post_id = ".$this->id);
 					$this->draft = $this->content;
+					Follow::set($user_id,$this->id);
 					return 0;				
 				}
 				else{
@@ -201,6 +204,7 @@ class PostElement {
 							SET index_id = ".$this->indexId."
 							WHERE post_id = ".$this->id);
 					$this->draft = $this->content;
+				Follow::set($user_id,$this->id);
 					return 0;			
 			}
 		}
