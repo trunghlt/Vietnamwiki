@@ -8,7 +8,7 @@ include("db.php");
 			$arr = array();
 			if($command == "")
 			{
-				$sql = "select id,username,password,level,ban_user from users";
+				$sql = "select id,username,password,level,ban_user,email from users";
 				$this->re = mysql_query($sql) or die(mysql_error());
 				while($row = mysql_fetch_assoc($this->re)){
 					$arr[] = $row;
@@ -17,7 +17,7 @@ include("db.php");
 				return $arr;
 			}
 			else{
-				$sql = "select id,username,password,level,ban_user from users $command";
+				$sql = "select id,username,password,level,ban_user,email from users $command";
 				$this->re = mysql_query($sql) or die(mysql_error());
 				while($row = mysql_fetch_assoc($this->re)){
 					$arr[] = $row;

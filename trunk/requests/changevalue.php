@@ -12,12 +12,12 @@ $id = $_POST['id'];
 		$post = new Follow;
 		if($vl==1)
 		{
-			$post->update_follow('0',"id=$id");
+			$post->update_follow('0',$id);
 			echo '0';
 		}
 		else
 		{
-			$post->update_follow('1',"id=$id");
+			$post->update_follow('1',$id);
 			echo '1';
 		}
 	}
