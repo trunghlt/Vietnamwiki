@@ -52,11 +52,10 @@ class MapSpot {
 	 * ----------------------------------------------------------------*/
 	public static function getMapSpots($HTMLContent) {
 		$html = str_get_html($HTMLContent);
-		$mapDivList = $html->find(".map");
+		$mapDivList = $html->find("div.map");
 		$mapSpotList = array();
 		foreach ($mapDivList as $mapDiv) {
 			$divContent = $mapDiv->innertext;
-			echo $divContent;
 			$tokens = preg_split("/:/", $divContent);
 			$info = preg_split("/,/", $tokens[1], 5);
 			$mp = new MapSpot;
