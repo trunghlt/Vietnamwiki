@@ -21,7 +21,7 @@ jQuery(document).ready(function(){
 		},		
 		buttons: {
 			Login: function() {
-				submitLogin('loginForm');
+				submitLogin('loginForm',1);
 				jQuery(this).dialog('close');
 			},
 			Cancel: function() {
