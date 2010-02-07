@@ -2,6 +2,7 @@
 include("core/init.php");
 include("core/common.php");
 include("core/classes.php");
+include("libraries/sendmail.php");
 if($_POST["summary"] != NULL && $_POST["title"] != NULL && $_POST["content"] != NULL){
 $postElement = new PostElement();
 $postElement->summary = htmlspecialchars($postElement->filterSummary($_POST["summary"]));
@@ -28,7 +29,27 @@ $editionElement->post_ip = myip();
 $editionElement->post_username = $postElement->authorUsername;
 $editionElement->reference = $postElement->reference;
 $editionElement->add();
-
+if($editionElement->postId != 0){
+		$row2 = Email::query(1);
+		$str = 'http://www.vietnamwiki.net/viewtopic.php?id='.$editionElement->id;
+		$message = str_replace('here',$str,$row2['message']);
+		$str = $q->query('select email from users where level=1');
+		
+		while($row = mysql_fetch_assoc($q->re))
+		{
+			if($row['email']!='')
+				sendmail($row['email'],$row2['subject'],$message,0,$row2['from']);	
+		}
+}
+else{
+		$row2 = Email::query(1);
+		$message = str_replace('here','',$row2['message']);
+		$str = $q->query('select email from users where level=1');
+		while($row = mysql_fetch_assoc($q->re))
+		{
+			sendmail($row['email'],$row2['subject'],$message,0,$row2['from']);
+		}
+}
 echo $postElement->id;
 }
 else{
