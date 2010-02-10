@@ -14,9 +14,15 @@ function change_value($v){
 		$str = change_value($st);
 		$row_value = get_value_in_text();
 		foreach($row_value as $value){
-			if(trim(change_value($value)) === trim($str))
+			if(strpos(trim($str),trim(change_value($value))) !== FALSE)
 			{
-				$st = trim($value);
+				$len = strpos(trim($str),trim(change_value($value)));
+				if(substr($st,$len,0)==='' && $len!=0){
+					$st = substr_replace($st,trim($value),$len+1);
+				}
+				else{
+					$st = substr_replace($st,trim($value),$len,strlen(trim($value)));
+				}
 			}
 		}
             
