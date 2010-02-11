@@ -8,8 +8,11 @@ include("preprocess.php");
 include('header.php'); 
 include('destination.php');
 include("ajaxLoad.php");
+include('./libraries/TalkPHP_Gravatar.php');
 $q = new Db;	
 $user_info = new User;
+$str_rate="<span id='rateStatus'>Please rate...</span><br/><div id='rateMe' title='Please rate this topic'><div onclick='rateIt(this)' id='_1' class='none' title='This is very bad, never try it !!!' onmouseover='rating(this)' onmouseout='off(this)'>&nbsp;</div><div onclick='rateIt(this)' id='_2' class='none' title='This is bad, I don't recommend it' onmouseover='rating(this)' onmouseout='off(this)'>&nbsp;</div><div onclick='rateIt(this)' id='_3' class='none' title='This is ok, no thing special' onmouseover='rating(this)' onmouseout='off(this)'>&nbsp;</div><div onclick='rateIt(this)' id='_4' class='none' title='This is good, I recommend it' onmouseover='rating(this)' onmouseout='off(this)'>&nbsp;</div><div onclick='rateIt(this)' id='_5' class='none' title='This is very good, highly recommend !!!' onmouseover='rating(this)' onmouseout='off(this)'>&nbsp;</div></div>";
+$pAvatar = new TalkPHP_Gravatar();
 ?>
     <td class="center">			
 		<div id="menuWrapper">
@@ -18,8 +21,14 @@ $user_info = new User;
 			echo getMainMenu(1, $post_id);
 			?>
 			<div id="toolbar"></div>
-		</div>		
+		</div>
+		<div id='button'>
+		<?php if(logged_in()){?>
 		<div class="button" style="margin: 20px 20px;" onClick="reviewDialog.dialog('open')"><a>+ Add a new review</a></div>
+		<?php }else{?>
+		<div class="button" style="margin: 20px 20px;" onClick="review_Dialog1.dialog('open')"><a>+ Add a new review</a></div>		
+		<?php }?>
+		</div>
 		<div id="reviewList"><?php echo getReviewListHTML($post_id); ?></div>
 	</td>
 </tr>
@@ -52,91 +61,48 @@ $user_info = new User;
 		_padding:0;
 	}
 </style>
-<div id="reviewDialog" title="Add a review">
-
-	<!-- Rating - source code reference @ http://reignwaterdesigns.com/ad/tidbits/rateme/ -->
-	<span id="rateStatus">Please rate...</span>
-	
-	<div id="rateMe" title="Please rate this topic">
-		<div onclick="rateIt(this)" id="_1" class="none" title="This is very bad, never try it !!!" onmouseover="rating(this)" onmouseout="off(this)">&nbsp;</div>
-		<div onclick="rateIt(this)" id="_2" class="none" title="This is bad, I don't recommend it" onmouseover="rating(this)" onmouseout="off(this)">&nbsp;</div>
-		<div onclick="rateIt(this)" id="_3" class="none" title="This is ok, no thing special" onmouseover="rating(this)" onmouseout="off(this)">&nbsp;</div>
-		<div onclick="rateIt(this)" id="_4" class="none" title="This is good, I recommend it" onmouseover="rating(this)" onmouseout="off(this)">&nbsp;</div>
-		<div onclick="rateIt(this)" id="_5" class="none" title="This is very good, highly recommend !!!" onmouseover="rating(this)" onmouseout="off(this)">&nbsp;</div>
-	</div>
-	<!------------------------------------------------------------------------------------->
-	<form id="reviewForm">
-		<textarea 	id="reviewText" 
-					onKeyDown="updateReviewText(this)"
-					onKeyUp="updateReviewText(this)"
-					rows="10" 
-					cols="80"></textarea>			
-	</form>
-	<label>Your review can't excess 5000 characters.</label>
-	<label id="reviewLimitLbl"></label>
-	
-</div>
-
-<div id="mustRateAlert" title="Alert">Sorry, you have to rate to finish reviewing !</div>
-
-<div id="reviewLowerBound" title="Alert">Sorry, your review has to be more than 140 characters. 
-Click on <a href="<?php echo getPostPermaLink($post_id)?>">comment</a> if you want to comment less than 140 characters.</div>
-
-<script language="javascript">
-function updateReviewText(reviewText) {
-	if (jQuery(reviewText).val().length > 5000)
-		jQuery(reviewText).val(jQuery(reviewText).val().substring(0, 5000));			
-	jQuery('#reviewLimitLbl').html('You have ' + (5000 - jQuery(reviewText).val().length) + ' characters left.');
-}
-
-jQuery(document).ready(function(){ 
-	loadToolbar("toolbar");
-	reviewLowerBound = jQuery("#reviewLowerBound").dialog({autoOpen: false});
-	mustRateAlert = jQuery("#mustRateAlert").dialog({autoOpen: false});
-	reviewDialog = jQuery("#reviewDialog").dialog({
-		autoOpen: false,
-		height: 'auto',
-		width: '450',
-		modal: true,
-		resizable:false,
-		overlay: {
-			backgroundColor: '#000',
-			opacity: 0.5
-		},		
-		buttons: {
-			'Submit': function() {
-				if (getRateValue() == 0) {
-					mustRateAlert.dialog("open");
-				}
-				else if (jQuery("#reviewText").val().length <= 140) {
-					reviewLowerBound.dialog("open");
-				}
-				else {
-					submitReview();
-					resetRating();
-					jQuery(this).dialog('close');
-				}
-			},
-			Cancel: function() {
-				jQuery(this).dialog('close');
-			}
-		}		
-	});
-});
-
-function submitReview() {
+<?php 
+include("forms/loginForm.php");
+include("forms/composeForm.php");
+include("forms/reviewform.php");
+include("forms/reviewform1.php");
+include("forms/fill_comment_email_form.php");
+include("forms/fill_comment_name_form.php");
+include("footer.php");
+?>
+<script type="text/javascript">
+	<?php if(logged_in()){?>
+		document.getElementById('review1').innerHTML="<?php echo "$str_rate"?>";
+	<?php }else{?>
+		document.getElementById('review2').innerHTML="<?php echo "$str_rate"?>";
+	<?php }?>
+function submitReview(dom,email,name) {
+	if(email=='' && name=='' ){
 	jQuery.post("submitReview.php",
-				{postId: <?php echo $post_id?>, rateValue: getRateValue(), reviewText: jQuery("#reviewText").val()},
+				{postId: <?php echo $post_id?>, rateValue: getRateValue(), reviewText: jQuery("#"+dom).val()},
 				function(response) {
 					jQuery("#reviewList").html(response);
 				},
-				"html");			
+				"html");
+	}
+	else{
+	jQuery.post("submitReview.php",
+				{postId: <?php echo $post_id?>, rateValue: getRateValue(), reviewText: jQuery("#"+dom).val(),name_guess:  jQuery("#"+name).val(),email_guess: jQuery("#"+email).val()},
+				function(response) {
+					jQuery("#reviewList").html(response);
+				},
+				"html");
+	}			
 }
 
 function signOut() {
 	jQuery.post("/requests/logout.php", {}, 
 				function(response) {
 					loadToolbar("toolbar");
+				document.getElementById('button').innerHTML="<div class='button' style='margin: 20px 20px;' onClick=review_Dialog1.dialog('open') ><a>+ Add a new review</a></div>";
+				document.getElementById('review1').innerHTML="<div style='height:0;'></div>";
+				document.getElementById('review2').innerHTML="<?php echo "$str_rate"?>";
+				document.getElementById('reviewText').value="";
 				});
 }
 
@@ -146,12 +112,11 @@ function submitLogin() {
 	loginForm.send();
 	loginForm.get("send").addEvent("onComplete", function(response){
 		loadToolbar("toolbar");
+		document.getElementById('button').innerHTML="<div class='button' style='margin: 20px 20px;' onClick=reviewDialog.dialog('open') ><a>+ Add a new review</a></div>";
+		document.getElementById('review2').innerHTML="<div style='height:0;'></div>";
+		document.getElementById('review1').innerHTML="<?php echo "$str_rate"?>";
+		document.getElementById('reviewText').value="";
 	});
 }
 </script>
 
-<?php 
-include("forms/loginForm.php");
-include("forms/composeForm.php");
-include("footer.php");
-?>

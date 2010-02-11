@@ -27,11 +27,11 @@ class Filter {
 	}
 	public static function filterInput($n,$location,$case) {
 
-			if (preg_match("/[-+]?[0-9]+/", $n) && ($case==1))
+			if (preg_match("/^[-+]?[0-9]+$/", $n) && ($case==1))
 				return $n;
-			if(preg_match("/\w{5,}/", $n) && ($case == 2))
+			if(preg_match("/^\w{5,}$/", $n) && ($case == 2))
 				return $n;
-			if(preg_match("/\w+/", $n) && ($case == 3))
+			if(preg_match("/^\w+/$", $n) && ($case == 3))
 				return $n;
 		return (header("location:$location"));
 	}
