@@ -4,29 +4,29 @@ include('../core/init.php');
 include('../core/classes/Db.php');
 include('../core/classes/User.php');
 include('../core/classes/PostElement.php');
+include('../core/classes/IndexElement.php');
+include('../core/classes/DestinationElement.php');
+include('../core/classes/Edition.php');
+include('../core/classes/Follow.php');
 function get_index_des($value,$id_follow,$numrow,$index_id,$post_id,$subject){
+$lasted_index = new IndexElement;
+$lasted_des = new DestinationElement;
 				$title = $subject;
 				echo "<div class='comment'>";	
 				if($index_id != NULL){
-					$sql = "SELECT *
-							FROM index_menu
-							WHERE id = '".$index_id."'";
-					$re = mysql_query($sql) or die(mysql_error());
-					$index = mysql_fetch_array($re);
-					$index_name = $index["name"];
+					$lasted_index->query($index_id);
+					$index_name = $lasted_index->name;
 					
-					$sql = "SELECT EngName
-							FROM destinations
-							WHERE id = '".$index["dest_id"]."'";
-					$re = mysql_query($sql) or die(mysql_error());
-					$dest = mysql_fetch_array($re);
-					$dest_name = $dest["EngName"];
+					$lasted_des->query($lasted_index->destId);
+					$dest_name = $lasted_des->engName;
+				}
+				else
+					$dest_name ='';
 			?> 
 				
-				<a href="viewtopic.php?id=<?php echo $post_id?>" class="link" style="margin-left: 5px"><?php echo $title?></a>,
-				<b><span style="color: gray"><?php echo $dest_name;?></span></b>
+			<a href="viewtopic.php?id=<?php echo $post_id?>" class="link" style="margin-left: 5px"><?php echo $title?></a>
+			<b><span style="color: gray"><?php echo $dest_name;?></span></b>
 				<?php
-					}
 				echo "<span name=".$id_follow.">";
 					if($value==1)
 						echo "<a onclick='changevalue($value,$id_follow,$numrow)'class='link'>Follow</a>";
@@ -37,13 +37,6 @@ function get_index_des($value,$id_follow,$numrow,$index_id,$post_id,$subject){
 				<br/>
 				</div>
 				<?php
-}
-function get_num($post_id,$user_id){
-			$str = "SELECT *
-					FROM editions
-					WHERE post_id = '".$post_id."' and user_id=$user_id";
-			$re_row = mysql_query($str) or die(mysql_error());		
-			return mysql_num_rows($re_row);
 }
 $type = $_POST['t'];
 $s = isset($_POST['s']);
@@ -64,11 +57,11 @@ else{
 	$start1 = 0;
 }
 if($type == 1 ){
-			$sql_page = "SELECT *
-					FROM editions
-					WHERE checked=1 and user_id=".myUser_id(myip())."";
-			$res_page = mysql_query($sql_page) or die(mysql_error());
-			$num = mysql_num_rows($res_page);
+$e = new Edition;
+			$arr = $e->query_string( "SELECT *
+				        		      FROM editions
+							          WHERE checked=1 and user_id=".myUser_id(myip())."");
+			$num = $arr['n'];
 			if( $num > $row_per_page)
 			{
 				$num_page = ceil($num/$row_per_page);
@@ -77,30 +70,27 @@ if($type == 1 ){
 				$num_page = 1;
 			}
 
-			$sql = "SELECT *
-					FROM editions
-					WHERE checked=1 and user_id=".myUser_id(myip())." limit $start,$row_per_page";
-			$result = mysql_query($sql) or die(mysql_error());
+			$result = $e->query_string("SELECT *
+									    FROM editions
+									    WHERE checked=1 and user_id=".myUser_id(myip())." limit $start,$row_per_page");
 			echo "<div class='comment_block'>";					
 			
-			$numrow = mysql_num_rows($result);
-			if ($numrow == 0) {
+			if ($result == 0) {
 				echo "You haven't posted any topics yet";
 				return;
-			}							
-			while ($post = mysql_fetch_array($result)) {
-			
-				$str = "SELECT *
-						FROM follow
-						WHERE post_id=$post[post_id] and user_id=$post[user_id]";
-				$re = mysql_query($str) or die(mysql_error());
-				$row = mysql_fetch_array($re);
-				//GET NUM ROWs 
-				$numrow1 = get_num($row["post_id"],$row['user_id']);
-				
-				get_index_des($row['value'],$row['id'],$numrow1,$post["index_id"],$row['post_id'],$post["post_subject"]);
-			
 			}
+		array_pop($result);							
+		foreach($result as $key=>$post){
+				$r = $e->query_string("SELECT *
+										 FROM follow
+										 WHERE post_id=$post[post_id] and user_id=$post[user_id]");
+				//GET NUM ROWs
+				array_pop($r);
+				foreach($r as $row){ 
+					$numrow1 = Edition::get_num($row["post_id"],$row['user_id']);
+					get_index_des($row['value'],$row['id'],$numrow1,$post["index_id"],$row['post_id'],$post["post_subject"]);
+				}
+		}
 			echo "<br />";
 			if($num_page > 1){
 				$current_page = ($start/$row_per_page)+1;
@@ -119,11 +109,11 @@ if($type == 1 ){
 			echo "</div>";
 }
 else if($type == 0){
-			$sql_page = "SELECT *
-					FROM editions
-					WHERE checked=0 and user_id=".myUser_id(myip())." and post_id!=0";
-			$res_page = mysql_query($sql_page) or die(mysql_error());
-			$num = mysql_num_rows($res_page);
+$e1 = new Edition;
+			$arr1 = $e1->query_string("SELECT *
+									  FROM editions
+									  WHERE checked=0 and user_id=".myUser_id(myip())." and post_id!=0");
+			$num = $arr1['n'];
 			if( $num > $row_per_page)
 			{
 				$num_page = ceil($num/$row_per_page);
@@ -131,31 +121,27 @@ else if($type == 0){
 			else{
 				$num_page = 1;
 			}
-			$sql = "SELECT *
-					FROM editions
-					WHERE checked=0 and user_id=".myUser_id(myip())." and post_id!=0 limit $start1,$row_per_page";
-			$result = mysql_query($sql) or die(mysql_error());
+			$result1 = $e1->query_string("SELECT *
+										  FROM editions
+										  WHERE checked=0 and user_id=".myUser_id(myip())." and post_id!=0 limit $start1,$row_per_page");
 			echo "<div class='comment_block'>";					
 			
-			$numrow = mysql_num_rows($result);
-			if ($numrow == 0) {
+			if ($result1 == 0) {
 				echo "You haven't posted any topics yet";
 				return;
 			}
-					
-			while ($post = mysql_fetch_array($result)) {
-				
-				$str = "SELECT *
-						FROM follow
-						WHERE post_id=$post[post_id] and user_id=$post[user_id]";
-				$re = mysql_query($str) or die(mysql_error());
-				$row = mysql_fetch_array($re);
-				//GET NUM ROWs 
-				$numrow1 = get_num($row["post_id"],$row['user_id']);
-									
-					get_index_des($row['value'],$row['id'],$numrow1,$post["index_id"],$row['post_id'],$post["post_subject"]);
-				 
-				}
+			array_pop($result1);
+			foreach($result1 as $key=>$post1) {
+					$r1 = $e1->query_string("SELECT *
+											   FROM follow
+											   WHERE post_id=$post1[post_id] and user_id=$post1[user_id]");
+					array_pop($r1);
+					//GET NUM ROWs 
+					foreach($r1 as $row1){
+						$numrow1 = Edition::get_num($row1["post_id"],$row1['user_id']);
+						get_index_des($row1['value'],$row1['id'],$numrow1,$post1["index_id"],$row1['post_id'],$post1["post_subject"]);
+				 }
+			}
 			echo "<br />";
 			if($num_page > 1){
 				$current_page = ($start/$row_per_page)+1;
@@ -174,4 +160,3 @@ else if($type == 0){
 			echo "</div>";
 }
 ?>
-

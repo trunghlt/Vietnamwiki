@@ -245,5 +245,25 @@ class Edition {
 		$q->query("	DELETE FROM editions
 					WHERE id = ".$this->id);
 	}
+	static public function get_num($post_id,$user_id){
+				$str = "SELECT *
+						FROM editions
+						WHERE post_id=$post_id and user_id=$user_id";
+				$re_row = mysql_query($str) or die(mysql_error());		
+				return mysql_num_rows($re_row);
+	}
+	public function query_string($str){
+		$q = new Db;
+		$q->query($str);
+		if($q->n > 0){
+			while($r = mysql_fetch_assoc($q->re))
+				$row[] = $r;
+		}
+		else
+			return 0;
+		$row['n'] = $q->n;
+		@mysql_free_result($q->re);
+		return $row;
+	}
 }
 ?>

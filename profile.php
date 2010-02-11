@@ -5,6 +5,10 @@ include('core/init.php');
 include('core/classes/Db.php');
 include('core/classes/User.php');
 include('core/classes/PostElement.php');
+include('core/classes/Message.php');
+include('core/classes/IndexElement.php');
+include('core/classes/DestinationElement.php');
+include('core/classes/CommentElement.php');
 include('core/session.php');
 include("ajax_header.php");	
 include("header.php");
@@ -14,25 +18,20 @@ include('topRibbon.php');
 
 <!--User info-->
 <?php
+	$user = new User;
 	$username = htmlspecialchars($_REQUEST["username"], ENT_QUOTES);
-	$sql = "SELECT * 
-			FROM users
-			WHERE username = '".$username."'";
-	$result = mysql_query($sql) or die(mysql_error());
-	if (!($row = mysql_fetch_array($result))) die_to_index();
-	$user_info = $row;
+	$user_info = $user->query_username($username);
+	if ($user_info==0) die_to_index();
 ?>
 
 <?php
+$message = new Message;
 	if (check_logged_in(myip())&&isset($_POST["message"])) {
 		$mess = htmlspecialchars($_POST["message"], ENT_QUOTES);
 		$s_id = myUser_id(myip());
 		$r_id = $user_info["id"];
-		$post_time = time();	
-		$sql = "INSERT INTO messages
-				(s_id, r_id, content, post_time)
-				VALUE ('".$s_id."','".$r_id."','".$mess."','".$post_time."')";
-		mysql_query($sql) or die(mysql_error());
+		$post_time = time();
+		$message->insert($s_id,$r_id,$mess,$post_time);
 	}
 ?>
 <style>
@@ -125,37 +124,25 @@ include('topRibbon.php');
 	<tr>
 		<h1>Latest posts</h1>
 		<?php
-			$sql = "SELECT * FROM posts
-					WHERE post_username = '".$username."'";
-			$result = mysql_query($sql) or die(mysql_error());
+			$lasted_post = new PostElement;
+			$result = $lasted_post->query_username($username);
 			echo "<div class='comment_block'>";					
 			
-			$numrow = mysql_num_rows($result);
-			if ($numrow == 0) {
+			if ($result == 0) {
 				echo "You haven't posted any topics yet";
 			}
 						
-			while ($row = mysql_fetch_array($result)) {
-				$sql = "SELECT post_subject
-						FROM posts_texts
-						WHERE post_id = '".$row["post_id"]."'";
-				$re = mysql_query($sql) or die(mysql_error());
-				$post = mysql_fetch_array($re);
-				$title = $post["post_subject"];
+			foreach($result as $row) {
+				$lasted_post->query($row["post_id"]);
+				$title = $lasted_post->title;
 				
-				$sql = "SELECT *
-						FROM index_menu
-						WHERE id = '".$row["index_id"]."'";
-				$re = mysql_query($sql) or die(mysql_error());
-				$index = mysql_fetch_array($re);
-				$index_name = $index["name"];
+				$lasted_index = new IndexElement;
+				$lasted_index->query($row["index_id"]);
+				$index_name = $lasted_index->name;
 				
-				$sql = "SELECT EngName
-						FROM destinations
-						WHERE id = '".$index["dest_id"]."'";
-				$re = mysql_query($sql) or die(mysql_error());
-				$dest = mysql_fetch_array($re);
-				$dest_name = $dest["EngName"];
+				$lasted_des = new DestinationElement;
+				$lasted_des->query($lasted_index->destId);
+				$dest_name = $lasted_des->engName;
 					?> 
 				<div class='comment'>
 				<a href="viewtopic.php?id=<?php echo $row["post_id"]?>" class="link" style="margin-left: 5px"><?php echo $title?></a>,
@@ -189,25 +176,17 @@ include('topRibbon.php');
 	<tr>
 		<h1>Latest comments</h1>
 		<?php
-			$sql = "SELECT *
-					FROM `comments`
-					WHERE (SELECT post_username
-						   FROM posts
-						   WHERE post_id = `comments`.post_id) = '".$username."'
-					ORDER BY comment_id DESC";
-			$result = mysql_query($sql) or die(mysql_error());
+				$last_comment = new CommentElement;
+					$result = $last_comment->query_get_posts($username);
 			
 				//write comments
 				function write_comment($row) {
 					$post_id = $row["post_id"];
 					echo "<div class='comment'>";
 					//echo entry
-					$sql = "SELECT *
-						FROM posts_texts
-						WHERE post_id = '".$post_id."'";
-					$r1 = mysql_query($sql) or die(mysql_error());
-					$x = mysql_fetch_array($r1);
-					echo "<span class='style5'>Entry: " . $x["post_subject"] . "</span>";
+					$x = new PostElement;
+					$x->query($post_id);
+					echo "<span class='style5'>Entry: " . $x->title . "</span>";
 					
 					//comment content
 					echo "<div class='content'>";
@@ -215,65 +194,58 @@ include('topRibbon.php');
 					echo "</div>";
 					
 					//poster detail					
-					$sql = "SELECT *
-						FROM users
-						WHERE id='".$row["user_id"]."'";
-					$r1 = mysql_query($sql) or die(mysql_error());
-					$x = mysql_fetch_array($r1);
+					$r1 = new User;
+					$x = $r1->query_id($row["user_id"]);
 					$posttime = $row['comment_time'];
 					$timelabel = date("d M, Y H:i", $posttime);
+					if($x != 0 && $x["firstName"]!='' && $x["lastName"]!='')
 					echo "<span class='style4'>posted by " . $x["firstName"] . " " . $x["lastName"] ." at " . $timelabel . "</span>";
-					
+					else
+					echo "<span class='style4'>posted by guess at " . $timelabel . "</span>";						
 					echo "</div>";				
 				}
 				
 			echo "<div class='comment_block'>";		
 			
-			$numrow = mysql_num_rows($result);
-			if ($numrow == 0) {
+			if ($result == 0) {
 				echo "There is no comment on your topics till now";
 			}
-			
-			while ($row = mysql_fetch_array($result)) {
-				write_comment($row);
+			else{
+				foreach($result as $row) {
+					write_comment($row);
+				}
 			}
 			echo "</div>";				
 		?>
 	</tr>
+	<!--End Latest comments-->
 	<!--Private messages-->
 	<tr>
 		<h1>Private messages</h1>
 		<?php
 			echo "<div class='comment_block'>";	
-			$sql = "SELECT *
-					FROM messages
-					WHERE r_id = '".$user_info["id"]."'";
-			$result = mysql_query($sql) or die(mysql_error());
-			
-			$numrow = mysql_num_rows($result);
-			if ($numrow == 0) {
+			$result = $message->query_user_id($user_info["id"]);
+			if ($result == 0) {
 				echo "There is no message till now";
 			}
-			
-			while ($row = mysql_fetch_array($result)) {
-				echo "<div class='comment'>";
-				
-				echo "<div class='content'>";
-				echo $row["content"];
-				echo "</div>";
-				
-				//poster detail					
-				$sql = "SELECT *
-					FROM users
-					WHERE id='".$row["s_id"]."'";
-				$r1 = mysql_query($sql) or die(mysql_error());
-				$x = mysql_fetch_array($r1);				
-				$posttime = $row['post_time'];
-				$timelabel = date("d M, Y H:i", $posttime);
-				echo "<span class='style4'>posted by " . $x["firstName"] . " " . $x["lastName"] ." at " . $timelabel . "</span>";
-				echo "</div>";
+			else{
+				foreach($result as $row) {
+					echo "<div class='comment'>";
+					
+					echo "<div class='content'>";
+					echo $row["content"];
+					echo "</div>";
+					
+					//poster detail
+					$mes_user = new User;	
+					$x = $mes_user->query_id($row["s_id"]);
+
+						$posttime = $row['post_time'];
+						$timelabel = date("d M, Y H:i", $posttime);
+						echo "<span class='style4'>posted by " . $x["firstName"] . " " . $x["lastName"] ." at " . $timelabel . "</span>";
+						echo "</div>";					
+				}
 			}
-			
 			echo "</div>";
 			echo "<br/><br/>";				
 			if (check_logged_in(myip())) {
@@ -288,6 +260,7 @@ include('topRibbon.php');
 				<?php
 			}
 		?>
+	<!--End Private messages-->
 	</tr>
 	</tbody>
 	</table>

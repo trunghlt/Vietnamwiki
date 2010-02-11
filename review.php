@@ -11,6 +11,7 @@ include("ajaxLoad.php");
 include('./libraries/TalkPHP_Gravatar.php');
 $q = new Db;	
 $user_info = new User;
+//Add span rate in review1 or review
 $str_rate="<span id='rateStatus'>Please rate...</span><br/><div id='rateMe' title='Please rate this topic'><div onclick='rateIt(this)' id='_1' class='none' title='This is very bad, never try it !!!' onmouseover='rating(this)' onmouseout='off(this)'>&nbsp;</div><div onclick='rateIt(this)' id='_2' class='none' title='This is bad, I don't recommend it' onmouseover='rating(this)' onmouseout='off(this)'>&nbsp;</div><div onclick='rateIt(this)' id='_3' class='none' title='This is ok, no thing special' onmouseover='rating(this)' onmouseout='off(this)'>&nbsp;</div><div onclick='rateIt(this)' id='_4' class='none' title='This is good, I recommend it' onmouseover='rating(this)' onmouseout='off(this)'>&nbsp;</div><div onclick='rateIt(this)' id='_5' class='none' title='This is very good, highly recommend !!!' onmouseover='rating(this)' onmouseout='off(this)'>&nbsp;</div></div>";
 $pAvatar = new TalkPHP_Gravatar();
 ?>

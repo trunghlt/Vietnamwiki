@@ -15,27 +15,27 @@
 	<h1>Personal information</h1>
 	<div id='error'></div>
 	<div>
-		Password:
+		<label style="float:left; width:100px;">Password: </label>
 		<input id="pw" name="pw" type="password" onchange="return change('pw')" />							
 	</div><br />
 	<div>
-		Re_Password:
+		<label style="float:left; width:100px;">Re_Password: </label>
 		<input id="re_pw" name="re_pw" type="password" onchange="return change('re_pw')"/>							
 	</div><br />
 	<div>
-		Email:
+		<label style="float:left; width:100px;">Email: </label>
 		<input id="email" name="email" type="text" value ="<?php echo $user_info["email"]?>" onchange="return change('email')"/>							
 	</div><br />
 	<div>
-		First name:
+		<label style="float:left; width:100px;">First name: </label>
 		<input id="firstname" name="firstname" type="text" value ="<?php echo $user_info["firstName"]?>" />							
 	</div><br />
 	<div>
-		Last name:
+		<label style="float:left; width:100px;">Last name: </label>
 		<input id="lastname" name="lastname" type="text" value ="<?php echo $user_info["lastName"]?>" />
 	</div><br />
 	<div>
-		Date of birth:
+		<label style="float:left; width:100px;">Date of birth: </label>
 <?php
 	 $day = date("j", $user_info["dob"]);
 	 $month = date("n", $user_info["dob"]);
@@ -76,14 +76,13 @@
 		  </select>
 	</div><br />
 	<div>
-			Location :
+			<label style="float:left; width:100px;">Location: </label>
 
 			<select name="loc" id="loc">
 				<?php
-					$sql = "SELECT *
-							FROM countries";
-					$result = mysql_query($sql) or die(mysql_error());
-					while ($row = mysql_fetch_array($result)) {
+					$country = new DestinationElement;
+					$result = $country->query_country();
+					foreach($result as $row) {
 						if($row["id"] == $user_info['locationCode']){
 						?>
 							<option value="<?php echo $row["id"]?>" selected="selected"><?php echo $row["country"]?></option>
