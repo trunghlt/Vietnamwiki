@@ -30,16 +30,29 @@ Get the review list HTML text for the post with $postId
 ->review list HTML text
 ----------------------------------------------------------------*/
 function getReviewListHTML($postId) {
+	global $pAvatar;
 	$reviewList = Review::getReviewListByPostId($postId); 
 	foreach ($reviewList as $review) { 
-		$user = User::getUserElementById($review->userId);					
+							
 		$reviewDateTimeStr = date("d M Y, H:i", $review->reviewDateTime); 
 		$reviewText = str_replace("\n", "<p/>", $review->reviewText);
 		?>					
 		<div class="reviewElement">
 			<div class="reviewHead">
 				<div class="reviewRate" style="background: url(/images/stars_map.png) 0 <?php echo -19*($review->rateValue - 1)*2 - 19 ?>px no-repeat;">&nbsp;</div>
-				&nbsp; Reviewed by <?php echo $user->username?> at <?php echo $reviewDateTimeStr?></div>
+				&nbsp; Reviewed by <?php 
+				if($review->name!='' && $review->email=='')
+					echo $review->name;
+				elseif($review->name=='' && $review->email==''){
+					$user = User::getUserElementById($review->userId);
+					echo $user->username;
+				}
+				elseif($review->email!='' && $review->userId==0){
+					$pAvatar->setEmail($review->email)->setSize(80)->setRatingAsPG();
+					echo "<img class='img_guess' src='".$pAvatar->getAvatar()."' height='30' width='30'/>";					
+				}
+					
+				?> at <?php echo $reviewDateTimeStr?></div>
 			<div class="reviewBody">
 				<?php
 				//delete all words with length >= 30

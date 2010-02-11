@@ -11,6 +11,8 @@ class Review {
 	public $rateValue;
 	public $reviewText;
 	public $reviewDateTime;
+	public $name;
+	public $email;
 	public static $currentReviewListByPostId;
 	
 	public function query($id) {
@@ -41,6 +43,8 @@ class Review {
 		$e->reviewText = $reviewArr["review_text"];
 		$e->rateValue = $reviewArr["rate_value"];
 		$e->reviewDateTime = $reviewArr["review_date_time"];
+		$e->name = $reviewArr["name"];
+		$e->email = $reviewArr["email"];
 		return $e;
 	}
 	
@@ -70,8 +74,8 @@ class Review {
 	public function add() {
 		$mysql["reviewText"] = htmlspecialchars($this->reviewText, ENT_QUOTES);
 		Db::sQuery("INSERT INTO reviews
-					(user_id, post_id, rate_value, review_text, review_date_time)
-					VALUES ({$this->userId}, {$this->postId}, {$this->rateValue}, '{$mysql["reviewText"]}', {$this->reviewDateTime})");		
+					(user_id, post_id, rate_value, review_text, review_date_time,name,email)
+					VALUES ({$this->userId}, {$this->postId}, {$this->rateValue}, '{$mysql["reviewText"]}', {$this->reviewDateTime},'{$this->name}','{$this->email}')");		
 		$this->id = mysql_insert_id();
 	}
 	

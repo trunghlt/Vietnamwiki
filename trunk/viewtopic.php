@@ -4,7 +4,6 @@
 	include('core/classes.php');
 	include('core/session.php');
 	include('core/filters.php');
-	
 	$postElement = new PostElement;
 	$postElement->query(PostElement::filterId($_GET["id"]));
 	$indexElement = new IndexElement;
@@ -42,5 +41,7 @@ include("forms/deleteConfirmForm.php");
 include("forms/loginForm.php");
 include('dialog.php');
 include("forms/register_email.php");
+include("forms/fill_comment_email_form.php");
+include("forms/fill_comment_name_form.php");
 include("footer.php");
 ?>

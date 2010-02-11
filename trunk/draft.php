@@ -230,5 +230,7 @@ include("forms/commentForm.php");
 include("forms/comment_login.php");
 include("forms/deleteConfirmForm.php");
 include("forms/register_email.php");
+include("forms/fill_comment_email_form.php");
+include("forms/fill_comment_name_form.php");
 include("footer.php");
 ?>

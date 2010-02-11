@@ -7,6 +7,8 @@ class CommentElement{
 	public $commentTime;
 	public $commentText;
 	public $editionid;
+	public $email;
+	public $name;
 	
 	public function query() {
 		$q = new Db;
@@ -25,8 +27,8 @@ class CommentElement{
 	public function add() {
 		$q = new Db;
 		$q->query(" INSERT INTO comments
-					(post_id, user_id, poster_ip, comment_time, comment_text,edition_id)
-					VALUES ('".$this->postId."','".$this->userId."','".$this->posterIp."','".$this->commentTime."','".$this->commentText."','".$this->editionid."')");
+					(post_id, user_id, poster_ip, comment_time, comment_text,edition_id,name,email)
+					VALUES ('".$this->postId."','".$this->userId."','".$this->posterIp."','".$this->commentTime."','".$this->commentText."','".$this->editionid."','".$this->name."','".$this->email."')");
 		$this->id = mysql_insert_id();
 	}
 	
@@ -35,5 +37,5 @@ class CommentElement{
 		$q->query(" DELETE FROM comments
 					WHERE comment_id = ".$this->id);
 	}
-	
 }
+?>
