@@ -209,6 +209,20 @@ class PostElement {
 			}
 		}
 	}
-	
+	public function query_username($username) {
+		$q = new db;
+		$q->query("	SELECT *
+					FROM posts
+					WHERE post_username = '$username'");
+		if($q->n > 0){
+			while($r = mysql_fetch_assoc($q->re))
+			{
+				$row[] =$r;
+			}
+			return $row;
+		}
+		else
+			return 0;	
+	}	
 }
 ?>

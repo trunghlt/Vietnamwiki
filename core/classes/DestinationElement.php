@@ -38,5 +38,12 @@ class DestinationElement {
 						`zoomlevel`=".$clean["zoomlevel"]."
 					WHERE id=".$this->id);
 	}
+	public function query_country() {
+		$q = new Db();
+		$q->query('SELECT * FROM countries');
+		while($row = mysql_fetch_assoc($q->re))
+			$r[] = $row;
+		return $r;
+	}	
 }
 ?>
