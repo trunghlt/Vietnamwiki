@@ -114,6 +114,36 @@ class User {
 			}
 			return $q->re;
 	}
+	/*-----------------------------------------------------------
+	Assign values of an array into user's properties
+	- $arr: the input array
+	-----------------------------------------------------------*/
+	function query_username($username) {
+		$q = new db();
+		$q->query(" SELECT *
+					FROM users
+					WHERE username='$username'");
+		if($q->n>0){			
+			while($r = mysql_fetch_assoc($q->re))
+				$row = $r;
+			return $row;
+		}
+		else
+			return 0;
+	}
+	function query_id($id) {
+		$q = new db();
+		$q->query(" SELECT *
+					FROM users
+					WHERE id=$id");
+		if($q->n>0){			
+			while($r = mysql_fetch_assoc($q->re))
+				$row = $r;
+		}
+		else
+			return 0;
+		return $row;
+	}	
 }
 $user_info = new User;
 ?>

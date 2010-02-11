@@ -37,5 +37,22 @@ class CommentElement{
 		$q->query(" DELETE FROM comments
 					WHERE comment_id = ".$this->id);
 	}
+	public function query_get_posts($username){
+			$q = new Db;
+			$q->query("SELECT *
+						FROM `comments`
+						WHERE (SELECT post_username
+						 		FROM posts
+						   		WHERE post_id = `comments`.post_id) = '".$username."'
+					ORDER BY comment_id DESC");
+			if($q->n > 0){
+				while($row = mysql_fetch_assoc($q->re))
+					$r[] = $row;
+			}
+			else 
+				return 0;
+			@mysql_free_result($q->re);
+				return $r;
+	}
 }
 ?>
