@@ -36,7 +36,7 @@ if (logged_in() || chkFbLoggedIn()) {
 }
 else{
 ?>
-	<a class='link'  onClick="comment_login.dialog('open')"> Comment </a>
+	<a class='link' onClick="commentlogin.dialog('open')"> Comment </a>
 <?php
 }
 ?>

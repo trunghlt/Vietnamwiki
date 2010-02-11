@@ -1,6 +1,6 @@
 <div id="commentList">
 <?php
-
+include('libraries/TalkPHP_Gravatar.php');
 $draft = isset($draf);
 if($draft){
 	$str_comment = "edition_id = '".$post_id."'"; 
@@ -33,21 +33,44 @@ if ($n > 0) {
 			?>
 			<div class="commentInfo">
 			<?php
-			$sql = "SELECT *
-				FROM users
-				WHERE id='".$row["user_id"]."'";
-			$r1 = mysql_query($sql) or die(mysql_error());
-			$x = mysql_fetch_array($r1);
-			$posttime = $row['comment_time'];
-			$timelabel = date("d M, Y H:i", $posttime);			
-			$username = $x["username"];			
-			echo "Posted by ". $username. " at ". $timelabel;			
-			?>
-			</div>
-			</div>
-			<?php
+			if($row["user_id"]!=0){
+				$sql = "SELECT *
+					FROM users
+					WHERE id='".$row["user_id"]."'";
+				$r1 = mysql_query($sql) or die(mysql_error());
+				$x = mysql_fetch_array($r1);
+				$posttime = $row['comment_time'];
+				$timelabel = date("d M, Y H:i", $posttime);			
+				$username = $x["username"];			
+				echo "Posted by ". $username. " at ". $timelabel;			
+
+			}
+			else{
+				if(($row['name']!='' && $row['email']!='')||($row['name']=='' && $row['email']!=''))
+				{
+					$pAvatar = new TalkPHP_Gravatar();
+					$pAvatar->setEmail($row['email'])->setSize(80)->setRatingAsPG();
+						$posttime = $row['comment_time'];
+						$timelabel = date("d M, Y H:i", $posttime);			
+						echo "Posted by <img class='img_guess' src='".$pAvatar->getAvatar()."' height='20' width='20'/> at ". $timelabel;					
+				}
+				elseif($row['name']!='' && $row['email']==''){
+						$posttime = $row['comment_time'];
+						$timelabel = date("d M, Y H:i", $posttime);			
+						echo "Posted by $row[name] at ". $timelabel;					 
+				}
+				elseif($row['name']=='' && $row['email']==''){
+						$posttime = $row['comment_time'];
+						$timelabel = date("d M, Y H:i", $posttime);			
+						echo "Posted by guess at ". $timelabel;
+				}
+			}
+		?>
+		</div>
+		</div>
+		<?php
 		}
-	
+
 	$i = 0;	
 	while (($i < 5)&&($row = mysql_fetch_array($result))) {
 		$i++;
