@@ -90,7 +90,10 @@ Return value in array
 		if($where != ''){
 			if(is_array($where)){
 				foreach($where as $key=>$value){
-					$r[] = "$key = $value";
+					if(is_string($value))
+						$r[] = "$key='$value'";
+					else
+						$r[] = "$key=$value";
 				}
 				$where = implode(" and ",$r);
 				$where = "where $where";
