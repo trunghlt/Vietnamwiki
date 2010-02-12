@@ -252,18 +252,32 @@ class Edition {
 				$re_row = mysql_query($str) or die(mysql_error());		
 				return mysql_num_rows($re_row);
 	}
-	public function query_string($str){
-		$q = new Db;
-		$q->query($str);
-		if($q->n > 0){
-			while($r = mysql_fetch_assoc($q->re))
-				$row[] = $r;
+	public function query_string($checked,$user_id,$post_id='',$start='',$numpage=''){
+		$active = new Active;
+		if($post_id!='' || $post_id==0){
+			$arr = array('checked'=>$checked,'user_id'=>(int)$user_id,'post_id !'=>$post_id);			
 		}
-		else
-			return 0;
-		$row['n'] = $q->n;
-		@mysql_free_result($q->re);
-		return $row;
+		else{
+			$arr = array('checked'=>$checked,'user_id'=>$user_id);
+		}
+		if($start=='' && $numpage=='')
+		{
+			$r = $active->select('','editions',$arr);
+			if($active->get_num() <= 0){
+					return 0;
+			}
+			$r['n'] =  $active->get_num();
+			return $r;
+		}
+		else{
+				$active->limit($start,$numpage);
+				$r = $active->select('','editions',$arr);
+			if($active->get_num() <= 0){
+					return 0;
+			}
+			$r['n'] =  $active->get_num();
+			return $r;		
+		}
 	}
 }
 ?>
