@@ -21,6 +21,9 @@
 	<label>Please click on <a href="review.php?id=<?php echo $post_id?>">Review</a> for any longer comments.</label>
 <?php }?>
 </form>
+</div>
+<div id='filldialog' title="Fill">
+You must have fill Email or your name
 </div> 
 <script language="javascript">
 function updateCommentText2(reviewText) {
@@ -42,7 +45,23 @@ function submitComment_login(){
 	});	
 }
 
-jQuery(document).ready(function(){ 
+jQuery(document).ready(function(){
+	fill =  jQuery("#filldialog").dialog({
+		autoOpen: false,
+		buttons: {
+		 'Fill Name': function() {
+				FillNameComment.dialog('open');
+		 },
+		 'Fill Email': function() {
+			FillEmailComment.dialog('open');
+		 },		 
+		 Cancel: function() {
+				document.getElementById('name_guess').value='';
+				document.getElementById('email_guess').value='';
+			jQuery(this).dialog('close');
+		 }
+		}
+	});		 
 	commentlogin = jQuery("#commentDialog_login").dialog({
 		autoOpen: false,
 		height: 'auto',
@@ -55,19 +74,17 @@ jQuery(document).ready(function(){
 		},
 		buttons: {
 			'Submit': function() {
-				submitComment_login();
-				jQuery(this).dialog('close');
+				if(jQuery("#name_guess").val()=='' && jQuery("#email_guess").val()=='')
+					fill.dialog('open');
+				else{
+					submitComment_login();
+					jQuery(this).dialog('close');
+				}
 			},
 			Cancel: function() {
 					document.getElementById('name_guess').value='';
 					document.getElementById('email_guess').value='';
 				jQuery(this).dialog('close');
-			},
-			'Fill Name': function() {
-				FillNameComment.dialog('open');
-			},
-			'Fill Email': function() {
-				FillEmailComment.dialog('open');
 			}
 		}
 	});

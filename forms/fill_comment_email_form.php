@@ -34,6 +34,7 @@ function submit_email_comment(dom){
 			if(data=='1'){
 				document.getElementById('email_guess').value = document.getElementById('email_comment').value;
 				FillEmailComment.dialog('close');
+				fill.dialog('close');
 			}else{ 
 				alert('Email Invalid');
 			}
