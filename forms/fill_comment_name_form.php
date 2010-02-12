@@ -33,6 +33,7 @@ function submit_name_comment(dom){
 			if(data=='1'){
 				document.getElementById('name_guess').value = document.getElementById('name_comment').value;
 				FillNameComment.dialog('close');
+				fill.dialog('close');
 			}else{ 
 				alert('Wrong');
 			}

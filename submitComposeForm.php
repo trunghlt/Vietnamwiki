@@ -31,7 +31,7 @@ $editionElement->reference = $postElement->reference;
 $editionElement->add();
 if($editionElement->postId != 0){
 		$row2 = Email::query(1);
-		$str = 'http://www.vietnamwiki.net/viewtopic.php?id='.$editionElement->id;
+		$str = 'http://www.vietnamwiki.net/viewtopic.php?id='.$postElement->id;
 		$message = str_replace('here',$str,$row2['message']);
 		$str = $q->query('select email from users where level=1');
 		

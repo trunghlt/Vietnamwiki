@@ -21,7 +21,9 @@
 
 <div id="reviewLowerBound1" title="Alert">Sorry, your review has to be more than 140 characters. 
 Click on <a href="<?php echo getPostPermaLink($post_id)?>">comment</a> if you want to comment less than 140 characters.</div>
-
+<div id='filldialog' title="Fill">
+You must have fill Email or your name
+</div> 
 <script language="javascript">
 function updateReviewText1(reviewText) {
 	if (jQuery(reviewText).val().length > 5000)
@@ -31,6 +33,22 @@ function updateReviewText1(reviewText) {
 
 jQuery(document).ready(function(){ 
 	loadToolbar("toolbar");
+	fill =  jQuery("#filldialog").dialog({
+		autoOpen: false,
+		buttons: {
+		 'Fill Name': function() {
+				FillNameComment.dialog('open');
+		 },
+		 'Fill Email': function() {
+			FillEmailComment.dialog('open');
+		 },		 
+		 Cancel: function() {
+				document.getElementById('name_guess').value='';
+				document.getElementById('email_guess').value='';
+			jQuery(this).dialog('close');
+		 }
+		}
+	});
 	review_LowerBound = jQuery("#reviewLowerBound1").dialog({autoOpen: false});
 	must_RateAlert = jQuery("#mustRateAlert1").dialog({autoOpen: false});
 	review_Dialog1 = jQuery("#reviewDialog1").dialog({
@@ -52,17 +70,15 @@ jQuery(document).ready(function(){
 					review_LowerBound.dialog("open");
 				}
 				else {
-					submitReview('reviewText1','email_guess','name_guess');
-					resetRating();
-					jQuery(this).dialog('close');
+					if(jQuery("#name_guess").val()=='' && jQuery("#email_guess").val()=='')
+						fill.dialog('open');
+					else{	
+						submitReview('reviewText1','email_guess','name_guess');
+						resetRating();
+						jQuery(this).dialog('close');
+					}	
 				}
 			},
-		'Fill Name': function() {
-			FillNameComment.dialog('open');
-		},
-		'Fill Email': function() {
-			FillEmailComment.dialog('open');
-		},
 		Cancel: function() {
 				jQuery(this).dialog('close');
 			}

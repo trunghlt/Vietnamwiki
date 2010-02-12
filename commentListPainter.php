@@ -1,6 +1,7 @@
 <div id="commentList">
 <?php
 include('libraries/TalkPHP_Gravatar.php');
+include('core/classes/CommentElement.php');
 $draft = isset($draf);
 if($draft){
 	$str_comment = "edition_id = '".$post_id."'"; 
@@ -8,12 +9,10 @@ if($draft){
 else{
 	$str_comment = "post_id = '".$post_id."'"; 
 }
-$sql = "SELECT *
-		FROM comments
-		WHERE $str_comment
-        ORDER BY comment_id DESC";
-$result = mysql_query($sql) or die(mysql_error());
-$n = mysql_num_rows($result);
+$com = new CommentElement;
+$r_com = $com->query_num($str_comment);
+$n = $r_com['n'];
+array_pop($r_com);
 if ($n > 0) {
 	?>
 	<div class="comment_head" align="center">
@@ -34,11 +33,8 @@ if ($n > 0) {
 			<div class="commentInfo">
 			<?php
 			if($row["user_id"]!=0){
-				$sql = "SELECT *
-					FROM users
-					WHERE id='".$row["user_id"]."'";
-				$r1 = mysql_query($sql) or die(mysql_error());
-				$x = mysql_fetch_array($r1);
+				$user_com = new User;
+				$x = $user_com->query_id($row["user_id"]);
 				$posttime = $row['comment_time'];
 				$timelabel = date("d M, Y H:i", $posttime);			
 				$username = $x["username"];			
@@ -71,18 +67,18 @@ if ($n > 0) {
 		<?php
 		}
 
-	$i = 0;	
-	while (($i < 5)&&($row = mysql_fetch_array($result))) {
+	while ($i < 5) {
+			write_comment($r_com[$i], $post_id);
 		$i++;
-		write_comment($row, $post_id);
 	}
 	
 	//elastic comments
 	if ($i < $n) {
 		?> 
 		<div id="elastic_comments">
-			<?php while ($row = mysql_fetch_array($result)) {
-				write_comment($row, $post_id);
+			<?php while ($i < $n) {
+					write_comment($r_com[$i], $post_id);
+				$i++;
 			} ?>
 		</div>
 		<div align="center">

@@ -54,5 +54,21 @@ class CommentElement{
 			@mysql_free_result($q->re);
 				return $r;
 	}
+	public function query_num($str){
+		$q = new Db;
+		$q->query("SELECT *
+					FROM comments
+					WHERE $str
+					ORDER BY comment_id DESC");
+		if($q->n > 0){
+			while($row = mysql_fetch_assoc($q->re))
+				$r[] = $row;
+		}
+		else
+			return 0;
+			$r['n'] = $q->n;
+		return $r;
+		
+	}
 }
 ?>
