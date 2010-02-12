@@ -2,6 +2,7 @@
 include('../core/common.php');
 include('../core/init.php');
 include('../core/classes/Db.php');
+include('../core/classes/ActiveRecord.php');
 include('../core/classes/User.php');
 include('../core/classes/PostElement.php');
 include('../core/classes/IndexElement.php');
@@ -58,9 +59,8 @@ else{
 }
 if($type == 1 ){
 $e = new Edition;
-			$arr = $e->query_string( "SELECT *
-				        		      FROM editions
-							          WHERE checked=1 and user_id=".myUser_id(myip())."");
+
+			$arr = $e->query_string(1,myUser_id(myip()));
 			$num = $arr['n'];
 			if( $num > $row_per_page)
 			{
@@ -69,23 +69,19 @@ $e = new Edition;
 			else{
 				$num_page = 1;
 			}
-
-			$result = $e->query_string("SELECT *
-									    FROM editions
-									    WHERE checked=1 and user_id=".myUser_id(myip())." limit $start,$row_per_page");
+			
+			$result = $e->query_string(1,myUser_id(myip()),'',$start,$row_per_page);
 			echo "<div class='comment_block'>";					
 			
 			if ($result == 0) {
 				echo "You haven't posted any topics yet";
 				return;
 			}
-		array_pop($result);							
+		array_pop($result);
+		$f = new Follow;							
 		foreach($result as $key=>$post){
-				$r = $e->query_string("SELECT *
-										 FROM follow
-										 WHERE post_id=$post[post_id] and user_id=$post[user_id]");
+				$r = $f->query_post($post['post_id'],$post['user_id']);
 				//GET NUM ROWs
-				array_pop($r);
 				foreach($r as $row){ 
 					$numrow1 = Edition::get_num($row["post_id"],$row['user_id']);
 					get_index_des($row['value'],$row['id'],$numrow1,$post["index_id"],$row['post_id'],$post["post_subject"]);
@@ -110,9 +106,8 @@ $e = new Edition;
 }
 else if($type == 0){
 $e1 = new Edition;
-			$arr1 = $e1->query_string("SELECT *
-									  FROM editions
-									  WHERE checked=0 and user_id=".myUser_id(myip())." and post_id!=0");
+			$arr1 = $e1->query_string(0,myUser_id(myip()),0);
+			
 			$num = $arr1['n'];
 			if( $num > $row_per_page)
 			{
@@ -121,9 +116,7 @@ $e1 = new Edition;
 			else{
 				$num_page = 1;
 			}
-			$result1 = $e1->query_string("SELECT *
-										  FROM editions
-										  WHERE checked=0 and user_id=".myUser_id(myip())." and post_id!=0 limit $start1,$row_per_page");
+			$result1 = $e1->query_string(0,myUser_id(myip()),0,$start1,$row_per_page);
 			echo "<div class='comment_block'>";					
 			
 			if ($result1 == 0) {
@@ -131,12 +124,10 @@ $e1 = new Edition;
 				return;
 			}
 			array_pop($result1);
+			$f = new Follow;
 			foreach($result1 as $key=>$post1) {
-					$r1 = $e1->query_string("SELECT *
-											   FROM follow
-											   WHERE post_id=$post1[post_id] and user_id=$post1[user_id]");
-					array_pop($r1);
-					//GET NUM ROWs 
+					$r1 = $f->query_post($post1['post_id'],$post1['user_id']);
+					//GET NUM ROWs
 					foreach($r1 as $row1){
 						$numrow1 = Edition::get_num($row1["post_id"],$row1['user_id']);
 						get_index_des($row1['value'],$row1['id'],$numrow1,$post1["index_id"],$row1['post_id'],$post1["post_subject"]);

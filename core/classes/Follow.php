@@ -116,6 +116,23 @@ Free old result
 			@mysql_free_result($this->re);
 		}
 	}
+/***************************************************************
+Select table follow 
+
+* @param $user_id: check user_id,
+
+* @param $post_id: and check post_id,
+
+* return array value
+***************************************************************/
+	public function query_post($post_id,$user_id){
+		$q = new Db;
+		$str = "SELECT * FROM follow WHERE post_id=$post_id and user_id=$user_id";
+		$q->query($str);
+		while($row = mysql_fetch_assoc($q->re))
+			$r[] = $row;
+		return $r;
+	}
 }
 
 ?>
