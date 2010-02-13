@@ -30,6 +30,7 @@ if (logged_in() || chkFbLoggedIn()) {
 		else if ($currentUser->level == 1 && $row['checked']==0){
 ?>
 		| <a class='link' onClick="restoreDraft('2')">Accept this draft</a>	
+		| <a class='link' onClick="rej.dialog('open')">Reject</a>	
 <?php		
 		}
 	}

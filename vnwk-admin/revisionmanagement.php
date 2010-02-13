@@ -76,7 +76,7 @@ if (isset($_GET["task"])) {
 		echo "<ul id='tlist'>";
 		$sql = "SELECT *
 				FROM editions
-				WHERE checked=0
+				WHERE checked=0 and reject=0
 				order by edit_date_time desc";
 	}
 	else
@@ -84,7 +84,7 @@ if (isset($_GET["task"])) {
 		echo "<ul id='tlist'>";
 		$sql = "SELECT *
 				FROM editions
-				WHERE post_id = ".$post_id." AND checked=0
+				WHERE post_id = ".$post_id." AND checked=0 and reject=0
 				order by edit_date_time desc";
 	}
 	$q->query($sql);

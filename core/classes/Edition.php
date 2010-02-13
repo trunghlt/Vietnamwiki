@@ -14,6 +14,7 @@ class Edition {
 	public $index_id;
 	public $checked;
 	public $reference;
+	public $reject;
 
 	public static function filterContent($content) {
 		return $content;
@@ -66,6 +67,7 @@ class Edition {
 			$this->postBigImgURL = $row["post_big_img_url"];
 			$this->editDateTime = $row["edit_date_time"];
 			$this->reference = $row["reference"];
+			$this->reject = $row["reject"];
 			return $row;
 	}
 	
@@ -89,29 +91,50 @@ class Edition {
 		$row2 = mysql_fetch_assoc($re1);	
 			if($row2['level']==0){			
 				mysql_query("INSERT INTO editions
-							(user_id, post_id, post_subject, post_summary, post_text, edit_date_time, post_small_img_url, post_big_img_url,index_id,post_ip,post_username,checked,reference)
-							VALUE ('".$this->userId."', '".$this->postId."', '".$this->postTitle."', '".$this->postSummary."', '".$mysql["postContent"]."', 
+							(user_id, post_id, post_subject, post_summary, post_text, edit_date_time, post_small_img_url, post_big_img_url,index_id,post_ip,post_username,checked,reference,accepted_time)
+							VALUE ('".$this->userId."', 
+									'".$this->postId."', 
+									'".$this->postTitle."', 
+									'".$this->postSummary."', 
+									'".$mysql["postContent"]."', 
 									'".$this->editDateTime."',
-									'".$this->postSmallImgURL."', '".$this->postBigImgURL."',							
-									'".$this->index_id."','".$this->post_ip."','".$this->post_username."','0','".$mysql["reference"]."')") or die(mysql_error());
+									'".$this->postSmallImgURL."', 
+									'".$this->postBigImgURL."',							
+									'".$this->index_id."',
+									'".$this->post_ip."',
+									'".$this->post_username."','0',
+									'".$mysql["reference"]."',0)") or die(mysql_error());
 			}
 
 			else{
 				mysql_query("INSERT INTO editions
-							(user_id, post_id, post_subject, post_summary, post_text, edit_date_time, post_small_img_url, post_big_img_url,index_id,post_ip,post_username,checked,reference)
-							VALUE ('".$this->userId."', '".$this->postId."', '".$this->postTitle."', '".$this->postSummary."', '".$mysql["postContent"]."', 
-									'".$this->editDateTime."',
-									'".$this->postSmallImgURL."', '".$this->postBigImgURL."',							
-									'".$this->index_id."','".$this->post_ip."','".$this->post_username."','1','".$mysql["reference"]."')") or die(mysql_error());			
+							(user_id, post_id, post_subject, post_summary, post_text, edit_date_time, post_small_img_url, post_big_img_url,index_id,post_ip,post_username,checked,reference,accepted_time)
+							VALUE ('".$this->userId."',
+								   '".$this->postId."',
+								   '".$this->postTitle."', 
+								   '".$this->postSummary."', 
+								   '".$mysql["postContent"]."', 
+								   '".$this->editDateTime."',
+								   '".$this->postSmallImgURL."', 
+								   '".$this->postBigImgURL."',							
+								   '".$this->index_id."',
+								   '".$this->post_ip."',
+								   '".$this->post_username."','1',
+								   '".$mysql["reference"]."',
+								   '".$this->editDateTime."')") or die(mysql_error());			
 			}
 		}
 		else{
 		mysql_query("INSERT INTO editions
-					(user_id, post_id, post_subject, post_summary, post_text, edit_date_time, post_small_img_url, post_big_img_url,index_id,post_ip,post_username,checked,reference)
+					(user_id, post_id, post_subject, post_summary, post_text, edit_date_time, post_small_img_url, post_big_img_url,index_id,post_ip,post_username,checked,reference,accepted_time)
 					VALUE ('".$this->userId."', '".$this->postId."', '".$this->postTitle."', '".$this->postSummary."', '".$mysql["postContent"]."', 
 							'".$this->editDateTime."',
-							'".$this->postSmallImgURL."', '".$this->postBigImgURL."',							
-							'".$this->index_id."','".$this->post_ip."','".$this->post_username."','1','".$mysql["reference"]."')") or die(mysql_error());
+							'".$this->postSmallImgURL."',
+							'".$this->postBigImgURL."',							
+							'".$this->index_id."','".$this->post_ip."',
+							'".$this->post_username."','1',
+							'".$mysql["reference"]."',
+							'".$this->editDateTime."')") or die(mysql_error());
 		}
 		$this->id = mysql_insert_id();		
 	}
@@ -189,7 +212,7 @@ class Edition {
 		if(is_array($row))
 		{
 				mysql_query("UPDATE editions
-					SET post_text = '".$mysql["postContent"]."',checked = 1,reference='".$mysql["reference"]."' 
+					SET post_text = '".$mysql["postContent"]."',checked = 1,reference='".$mysql["reference"]."',accepted_time=".time()." 
 					WHERE id = ".$id) or die(mysql_error());
 				mysql_query("UPDATE posts_texts
 					SET post_text = '".$mysql["postContent"]."',reference='".$mysql["reference"]."' 
@@ -197,8 +220,11 @@ class Edition {
 		}
 		else{				
 				mysql_query("UPDATE editions
-					SET post_text = '".$mysql["postContent"]."',checked = 1,reference='".$mysql["reference"]."'
-					WHERE id = ".$id) or die(mysql_error());
+							 SET post_text = '".$mysql["postContent"]."',
+							 checked = 1,
+							 reference='".$mysql["reference"]."',
+							 accepted_time=".time()."
+							 WHERE id = ".$id) or die(mysql_error());
 					
 				$re = mysql_query("	SELECT *
 								FROM editions
@@ -211,7 +237,12 @@ class Edition {
 				{	
 					mysql_query(" INSERT INTO posts_texts
 								(post_subject, post_summary, post_text, post_small_img_url, post_big_img_url,reference)
-								VALUE ('".$post_sub."','".$post_sum."','".$mysql['postContent']."','".$smal_img."','".$big_url."','".$mysql["reference"]."')");
+								VALUE ('".$post_sub."',
+									   '".$post_sum."',
+									   '".$mysql['postContent']."',
+									   '".$smal_img."',
+									   '".$big_url."',
+									   '".$mysql["reference"]."')");
 					$post_id = mysql_insert_id();	
 					$post_time = $r['edit_date_time'];
 					$ip = $r['post_ip'];
@@ -224,7 +255,13 @@ class Edition {
 					$ord = $row2["n"];
 					mysql_query('INSERT INTO posts
 								(post_id, index_id, post_time, poster_ip, post_username, post_edit_time, ord)
-								VALUE ("'.$post_id.'","'.$r['index_id'].'","'.$post_time.'","'.$ip.'","'.$r['post_username'].'","'.$edittime.'","'.$ord.'")');
+								VALUE ("'.$post_id.'",
+									   "'.$r['index_id'].'",
+									   "'.$post_time.'",
+									   "'.$ip.'",
+									   "'.$r['post_username'].'",
+									   "'.$edittime.'",
+									   "'.$ord.'")');
 					mysql_query("INSERT INTO acts
 								(act_username, type, target, time) 
 								VALUE ('".$r['post_username']."','create','".$post_id."','".$post_time."')");
@@ -235,15 +272,24 @@ class Edition {
 				}
 				else{
 					mysql_query("UPDATE editions
-						SET post_text = '".$mysql["postContent"]."', post_id = '".$r['post_id']."',reference='".$mysql["reference"]."'	WHERE id = ".$id) or die(mysql_error());
+								 SET post_text = '".$mysql["postContent"]."', 
+								 post_id = '".$r['post_id']."',
+								 reference='".$mysql["reference"]."',
+								 accepted_time=".time()." WHERE id = ".$id) or die(mysql_error());
 				}	
 		}
 	}
-	//del draf editon
-	public function remove() {
+	//del draf edition
+	public function remove(){
 		$q = new Db;
 		$q->query("	DELETE FROM editions
 					WHERE id = ".$this->id);
+	}
+	//reject edidion
+	public function reject($id){
+		$q = new Db;
+		$q->query("	UPDATE editions set reject=1
+					WHERE id = ".$id);
 	}
 	static public function get_num($post_id,$user_id){
 				$str = "SELECT *
