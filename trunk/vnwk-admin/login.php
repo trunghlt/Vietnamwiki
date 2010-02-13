@@ -22,7 +22,7 @@
 			else
 				$error[] = "<span class=error>Please enter password</span>";
 		}
-		if($pw && $un)
+		if(@$pw && @$un)
 		{
 			if ($id = chk_authentication($un, $pw)) {
 				sign_in($id);

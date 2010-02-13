@@ -33,19 +33,19 @@ if($editionElement->postId != 0){
 		$row2 = Email::query(1);
 		$str = 'http://www.vietnamwiki.net/viewtopic.php?id='.$postElement->id;
 		$message = str_replace('here',$str,$row2['message']);
-		$str = $q->query('select email from users where level=1');
+		$r = Email::query_post($postElement->id);
 		
-		while($row = mysql_fetch_assoc($q->re))
+		foreach($r as $row)
 		{
-			if($row['email']!='')
 				sendmail($row['email'],$row2['subject'],$message,0,$row2['from']);	
 		}
 }
 else{
 		$row2 = Email::query(1);
 		$message = str_replace('here','',$row2['message']);
-		$str = $q->query('select email from users where level=1');
-		while($row = mysql_fetch_assoc($q->re))
+		$r = Email::query_post($postElement->id);
+		
+		foreach($r as $row)
 		{
 			sendmail($row['email'],$row2['subject'],$message,0,$row2['from']);
 		}

@@ -37,5 +37,24 @@ Class connect email  in database
 			}
 			return $row2;
 		}
+
+/***************************************************************
+
+* query table email follow post_id
+
+* $post_id : col post_id of email
+
+* @return: return array value in email
+
+***************************************************************/
+	static public function query_post($post_id){
+		$q=new Db;
+		$str = $q->query("select email from users where id IN (select user_id from follow where post_id=$post_id)");
+		while($r = mysql_fetch_assoc($q->re)){
+			if($r['email']!='')
+				$row[] = $r;
+		}
+		return $row;
 	}
+}
 ?>

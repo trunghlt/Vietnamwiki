@@ -4,6 +4,7 @@
 	include('core/classes.php');
 	include('core/session.php');
 	include('core/filters.php');
+	include('core/classes/CommentElement.php');
 	$postElement = new PostElement;
 	$postElement->query(PostElement::filterId($_GET["id"]));
 	$indexElement = new IndexElement;

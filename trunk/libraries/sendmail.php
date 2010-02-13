@@ -43,6 +43,6 @@ function sendmail($to,$subject,$message,$type,$from){
 		$headers .= "From: $from \n";
 		$headers .= "X-Mailer: PHP/" . phpversion()."\n";
 		}	
-	@mail($to1, $subject, $message, $headers);
+	return @mail($to1, $subject, $message, $headers);
 }
 ?> 

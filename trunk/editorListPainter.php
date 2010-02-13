@@ -8,8 +8,8 @@ $clean["postId"] = PostElement::filterId($_POST["postId"]);
 	$q = new db;
 	$q->query("	SELECT *
 				FROM editions
-				WHERE post_id = '{$clean["postId"]}'
-				ORDER BY edit_date_time");
+				WHERE post_id = '{$clean["postId"]}' and reject=0
+				ORDER BY accepted_time");
 	
 	$editions = array();	
 	while ($r = mysql_fetch_array($q->re)) {
