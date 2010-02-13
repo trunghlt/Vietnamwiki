@@ -42,6 +42,7 @@ $lasted_des = new DestinationElement;
 $type = $_POST['t'];
 $s = isset($_POST['s']);
 $s1 = isset($_POST['s1']);
+$user_id_info = $_POST['user_id'];
 $row_per_page = 5;
 if($s)
 {
@@ -60,7 +61,7 @@ else{
 if($type == 1 ){
 $e = new Edition;
 
-			$arr = $e->query_string(1,myUser_id(myip()));
+			$arr = $e->query_string(1,$user_id_info);
 			$num = $arr['n'];
 			if( $num > $row_per_page)
 			{
@@ -70,7 +71,7 @@ $e = new Edition;
 				$num_page = 1;
 			}
 			
-			$result = $e->query_string(1,myUser_id(myip()),'',$start,$row_per_page);
+			$result = $e->query_string(1,$user_id_info,'',$start,$row_per_page);
 			echo "<div class='comment_block'>";					
 			
 			if ($result == 0) {
@@ -95,7 +96,7 @@ $e = new Edition;
 					if($current_page != $i){
 						$k = ($i-1)*$row_per_page;
 					?>
-						<a href='#' onclick="get_page(<?php echo $k?>,1,'followpost')" ><?php echo $i?></a>
+						<a href='#' onclick="get_page(<?php echo $k?>,1,'followpost',<?php echo $user_id_info?>)" ><?php echo $i?></a>
 					<?php
 					}
 					else
@@ -106,7 +107,7 @@ $e = new Edition;
 }
 else if($type == 0){
 $e1 = new Edition;
-			$arr1 = $e1->query_string(0,myUser_id(myip()),0);
+			$arr1 = $e1->query_string(0,$user_id_info,0);
 			
 			$num = $arr1['n'];
 			if( $num > $row_per_page)
@@ -116,7 +117,7 @@ $e1 = new Edition;
 			else{
 				$num_page = 1;
 			}
-			$result1 = $e1->query_string(0,myUser_id(myip()),0,$start1,$row_per_page);
+			$result1 = $e1->query_string(0,$user_id_info,0,$start1,$row_per_page);
 			echo "<div class='comment_block'>";					
 			
 			if ($result1 == 0) {
@@ -141,7 +142,7 @@ $e1 = new Edition;
 					if($current_page != $i){
 						$k = ($i-1)*$row_per_page;
 					?>
-						<a href='#' onclick="get_page(<?php echo $k?>,0,'followedit')" ><?php echo $i?></a>
+						<a href='#' onclick="get_page(<?php echo $k?>,0,'followedit',<?php echo $user_id_info?>)" ><?php echo $i?></a>
 					<?php
 					}
 					else
