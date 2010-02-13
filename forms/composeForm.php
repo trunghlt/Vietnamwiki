@@ -78,7 +78,7 @@ function submitComposeForm() {
 		 {
 			window.location = "viewtopic.php?id=" + response;
 			composeDialog.dialog('close');
-		 }
+		 }break;
 		}
 	});
 }

@@ -2,6 +2,7 @@
 	include('core/common.php');
 	include('core/init.php');
 	include('core/classes.php');
+	include('core/classes/CommentElement.php');
 	include('core/session.php');
 	include('core/filters.php');
 	include('header.php'); 
@@ -137,11 +138,67 @@
 <div id="restoreConfirmDialog" title="Alert">
 	Restoring this draft will make all later drafts deleted. Are you sure you still want to restore this draft ?
 </div>
-
+<div id='rej_confirm' title='Confirm' style="font-size:12px; font-weight:bold;">
+	Do you want reject this edition?
+</div>
+<div id='sendmail' title='Message'>
+	<label> Message:</label><br />
+		<textarea cols="80" rows="10" name="s_mail" id="s_mail"></textarea>
+</div>
 <script language="javascript">
 jQuery(document).ready(function(){
 	loadToolbar("toolbar");
 	loadDraftRibbon(<?php echo $editionId?>,"ribbon");
+		mail = jQuery('#sendmail').dialog({
+					autoOpen: false,
+					width: '450',
+					minHeight:'400',
+					height:'auto',
+					modal: true,
+					resizable:true,
+					overlay: {
+						backgroundColor: '#000',
+						opacity: 0.5
+					},
+					buttons:{
+						'Send Email':function(){
+							jQuery.post('../requests/reject.php',{ed_id:<?php echo $draf?>,mes:jQuery('#s_mail').val(),user_id:<?php echo $editorId?>},
+									function(data){
+										if(data!='false'){
+											location.href = 'index2.php';
+											alert('Success');
+										}
+										else
+											alert(data);
+									});
+							rej.dialog('close');
+							mail.dialog('close');
+						},
+						'Cancel':function(){
+							jQuery(this).dialog('close');
+							rej.dialog('close');
+						}
+					}
+				});
+		rej = jQuery('#rej_confirm').dialog({
+			autoOpen: false,
+			height: 'auto',
+			width: '300',
+			modal: true,
+			resizable:false,
+			overlay: {
+				backgroundColor: '#000',
+				opacity: 0.5
+			},
+			buttons:{
+				'Submit': function() {
+					mail.dialog('open');
+				},
+				Cancel: function() {
+					jQuery(this).dialog('close');
+				}				
+			}
+		});
 	restoreConfirmDialog = jQuery("#restoreConfirmDialog").dialog({
 		autoOpen: false,
 		height: 'auto',

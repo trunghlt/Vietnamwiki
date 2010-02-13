@@ -1,7 +1,6 @@
 <div id="commentList">
 <?php
 include('libraries/TalkPHP_Gravatar.php');
-include('core/classes/CommentElement.php');
 $draft = isset($draf);
 if($draft){
 	$str_comment = "edition_id = '".$post_id."'"; 
@@ -12,8 +11,8 @@ else{
 $com = new CommentElement;
 $r_com = $com->query_num($str_comment);
 $n = $r_com['n'];
-array_pop($r_com);
 if ($n > 0) {
+array_pop($r_com);
 	?>
 	<div class="comment_head" align="center">
 		<?php echo $n . " "?>Comments
@@ -66,7 +65,7 @@ if ($n > 0) {
 		</div>
 		<?php
 		}
-
+	$i=0;
 	while ($i < 5) {
 			write_comment($r_com[$i], $post_id);
 		$i++;
@@ -107,8 +106,6 @@ if ($n > 0) {
 		</script>
 		<?php
 	}		
-	
-	mysql_free_result($result);
 	echo "</div>";
 	
 }

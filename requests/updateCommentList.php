@@ -3,6 +3,7 @@ include("../core/common.php");
 include("../core/init.php");
 include("../core/classes/Db.php");
 include("../core/classes/CommentElement.php");
+include("../core/classes/User.php");
 if(isset($_POST["commentText"])){
 		
 		$commentElement = new CommentElement; 

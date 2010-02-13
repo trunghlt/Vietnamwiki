@@ -26,8 +26,14 @@ session_start();
 		width:200px;
 	}
 </style>
-<link href="admin.css" rel="stylesheet" type="text/css" />
+<link href="../css/themes/default/ui.all.css" type="text/css" rel="stylesheet"/>
 <script type="text/javascript" src=".././js/tiny_mce/tiny_mce.js"></script>
+<script src="../js/jquery/jquery-1.3.2.min.js"></script>
+<script>
+	jQuery.noConflict();
+</script>
+<script src="../js/integrated.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/integrated.css" />
 <script language="javascript">
 	tinyMCE.init({
 				// General options
@@ -120,10 +126,11 @@ session_start();
 	
 
 ?>
-<form method="post" action="edit_edition.php?id=<?php echo $arr['id']?>&post_id=<?php echo $arr['post_id'];?>&act=edit" target="edition" name="edition" o>
+<form method="post" action="edit_edition.php?id=<?php echo $arr['id']?>&post_id=<?php echo $arr['post_id'];?>&act=edit" target="edition" name="edition" >
 <div>
+	<input type="hidden" name='id' id="id" value="<?php echo $arr['id']?>" />
 	<label>Post Subject :</label><input type="text" name="PostSub" value="<?php echo $arr['post_subject'];?>" /><br />
-	<input type="hidden" name="User_id" value="<?php echo $arr['user_id'];?>" /><br />
+	<input type="hidden" name="User_id" id='User_id' value="<?php echo $arr['user_id'];?>" /><br />
 	<label>Post Summary :</label><input type="text" name="PostSum" value="<?php echo $arr['post_summary'];?>" /><br />
 	<label>Post Text:</label><br />
 	<textarea name="PTex" id="ptex" rows="20" cols="80"><?php
@@ -143,8 +150,70 @@ session_start();
     ?></textarea><br/>	
 	</p>
 	<input type="submit" name="ok" value="Accept edition" onclick="return confir(<?php echo $arr['id']?>);"/>
+	<input type="button" name="reject" value="Reject edition" onclick="rej.dialog('open')"/>
 </div>
 </form>
+<div id='rej_confirm' title='Confirm' style="font-size:12px; font-weight:bold;">
+	Do you want reject this edition?
+</div>
+<div id='sendmail' title='Message'>
+	<label> Message:</label><br />
+		<textarea cols="80" rows="10" name="s_mail" id="s_mail"></textarea>
+</div>
+
+<script language="javascript">
+	jQuery(document).ready(function(){
+		mail = jQuery('#sendmail').dialog({
+					autoOpen: false,
+					width: '450',
+					minHeight:'400',
+					height:'auto',
+					modal: true,
+					resizable:true,
+					overlay: {
+						backgroundColor: '#000',
+						opacity: 0.5
+					},
+					buttons:{
+						'Send Email':function(){
+							jQuery.post('../requests/reject.php',{ed_id:jQuery('#id').val(),mes:jQuery('#s_mail').val(),user_id:jQuery('#User_id').val()},
+									function(data){
+										if(data!='false')
+										//remove frame
+											window.open('edition_frame.php','_parent');
+										else
+											alert(data);
+									});
+							rej.dialog('close');
+							mail.dialog('close');
+						},
+						'Cancel':function(){
+							jQuery(this).dialog('close');
+							rej.dialog('close');
+						}
+					}
+				});
+		rej = jQuery('#rej_confirm').dialog({
+			autoOpen: false,
+			height: 'auto',
+			width: '300',
+			modal: true,
+			resizable:false,
+			overlay: {
+				backgroundColor: '#000',
+				opacity: 0.5
+			},
+			buttons:{
+				'Submit': function() {
+					mail.dialog('open');
+				},
+				Cancel: function() {
+					jQuery(this).dialog('close');
+				}				
+			}
+		});
+	});
+</script>
 </body>
 <?php
 ob_end_flush();

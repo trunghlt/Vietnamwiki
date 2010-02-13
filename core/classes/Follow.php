@@ -66,6 +66,16 @@ class Follow {
 			(user_id, post_id, value)
 			
 			VALUES({$user_id}, {$post_id}, 1)");
+			$q->query('select * from users where level=1');
+			while($row = mysql_fetch_assoc($q->re)){
+				if(self::exist($user_id, $post_id) == 0){
+					Db::squery("INSERT INTO follow
+					
+					(user_id, post_id, value)
+					
+					VALUES({$row['id']}, {$post_id}, 1)");
+				}
+			}
 		
 		}
 		

@@ -52,12 +52,10 @@ else if($_POST["type"]==2 && User::check_user(myUser_id(myip()),$postElement->id
 		$row2 = Email::query(1);
 		$str = 'http://www.vietnamwiki.net/viewtopic.php?id='.$postElement->id;
 		$message = str_replace('here',$str,$row2['message']);
-		$str = $q->query('select email from users where level=1');
-		
-		while($row = mysql_fetch_assoc($q->re))
+		$r = Email::query_post($postElement->id);
+		foreach($r as $row)
 		{
-			if($row['email']!='')
-			echo sendmail($row['email'],$row2['subject'],$message,0,$row2['from']);
+			sendmail($row['email'],$row2['subject'],$message,0,$row2['from']);
 		}	
 	$content = htmlspecialchars_decode($postElement->draft, ENT_QUOTES);
 	$content = str_replace("|", "&", $content);
