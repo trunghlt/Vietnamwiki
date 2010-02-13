@@ -43,9 +43,9 @@ $message = new Message;
 }
 </style>
 <script>
-	function follow(type,dom)
+	function follow(type,dom,id)
 	{
-		jQuery.post('requests/profile.php',{t:type,d:dom},function(data){
+		jQuery.post('requests/profile.php',{t:type,d:dom,user_id:id},function(data){
 												document.getElementById(dom).innerHTML = data;
 											});
 	}
@@ -160,7 +160,7 @@ $message = new Message;
 		<h1>Follow's posts</h1>
 		<div id='followpost'></div>
 		<script language="javascript">
-			follow(1,'followpost');
+			follow(1,'followpost',<?php echo $user_info['id']?>);
 		</script>
 	</tr>
 	<!--Lastest post-->
@@ -168,7 +168,7 @@ $message = new Message;
 		<h1>Last edit</h1>
 		<div id='followedit'></div>
 		<script>
-			follow(0,'followedit');
+			follow(0,'followedit',<?php echo $user_info['id']?>);
 		</script>
 	</tr>
 <?php }?>
@@ -303,9 +303,9 @@ include("footer.php");
 				alert(data);
 		});
 	}
-	function get_page(start,type,dom){
+	function get_page(start,type,dom,id){
 		if(type==1){
-			jQuery.post('requests/profile.php',{s:start,t:type,d:dom},function(data){
+			jQuery.post('requests/profile.php',{s:start,t:type,d:dom,user_id:id},function(data){
 													document.getElementById(dom).innerHTML = data;
 												});
 		}
