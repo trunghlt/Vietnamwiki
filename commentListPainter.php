@@ -57,7 +57,7 @@ array_pop($r_com);
 				elseif($row['name']=='' && $row['email']==''){
 						$posttime = $row['comment_time'];
 						$timelabel = date("d M, Y H:i", $posttime);			
-						echo "Posted by guess at ". $timelabel;
+						echo "Posted by guest at ". $timelabel;
 				}
 			}
 		?>
@@ -66,8 +66,9 @@ array_pop($r_com);
 		<?php
 		}
 	$i=0;
+	print_r($r_com);
 	while ($i < 5) {
-			write_comment($r_com[$i], $post_id);
+		write_comment($r_com[$i], $post_id);
 		$i++;
 	}
 	
