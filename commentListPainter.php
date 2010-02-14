@@ -66,8 +66,7 @@ array_pop($r_com);
 		<?php
 		}
 	$i=0;
-	print_r($r_com);
-	while ($i < 5) {
+	while (($i < 5)&&($i < $n)) {
 		write_comment($r_com[$i], $post_id);
 		$i++;
 	}
