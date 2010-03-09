@@ -131,18 +131,18 @@ $message = new Message;
 			if ($result == 0) {
 				echo "You haven't posted any topics yet";
 			}
-						
-			foreach($result as $row) {
-				$lasted_post->query($row["post_id"]);
-				$title = $lasted_post->title;
+			else{			
+				foreach($result as $row) {
+				 $lasted_post->query($row["post_id"]);
+				 $title = $lasted_post->title;
 				
-				$lasted_index = new IndexElement;
-				$lasted_index->query($row["index_id"]);
-				$index_name = $lasted_index->name;
+				 $lasted_index = new IndexElement;
+				 $lasted_index->query($row["index_id"]);
+				 $index_name = $lasted_index->name;
 				
-				$lasted_des = new DestinationElement;
-				$lasted_des->query($lasted_index->destId);
-				$dest_name = $lasted_des->engName;
+				 $lasted_des = new DestinationElement;
+				 $lasted_des->query($lasted_index->destId);
+				 $dest_name = $lasted_des->engName;
 					?> 
 				<div class='comment'>
 				<a href="viewtopic.php?id=<?php echo $row["post_id"]?>" class="link" style="margin-left: 5px"><?php echo $title?></a>,
@@ -150,6 +150,7 @@ $message = new Message;
 				<br/>
 				</div>
 				<?php
+				}
 			}
 			echo "</div>";
 		?>
