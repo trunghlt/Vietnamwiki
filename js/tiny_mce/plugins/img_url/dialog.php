@@ -10,7 +10,7 @@
 <?php
 
 include("../../../../core/init.php");
-include("../../../../core/classes/filter.php");
+include("../../../../core/classes/Filter.php");
 include("../../../../core/common.php");
 include("../../../../core/classes/ActiveRecord.php");
 

@@ -1,7 +1,7 @@
 <script type="text/javascript" src="../../../jquery/jquery-1.2.6.js"></script>
 <?php
 include("../../../../core/init.php");
-include("../../../../core/classes/filter.php");
+include("../../../../core/classes/Filter.php");
 include("../../../../core/classes/ActiveRecord.php");
 
 if (isset($_GET["task"])) {
