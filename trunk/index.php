@@ -391,7 +391,7 @@ function cen(a ,b) {
 		</div>
 		</td>
 	<td width="263">
-		<p align="right" class="style4"> <span class="style6"><a href="/Vietnam_general-General-Vietnam-P32" style="color:#00FFFF">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+		<p align="right" class="style4"> <span class="style6"><a href="/Vietnam_general-General-Vietnam-P32" style="color:#00FFFF">Top destinations</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
 		<p align="right" class="style4 style6"> <a href="/Vietnam_general-Passport__Visa-I39" style="color:#00FFFF">Passport & Visa&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 		<p align="right" class="style4 style6"><a href="/Vietnam_general-Tradition__culture-I58" style="color:#00FFFF">Traddition &amp; Culture</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 		<p align="right" class="style4 style6"><a href="/Vietnam_general-Travel_information-I116" style="color:#00FFFF">Travel information</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
