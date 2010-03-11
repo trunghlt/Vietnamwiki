@@ -291,39 +291,44 @@ class Edition {
 		$q->query("	UPDATE editions set reject=1
 					WHERE id = ".$id);
 	}
-	static public function get_num($post_id,$user_id){
-				$str = "SELECT *
+	//check number row 
+	static public function get_num($user_id){
+				$str = "SELECT post_id
 						FROM editions
-						WHERE post_id=$post_id and user_id=$user_id";
-				$re_row = mysql_query($str) or die(mysql_error());		
-				return mysql_num_rows($re_row);
+						WHERE user_id=$user_id and checked=0";
+				$re_row = mysql_query($str) or die(mysql_error());
+				while($r = mysql_fetch_assoc($re_row))
+					$arr[] = $r;
+				$arr['n'] = mysql_num_rows($re_row);		
+				return $arr;
 	}
-	public function query_string($checked,$user_id,$post_id='',$start='',$numpage=''){
-		$active = new Active;
-		if($post_id!='' || $post_id==0){
-			$arr = array('checked'=>$checked,'user_id'=>(int)$user_id,'post_id !'=>$post_id);			
-		}
-		else{
-			$arr = array('checked'=>$checked,'user_id'=>$user_id);
-		}
-		if($start=='' && $numpage=='')
-		{
-			$r = $active->select('','editions',$arr);
-			if($active->get_num() <= 0){
-					return 0;
+	
+	public function query_post($post_id,$user_id,$type_query){
+		$q = new Db;
+		$q->query("select * from users where id=$user_id");
+			$r = mysql_fetch_assoc($q->re);
+			if($r['level']==1){
+				$str_where = "post_id=$post_id group by post_id"; 
 			}
-			$r['n'] =  $active->get_num();
-			return $r;
-		}
-		else{
-				$active->limit($start,$numpage);
-				$r = $active->select('','editions',$arr);
-			if($active->get_num() <= 0){
-					return 0;
+			else{
+				$str_where = "post_id=$post_id and user_id=$user_id";
+				if($type_query==0)
+					 $str_where .= " and checked=0 group by post_id";
+				else
+					 $str_where .= " and checked=1 group by post_id";
 			}
-			$r['n'] =  $active->get_num();
-			return $r;		
-		}
+			
+			$str = "SELECT index_id, post_subject ,post_id FROM editions WHERE $str_where ";
+
+			$q->query($str);
+			
+			if($q->n != 0)
+			{
+				while($row = mysql_fetch_assoc($q->re))
+					$r1[] = $row;
+				return $r1;	
+			}	
+			return NULL;
 	}
 }
 ?>

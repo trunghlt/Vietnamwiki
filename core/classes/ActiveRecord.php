@@ -86,6 +86,8 @@ Return value in array
 			if(is_array($col)){
 					$col = implode(' , ',$col);
 				}
+			else
+				$col = $col;
 		}
 		if($where != ''){
 			if(is_array($where)){
