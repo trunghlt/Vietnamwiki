@@ -223,6 +223,6 @@ class PostElement {
 		}
 		else
 			return 0;	
-	}	
+	}
 }
 ?>

@@ -25,7 +25,7 @@ class Follow {
 		$q = new db;
 		$q->query(" UPDATE follow
 			
-					SET value=1
+					SET value=$value
 			
 					WHERE id={$id}");
 	}
@@ -61,15 +61,16 @@ class Follow {
 			$q = new Db;
 		if (self::exist($user_id, $post_id) == 0) {
 		
-			Db::squery("INSERT INTO follow
+			Db::sQuery("INSERT INTO follow
 			
 			(user_id, post_id, value)
 			
 			VALUES({$user_id}, {$post_id}, 1)");
+			
 			$q->query('select * from users where level=1');
 			while($row = mysql_fetch_assoc($q->re)){
-				if(self::exist($user_id, $post_id) == 0){
-					Db::squery("INSERT INTO follow
+				if(self::exist($row['id'], $post_id) == 0){
+					Db::sQuery("INSERT INTO follow
 					
 					(user_id, post_id, value)
 					
@@ -81,7 +82,7 @@ class Follow {
 		
 		else {
 		
-			Db::squery(" UPDATE follow
+			Db::sQuery(" UPDATE follow
 			
 			SET value=1
 			
@@ -101,7 +102,7 @@ class Follow {
 			$q = new Db;
 		if (self::exist($user_id, $post_id) == 0) {
 		
-			Db::squery("INSERT INTO follow
+			Db::sQuery("INSERT INTO follow
 			
 			(user_id, post_id, value)
 			
@@ -111,7 +112,7 @@ class Follow {
 		
 		else {
 		
-			Db::squery(" UPDATE follow
+			Db::sQuery(" UPDATE follow
 			
 			SET value=0
 			
@@ -139,10 +140,57 @@ Select table follow
 		$q = new Db;
 		$str = "SELECT * FROM follow WHERE post_id=$post_id and user_id=$user_id";
 		$q->query($str);
-		while($row = mysql_fetch_assoc($q->re))
-			$r[] = $row;
-		return $r;
+		
+			while($row = mysql_fetch_assoc($q->re))
+				$r[] = $row;
+			return $r;
+		
+	}
+
+
+/***************************************************************
+Select table follow 
+
+* @param $user_id: check user_id,
+
+* @param $post_id: and check post_id,
+
+* @param $numpage: page's number,
+
+* @param $start: position start in database,
+
+* return array value
+***************************************************************/
+	public function query_string($user_id,$post_id='',$start='',$numpage=''){
+		$active = new Active;
+
+		if($post_id!='' || $post_id==0){
+			if($post_id==0)
+				$arr = array('user_id'=>$user_id,'post_id !'=>$post_id);
+			else
+				$arr = array('user_id'=>$user_id,'post_id '=>$post_id);		
+		}
+		else{
+			$arr = array('user_id'=>$user_id);
+		}
+		if($start=='' && $numpage=='')
+		{
+			$r = $active->select('','follow',$arr);
+			if($active->get_num() == 0){
+					return 0;
+			}
+			$r['n'] =  $active->get_num();
+			return $r;
+		}
+		else{
+				$active->limit($start,$numpage);
+				$r = $active->select('','follow',$arr);
+			if($active->get_num() == 0){
+					return 0;
+			}
+			$r['n'] =  $active->get_num();
+			return $r;		
+		}
 	}
 }
-
 ?>
