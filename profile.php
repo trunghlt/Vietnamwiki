@@ -132,9 +132,9 @@ $message = new Message;
 				echo "You haven't posted any topics yet";
 			}
 			else{			
-				foreach($result as $row) {
-				 $lasted_post->query($row["post_id"]);
-				 $title = $lasted_post->title;
+			foreach($result as $row) {
+				$lasted_post->query($row["post_id"]);
+				$title = $lasted_post->title;
 				
 				 $lasted_index = new IndexElement;
 				 $lasted_index->query($row["index_id"]);
