@@ -30,6 +30,11 @@ function signOut() {
 	jQuery.post("/requests/logout.php", {}, 
 				function(response) {
 					loadToolbar("toolbar");
+						if(document.getElementById('link_add').value == 1){
+							document.getElementById('link_add').value = 0;
+							document.getElementById('link_add').innerHTML = "<a onClick=loginDialog.dialog('open')>+ Add new topic</a>";							
+						}
+					jQuery('#field_not_login_comment').html("Email :<br /><input class='field' name='fill_email_comment' id='fill_email_comment' type='text' style='width:250px' value=''/><br />Name :<br /><input class='field' name='fill_name_comment' id='fill_name_comment' type='text' style='width:250px' value=''/><br /><input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='1'/>");					
 				});
 }
 /*
@@ -41,19 +46,31 @@ function submitLogin() {
 		loadToolbar("toolbar");
 	});
 }*/
-function submitLogin() {	
-	jQuery.post("/requests/postLogin.php", jQuery("#loginForm").serialize(), 
+function submitLogin(dom,check) {	
+	jQuery.post("/requests/postLogin.php", jQuery("#"+dom).serialize(), 
 			function(response){
+			
 				if(response==-2)
 					alert("This user has been banned");
 				else{
 					if(response != '' && response != 'success'){
 						loadToolbar("toolbar");
+						if(document.getElementById('link_add').value == 0){
+							document.getElementById('link_add').value = 1;
+							document.getElementById('link_add').innerHTML = "<a onClick=composeDialog.dialog('open')>+ Add new topic</a>";
+						}
 						document.getElementById('id_user').value = response;
 						Fill_EmailDialog.dialog('open');
 					}
-					else if(response == 'success')
+					else if(response == 'success'){
 						loadToolbar("toolbar");
+						
+						if(document.getElementById('link_add').value == 0){
+							document.getElementById('link_add').value = 1;
+							document.getElementById('link_add').innerHTML = "<a onClick=composeDialog.dialog('open')>+ Add new topic</a>";
+						}
+						jQuery('#field_not_login_comment').html("<input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='2'/>");
+					}
 				}
 	});
 }

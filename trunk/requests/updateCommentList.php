@@ -4,7 +4,7 @@ include("../core/init.php");
 include("../core/classes/Db.php");
 include("../core/classes/CommentElement.php");
 include("../core/classes/User.php");
-if(isset($_POST["commentText"])){
+//if(isset($_POST["commentText"])){
 		
 		$commentElement = new CommentElement; 
 		$commentElement->commentText = $_POST["commentText"];
@@ -18,9 +18,15 @@ if(isset($_POST["commentText"])){
 			$draf = $commentElement->editionid;
 			$post_id = $commentElement->editionid;
 		}
+		if(isset($_POST["fill_name_comment"])){
+			$commentElement->name = $_POST["fill_name_comment"];
+		}
+		if(isset($_POST["fill_email_comment"])){
+			$commentElement->email = $_POST["fill_email_comment"];
+		}
 		$commentElement->add();
-}
-else if(isset($_POST["commentText2"])){
+//}
+/*else if(isset($_POST["commentText2"])){
 		$commentElement = new CommentElement; 
 		$commentElement->commentText = $_POST["commentText2"];
 		$commentElement->postId = $_POST["postId2"];
@@ -40,6 +46,6 @@ else if(isset($_POST["commentText2"])){
 			$commentElement->email = $_POST["email_guess"];
 		}
 		$commentElement->add();
-}
+}*/
 include("../commentListPainter.php");
 ?>

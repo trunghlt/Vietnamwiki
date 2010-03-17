@@ -57,12 +57,21 @@
 			$q->query($sql);
 
 		}
-		
+		//lock
+		if ($action == "tg_lock") {
+			$index_id = $_GET["index_id"];
+			$sql = "UPDATE index_menu
+					SET locked = 1 - locked
+					WHERE id = ".$index_id;
+			
+			$q->query($sql);
+			echo $projax->sortabe_element('indexlist',array('update'=>'lbl',
+											'complete'=>$projax->visual_effect('highlight','test') , 
+											'url'=>'ajaxcall.php?action=order&indexlist='.$id,
+											'constraint' => 0));
+		}		
 		if ($action == "order") {
 			$order = $_POST["indexlist"];
-			
-			print_r($order);
-			echo $id;
 			for ($i=0; $i < sizeof($order); $i++) {
 				$sql = "UPDATE index_menu
 						SET ord = ".$i."
@@ -90,6 +99,7 @@
 	}
 </script>
 <body id="index_menu">
+<div id='lbl'>
 <h3>Index menu</h3>
 <?php
 	$sql = "SELECT * FROM index_menu
@@ -102,16 +112,29 @@
 	<ul id='indexlist'>
 <?php while ($row = mysql_fetch_array($q->re)) {	?>
 		<li id="item_<?php echo $i?>">
-			<a href='#' onclick="confir(<?php echo $id?>,<?php echo $row["id"]?>);">x</a>
+			<a href='#' onClick="confir(<?php echo $id?>,<?php echo $row["id"]?>);">x</a>
 			<?php echo $row["name"]; 			
 			$i++; ?>
-			<a href='index_menu.php?action=tg_lock&id=<?=$id?>&index_id=<?=$row["id"]?>'><?=$row['locked']=0? 'lock':'unlock'?></a>
+			<a href='#' onClick="javascript:tlock(<?php echo $id?>,<?php echo $row["id"]?>);" ><?=$row['locked']? 'lock':'unlock'?></a>
 		</li>
 <?php } ?>
 	</ul>
+	
 	<?php echo $projax->sortabe_element('indexlist', array('update'=>'lbl','complete'=>$projax->visual_effect('highlight','indexlist') , 'url'=>'ajaxcall.php?action=order&id='.$id)); ?>
 	<form action="index_menu.php?action=add&id=<?php echo $id?>" method="post">
 		<input type="text" id="name" name="name" />
 		<input type="submit" value="Add index" />
 	</form>
+</div>
 </body>
+<script>
+	function tlock(x,id) {
+		//call Ajax delete function
+		new Ajax.Updater(	'lbl',
+							'index_menu.php?action=tg_lock&id='+x+'&index_id='+id,
+							{evalScripts:true});
+	
+		return true;
+			
+	}
+</script>

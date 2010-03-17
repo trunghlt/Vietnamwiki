@@ -1,16 +1,7 @@
 <?php
 function sendmail($to,$subject,$message,$type,$from){
 
-	/*	if(count($to) > 1)
-		{
-			$arr = $to;
-			foreach($arr as $key=>$value)
-				$str .= Filter::filterEmail($value) . ",";
-				
-			$to1 = substr($str,0,-1);
-		}
-		else*/
-			$to1 = Filter::filterEmail($to);
+		$to1 = Filter::filterEmail($to);
 			
 					
 		if($to1 != $to)
@@ -34,15 +25,15 @@ function sendmail($to,$subject,$message,$type,$from){
 	}
 	if(strtolower($str) == 'yahoo'){
 		$headers .= "Content-Transfer-Encoding: 8bit\n";
-		$headers .= "From: $from \n";
+		$headers .= "From: VietnamWiKi<$from> \n";
 		$headers .= "X-Priority: 1\n";
 		$headers .= "X-MSMail-Priority: High\n";
 		$headers .= "X-Mailer: PHP/" . phpversion()."\n";
 	}
 	else{
-		$headers .= "From: $from \n";
+		$headers .= "From: VietnamWiKi<$from> \n";
 		$headers .= "X-Mailer: PHP/" . phpversion()."\n";
-		}	
+	}	
 	return @mail($to1, $subject, $message, $headers);
 }
 ?> 

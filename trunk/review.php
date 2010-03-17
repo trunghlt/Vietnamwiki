@@ -12,7 +12,7 @@ include('./libraries/TalkPHP_Gravatar.php');
 $q = new Db;	
 $user_info = new User;
 //Add span rate in review1 or review
-$str_rate="<span id='rateStatus'>Please rate...</span><br/><div id='rateMe' title='Please rate this topic'><div onclick='rateIt(this)' id='_1' class='none' title='This is very bad, never try it !!!' onmouseover='rating(this)' onmouseout='off(this)'>&nbsp;</div><div onclick='rateIt(this)' id='_2' class='none' title='This is bad, I don't recommend it' onmouseover='rating(this)' onmouseout='off(this)'>&nbsp;</div><div onclick='rateIt(this)' id='_3' class='none' title='This is ok, no thing special' onmouseover='rating(this)' onmouseout='off(this)'>&nbsp;</div><div onclick='rateIt(this)' id='_4' class='none' title='This is good, I recommend it' onmouseover='rating(this)' onmouseout='off(this)'>&nbsp;</div><div onclick='rateIt(this)' id='_5' class='none' title='This is very good, highly recommend !!!' onmouseover='rating(this)' onmouseout='off(this)'>&nbsp;</div></div>";
+/*$str_rate="<span id='rateStatus'>Please rate...</span><br/><div id='rateMe' title='Please rate this topic'><div onclick='rateIt(this)' id='_1' class='none' title='This is very bad, never try it !!!' onmouseover='rating(this)' onmouseout='off(this)'>&nbsp;</div><div onclick='rateIt(this)' id='_2' class='none' title='This is bad, I don't recommend it' onmouseover='rating(this)' onmouseout='off(this)'>&nbsp;</div><div onclick='rateIt(this)' id='_3' class='none' title='This is ok, no thing special' onmouseover='rating(this)' onmouseout='off(this)'>&nbsp;</div><div onclick='rateIt(this)' id='_4' class='none' title='This is good, I recommend it' onmouseover='rating(this)' onmouseout='off(this)'>&nbsp;</div><div onclick='rateIt(this)' id='_5' class='none' title='This is very good, highly recommend !!!' onmouseover='rating(this)' onmouseout='off(this)'>&nbsp;</div></div>";*/
 $pAvatar = new TalkPHP_Gravatar();
 ?>
     <td class="center">			
@@ -24,11 +24,11 @@ $pAvatar = new TalkPHP_Gravatar();
 			<div id="toolbar"></div>
 		</div>
 		<div id='button'>
-		<?php if(logged_in()){?>
+		<?php //if(logged_in()){?>
 		<div class="button" style="margin: 20px 20px;" onClick="reviewDialog.dialog('open')"><a>+ Add a new review</a></div>
-		<?php }else{?>
-		<div class="button" style="margin: 20px 20px;" onClick="review_Dialog1.dialog('open')"><a>+ Add a new review</a></div>		
-		<?php }?>
+		<?php //}else{?>
+<!--<div class="button" style="margin: 20px 20px;" onClick="review_Dialog1.dialog('open')"><a>+ Add a new review</a></div>	-->	
+		<?php //}?>
 		</div>
 		<div id="reviewList"><?php echo getReviewListHTML($post_id); ?></div>
 	</td>
@@ -66,17 +66,17 @@ $pAvatar = new TalkPHP_Gravatar();
 include("forms/loginForm.php");
 include("forms/composeForm.php");
 include("forms/reviewform.php");
-include("forms/reviewform1.php");
-include("forms/fill_comment_email_form.php");
-include("forms/fill_comment_name_form.php");
+//include("forms/reviewform1.php");
+//include("forms/fill_comment_email_form.php");
+//include("forms/fill_comment_name_form.php");
 include("footer.php");
 ?>
 <script type="text/javascript">
-	<?php if(logged_in()){?>
-		document.getElementById('review1').innerHTML="<?php echo "$str_rate"?>";
-	<?php }else{?>
-		document.getElementById('review2').innerHTML="<?php echo "$str_rate"?>";
-	<?php }?>
+	<?php //if(logged_in()){?>
+		//document.getElementById('review1').innerHTML="<?php //echo "$str_rate"?>";
+	<?php //}else{?>
+		//document.getElementById('review2').innerHTML="<?php //echo "$str_rate"?>";
+	<?php //}?>
 function submitReview(dom,email,name) {
 	if(email=='' && name=='' ){
 	jQuery.post("submitReview.php",
@@ -87,7 +87,7 @@ function submitReview(dom,email,name) {
 				"html");
 	}
 	else{
-	jQuery.post("submitReview.php",
+		jQuery.post("submitReview.php",
 				{postId: <?php echo $post_id?>, rateValue: getRateValue(), reviewText: jQuery("#"+dom).val(),name_guess:  jQuery("#"+name).val(),email_guess: jQuery("#"+email).val()},
 				function(response) {
 					jQuery("#reviewList").html(response);
@@ -100,10 +100,11 @@ function signOut() {
 	jQuery.post("/requests/logout.php", {}, 
 				function(response) {
 					loadToolbar("toolbar");
-				document.getElementById('button').innerHTML="<div class='button' style='margin: 20px 20px;' onClick=review_Dialog1.dialog('open') ><a>+ Add a new review</a></div>";
-				document.getElementById('review1').innerHTML="<div style='height:0;'></div>";
-				document.getElementById('review2').innerHTML="<?php echo "$str_rate"?>";
+				//document.getElementById('button').innerHTML="<div class='button' style='margin: 20px 20px;' onClick=review_Dialog1.dialog('open') ><a>+ Add a new review</a></div>";
+				//document.getElementById('review1').innerHTML="<div style='height:0;'></div>";
+				//document.getElementById('review2').innerHTML="<?php //echo "$str_rate"?>";
 				document.getElementById('reviewText').value="";
+				document.getElementById('field_not_login').innerHTML="Email :<br /><input class='field' name='fill_email_review' id='fill_email_review' type='text' style='width:250px' value=''/><br />Name :<br /><input class='field' name='fill_name_review' id='fill_name_review' type='text' style='width:250px' value=''/><br /><input class='field' name='check_login' id='check_login' type='hidden' value='1'/>";
 				});
 }
 
@@ -113,10 +114,10 @@ function submitLogin() {
 	loginForm.send();
 	loginForm.get("send").addEvent("onComplete", function(response){
 		loadToolbar("toolbar");
-		document.getElementById('button').innerHTML="<div class='button' style='margin: 20px 20px;' onClick=reviewDialog.dialog('open') ><a>+ Add a new review</a></div>";
-		document.getElementById('review2').innerHTML="<div style='height:0;'></div>";
-		document.getElementById('review1').innerHTML="<?php echo "$str_rate"?>";
+		//document.getElementById('button').innerHTML="<div class='button' style='margin: 20px 20px;' onClick=reviewDialog.dialog('open') ><a>+ Add a new review</a></div>";
+		//document.getElementById('review1').innerHTML="<?php //echo "$str_rate"?>";
 		document.getElementById('reviewText').value="";
+		jQuery('#field_not_login').html("<input class='field' name='check_login' id='check_login' type='hidden' value='2'/>");
 	});
 }
 </script>

@@ -1,5 +1,18 @@
 <div id="commentDialog" title="Comment">
 <form id="commentForm">
+	<div id='field_not_login_comment'>
+	<?php if(!logged_in()) {?>
+		Email :<br />
+		<input class="field" name="fill_email_comment" id="fill_email_comment" type="text" style="width:250px" value=""/><br />
+		Name :<br />
+		<input class="field" name="fill_name_comment" id="fill_name_comment" type="text" style="width:250px" value=""/><br />
+		
+		<input class="field" name="check_login_comment" id="check_login_comment" type="hidden" value="1"/>
+	<?php }else{?>
+		<input class="field" name="check_login_comment" id="check_login_comment" type="hidden" value="2"/>
+	<?php }?>
+	</div>
+	<br />
 	<input type="text" id="postId" name="postId" value="<?php 
 	if(isset($draf)) echo '0';
 	elseif(isset($currentPostElement->id)) echo $currentPostElement->id;?>" style="visibility:hidden; display: none"/>
@@ -20,6 +33,7 @@
 <?php }?>
 </form>
 </div> 
+<div id="mustNameEmail_CommentAlert" title="Alert">You must fill Name or Email</div>
 <script language="javascript">
 function updateCommentText(reviewText) {
 	if (reviewText.value.length > 140)
@@ -38,7 +52,8 @@ function submitComment(){
 	});	
 }
 
-jQuery(document).ready(function(){ 
+jQuery(document).ready(function(){
+	mustNameEmail_CommentAlert = jQuery("#mustNameEmail_CommentAlert").dialog({autoOpen: false});
 	commentDialog = jQuery("#commentDialog").dialog({
 		autoOpen: false,
 		height: 'auto',
@@ -51,8 +66,18 @@ jQuery(document).ready(function(){
 		},		
 		buttons: {
 			'Submit': function() {
-				submitComment();
-				jQuery(this).dialog('close');
+				if(jQuery("#check_login_comment").val() == 1){
+					if(jQuery("#fill_name_comment").val() == '' && jQuery("#fill_email_comment").val() == '')
+						mustNameEmail_CommentAlert.dialog("open");
+					else{
+						submitComment();
+						jQuery(this).dialog('close');
+					}			
+				}
+				else{
+						submitComment();
+						jQuery(this).dialog('close');					
+				}
 			},
 			Cancel: function() {
 				jQuery(this).dialog('close');
