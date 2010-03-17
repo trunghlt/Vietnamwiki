@@ -1,9 +1,30 @@
 <div id="review_Dialog" title="Add a review">
 
 	<!-- Rating - source code reference @ http://reignwaterdesigns.com/ad/tidbits/rateme/ -->
-	<div id="review1">><!-- --></div>
+	<!--<div id="review1">-->
+		<span id='rateStatus'>Please rate...</span><br/>
+		<div id='rateMe' title='Please rate this topic'>
+		<div onclick="rateIt(this)" id='_1' class='none' title="This is very bad, never try it !!!" onmouseover="rating(this)" onmouseout="off(this)">&nbsp;</div>
+		<div onclick="rateIt(this)" id='_2' class='none' title="This is bad, I don't recommend it" onmouseover="rating(this)" onmouseout="off(this)">&nbsp;</div>
+		<div onclick="rateIt(this)" id='_3' class='none' title="This is ok, no thing special" onmouseover="rating(this)" onmouseout="off(this)">&nbsp;</div>
+		<div onclick="rateIt(this)" id='_4' class='none' title='This is good, I recommend it' onmouseover="rating(this)" onmouseout="off(this)">&nbsp;</div>
+		<div onclick="rateIt(this)" id='_5' class='none' title="This is very good, highly recommend !!!" onmouseover="rating(this)" onmouseout="off(this)">&nbsp;</div>
+		</div>
+	<!--</div>-->
 	<!------------------------------------------------------------------------------------->
 	<form id="reviewForm">
+	<div id='field_not_login'>
+	<?php if(!logged_in()) {?>
+		Email :<br />
+		<input class="field" name="fill_email_review" id="fill_email_review" type="text" style="width:250px" value=""/><br />
+		Name :<br />
+		<input class="field" name="fill_name_review" id="fill_name_review" type="text" style="width:250px" value=""/><br />
+		
+		<input class="field" name="check_login" id="check_login" type="hidden" value="1"/>
+	<?php }else{?>
+		<input class="field" name="check_login" id="check_login" type="hidden" value="2"/>
+	<?php }?>
+	</div>
 		<textarea 	id="reviewText" 
 					onKeyDown="updateReviewText(this)"
 					onKeyUp="updateReviewText(this)"
@@ -16,6 +37,7 @@
 </div>
 
 <div id="mustRateAlert" title="Alert">Sorry, you have to rate to finish reviewing !</div>
+<div id="mustNameEmailAlert" title="Alert">You must fill Name or Email</div>
 
 <div id="reviewLowerBound" title="Alert">Sorry, your review has to be more than 140 characters. 
 Click on <a href="<?php echo getPostPermaLink($post_id)?>">comment</a> if you want to comment less than 140 characters.</div>
@@ -31,6 +53,7 @@ jQuery(document).ready(function(){
 	loadToolbar("toolbar");
 	reviewLowerBound = jQuery("#reviewLowerBound").dialog({autoOpen: false});
 	mustRateAlert = jQuery("#mustRateAlert").dialog({autoOpen: false});
+	mustNameEmailAlert = jQuery("#mustNameEmailAlert").dialog({autoOpen: false});
 	reviewDialog = jQuery("#review_Dialog").dialog({
 		autoOpen: false,
 		height: 'auto',
@@ -50,9 +73,22 @@ jQuery(document).ready(function(){
 					reviewLowerBound.dialog("open");
 				}
 				else {
-					submitReview('reviewText','','');
-					resetRating();
-					jQuery(this).dialog('close');
+					
+					if(jQuery("#check_login").val() == 1){
+						
+						if(jQuery("#fill_name_review").val() == '' && jQuery("#fill_email_review").val() == '')
+							mustNameEmailAlert.dialog("open");
+						else{
+							submitReview('reviewText','fill_email_review','fill_name_review');
+							resetRating();
+							jQuery(this).dialog('close');
+						}							
+					}
+					else{
+						submitReview('reviewText','','');
+						resetRating();
+						jQuery(this).dialog('close');
+					}
 				}
 			},
 		Cancel: function() {
