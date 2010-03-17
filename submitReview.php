@@ -18,13 +18,13 @@ if(isset($_POST["name_guess"]) || isset($_POST["email_guess"])){
 		$review->email= $_POST["email_guess"];
 }
 $review->add();
-$row2 = Email::query(3);
-$str = 'http://localhost/review.php?&id='.$review->postId;
-$message = str_replace('here',$str,$row2['message']);
-$r = Email::query_post($review->postId);
-foreach($r as $row)
-{
-	sendmail($row['email'],$row2['subject'],$message,0,$row2['from']);
-}
+//$row2 = Email::query(3);
+//$str = 'http://localhost/review.php?&id='.$review->postId;
+//$message = str_replace('here',$str,$row2['message']);
+//$r = Email::query_post($review->postId);
+//foreach($r as $row)
+//{
+	//sendmail($row['email'],$row2['subject'],$message,0,$row2['from']);
+//}
 echo getReviewListHTML($review->postId);
 ?>

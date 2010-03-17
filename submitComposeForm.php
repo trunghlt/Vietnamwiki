@@ -32,7 +32,14 @@ $editionElement->add();
 if($editionElement->postId != 0){
 		$row2 = Email::query(1);
 		$str = 'http://www.vietnamwiki.net/viewtopic.php?id='.$postElement->id;
-		$message = str_replace('here',$str,$row2['message']);
+		
+$u = new User;
+$arr = $u->query_id($editionElement->userId);		
+		$message = str_replace('{link}',$str,$row2['message']);
+		$message = str_replace('{time}',date("d/m/Y",$editionElement->editDateTime),$message);
+		$message = str_replace('{username}',$arr['username'],$message);
+		$message = str_replace('{title}',$editionElement->postTitle,$message);
+		
 		$r = Email::query_post($postElement->id);
 		
 		foreach($r as $row)
@@ -41,10 +48,15 @@ if($editionElement->postId != 0){
 		}
 }
 else{
+$u = new User;
+$arr = $u->query_id($editionElement->userId);
 		$row2 = Email::query(1);
-		$message = str_replace('here','',$row2['message']);
-		$r = Email::query_post($postElement->id);
+		$message = str_replace('{link}','',$row2['message']);		
+		$message = str_replace('{time}',date("d/m/Y",$editionElement->editDateTime),$message);
+		$message = str_replace('{username}',$arr['username'],$message);
+		$message = str_replace('{title}',$editionElement->postTitle,$message);
 		
+		$r = Email::query_post($postElement->id);	
 		foreach($r as $row)
 		{
 			sendmail($row['email'],$row2['subject'],$message,0,$row2['from']);

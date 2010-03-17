@@ -47,11 +47,18 @@ if($_POST["type"]==1 && User::check_user(myUser_id(myip()),$postElement->id))
 }
 else if($_POST["type"]==2 && User::check_user(myUser_id(myip()),$postElement->id))
 {
+	$u = new User;
+	$arr = $u->query_id($editionElement->userId);	
 	$editionElement->editDateTime = time();
 	$editionElement->add();
 		$row2 = Email::query(1);
 		$str = 'http://www.vietnamwiki.net/viewtopic.php?id='.$postElement->id;
-		$message = str_replace('here',$str,$row2['message']);
+		
+		$message = str_replace('{link}',$str,$row2['message']);
+		$message = str_replace('{time}',date("d/m/Y",$editionElement->editDateTime),$message);
+		$message = str_replace('{username}',$arr['username'],$message);
+		$message = str_replace('{title}',$editionElement->postTitle,$message);
+		
 		$r = Email::query_post($postElement->id);
 		foreach($r as $row)
 		{

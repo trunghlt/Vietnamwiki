@@ -3,9 +3,11 @@
 ob_start();
 session_start();
 //include file	
-	include("db.php");
-	include("common.php");
+	include("../core/init.php");
+	include("../core/classes/Db.php");
 	include("session.php");
+	include("../core/classes/User.php");
+	include("../core/common.php");
 	include("../core/classes/Edition.php");
 	include("../core/classes/Filter.php");
 	include("../core/classes/Email.php");
@@ -105,15 +107,11 @@ session_start();
 <?php
 			$row2 = Email::query(2);
 			$str = 'http://www.vietnamwiki.net/viewtopic.php?id='.$post_id;
-			$q = new db;
+			$q = new User;
 			$message = str_replace('here',$str,$row2['message']);
-			$str = $q->query('select email from users where id='.$user_id);
-			
-			while($row = mysql_fetch_assoc($q->re))
-			{
-				if($row['email']!='')
+			$row = $q->query_id($user_id);
+			if($row['email']!='')
 					sendmail($row['email'],$row2['subject'],$message,0,$row2['from']);
-			}	
 		}
 	}	
 
@@ -123,8 +121,6 @@ session_start();
 	echo "Edition<br />";
 	echo "___________________________________________________<br />";
 	echo "<br />";
-	
-
 ?>
 <form method="post" action="edit_edition.php?id=<?php echo $arr['id']?>&post_id=<?php echo $arr['post_id'];?>&act=edit" target="edition" name="edition" >
 <div>

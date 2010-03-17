@@ -183,6 +183,7 @@ function signOut() {
 				function(response) {
 					loadToolbar("toolbar");
 					loadEdittingRibbon(<?php echo $post_id?>, "ribbon");
+					jQuery('#field_not_login_comment').html("Email :<br /><input class='field' name='fill_email_comment' id='fill_email_comment' type='text' style='width:250px' value=''/><br />Name :<br /><input class='field' name='fill_name_comment' id='fill_name_comment' type='text' style='width:250px' value=''/><br /><input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='1'/>");
 				});
 }
 
@@ -210,7 +211,8 @@ function submitLogin(dom,check) {
 							edit_login.dialog('close');	
 							editDialog.dialog('open');
 						}
-						loadEdittingRibbon(<?php echo $post_id?>, "ribbon");					
+						loadEdittingRibbon(<?php echo $post_id?>, "ribbon");
+						jQuery('#field_not_login_comment').html("<input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='2'/>");											
 					}
 					else
 					{

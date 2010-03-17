@@ -5,6 +5,11 @@ db_connect();
 $dest_id = isset($_GET["id"])? $_GET["id"] : 1;
 $dest_id = htmlspecialchars($dest_id , ENT_QUOTES);
 
+
+	$r1 = mysql_query("SELECT d.EngName FROM index_menu i, destinations d where i.id=$index_id and d.id = i.dest_id");
+	$arr1 = mysql_fetch_array($r1);
+	$dest_name = $arr1['EngName'];
+
 //$request = ($dest_id == 1)? "" : "WHERE index_id = '".$index_id."'";
 $request = "WHERE index_id = '".$index_id."'";
 //sort
@@ -45,8 +50,9 @@ $numrow = mysql_num_rows($result);
 if (($page - 1) * $num_per_page > $numrow) die_to_index();
 $start = ($page - 1) * $num_per_page;
 $end = $page * $num_per_page;
-$result = mysql_query("SELECT * FROM posts ".$request." ORDER BY ".$sort_query." DESC LIMIT ".$start.",".$end) or die(mysql_error()); 
-
+$result = mysql_query("SELECT * FROM posts ".$request." ORDER BY ".$sort_query." DESC LIMIT ".$start.",".$end) or die(mysql_error());
+$result2 = mysql_query("SELECT * FROM posts ".$request) or die(mysql_error()); 
+$numrow2 = mysql_num_rows($result2);
 While ($row = mysql_fetch_array($result)) {       
 	$sql = "SELECT *
 			FROM posts_texts
@@ -112,6 +118,29 @@ While ($row = mysql_fetch_array($result)) {
 
 <br /> <br />
 <?php
+if($numrow2 < 3 || $numrow2 == 0){
+	if($numrow2 == 0){
+		$str = 'no';
+	}
+	else
+		$str = $numrow2;
+		echo "There is currently $str topic in this index. Love $dest_name ? You know you can add new content to the website to recommend $dest_name to world-wide travellers by clicking on the below button";	
+?>
+<div id="mainMenu">
+<ul>
+	<li id='link_add' value="0">
+<?php if(!logged_in()){?>
+		<a onClick="loginDialog.dialog('open')" >+ Add new topic</a>
+
+<?php }else{ ?>
+	<a onClick="composeDialog.dialog('open')">+ Add new topic</a>
+<?php }?>
+	</li>
+</ul>
+</div>
+<?php
+}
+	
 /*
 function write_link_dest($i , $c) {
 		global $dest_id;
@@ -136,5 +165,5 @@ if ($numrow > $num_per_page) {
 	write_link_dest($numpage, ">>");
 }
 */
+include("forms/composeForm.php");
 ?>
-

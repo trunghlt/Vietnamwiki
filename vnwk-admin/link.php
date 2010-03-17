@@ -67,12 +67,12 @@ function set_update($value,$s){
 		echo 'Allow direct update';
 ?></a>
 </p>
-<p><a href="link.php?value=<?php echo $r['ALLOW_RESTORE_DRAFT']?>&type=draft_restore" >
+<!--<p><a href="link.php?value=<?php //echo $r['ALLOW_RESTORE_DRAFT']?>&type=draft_restore" >-->
 <?php 
-	if($r['ALLOW_RESTORE_DRAFT']==1)
+/*	if($r['ALLOW_RESTORE_DRAFT']==1)
 		echo "Don't allow restoring draft from accepted editors";
 	else
-		echo 'Allow restroing draft from accepted editors';
+		echo 'Allow restroing draft from accepted editors';*/
 ?></a>
 </p>
 <p><a href="#">Back up</a></p>
