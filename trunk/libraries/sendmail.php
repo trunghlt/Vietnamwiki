@@ -2,7 +2,7 @@
 function sendmail($to,$subject,$message,$type,$from){
 
 		$to1 = Filter::filterEmail($to);
-			
+		$to1 = "$to1";	
 					
 		if($to1 != $to)
 			return 1;
@@ -12,6 +12,7 @@ function sendmail($to,$subject,$message,$type,$from){
 		
 		$subject = Filter::filterInputText($subject);
 		$message = Filter::filterInputText($message);
+		$message = "\n $message";
 		$from = Filter::filterEmail($from);
 		
 		$headers = "MIME-Version: 1.0\n";
@@ -22,6 +23,7 @@ function sendmail($to,$subject,$message,$type,$from){
 	else if($type==0){
 		$headers .= "Content-type: text/plain; charset=utf-8\n";
 		$message = strip_tags($message);
+		$message = "\n $message";
 	}
 	if(strtolower($str) == 'yahoo'){
 		$headers .= "Content-Transfer-Encoding: 8bit\n";
