@@ -112,9 +112,14 @@ $message = new Message;
 	</tr>	
 	</tbody>
 	</table>
-	<?php if (check_logged_in(myip()) && $username==myUsername(myip())) {?>
-		<p><button onclick="update_click()">Update</button></p>
-		<?php }?>
+	<?php if (check_logged_in(myip()) && $username==myUsername(myip())) {
+			if(!chkFbLoggedIn()){
+	?>
+				<p><button onclick="update_click()">Update</button></p>
+		<?php 
+			}
+		}
+		?>
 	</div>
 </td>
 	<td>
