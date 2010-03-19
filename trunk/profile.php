@@ -155,7 +155,7 @@ $message = new Message;
 			echo "</div>";
 		?>
 	</tr>
-	<?php if (check_logged_in(myip()) && $username==myUsername(myip())) {?>
+	<?php if((check_logged_in(myip()) && $username==myUsername(myip()))) {?>
 	<!--Follow post-->
 	<tr>
 		<h1>Follow's posts</h1>
