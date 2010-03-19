@@ -13,6 +13,7 @@ session_start();
 	include("../core/classes/Email.php");
 	include("../core/classes/Follow.php");
 	include("../libraries/sendmail.php");
+	include("../core/permalink.php");
 //check logged user 
 	process(session_id(), myip());
 	if (!logged_in()) header("location: login.php");
@@ -106,7 +107,7 @@ session_start();
 </script>
 <?php
 			$row2 = Email::query(2);
-			$str = 'http://www.vietnamwiki.net/viewtopic.php?id='.$post_id;
+			$str = 'http://www.vietnamwiki.net/'.getPostPermalink($post_id);
 			$q = new User;
 			$message = str_replace('here',$str,$row2['message']);
 			$row = $q->query_id($user_id);
