@@ -38,7 +38,7 @@
 				content_css : "/css/topic-content.css",
 
 				//add iframe element
-				extended_valid_elements : "fb|[src|width|height|name|align][frameborder][scrolling][marginheight][marginwidth]",
+				//extended_valid_elements : "fb:fan|[profile_id|stream|connections|logobar|width][frameborder][scrolling][marginheight][marginwidth]",
 			
 				// Drop lists for link/image/media/template dialogs
 				template_external_list_url : "js/template_list.js",
