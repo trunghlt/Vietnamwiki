@@ -2,6 +2,7 @@
 include("core/init.php");
 include("core/common.php");
 include("core/classes.php");
+include("core/permalink.php");
 include("libraries/sendmail.php");
 if($_POST["summary"] != NULL && $_POST["title"] != NULL && $_POST["content"] != NULL){
 $postElement = new PostElement();
@@ -31,12 +32,12 @@ $editionElement->reference = $postElement->reference;
 $editionElement->add();
 if($editionElement->postId != 0){
 		$row2 = Email::query(1);
-		$str = 'http://www.vietnamwiki.net/viewtopic.php?id='.$postElement->id;
+		$str = 'http://www.vietnamwiki.net/'.getPostPermalink($postElement->id);
 		
 $u = new User;
 $arr = $u->query_id($editionElement->userId);		
 		$message = str_replace('{link}',$str,$row2['message']);
-		$message = str_replace('{time}',date("d/m/Y",$editionElement->editDateTime),$message);
+		$message = str_replace('{time}',date("d/m/Y   H:i a",$editionElement->editDateTime),$message);
 		$message = str_replace('{username}',$arr['username'],$message);
 		$message = str_replace('{title}',$editionElement->postTitle,$message);
 		
@@ -52,7 +53,7 @@ $u = new User;
 $arr = $u->query_id($editionElement->userId);
 		$row2 = Email::query(1);
 		$message = str_replace('{link}','',$row2['message']);		
-		$message = str_replace('{time}',date("d/m/Y",$editionElement->editDateTime),$message);
+		$message = str_replace('{time}',date("d/m/Y  H:i a",$editionElement->editDateTime),$message);
 		$message = str_replace('{username}',$arr['username'],$message);
 		$message = str_replace('{title}',$editionElement->postTitle,$message);
 		
