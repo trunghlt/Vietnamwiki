@@ -37,7 +37,6 @@ array_pop($r_com);
 				if (isset($fbId)) {
 			    	$fbUserInfo = facebook_client()->api_client->users_getInfo($fbId, "pic_square");
 			    	$avatarURL = $fbUserInfo[0]["pic_square"];
-			    	echo $avatarURL;
 				}
 				else {
 					$pAvatar = new TalkPHP_Gravatar();
