@@ -22,15 +22,6 @@ array_pop($r_com);
 	
 		function write_comment($row, $post_id) {
 			echo "<div class='comment'>";
-			//comment content
-			echo "<div class='commentContent'>";
-			echo htmlspecialchars($row["comment_text"]);
-			echo "</div>";
-			
-			//Comment detail entry			
-			?>
-			<div class="commentInfo">
-			<?php
 			if($row["user_id"]!=0){
 				$user_com = new User;
 				$x = $user_com->query_id($row["user_id"]);
@@ -46,8 +37,11 @@ array_pop($r_com);
 					$pAvatar = new TalkPHP_Gravatar();
 					$pAvatar->setEmail($row['email'])->setSize(80)->setRatingAsPG();
 						$posttime = $row['comment_time'];
-						$timelabel = date("d M, Y H:i", $posttime);			
-						echo "Posted by <img class='img_guess' src='".$pAvatar->getAvatar()."' height='20' width='20'/> at ". $timelabel;					
+						$timelabel = date("d M, Y H:i", $posttime);
+						?>
+						<img class="avatar" src='<?php echo $pAvatar->getAvatar()?>' height=50 width=50/>
+						<div class="commentText"><?php echo htmlspecialchars($row["comment_text"]);?></div>						 
+						<?php 					
 				}
 				elseif($row['name']!='' && $row['email']==''){
 						$posttime = $row['comment_time'];
@@ -61,7 +55,6 @@ array_pop($r_com);
 				}
 			}
 		?>
-		</div>
 		</div>
 		<?php
 		}

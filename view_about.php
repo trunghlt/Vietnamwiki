@@ -1,6 +1,6 @@
 <br />
 <br />
-<div align="center"><embed src="images/1.swf" type="application/x-shockwave-flash" wmode="transparent" allowscriptaccess="none" height="300" width="450"> </div> 
+<div align="center"><embed src="/images/1.swf" type="application/x-shockwave-flash" wmode="transparent" allowscriptaccess="none" height="300" width="450"> </div> 
 <br/>
 <div align="center"><span class="style1">This website is developed by some people who want to recommend to you seriously about an amazing Vietnam</span></div>
 

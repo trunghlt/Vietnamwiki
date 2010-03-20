@@ -29,7 +29,7 @@ While ($row = mysql_fetch_array($result)) {
     $n++; ?>
  	<tr>
 	 	<td width="23px">
-		 	<img style="margin-left: 5px;" src="css/images/bg/arrow.jpg"/>
+		 	<img style="margin-left: 5px;" src="/css/images/bg/arrow.jpg"/>
 		 </td>
 			<?php 	 
 			$class = ($row["id"] == $destination)? "active" : "linksmall";
