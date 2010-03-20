@@ -1,3 +1,4 @@
+<div style="padding: 5px;">
 <?php
 echo "<h1>Latest Headlines</h1>";
 
@@ -137,6 +138,7 @@ if($numrow2 <= 5){
 <?php }?>
 	</li>
 </ul>
+</div>
 </div>
 <?php
 }
