@@ -546,6 +546,13 @@ html, body {
 			background: #ECEFF5 none repeat scroll 0 0;		
 		}
 		
+		#reviewList div.reviewElement div.reviewHead .avatar {
+			float: left;
+			display: block;
+			clear: left;
+			padding: 5px;
+		}
+		
  		#reviewList div.reviewElement div.reviewHead div.reviewRate {
             width: 83px;
             height: 17px;
@@ -858,8 +865,8 @@ table.main {
 	width: 800px;
 	clear:both;
 	width: 800px;
-	clear:both;
-	margin-bottom: 10px;
+	clear: both;
+	margin-bottom: 50px;
 }
 
 a.linksmall:hover {
@@ -919,28 +926,42 @@ a.none{
 	border-bottom: 1px solid #7B9EBD;
 }
 
-.comment_block .comment{
-	margin-top: 5px;
-	margin-left: 5px;	
-	border-bottom: 1px solid #DDDDDD;
-}
-
-.comment_block div:last-child{
+.comment_block div.comment:last-child{
 	border-bottom: none;	
 }
 
+.comment_block div.comment:nth-child(odd){
+	}
+
+.comment_block div.comment:nth-child(even){
+	}
+
+
 	.comment {
 		clear: both;
+		margin-top: 2px;
+		margin-left: 2px;
+		overflow: hidden;	
+		border-bottom: 1px solid #DDDDDD;		
 	}
 	
-	.comment .commentContent{
-		margin-top: 5px;
-		margin-bottom: 5px;
-		font-size: 11px;
+	.comment .commentText {
+		padding-top: 5px;
+		font-size: 12px;
 		color: #333333;
-		margin-bottom: 5px;
+		display: table-cell;
 	}
-	
+
+	.comment .commentText .author {
+		font-weight: bold;
+		color: #3B5998;
+	}
+
+	.comment .commentText .timeLbl {
+		color: #777;
+		font-size: 9px;
+	}
+
 	.comment .commentInfo {
 		margin-top: 5px;
 		margin-bottom: 2px;
@@ -950,10 +971,12 @@ a.none{
 	
 	.comment .avatar {
 		float: left;
+		display: block;
+		clear: left;
 		padding: 5px;
 	}
-
-
+	
+	
 h1  {
 	color : #990000;
 	font-size : 20px;

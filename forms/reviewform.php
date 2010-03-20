@@ -1,6 +1,5 @@
 <div id="review_Dialog" title="Add a review">
 
-	<!-- Rating - source code reference @ http://reignwaterdesigns.com/ad/tidbits/rateme/ -->
 	<!--<div id="review1">-->
 		<span id='rateStatus'>Please rate...</span><br/>
 		<div id='rateMe' title='Please rate this topic'>
@@ -11,25 +10,28 @@
 		<div onclick="rateIt(this)" id='_5' class='none' title="This is very good, highly recommend !!!" onmouseover="rating(this)" onmouseout="off(this)">&nbsp;</div>
 		</div>
 	<!--</div>-->
-	<!------------------------------------------------------------------------------------->
+
 	<form id="reviewForm">
 	<div id='field_not_login'>
 	<?php if(!logged_in()) {?>
-		Email :<br />
+		<p>Email: (required)<br />
 		<input class="field" name="fill_email_review" id="fill_email_review" type="text" style="width:250px" value=""/><br />
-		Name :<br />
-		<input class="field" name="fill_name_review" id="fill_name_review" type="text" style="width:250px" value=""/><br />
+		<span style="font-size: 9px; color: #777;">We loathe spamming. We will never spam you! We use your email to display your <a href="http://en.gravatar.com/">Gravatar</a>.</span></p>
+		
+		<p>Name: (required)<br />
+		<input class="field" name="fill_name_review" id="fill_name_review" type="text" style="width:250px" value=""/><br /></p>
 		
 		<input class="field" name="check_login" id="check_login" type="hidden" value="1"/>
 	<?php }else{?>
 		<input class="field" name="check_login" id="check_login" type="hidden" value="2"/>
 	<?php }?>
 	</div>
-		<textarea 	id="reviewText" 
-					onKeyDown="updateReviewText(this)"
-					onKeyUp="updateReviewText(this)"
-					rows="10" 
-					cols="80"></textarea>
+
+	<textarea 	id="reviewText" 
+				onKeyDown="updateReviewText(this)"
+				onKeyUp="updateReviewText(this)"
+				rows="10" 
+				cols="80"></textarea>
 	</form>
 	<label>Your review can't excess 5000 characters.</label>
 	<label id="reviewLimitLbl"></label>
