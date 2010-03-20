@@ -29,7 +29,6 @@ array_pop($r_com);
 				$timelabel = date("d M, Y H:i", $posttime);			
 				$username = $x["username"];			
 				echo "Posted by ". $username. " at ". $timelabel;			
-
 			}
 			else{
 				if(($row['name']!='' && $row['email']!='')||($row['name']=='' && $row['email']!=''))
@@ -40,7 +39,12 @@ array_pop($r_com);
 						$timelabel = date("d M, Y H:i", $posttime);
 						?>
 						<img class="avatar" src='<?php echo $pAvatar->getAvatar()?>' height=50 width=50/>
-						<div class="commentText"><?php echo htmlspecialchars($row["comment_text"]);?></div>						 
+						<div class="commentText">
+							<span class="author"><?php echo $row["name"]?></span>
+							<?php echo htmlspecialchars($row["comment_text"]);?>
+							<br/>
+							<span class="timeLbl"><?php echo $timelabel;?></span>
+						</div>						 
 						<?php 					
 				}
 				elseif($row['name']!='' && $row['email']==''){
