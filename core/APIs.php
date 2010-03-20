@@ -85,7 +85,7 @@ function getToolbarHTML() {
         try {
     		$fbUserId = facebook_client()->get_loggedin_user();
 		    if ($fbUserId) {
-			    $fbUserInfo = facebook_client()->api_client->users_getInfo($fbUserId, "name, proxied_email, first_name, last_name, locale");
+			    $fbUserInfo = facebook_client()->api_client->users_getInfo($fbUserId, "name, proxied_email, first_name, last_name, locale, pic_square");
 			    $currentFbUserInfo = $fbUserInfo[0];
 			    if ( !User::chkFbUserReged($fbUserId) ) {
 				    $user = new User;
