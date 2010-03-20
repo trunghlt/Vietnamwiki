@@ -21,46 +21,39 @@ array_pop($r_com);
 	echo "<div class='comment_block'>";
 	
 		function write_comment($row, $post_id) {
-			echo "<div class='comment'>";
-			if($row["user_id"]!=0){
-				$user_com = new User;
-				$x = $user_com->query_id($row["user_id"]);
-				$posttime = $row['comment_time'];
-				$timelabel = date("d M, Y H:i", $posttime);			
-				$username = $x["username"];			
-				echo "Posted by ". $username. " at ". $timelabel;			
-			}
-			else{
-				if(($row['name']!='' && $row['email']!='')||($row['name']=='' && $row['email']!=''))
-				{
+			?><div class='comment'><?php
+				$fbId = NULL;
+				if($row["user_id"]!=0){
+					$user_com = new User;
+					$x = $user_com->query_id($row["user_id"]);
+					if (isset($x["fbId"])) $fbId = $x["fbId"];
+					$email = $x["email"];
+					$name = $x["username"];
+				}
+				else {
+					$email = $row["email"];
+					$name = $row["name"];
+				}
+				if (isset($fbId)) {
+			    	$fbUserInfo = facebook_client()->api_client->users_getInfo($fbId, "first_name, last_name, pic_square");
+			    	$avatarURL = $fbUserInfo[0]["pic_square"];
+				}
+				else {
 					$pAvatar = new TalkPHP_Gravatar();
-					$pAvatar->setEmail($row['email'])->setSize(80)->setRatingAsPG();
-						$posttime = $row['comment_time'];
-						$timelabel = date("d M, Y H:i", $posttime);
-						?>
-						<img class="avatar" src='<?php echo $pAvatar->getAvatar()?>' height=50 width=50/>
-						<div class="commentText">
-							<span class="author"><?php echo $row["name"]?></span>
-							<?php echo htmlspecialchars($row["comment_text"]);?>
-							<br/>
-							<span class="timeLbl"><?php echo $timelabel;?></span>
-						</div>						 
-						<?php 					
+					$pAvatar->setEmail($email)->setSize(80)->setRatingAsPG();
+					$avatarURL = $pAvatar->getAvatar();
 				}
-				elseif($row['name']!='' && $row['email']==''){
-						$posttime = $row['comment_time'];
-						$timelabel = date("d M, Y H:i", $posttime);			
-						echo "Posted by $row[name] at ". $timelabel;					 
-				}
-				elseif($row['name']=='' && $row['email']==''){
-						$posttime = $row['comment_time'];
-						$timelabel = date("d M, Y H:i", $posttime);			
-						echo "Posted by guest at ". $timelabel;
-				}
-			}
-		?>
-		</div>
-		<?php
+				$posttime = $row['comment_time'];
+				$timelabel = date("d M, Y H:i", $posttime);
+				?>
+				<img class="avatar" src='<?php echo $avatarURL?>' height=50 width=50/>
+				<div class="commentText">
+					<span class="author"><?php echo $name?></span>
+					<?php echo htmlspecialchars($row["comment_text"]);?>
+					<br/>
+					<span class="timeLbl"><?php echo $timelabel;?></span>
+				</div>						 
+			</div><?php
 		}
 	$i=0;
 	while (($i < 5)&&($i < $n)) {
