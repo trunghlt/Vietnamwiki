@@ -516,19 +516,15 @@ html, body {
 #contentTable{
 	background-color: white;
 	clear:both;
-		padding: 5px;
 }
 
 	#contentTable #postContent {
-		margin-top: 20px;
+		margin-top: 0px;
 		padding: 5px 5px 5px 5px;
-		#margin-top: 0px;
-		#padding-top:0px;
 	}
 	
 #reviewList {
 	margin: 100px 5px 10px 5px;
-	#margin-top:80px;
 }
 	
 	#reviewList div.reviewElement {
