@@ -2,10 +2,12 @@
 <form id="commentForm">
 	<div id='field_not_login_comment'>
 	<?php if(!logged_in()) {?>
-		Email :<br />
+		<p>Email: (required)<br />
 		<input class="field" name="fill_email_comment" id="fill_email_comment" type="text" style="width:250px" value=""/><br />
-		Name :<br />
-		<input class="field" name="fill_name_comment" id="fill_name_comment" type="text" style="width:250px" value=""/><br />
+		<span style="font-size: 9px; color: #777;">We loathe spamming. We will never spam you! We use your email to display your <a href="http://en.gravatar.com/">Gravatar</a>.</span></p>
+		
+		<p>Name: (required)<br />
+		<input class="field" name="fill_name_comment" id="fill_name_comment" type="text" style="width:250px" value=""/><br /></p>
 		
 		<input class="field" name="check_login_comment" id="check_login_comment" type="hidden" value="1"/>
 	<?php }else{?>
