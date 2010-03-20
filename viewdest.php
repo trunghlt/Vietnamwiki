@@ -116,16 +116,16 @@ While ($row = mysql_fetch_array($result)) {
 
 ?>
 
-<br /> <br />
 <?php
-if($numrow2 < 3 || $numrow2 == 0){
+if($numrow2 <= 5){
 	if($numrow2 == 0){
-		$str = 'no';
+		$str = 'is currently no topic';
 	}
-	else
-		$str = $numrow2;
-		echo "There is currently $str topic in this index. Love $dest_name ? You know you can add new content to the website to recommend $dest_name to world-wide travellers by clicking on the below button";	
+	else if ($numrow2 == 1) {$str = "is currently only 1 topic";}
+	else $str = "are currently only ". $numrow2 . " topics";
 ?>
+<p class="note1">There <?php echo $str?> in this index. Is <?php echo $dest_name?> your hometown? Or do you just simply love this place? You know you can add a new topic here to recommend <?php echo $dest_name?> to worldwide travellers by clicking on the below button.</p>
+
 <div id="mainMenu">
 <ul>
 	<li id='link_add' value="0">
