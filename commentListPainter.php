@@ -15,7 +15,7 @@ if ($n > 0) {
 array_pop($r_com);
 	?>
 	<div class="comment_head" align="center">
-		<?php echo $n . " "?>Comments
+		<?php echo $n?> comment<?php if ($n > 1) echo "s"?>
 	</div>
 	<?php
 	echo "<div class='comment_block'>";
@@ -35,8 +35,9 @@ array_pop($r_com);
 					$name = $row["name"];
 				}
 				if (isset($fbId)) {
-			    	$fbUserInfo = facebook_client()->api_client->users_getInfo($fbId, "first_name, last_name, pic_square");
+			    	$fbUserInfo = facebook_client()->api_client->users_getInfo($fbId, "pic_square");
 			    	$avatarURL = $fbUserInfo[0]["pic_square"];
+			    	echo $avatarURL;
 				}
 				else {
 					$pAvatar = new TalkPHP_Gravatar();
