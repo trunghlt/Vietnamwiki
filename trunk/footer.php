@@ -30,6 +30,6 @@ include("feedback.php");
 include("googleAnalytical.php")
 ?>
 
-
+</div>
 </body>
 </html>

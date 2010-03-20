@@ -73,27 +73,32 @@ function getToolbarHTML() {
 	?>
 	<div align="right" style="padding-top: 5px;">
 		<?php
-		$fbUserId = facebook_client()->get_loggedin_user();
-		if ($fbUserId) {
-			$fbUserInfo = facebook_client()->api_client->users_getInfo($fbUserId, "name, proxied_email, first_name, last_name, locale");
-			$currentFbUserInfo = $fbUserInfo[0];
-			if ( !User::chkFbUserReged($fbUserId) ) {
-				$user = new User;
-				$user->fbId = $fbUserId;
-				$user->username = $currentFbUserInfo["name"];
-				$user->email = $currentFbUserInfo["proxied_email"];
-				$user->firstName = $currentFbUserInfo["first_name"];
-				$user->lastName = $currentFbUserInfo["last_name"];
-				$user->locationCode = $currentFbUserInfo["locale"];
-				$user->add();
-				login($user->id);
-			}
-			else {
-				$user = new User;
-				$user->queryByFbId($fbUserId);
-				login($user->id);
-			}
-		}
+        try {
+    		$fbUserId = facebook_client()->get_loggedin_user();
+		    if ($fbUserId) {
+			    $fbUserInfo = facebook_client()->api_client->users_getInfo($fbUserId, "name, proxied_email, first_name, last_name, locale");
+			    $currentFbUserInfo = $fbUserInfo[0];
+			    if ( !User::chkFbUserReged($fbUserId) ) {
+				    $user = new User;
+				    $user->fbId = $fbUserId;
+				    $user->username = $currentFbUserInfo["name"];
+				    $user->email = $currentFbUserInfo["proxied_email"];
+				    $user->firstName = $currentFbUserInfo["first_name"];
+				    $user->lastName = $currentFbUserInfo["last_name"];
+				    $user->locationCode = $currentFbUserInfo["locale"];
+				    $user->add();
+				    login($user->id);
+			    }
+			    else {
+				    $user = new User;
+				    $user->queryByFbId($fbUserId);
+				    login($user->id);
+			    }
+		    }
+        }
+        catch (Exception $e) {
+            $fbUserId = False;
+        }
 		
 		$loggedIn = logged_in();
 		

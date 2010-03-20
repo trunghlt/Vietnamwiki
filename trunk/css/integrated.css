@@ -405,11 +405,20 @@ body{
 	background: #830003 url(images/bg/bg.gif) repeat-y scroll center center;
 	font-family: Arial,Helvetica,serif;
 	font-size: 12px;
-	margin: 0 0;
-	padding: 0 0;
+	margin: 0;
+	padding: 0;
 }
 
+html, body {
+	height: 100%;
+}
 
+#grandWrapper {
+	position: relative;
+	height: auto !important;
+	min-height: 100%;
+	}
+	
 #header {
 	width: 100%;
 	background-color: #600003;
@@ -507,6 +516,7 @@ body{
 #contentTable{
 	background-color: white;
 	clear:both;
+		padding: 5px;
 }
 
 	#contentTable #postContent {
@@ -781,6 +791,8 @@ input.img_link{
 	width: *%;
 }
 
+
+
 img.upload_image{
 	border: 0px;
 	width: 180px;
@@ -829,27 +841,25 @@ td.left {
 	width : 180px;
 	vertical-align: top;
 	border-right: 1px solid #C8C8C8;
-	#width:180px;
 }
 td.center {
 	width : 620px;
 	vertical-align: top;
-	#width:620px;
+	border-bottom: 1px solid #C8C8C8;
 }
 
 table.leftmenu{
 	width: 100%;
 	background-color: white;
 	border: 0px;
-	#width: 180px;
 }
 
 table.main {
 	width: 800px;
-	border-bottom: 1px solid #C8C8C8;
 	clear:both;
-	#width: 800px;
+	width: 800px;
 	clear:both;
+	margin-bottom: 10px;
 }
 
 a.linksmall:hover {
@@ -919,7 +929,10 @@ a.none{
 	border-bottom: none;	
 }
 
-
+	.comment {
+		clear: both;
+	}
+	
 	.comment .commentContent{
 		margin-top: 5px;
 		margin-bottom: 5px;
@@ -933,6 +946,11 @@ a.none{
 		margin-bottom: 2px;
 		font-size: 9px;
 		color: #AAAAAA;
+	}
+	
+	.comment .avatar {
+		float: left;
+		padding: 5px;
 	}
 
 
@@ -984,6 +1002,11 @@ span.style4 {
 	color : gray;
 	font-family : Arial, Helvetica, serif;	
 }
+
+.note1 {
+	font-size: 	14px;
+	color: 		#666666;
+	}
 
 span.style3 {
 	color : black;

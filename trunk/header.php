@@ -158,7 +158,7 @@ if (window.attachEvent) {
 
 <!--  BODY -->
 <body bgcolor="#D8D8D8">
-
+<div id="grandWrapper">
 <?php echo render_fbconnect_init_js();?>
 
 <script language="javascript">
