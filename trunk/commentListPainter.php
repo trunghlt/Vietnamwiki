@@ -29,7 +29,7 @@ array_pop($r_com);
 				if($row["user_id"]!=0){
 					$user_com = new User;
 					$x = $user_com->query_id($row["user_id"]);
-					if (isset($x["fbId"])) $fbId = $x["fbId"];
+					if (isset($x["fbId"])) $fbId = (int) $x["fbId"];
 					$email = $x["email"];
 					$name = $x["username"];
 				}
@@ -42,7 +42,7 @@ array_pop($r_com);
 					    	$fbUserInfo = facebook_client()->api_client->users_getInfo($fbId, "pic_square");
 					    	$avatarURL = $fbUserInfo[0]["pic_square"];
 					}
-					catch (Exception $e) {}
+					catch (Exception $e) {echo $fbId}
 				}
 				else {
 					$pAvatar = new TalkPHP_Gravatar();
