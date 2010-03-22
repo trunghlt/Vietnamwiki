@@ -38,8 +38,11 @@ array_pop($r_com);
 					$name = $row["name"];
 				}
 				if (isset($fbId)) {
-			    	$fbUserInfo = facebook_client()->api_client->users_getInfo($fbId, "pic_square");
-			    	$avatarURL = $fbUserInfo[0]["pic_square"];
+					try {
+					    	$fbUserInfo = facebook_client()->api_client->users_getInfo($fbId, "pic_square");
+					    	$avatarURL = $fbUserInfo[0]["pic_square"];
+					}
+					catch (Exception $e) {}
 				}
 				else {
 					$pAvatar = new TalkPHP_Gravatar();
