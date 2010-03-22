@@ -329,5 +329,23 @@ function update_image($id, $loc, $des, $tags) {
 			WHERE id = $id";
 	$q->query($sql);		
 }
-		
+//--------------------------login admin-------------------
+	function logged_in_admin() {
+		$ip = myip();
+		$sql = "SELECT *
+				FROM admin_sessions
+				WHERE ip = '".$ip."'";
+		$result = mysql_query($sql);
+		$row = mysql_fetch_array($result);
+		mysql_free_result($result);
+		return $row["logged_in"];
+	}
+	
+	function filter_content_script($s){
+		$str = str_replace('<script>',' ',$s);
+		$str = str_replace('</script>',' ',$str);
+		$str = str_replace('<iframe>',' ',$str);
+		$str = str_replace('</iframe>',' ',$str);
+		return $str;
+	}		
 ?>

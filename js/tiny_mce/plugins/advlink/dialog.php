@@ -2,7 +2,12 @@
 <?php
 include("../../../../core/init.php");
 include("../../../../core/classes/Filter.php");
+include("../../../../core/classes/Db.php");
 include("../../../../core/classes/ActiveRecord.php");
+include("../../../../core/classes/IndexElement.php");
+include("../../../../core/classes/DestinationElement.php");
+include("../../../../core/classes/PostElement.php");
+include("../../../../core/permalink.php");
 
 if (isset($_GET["task"])) {
 	$task = $_GET["task"];
@@ -64,7 +69,7 @@ if (isset($_GET["task"])) {
 		$rr = $qq->select($arr,'posts_texts',"post_id=$r[post_id]");
 	echo "<div>";
 	echo "<font style='font-size:14px;font-weight:bold;color:#336699;'>".$rr[0]['post_subject'].'</font><br />';
-	echo "<font style='color:#33CC66;'>http://www.vietnamwiki.net/viewtopic.php?id=".$rr[0]['post_id']."</font><br />";
+	echo "<font style='color:#33CC66;'>http://www.vietnamwiki.net".getPostPermalink($rr[0]['post_id'])."</font><br />";
 	echo "</div>";
 	}
 	echo "<div style='margin-top:5px; margin-bottom:5px; color:RED; font-size:12px;'>";

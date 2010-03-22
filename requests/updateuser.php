@@ -51,30 +51,32 @@ include("../core/classes/Db.php");
 		 echo '1';
 		 return;
 	}
-	if (chk_sql_injection($_POST['tmp_file_name'])) $tmp = $_POST['tmp_file_name'];
-	else{
-		 echo '1';
-		 return;
-	}
+	//if (chk_sql_injection($_POST['tmp_file_name'])) $tmp = $_POST['tmp_file_name'];
+	//else{
+		 //echo '1';
+		// return;
+	//}
 
-	update_user($id,$pw,$email,$first,$last,$dob,$mob,$yob,$loc,$tmp);
+	update_user($id,$pw,$email,$first,$last,$dob,$mob,$yob,$loc);//,$tmp);
 
-function update_user($id,$pw,$email,$fn,$ln,$dd,$mm,$yyyy,$country,$ftmp){	
+function update_user($id,$pw,$email,$fn,$ln,$dd,$mm,$yyyy,$country){//,$ftmp){	
 	global $q;
-	require_once("../upload2/class.upload.php");
-	require_once("../upload2/class.img.php");	
 	if (checkdate($mm, $dd, $yyyy))
 		$dob = mktime(0,0,0,$mm,$dd,$yyyy);
 	else{
 		echo '1';
 		return;
 	}
-		
-	$sql = "SELECT avatar, username
+	$sql = "SELECT username
 			FROM users
 			WHERE id='".$id."'";
 	$q->query($sql);
 	$row1 = mysql_fetch_array($q->re);
+/*	require_once("../upload2/class.upload.php");
+	require_once("../upload2/class.img.php");	
+
+		
+
 	if($row1['avatar']!=$ftmp || $row1['avatar']!=NULL || $row1['avatar']!='')
 	{	
 		$pftmp = "../upload/upload/". $ftmp;
@@ -126,7 +128,7 @@ function update_user($id,$pw,$email,$fn,$ln,$dd,$mm,$yyyy,$country,$ftmp){
 	}
 	else{
 		$file_name = $ftmp;
-	}
+	}*/
 if($pw==''){	
 			//update database
 			$sql = "UPDATE users 
@@ -134,8 +136,7 @@ if($pw==''){
 						firstName='".$fn."', 
 						lastName='".$ln."', 
 						dob='".$dob."',
-						locationCode='".$country."',
-						avatar='".$file_name."'
+						locationCode='".$country."'						
 					WHERE id='".$id."'";
 			$q->query($sql);
 }
@@ -146,8 +147,7 @@ else{
 						firstName='".$fn."', 
 						lastName='".$ln."', 
 						dob='".$dob."',
-						locationCode='".$country."',
-						avatar='".$file_name."'
+						locationCode='".$country."'
 					WHERE id='".$id."'";
 			$q->query($sql);	
 }

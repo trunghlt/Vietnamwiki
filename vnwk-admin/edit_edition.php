@@ -12,11 +12,14 @@ session_start();
 	include("../core/classes/Filter.php");
 	include("../core/classes/Email.php");
 	include("../core/classes/Follow.php");
+	//include("../core/classes/DestinationElement.php");
+	//include("../core/classes/IndexElement.php");
+	//include("../core/classes/PostElement.php");
 	include("../libraries/sendmail.php");
-	include("../core/permalink.php");
+	//include("../core/permalink.php");
 //check logged user 
 	process(session_id(), myip());
-	if (!logged_in()) header("location: login.php");
+	if (!logged_in_admin()) header("location: login.php");
 	if(isset($_GET['id']))
 	{
 		$id = Filter::filterInput($_GET['id'],"login.php",1);
@@ -107,9 +110,10 @@ session_start();
 </script>
 <?php
 			$row2 = Email::query(2);
-			$str = 'http://www.vietnamwiki.net/'.getPostPermalink($post_id);
+			//$str = 'http://www.vietnamwiki.net/'.getPostPermalink($post_id);
 			$q = new User;
-			$message = str_replace('here',$str,$row2['message']);
+			//$message = str_replace('here',$str,$row2['message']);
+			$message = $row2['message'];
 			$row = $q->query_id($user_id);
 			if($row['email']!='')
 					sendmail($row['email'],$row2['subject'],$message,0,$row2['from']);
