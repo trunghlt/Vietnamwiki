@@ -41,8 +41,11 @@ array_pop($r_com);
 					try {
 					    	$fbUserInfo = facebook_client()->api_client->users_getInfo($fbId, "pic_square");
 					    	$avatarURL = $fbUserInfo[0]["pic_square"];
+						mysql_query("UPDATE users SET avatar='{$avatarURL}' WHERE id={$row["user_id"]}");
 					}
-					catch (Exception $e) {echo $fbId}
+					catch (Exception $e) {
+						$avatarURL = $x["avatar"];
+					}
 				}
 				else {
 					$pAvatar = new TalkPHP_Gravatar();
