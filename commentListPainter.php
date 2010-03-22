@@ -25,7 +25,7 @@ array_pop($r_com);
 	
 		function write_comment($row, $post_id) {
 			?><div class='comment'><?php
-				$fbId = NULL;
+				$fbId = 0;
 				if($row["user_id"]!=0){
 					$user_com = new User;
 					$x = $user_com->query_id($row["user_id"]);
@@ -37,7 +37,7 @@ array_pop($r_com);
 					$email = $row["email"];
 					$name = $row["name"];
 				}
-				if (isset($fbId)) {
+				if ($fbId != 0) {
 					try {
 					    	$fbUserInfo = facebook_client()->api_client->users_getInfo($fbId, "pic_square");
 					    	$avatarURL = $fbUserInfo[0]["pic_square"];
