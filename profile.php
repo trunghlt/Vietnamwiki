@@ -9,6 +9,7 @@ include('core/classes/Message.php');
 include('core/classes/IndexElement.php');
 include('core/classes/DestinationElement.php');
 include('core/classes/CommentElement.php');
+include('libraries/TalkPHP_Gravatar.php');
 include('core/session.php');
 include("ajax_header.php");	
 include("header.php");

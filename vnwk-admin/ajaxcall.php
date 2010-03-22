@@ -120,7 +120,7 @@
 <?php } ?>
 	</ul>
 	
-	<?php echo $projax->sortabe_element('indexlist', array('update'=>'lbl','complete'=>$projax->visual_effect('highlight','indexlist') , 'url'=>'ajaxcall.php?action=order&id='.$id)); ?>
+	<?php echo $projax->sortabe_element('indexlist', array('update'=>'lbl','complete'=>$projax->visual_effect('highlight','indexlist') , 'url'=>'index_menu.php?action=order&id='.$id)); ?>
 	<form action="index_menu.php?action=add&id=<?php echo $id?>" method="post">
 		<input type="text" id="name" name="name" />
 		<input type="submit" value="Add index" />

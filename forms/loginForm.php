@@ -26,6 +26,10 @@ jQuery(document).ready(function(){
 			},
 			Cancel: function() {
 				jQuery(this).dialog('close');
+			},
+			SignUp: function(){
+				jQuery(this).dialog('close');
+				window.location = '/signup.php';				
 			}
 		}		
 	});

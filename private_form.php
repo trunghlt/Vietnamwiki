@@ -3,13 +3,14 @@
 <input id="user_id" name="user_id" type="hidden" value="<?php echo $user_info['id']?>" />	
 	<div>
 		<h1>Avatar</h1>
-		<?php include("avatar.php"); ?>
+		<?php //include("avatar.php"); ?>
 		<br/>
-		<a href="#" name="AU_toggle" id="AU_toggle" class="link">(change)</a>
+		<a href="http://en.gravatar.com/" target="_blank" rel="nofollow">change</a>
+		<!--<a href="#" name="AU_toggle" id="AU_toggle" class="link">(change)</a>
 		<br/>
 		<div id="avatar_upload">
-			<?php include("upload/index.php"); ?>
-		</div>
+			<?php //include("upload/index.php"); ?>
+		</div>-->
 	</div>
 	<br />
 	<h1>Personal information</h1>
@@ -121,8 +122,8 @@ jQuery(document).ready(function(){
 			}
 		}		
 	});
-var AU_Slide = new Fx.Slide('avatar_upload'); 
-	AU_Slide.hide();
+/*var AU_Slide = new Fx.Slide('avatar_upload'); 
+	AU_Slide.hide();*/
 
 });
 	function page_refresh(user) {
@@ -186,7 +187,7 @@ var AU_Slide = new Fx.Slide('avatar_upload');
 					});
 	}
 	
-	var AU_Slide = new Fx.Slide('avatar_upload'); 
+/*	var AU_Slide = new Fx.Slide('avatar_upload'); 
 					 
 	$('AU_toggle').addEvent('click', function(e){
 		e = new Event(e);
@@ -199,5 +200,5 @@ var AU_Slide = new Fx.Slide('avatar_upload');
 		  		AU_Slide.hide();
 		  }	
 		  e.stop();
-	});
+	});*/
 </script>

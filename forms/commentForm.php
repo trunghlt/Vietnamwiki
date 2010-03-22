@@ -35,7 +35,7 @@
 <?php }?>
 </form>
 </div> 
-<div id="mustNameEmail_CommentAlert" title="Alert">You must fill Name or Email</div>
+<div id="EmailComment1" title="Alert">You must fill Name or Email</div>
 <script language="javascript">
 function updateCommentText(reviewText) {
 	if (reviewText.value.length > 140)
@@ -55,7 +55,7 @@ function submitComment(){
 }
 
 jQuery(document).ready(function(){
-	mustNameEmail_CommentAlert = jQuery("#mustNameEmail_CommentAlert").dialog({autoOpen: false});
+	Email_Comment = jQuery("#EmailComment1").dialog({autoOpen: false});
 	commentDialog = jQuery("#commentDialog").dialog({
 		autoOpen: false,
 		height: 'auto',
@@ -70,7 +70,7 @@ jQuery(document).ready(function(){
 			'Submit': function() {
 				if(jQuery("#check_login_comment").val() == 1){
 					if(jQuery("#fill_name_comment").val() == '' && jQuery("#fill_email_comment").val() == '')
-						mustNameEmail_CommentAlert.dialog("open");
+						Email_Comment("open");
 					else{
 						submitComment();
 						jQuery(this).dialog('close');

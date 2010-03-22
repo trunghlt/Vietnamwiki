@@ -63,6 +63,10 @@ include('dialog.php');
 								 </select>
 							</td>
 						</tr>
+						<tr>
+							<td nowrap="nowrap"><label for="title">Zoom-in effect: </label></td>
+							<td><input type="checkbox" name="zoom_in_effect" id="zoom_in_effect" class="checkbox"/></td>
+						</tr>
 					</table>
 				</fieldset>
 			</div>
