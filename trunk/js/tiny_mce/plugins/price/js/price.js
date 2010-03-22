@@ -1,6 +1,6 @@
 tinyMCEPopup.requireLangPack();
 var PriceDialog = {
-	init : function(ed) {
+	init : function() {
 		tinyMCEPopup.resizeToInnerSize();
 		var f = document.forms[0];
 		// Get the selected contents as text and place it in the input
@@ -14,11 +14,12 @@ var PriceDialog = {
 	insert : function() {
 		// Insert the contents from the input into the document
 		var ed = tinyMCEPopup.editor, dom = ed.dom;
-		
+
 		tinyMCEPopup.execCommand('mceInsertContent', false, dom.createHTML('img', {
 							class:"price"+document.forms[0].price.value,
 							src:tinyMCEPopup.getWindowArg('plugin_url')+ "/img/dollar"+document.forms[0].price.value+".gif"
 							}));
+		
 		tinyMCEPopup.close();
 	}
 };

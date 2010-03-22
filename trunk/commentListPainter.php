@@ -3,15 +3,18 @@
 include('libraries/TalkPHP_Gravatar.php');
 $draft = isset($draf);
 if($draft){
-	$str_comment = "edition_id = '".$post_id."'"; 
+	$str_comment = "edition_id = ".$post_id; 
 }
 else{
-	$str_comment = "post_id = '".$post_id."'"; 
+	$str_comment = "post_id = ".$post_id; 
 }
 $com = new CommentElement;
-$r_com = $com->query_num($str_comment);
-$n = $r_com['n'];
+$arr_com = $com->query_num($str_comment);
+$n = $arr_com['n'];
+$num_row_comment = 10;
 if ($n > 0) {
+$r_com = $com->query_num($str_comment,'0',$num_row_comment);
+$n_com = $r_com['n'];
 array_pop($r_com);
 	?>
 	<div class="comment_head" align="center">
@@ -56,43 +59,29 @@ array_pop($r_com);
 			</div><?php
 		}
 	$i=0;
-	while (($i < 5)&&($i < $n)) {
+	while ($i < $n_com) {
 		write_comment($r_com[$i], $post_id);
 		$i++;
 	}
 	
-	//elastic comments
-	if ($i < $n) {
+	if ($n > $num_row_comment) {
 		?> 
-		<div id="elastic_comments">
-			<?php while ($i < $n) {
-					write_comment($r_com[$i], $post_id);
-				$i++;
-			} ?>
-		</div>
-		<div align="center">
-			<span id="comment_arrow" ><img src="css/images/down_arrow.gif" /></span><a id="comment_toggle" href="#" style="font-size: 11px;">Show more</a> 
+		<div id='more_comment'></div>
+		<div align="center" id='state_comment'>
+			<a id="comment_toggle" href="#" style="font-size: 11px;" onclick="load_comment('<?php echo $str_comment?>',10,10,<?php echo $post_id?>,<?php echo $n?>)">View older comments</a> 
      	</div>
 		<script type="text/javascript">
-			jQuery(document).ready(function(){ 
-				commentSlide = new Fx.Slide('elastic_comments'); 
-				window.addEvent('domready', function(){
-					commentSlide.hide();
-				});
-				$('comment_toggle').addEvent('click', function(e){
-					e = new Event(e);
-					if ($('comment_toggle').get("html") == "Show more") {
-						$('comment_toggle').set("html", "Slide up");
-						$('comment_arrow').set("html", "<img src='css/images/up_arrow.gif' />");
-				  	}
-					else {
-						$('comment_toggle').set("html", "Show more");
-						$('comment_arrow').set("html", "<img src='css/images/down_arrow.gif' />");
-					}	
-				  	commentSlide.toggle();
-				  	e.stop();
-				});
-			});
+			function load_comment(str_query,numrow_comment,start_comment,post_id,num_query){
+					jQuery.post('/requests/loadComment.php',{id : post_id,num : numrow_comment,s : start_comment,str : str_query, n:num_query},function(response){
+					if(response != 'false' && response != 'stop')
+						jQuery("#more_comment").html(response);
+					}
+				);
+			}
+				function close_comment(){
+					jQuery("#more_comment").html("<!-- -->");
+					jQuery("#state_comment").html('<a id="comment_toggle" href="#" style="font-size: 11px;" onclick="load_comment('+"'<?php echo $str_comment?>'"+',10,10,<?php echo $post_id?>,<?php echo $n?>);" >View older comments</a>');					
+				}
 		</script>
 		<?php
 	}		

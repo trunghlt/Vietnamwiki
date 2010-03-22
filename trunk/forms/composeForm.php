@@ -76,7 +76,7 @@ function submitComposeForm() {
 		 break;
 		 default:
 		 {
-			window.location = "viewtopic.php?id=" + response;
+			window.location = response;
 			composeDialog.dialog('close');
 		 }break;
 		}

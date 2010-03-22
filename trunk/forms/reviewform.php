@@ -39,7 +39,7 @@
 </div>
 
 <div id="mustRateAlert" title="Alert">Sorry, you have to rate to finish reviewing !</div>
-<div id="mustNameEmailAlert" title="Alert">You must fill Name or Email</div>
+<div id="mustName_EmailAlert" title="Alert">You must fill Name or Email</div>
 
 <div id="reviewLowerBound" title="Alert">Sorry, your review has to be more than 140 characters. 
 Click on <a href="<?php echo getPostPermaLink($post_id)?>">comment</a> if you want to comment less than 140 characters.</div>
@@ -55,7 +55,7 @@ jQuery(document).ready(function(){
 	loadToolbar("toolbar");
 	reviewLowerBound = jQuery("#reviewLowerBound").dialog({autoOpen: false});
 	mustRateAlert = jQuery("#mustRateAlert").dialog({autoOpen: false});
-	mustNameEmailAlert = jQuery("#mustNameEmailAlert").dialog({autoOpen: false});
+	mustNameEmailAlert = jQuery("#mustName_EmailAlert").dialog({autoOpen: false});
 	reviewDialog = jQuery("#review_Dialog").dialog({
 		autoOpen: false,
 		height: 'auto',
@@ -93,10 +93,10 @@ jQuery(document).ready(function(){
 					}
 				}
 			},
-		Cancel: function() {
+			Cancel: function() {
 				jQuery(this).dialog('close');
+				}
 			}
-		}
 	});
 });
 </script>

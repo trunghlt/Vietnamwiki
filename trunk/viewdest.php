@@ -7,9 +7,10 @@ $dest_id = isset($_GET["id"])? $_GET["id"] : 1;
 $dest_id = htmlspecialchars($dest_id , ENT_QUOTES);
 
 
-	$r1 = mysql_query("SELECT d.EngName FROM index_menu i, destinations d where i.id=$index_id and d.id = i.dest_id");
+	$r1 = mysql_query("SELECT d.EngName,i.dest_id FROM index_menu i, destinations d where i.id=$index_id and d.id = i.dest_id");
 	$arr1 = mysql_fetch_array($r1);
 	$dest_name = $arr1['EngName'];
+
 
 //$request = ($dest_id == 1)? "" : "WHERE index_id = '".$index_id."'";
 $request = "WHERE index_id = '".$index_id."'";
@@ -167,5 +168,5 @@ if ($numrow > $num_per_page) {
 	write_link_dest($numpage, ">>");
 }
 */
-include("forms/composeForm.php");
+//include("forms/composeForm.php");
 ?>

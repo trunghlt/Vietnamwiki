@@ -1,5 +1,5 @@
 (function() {
-
+	tinymce.PluginManager.requireLangPack('price');
 	tinymce.create('tinymce.plugins.PricePlugin', {
 
 		init : function(ed, url) {
@@ -7,17 +7,18 @@
 			ed.addCommand('mcePrice', function() {
 				ed.windowManager.open({
 					file : url + '/dialog.htm',
-					width : 200 + parseInt(ed.getLang('price.delta_width', 0)), 
-					height : 100 + parseInt(ed.getLang('price.delta_height', 0)), 
+					width : 200, 
+					height : 100, 
 					inline : 1
 				}, {
-					plugin_url : url, // Plugin absolute URL
+					plugin_url : url // Plugin absolute URL
+				
 				});
 			});
 
 		ed.addButton('price', {
 				title : 'price',
-				cmd : 'mcePrice_desc',
+				cmd : 'mcePrice',
 				image : url + '/img/dollar.png'
 			});
 		

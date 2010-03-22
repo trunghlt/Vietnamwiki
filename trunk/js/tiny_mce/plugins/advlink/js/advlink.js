@@ -27,6 +27,7 @@ function init() {
 	var elm = inst.selection.getNode();
 	var action = "insert";
 	var html;
+	var dom = tinymce.dom;
 
 	document.getElementById('hrefbrowsercontainer').innerHTML = getBrowserHTML('hrefbrowser','href','file','advlink');
 	document.getElementById('popupurlbrowsercontainer').innerHTML = getBrowserHTML('popupurlbrowser','popupurl','file','advlink');
@@ -49,6 +50,10 @@ function init() {
 		document.getElementById('popupurl').style.width = '180px';
 
 	elm = inst.dom.getParent(elm, "A");
+	
+	if(inst.dom.getAttrib(elm, 'rel') && inst.dom.getAttrib(elm, 'rel')=='lightbox')
+		formObj.zoom_in_effect.checked = true;
+		
 	if (elm != null && elm.nodeName == "A")
 		action = "update";
 
@@ -379,6 +384,7 @@ function getAnchorListHTML(id, target) {
 }
 
 function insertAction() {
+	
 	var inst = tinyMCEPopup.editor;
 	var elm, elementArray, i;
 
@@ -425,6 +431,10 @@ function insertAction() {
 function setAllAttribs(elm) {
 	var formObj = document.forms[0];
 	var href = formObj.href.value;
+	if(formObj.zoom_in_effect.checked)
+		rel = "lightbox";
+	else
+		rel = '';
 	var target = getSelectValue(formObj, 'targetlist');
 
 	setAttrib(elm, 'href', href);
@@ -433,7 +443,7 @@ function setAllAttribs(elm) {
 	setAttrib(elm, 'id');
 	setAttrib(elm, 'style');
 	setAttrib(elm, 'class', getSelectValue(formObj, 'classlist'));
-	setAttrib(elm, 'rel');
+	setAttrib(elm, 'rel',rel);
 	setAttrib(elm, 'rev');
 	setAttrib(elm, 'charset');
 	setAttrib(elm, 'hreflang');
