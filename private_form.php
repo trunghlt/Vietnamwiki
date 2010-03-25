@@ -1,18 +1,18 @@
 <div class="privateDialog" id="privateDialog" title="Personal information">
 <form id='privateform' name="privateform">
 <input id="user_id" name="user_id" type="hidden" value="<?php echo $user_info['id']?>" />	
-	<div>
+	<!--<div>
 		<h1>Avatar</h1>
 		<?php //include("avatar.php"); ?>
 		<br/>
 		<a href="http://en.gravatar.com/" target="_blank" rel="nofollow">change</a>
-		<!--<a href="#" name="AU_toggle" id="AU_toggle" class="link">(change)</a>
+		<a href="#" name="AU_toggle" id="AU_toggle" class="link">(change)</a>
 		<br/>
 		<div id="avatar_upload">
 			<?php //include("upload/index.php"); ?>
-		</div>-->
+		</div>
 	</div>
-	<br />
+	<br />-->
 	<h1>Personal information</h1>
 	<div id='error'></div>
 	<div>

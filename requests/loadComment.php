@@ -64,11 +64,11 @@ if(isset($_POST['id']) && isset($_POST['num']) && isset($_POST['s']) && isset($_
 					}
 				if($s+$n_com  ==  $n){?>
 					<script>
-					jQuery("#state_comment").html("<a id='comment_toggle' href='#' style='font-size: 11px;' onclick='close_comment();'>Close comments</a>");
+					jQuery("#state_comment").html("<a id='comment_toggle' style='font-size: 11px;' onclick='close_comment();'>Close comments</a>");
 					</script>
 			<?php } else{ $s_com = $s+$n_com; ?>
 					<script>
-					jQuery("#state_comment").html('<a id="comment_toggle" href="#" style="font-size: 11px;" onclick="load_comment('+"'<?php echo $str_comment?>'"+',<?php echo $s_com?>,10,<?php echo $id?>,<?php echo $n?>);" >View older comments</a>');
+					jQuery("#state_comment").html('<a id="comment_toggle" style="font-size: 11px;" onclick="load_comment('+"'<?php echo $str_comment?>'"+',<?php echo $s_com?>,10,<?php echo $id?>,<?php echo $n?>);" >View older comments</a>');
 					</script>			
 			<?php }
 				echo $str;
