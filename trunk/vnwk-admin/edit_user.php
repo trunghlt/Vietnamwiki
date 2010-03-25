@@ -43,7 +43,7 @@ session_start();
 		{
 			if($level == 2)
 				$level = 0;
-			$arr_edit = $level;
+			$arr_edit = array('level'=>$level);
 			$u->edit_user($_GET['id'],$arr_edit);
 		}
 	}	
