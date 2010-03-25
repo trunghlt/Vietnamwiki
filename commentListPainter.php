@@ -1,4 +1,9 @@
 <div id="commentList">
+<style>
+	#comment_toggle{
+		cursor:pointer;
+	}
+</style>
 <?php
 include('libraries/TalkPHP_Gravatar.php');
 $draft = isset($draf);
@@ -71,22 +76,28 @@ array_pop($r_com);
 	}
 	
 	if ($n > $num_row_comment) {
-		?> 
-		<div id='more_comment'></div>
+		?>
+		
+		<div id='more_comment' ></div>
+		<div id='waiting_load'><!-- --></div> 
 		<div align="center" id='state_comment'>
-			<a id="comment_toggle" href="#" style="font-size: 11px;" onclick="load_comment('<?php echo $str_comment?>',10,10,<?php echo $post_id?>,<?php echo $n?>)">View older comments</a> 
+			<a id="comment_toggle" style="font-size: 11px;" onclick="load_comment('<?php echo $str_comment?>',10,10,<?php echo $post_id?>,<?php echo $n?>)">View older comments</a> 
      	</div>
 		<script type="text/javascript">
 			function load_comment(str_query,numrow_comment,start_comment,post_id,num_query){
 					jQuery.post('/requests/loadComment.php',{id : post_id,num : numrow_comment,s : start_comment,str : str_query, n:num_query},function(response){
-					if(response != 'false' && response != 'stop')
-						jQuery("#more_comment").html(response);
+					if(response != 'false' && response != 'stop'){
+					jQuery("#waiting_load").html("<img width='20px' height='20px' alt='loading' src='http://static.manutangroup.com/N_css/WScolor/blue/picts/N_nice/N_main/N_loading.gif' />").slideToggle(2000,function(){ jQuery('#more_comment').html(response);jQuery("#waiting_load").html("<!-- -->").slideToggle(1000);});
+							
+						}
 					}
 				);
 			}
 				function close_comment(){
+				
 					jQuery("#more_comment").html("<!-- -->");
-					jQuery("#state_comment").html('<a id="comment_toggle" href="#" style="font-size: 11px;" onclick="load_comment('+"'<?php echo $str_comment?>'"+',10,10,<?php echo $post_id?>,<?php echo $n?>);" >View older comments</a>');					
+				
+					jQuery("#state_comment").html('<a id="comment_toggle" style="font-size: 11px;" onclick="load_comment('+"'<?php echo $str_comment?>'"+',10,10,<?php echo $post_id?>,<?php echo $n?>);" >View older comments</a>');					
 				}
 		</script>
 		<?php
