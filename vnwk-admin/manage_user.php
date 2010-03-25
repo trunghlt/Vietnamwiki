@@ -6,7 +6,7 @@ session_start();
 	include("class_user.php");
 	include("common.php");
 	include("session.php");
-	include(".././core/classes/filter.php");
+	include(".././core/classes/Filter.php");
 //check logged user 
 	process(session_id(), myip());
 	if (!logged_in()) header("location: login.php");
@@ -80,9 +80,9 @@ session_start();
 			echo "<a href=edit_user.php?id=$value[id] target='user' style='width:50px;float:left;'>(Edit)</a>";
 			echo "<label style='width:160px;float:left;'>$value[username]</label>";
 			if($value['ban_user']==0)
-				echo "<a href='manage_user.php?id=$value[id]&act=ban&value=0&page=$num_page&s=$start' style='width:60px;float:left;'>(Allowed)</a>";
+				echo "<a href='manage_user.php?id=$value[id]&act=ban&value=0&page=$num_page&s=$start' style='width:70px;float:left;'>(Allowed)</a>";
 			else
-				echo "<a href='manage_user.php?id=$value[id]&act=ban&value=1&page=$num_page&s=$start' style='width:60px;float:left;'>(Banned)</a>";
+				echo "<a href='manage_user.php?id=$value[id]&act=ban&value=1&page=$num_page&s=$start' style='width:70px;float:left;'>(Banned)</a>";
 			echo "<a href='#' onclick='confir($value[id],$num_page,$start);' style='width:10px;float:left;'>(x)</a>";
 			echo "</div>";
 			echo "<br />";
