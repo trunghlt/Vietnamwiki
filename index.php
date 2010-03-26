@@ -360,8 +360,8 @@ function cen(a ,b) {
 <div align="center" style="margin-top: -10px;">
 	<table width="843">
 	<tr>	
-	<td width="263"><p class="style4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Capital: <a href="http://www.vietnamwiki.net/viewtopic.php?id=29" class="style5">Hanoi</a></p>
-	  <p class="style4">&nbsp;&nbsp;&nbsp;Biggest city: <a href="http://www.vietnamwiki.net/Ho_Chi_Minh-General-Ho_Chi_Minh_general_information-P11" class="style6">Ho Chi Minh</a></p>
+	<td width="263"><p class="style4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Capital: <a href="http://www.vietnamwiki.net/Ha_Noi-Overview-I72" class="style5">Hanoi</a></p>
+	  <p class="style4">&nbsp;&nbsp;&nbsp;Biggest city: <a href="http://www.vietnamwiki.net/Ho_Chi_Minh-Overview-Ho_Chi_Minh_general_information-P11" class="style6">Ho Chi Minh</a></p>
 	  <p class="style4">&nbsp;Language:  Vietnamese</p>
 	  <p class="style4">Area: <a href="http://en.wikipedia.org/wiki/1_E9_m%C2%B2" title="1 E9 m&sup2;" class="style6">331,689&nbsp;km&sup2;</a>&nbsp;(<a title="List of countries and outlying territories by area" href="http://en.wikipedia.org/wiki/List_of_countries_and_outlying_territories_by_area" style="color:#00FFFF">65th</a>)</p>
 	  <p class="style4">Population: 87,375,000&nbsp;(<a title="List of countries by population" href="http://en.wikipedia.org/wiki/List_of_countries_by_population" style="color:#00FFFF">13th</a>) </p>
@@ -391,7 +391,7 @@ function cen(a ,b) {
 		</div>
 		</td>
 	<td width="263">
-		<p align="right" class="style4"> <span class="style6"><a href="/Vietnam_general-General-Vietnam-P32" style="color:#00FFFF">Top destinations</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+		<p align="right" class="style4"> <span class="style6"><a href="/Vietnam_general-Overview-Vietnam-P32" style="color:#00FFFF">Top destinations</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
 		<p align="right" class="style4 style6"> <a href="/Vietnam_general-Passport__Visa-I39" style="color:#00FFFF">Passport & Visa&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 		<p align="right" class="style4 style6"><a href="/Vietnam_general-Tradition__culture-I58" style="color:#00FFFF">Tradition &amp; Culture</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 		<p align="right" class="style4 style6"><a href="/Vietnam_general-Travel_information-I116" style="color:#00FFFF">Travel information</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>

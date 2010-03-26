@@ -7,45 +7,45 @@
  
 var fadeimages1=new Array()
 //SET IMAGE PATHS. Extend or contract array as needed
-fadeimages1[0]=["http://www.vietnamwiki.net/images/upload/medium/sapa_in_mist.jpg", "index2.php?index_id=100", ""] //plain image syntax
-fadeimages1[1]=["http://www.vietnamwiki.net/images/upload/medium/reisterrassen_sapa_vietnam.jpg", "index2.php?index_id=100", ""] //image with link syntax
-fadeimages1[2]=["http://www.vietnamwiki.net/images/upload/medium/viet_sapa_girls.jpg", "index2.php?index_id=100", ""] //image with link and target syntax
+fadeimages1[0]=["http://www.vietnamwiki.net/images/upload/medium/sapa_in_mist.jpg", "http://www.vietnamwiki.net/Sapa-Overview-I100", ""] //plain image syntax
+fadeimages1[1]=["http://www.vietnamwiki.net/images/upload/medium/reisterrassen_sapa_vietnam.jpg", "http://www.vietnamwiki.net/Sapa-Overview-I100", ""] //image with link syntax
+fadeimages1[2]=["http://www.vietnamwiki.net/images/upload/medium/viet_sapa_girls.jpg", "http://www.vietnamwiki.net/Sapa-Overview-I100", ""] //image with link and target syntax
  
 var fadeimages2=new Array() //2nd array set example. Remove or add more sets as needed.
 //SET IMAGE PATHS. Extend or contract array as needed
-fadeimages2[0]=["http://www.vietnamwiki.net/images/upload/medium/HTV_9131.jpg", "index2.php?id=10", "http://www.vietnamwiki.net/viewtopic.php?id=29"] //plain image syntax
-fadeimages2[1]=["http://www.vietnamwiki.net/images/upload/medium/Hanoi_Temple_de_la_Litterature_3_1.jpg", "http://www.vietnamwiki.net/viewtopic.php?id=29", ""] //image with link syntax
-fadeimages2[2]=["http://www.vietnamwiki.net/images/upload/medium/681x454_2.jpg", "http://www.vietnamwiki.net/viewtopic.php?id=29", ""] //image with link and target syntax
+fadeimages2[0]=["http://www.vietnamwiki.net/images/upload/medium/HTV_9131.jpg", "index2.php?id=10", "http://www.vietnamwiki.net/Ha_Noi-Overview-I72"] //plain image syntax
+fadeimages2[1]=["http://www.vietnamwiki.net/images/upload/medium/Hanoi_Temple_de_la_Litterature_3_1.jpg", "http://www.vietnamwiki.net/Ha_Noi-Overview-I72", ""] //image with link syntax
+fadeimages2[2]=["http://www.vietnamwiki.net/images/upload/medium/681x454_2.jpg", "http://www.vietnamwiki.net/Ha_Noi-Overview-I72", ""] //image with link and target syntax
 
 var fadeimages3=new Array() //2nd array set example. Remove or add more sets as needed.
 //SET IMAGE PATHS. Extend or contract array as needed
-fadeimages3[0]=["http://www.vietnamwiki.net/images/upload/medium/halong_bay.jpg", "http://www.vietnamwiki.net/viewtopic.php?id=49", ""] //plain image syntax
-fadeimages3[1]=["http://www.vietnamwiki.net/images/upload/medium/cave4.jpg", "http://www.vietnamwiki.net/viewtopic.php?id=49", ""] //image with link syntax
-fadeimages3[2]=["http://www.vietnamwiki.net/images/upload/medium/Hang_Trong.jpg", "http://www.vietnamwiki.net/viewtopic.php?id=49", ""] //image with link and target syntax
+fadeimages3[0]=["http://www.vietnamwiki.net/images/upload/medium/halong_bay.jpg", "http://www.vietnamwiki.net/Ha_Long-Overview-I62", ""] //plain image syntax
+fadeimages3[1]=["http://www.vietnamwiki.net/images/upload/medium/cave4.jpg", "http://www.vietnamwiki.net/Ha_Long-Overview-I62", ""] //image with link syntax
+fadeimages3[2]=["http://www.vietnamwiki.net/images/upload/medium/Hang_Trong.jpg", "http://www.vietnamwiki.net/Ha_Long-Overview-I62", ""] //image with link and target syntax
 
 var fadeimages4=new Array() //2nd array set example. Remove or add more sets as needed.
 //SET IMAGE PATHS. Extend or contract array as needed
-fadeimages4[0]=["http://www.vietnamwiki.net/images/upload/medium/H8.jpg", "http://www.vietnamwiki.net/index2.php?index_id=97", ""] //plain image syntax
-fadeimages4[1]=["http://www.vietnamwiki.net/images/upload/medium/Hue_2.jpg", "http://www.vietnamwiki.net/index2.php?index_id=97", ""] //image with link syntax
-fadeimages4[2]=["http://www.vietnamwiki.net/images/upload/medium/Hue_6.jpg", "http://www.vietnamwiki.net/index2.php?index_id=97", ""] //image with link and target syntax
+fadeimages4[0]=["http://www.vietnamwiki.net/images/upload/medium/H8.jpg", "http://www.vietnamwiki.net/Hue-Overview-I97", ""] //plain image syntax
+fadeimages4[1]=["http://www.vietnamwiki.net/images/upload/medium/Hue_2.jpg", "http://www.vietnamwiki.net/Hue-Overview-I97", ""] //image with link syntax
+fadeimages4[2]=["http://www.vietnamwiki.net/images/upload/medium/Hue_6.jpg", "http://www.vietnamwiki.net/Hue-Overview-I97", ""] //image with link and target syntax
 
 var fadeimages5=new Array() //2nd array set example. Remove or add more sets as needed.
 //SET IMAGE PATHS. Extend or contract array as needed
-fadeimages5[0]=["http://www.vietnamwiki.net/images/upload/medium/193345074_b0dd1d0796.jpg", "http://www.vietnamwiki.net/viewtopic.php?id=9", ""] //plain image syntax
-fadeimages5[1]=["http://www.vietnamwiki.net/images/upload/medium/8.jpg", "http://www.vietnamwiki.net/viewtopic.php?id=9", ""] //image with link syntax
-fadeimages5[2]=["http://www.vietnamwiki.net/images/upload/medium/HoiAnBynight2.jpg", "http://www.vietnamwiki.net/viewtopic.php?id=9", ""] //image with link and target syntax
+fadeimages5[0]=["http://www.vietnamwiki.net/images/upload/medium/193345074_b0dd1d0796.jpg", "http://www.vietnamwiki.net/Hoi_An__My_Son-Overview-I56", ""] //plain image syntax
+fadeimages5[1]=["http://www.vietnamwiki.net/images/upload/medium/8.jpg", "http://www.vietnamwiki.net/Hoi_An__My_Son-Overview-I56", ""] //image with link syntax
+fadeimages5[2]=["http://www.vietnamwiki.net/images/upload/medium/HoiAnBynight2.jpg", "http://www.vietnamwiki.net/Hoi_An__My_Son-Overview-I56", ""] //image with link and target syntax
                 
 var fadeimages6=new Array() //2nd array set example. Remove or add more sets as needed.
 //SET IMAGE PATHS. Extend or contract array as needed
-fadeimages6[0]=["http://www.vietnamwiki.net/images/upload/medium/3_2.jpg", "http://www.vietnamwiki.net/index2.php?index_id=91", ""] //plain image syntax
-fadeimages6[1]=["http://www.vietnamwiki.net/images/upload/medium/6_1.jpg", "http://www.vietnamwiki.net/index2.php?index_id=91", ""] //image with link syntax
-fadeimages6[2]=["http://www.vietnamwiki.net/images/upload/medium/1_1_2.jpg", "http://www.vietnamwiki.net/index2.php?index_id=91", ""] //image with link and target syntax
+fadeimages6[0]=["http://www.vietnamwiki.net/images/upload/medium/3_2.jpg", "http://www.vietnamwiki.net/Nha_Trang-Overview-I91", ""] //plain image syntax
+fadeimages6[1]=["http://www.vietnamwiki.net/images/upload/medium/6_1.jpg", "http://www.vietnamwiki.net/Nha_Trang-Overview-I91", ""] //image with link syntax
+fadeimages6[2]=["http://www.vietnamwiki.net/images/upload/medium/1_1_2.jpg", "http://www.vietnamwiki.net/Nha_Trang-Overview-I91", ""] //image with link and target syntax
               
 var fadeimages7=new Array() //2nd array set example. Remove or add more sets as needed.
 //SET IMAGE PATHS. Extend or contract array as needed
-fadeimages7[0]=["http://www.vietnamwiki.net/images/upload/medium/7B05_mekong.jpg", "http://www.vietnamwiki.net/index2.php?index_id=117", ""] //plain image syntax
-fadeimages7[1]=["http://www.vietnamwiki.net/images/upload/medium/a_1.jpg", "http://www.vietnamwiki.net/index2.php?index_id=117", ""] //image with link syntax
-fadeimages7[2]=["http://www.vietnamwiki.net/images/upload/medium/23820664transportinMekongDelta.jpg", "http://www.vietnamwiki.net/index2.php?index_id=117", ""] //image with link and target syntax
+fadeimages7[0]=["http://www.vietnamwiki.net/images/upload/medium/7B05_mekong.jpg", "http://www.vietnamwiki.net/Mekong_delta-Overview-I117", ""] //plain image syntax
+fadeimages7[1]=["http://www.vietnamwiki.net/images/upload/medium/a_1.jpg", "http://www.vietnamwiki.net/Mekong_delta-Overview-I117", ""] //image with link syntax
+fadeimages7[2]=["http://www.vietnamwiki.net/images/upload/medium/23820664transportinMekongDelta.jpg", "http://www.vietnamwiki.net/Mekong_delta-Overview-I117", ""] //image with link and target syntax
             
                 
 var fadebgcolor="white"
