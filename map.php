@@ -170,6 +170,47 @@ function htmlspecialchars_decode (string, quote_style) {
     return string;
 }
 
+function showAddress(address)
+{
+	var map = null;
+	var geocoder = null;
+	map = new GMap2(document.getElementById("gmap"));
+	var latCoord = 16.003575733881323;
+	<?php if (isset($dest->lat)) {?> latCoord=<?php echo $dest->lat?>;<?php } ?>
+		
+	var longCoord = 108.2373046875;
+	<?php if (isset($dest->long)) {?> longCoord=<?php echo $dest->long?>;<?php } ?>
+		
+	var zoomlevel = 14;
+	<?php if (isset($dest->zoomlevel)) {?> zoomlevel=<?php echo $dest->zoomlevel?>;<?php } ?>
+	map.setCenter(new GLatLng(latCoord, longCoord), zoomlevel);
+	
+	geocoder = new GClientGeocoder();
+	if (geocoder)
+	{
+	  geocoder.getLatLng(address,
+	          function(point) {
+	            if (!point) {
+	              alert(address + " not found");
+	            } else {
+					map.setCenter(point, 13);
+					var customUI = map.getDefaultUI();
+					customUI.maptypes.hybrid = false;
+					map.setUI(customUI);
+				<?php foreach ($mapSpotList as $ms) {	?>
+					des = htmlspecialchars_decode("<?php echo str_replace("\n", "", $ms->des)?>", "ENT_QUOTES");
+					var marker = createMarker(new GLatLng(<?php echo $ms->lat?>, <?php echo $ms->long?>), "<?php echo $ms->cat?>", des));
+					<?php }?>
+					map.addOverlay(marker);
+					marker.enableDragging();
+					GEvent.addListener(marker, "drag", function(){});
+	            }
+	          }
+	        );
+	}
+
+}
+
 function load() {
      if (GBrowserIsCompatible()) {
 		var map = new GMap2(document.getElementById("gmap"), { size:new GSize(800,500)});
@@ -202,8 +243,8 @@ function load() {
 
 <div id="gmap" ></div>
 <div style="margin-left: 150px; margin-top: 5px;">
-	<div class="button" ><input type="text" id="search" size="50"/></div><div class="button"><a>Search</a></div>
-	<div class="button" style="margin-left: 10px;"><a>Print</a></div>
+	<div class="button" ><input type="text" id="search" size="50"/></div><div class="button" onclick="showAddress(document.getElementById('search').value);return false;"><a>Search</a></div>
+	<div class="button" style="margin-left: 10px;" onclick="window.print(); return false;"><a>Print</a></div>
 </div>
 
 </body>
