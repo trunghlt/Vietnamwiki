@@ -8,7 +8,7 @@
 </div>
 <script language="javascript">
 jQuery(document).ready(function(){ 
-	invalidLoginDialog = jQuery("#invalidLoginDialog").dialog({
+	invalid_LoginDialog = jQuery("#invalidLoginDialog").dialog({
 		autoOpen: false,
 		height: '100',
 		resizable: false,

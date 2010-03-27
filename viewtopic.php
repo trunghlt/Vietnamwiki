@@ -18,6 +18,7 @@
 	$q = new Db;	
 	$user_info = new User;
 ?>
+<script type="text/javascript" src="js/tiny_mce/tiny_mce.js"></script>
     <td class="center">			
 		<div id="menuWrapper">
 			<?php
