@@ -5,7 +5,7 @@
 	$q->query($sql);
 	$row = mysql_fetch_array($q->re);
 	$ava = $row["avatar"];
-	if (isset($ava) && $ava!=NULL && $ava!='') { 
+	if (isset($ava) && $ava!='') { 
 		$fn = $ava;
 	}
 	else {
