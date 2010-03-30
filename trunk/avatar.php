@@ -1,5 +1,5 @@
 <?php
-	$sql = "SELECT avatar ,email
+	$sql = "SELECT avatar
 			FROM users
 			WHERE id='".$user_info["id"]."'";
 	$q->query($sql);
