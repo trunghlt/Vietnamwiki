@@ -197,16 +197,13 @@ function showAddress(address)
 					var customUI = map.getDefaultUI();
 					customUI.maptypes.hybrid = false;
 					map.setUI(customUI);
-				<?php foreach ($mapSpotList as $ms) {	?>
-					des = htmlspecialchars_decode("<?php echo str_replace("\n", "", $ms->des)?>", "ENT_QUOTES");
-					var marker = createMarker(new GLatLng(<?php echo $ms->lat?>, <?php echo $ms->long?>), "<?php echo $ms->cat?>", des));
-					<?php }?>
+					var marker = createMarker(point, {icon:vnwkIcon, draggable: true});
 					map.addOverlay(marker);
 					marker.enableDragging();
-					GEvent.addListener(marker, "drag", function(){});
+					GEvent.addListener(marker, "drag");
 	            }
 	          }
-	        );
+	   );
 	}
 
 }
