@@ -66,6 +66,11 @@ if($type==1){
 			$arr = $f->query_string($user_id_info);
 			$num = $arr['n'];
 			
+			if ($num == 0) {
+				echo "You haven't posted any topics yet";
+				return;
+			}
+						
 			if( $num > $row_per_page)
 			{
 				$num_page = ceil($num/$row_per_page);
@@ -77,17 +82,12 @@ if($type==1){
 			$result = $f->query_string($user_id_info,"",$start,$row_per_page);
 			echo "<div class='comment_block'>";					
 
-			if ($result == 0) {
-				echo "You haven't posted any topics yet";
-				return;
-			}
-
 		array_pop($result);
 		$e = new Edition;
 								
 		foreach($result as $key=>$post){
 				$r = $e->query_post($post['post_id'],$post['user_id'],$type);
-				if($r != NULL)
+				if(isset($r) && $r!='')
 					foreach($r as $row){ 
 						get_index_des($post['value'],$post['id'],1,$row['index_id'],$post['post_id'],$row['post_subject']);
 					}
@@ -112,6 +112,7 @@ if($type==1){
 else if($type == 0){
 $f = new Follow;
 			$num1 = Edition::get_num($user_id_info);
+			
 			if($num1['n'] == 0)
 			{
 				echo "You haven't posted any topics yet";
@@ -129,8 +130,10 @@ $f = new Follow;
 			array_pop($num1);
 			
 			foreach($num1 as $value){
-				$arr = $f->query_string($user_id_info,$value['post_id'],$start,$row_per_page);
+				
+				$arr = $f->query_string($user_id_info,$value['post_id'],$start1,$row_per_page);
 				array_pop($arr);
+				
 					foreach($arr as $value2)
 						$result1[] = $value2;
 									
@@ -141,14 +144,14 @@ $f = new Follow;
 			foreach($result1 as $key=>$post1) {
 					$r1 = $e->query_post($post1['post_id'],$post1['user_id'],0);
 					//GET NUM ROWs
-					if($r1 != NULL)
+					if(isset($r1) && $r1!='')
 					foreach($r1 as $row1){
 						get_index_des($post1['value'],$post1['id'],$num,$row1["index_id"],$post1['post_id'],$row1["post_subject"]);
 				 }
 			}
 			echo "<br />";
 			if($num_page > 1){
-				$current_page = ($start/$row_per_page)+1;
+				$current_page = ($start1/$row_per_page)+1;
 				for($i=1 ; $i <= $num_page; $i++)
 				{
 					if($current_page != $i){

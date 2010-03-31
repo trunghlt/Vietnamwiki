@@ -176,18 +176,18 @@ Select table follow
 		if($start=='' && $numpage=='')
 		{
 			$r = $active->select('','follow',$arr);
-			if($active->get_num() == 0){
-					return 0;
-			}
+			//if($active->get_num() == 0){
+					//return 0;
+			//}
 			$r['n'] =  $active->get_num();
 			return $r;
 		}
 		else{
 				$active->limit($start,$numpage);
 				$r = $active->select('','follow',$arr);
-			if($active->get_num() == 0){
-					return 0;
-			}
+			//if($active->get_num() == 0){
+					//return 0;
+			//}
 			$r['n'] =  $active->get_num();
 			return $r;		
 		}

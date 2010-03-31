@@ -328,7 +328,7 @@ class Edition {
 					$r1[] = $row;
 				return $r1;	
 			}	
-			return NULL;
+			return;
 	}
 }
 ?>
