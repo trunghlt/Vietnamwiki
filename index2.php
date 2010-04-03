@@ -24,6 +24,7 @@ include('destination.php');
 <script language="javascript">
 jQuery(function(){
 	loadToolbar("toolbar");
+	
 });
 
 function signOut() {
@@ -60,6 +61,7 @@ function submitLogin(dom,check) {
 							document.getElementById('link_add').innerHTML = "<a onClick=composeDialog.dialog('open')>+ Add new topic</a>";
 						}
 						document.getElementById('id_user').value = response;
+						jQuery('#field_not_login_comment').html("<input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='2'/>");						
 						Fill_EmailDialog.dialog('open');
 					}
 					else if(response == 'success'){

@@ -123,6 +123,19 @@ class MapSpot {
 		Db::squery("DELETE FROM map_spots
 					WHERE id={$this->id}");
 	}
-	
+	/* ----------------------------------------------------------------
+	 * Query from database
+	 * return : A list of map spots 
+	 * ----------------------------------------------------------------*/	
+
+	public static function query() {
+		$q = new Db;
+		$q->query("	SELECT *
+					FROM map_spots");
+		
+		while($r = mysql_fetch_assoc($q->re))
+			$arr[] = $r;
+		return $arr;
+	}
 }
 ?>

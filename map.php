@@ -7,12 +7,34 @@ require_once("core/classes/MapSpot.php");
 $dest = new DestinationElement;
 $dest->query(filterNumeric($_GET["id"]));
 $mapSpotList = MapSpot::getMapSpotsByDestId($dest->id);
+$mapmarkerList = MapSpot::query();
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <style type="text/css">
+#spots img{
+	width:25px;
+	height:25px;
+}
+#spots{
+	font-size:10pt;
+}
+#spots ul{
+	margin:0px;
+	padding:0px;
+	list-style-type:none;
+}
+#spots div{
+	display:block;
+	clear:left;
+}
+#spots .spotsimg{
+	width:50px;
+	height:50px;
+	
+}
 div.button {
 	float: left;
 	position: relative;
@@ -73,6 +95,15 @@ select.icon-menu option {
 <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js"></script>
 <script type="text/javascript">
 //<![CDATA[
+if (window.attachEvent) {
+	window.attachEvent("onunload", function() {
+		GUnload();      // Internet Explorer
+	});
+} else {
+	window.addEventListener("unload", function() {
+		GUnload(); // Firefox and standard browsers
+    }, false);
+}
 var mapIcons = new Array();
 mapDir = "images/gmap/icons/";
 mapIcons["others"] = "marker.png";
@@ -97,10 +128,9 @@ function createMarker(point, cat, des) {
 	}
 	vnwkIcon.infoWindowAnchor = new GPoint(20, 10); 	
     var marker = new GMarker(point, {icon: vnwkIcon, draggable: false});
-    if (des && (des.trim() != "")) {
+    if (des!='') {
 	    GEvent.addListener(marker, "click", function() {
-		  //alert(des);
-	      marker.openInfoWindowHtml(des);
+		  marker.openInfoWindowHtml(des);
 	    });
     }
     return marker;
@@ -174,6 +204,15 @@ function showAddress(address)
 {
 	var map = null;
 	var geocoder = null;
+		name_address = "<?php echo $dest->engName?>";
+		if(name_address=="Phong Nha - Ke Bang"){
+			name_address = "Phong Nha";
+		}
+		if(name_address=="Hoi An - My Son"){
+			name_address = "Hoi An";
+		}
+		address = address +", "+ name_address +", Vietnam";
+
 	map = new GMap2(document.getElementById("gmap"));
 	var latCoord = 16.003575733881323;
 	<?php if (isset($dest->lat)) {?> latCoord=<?php echo $dest->lat?>;<?php } ?>
@@ -197,10 +236,13 @@ function showAddress(address)
 					var customUI = map.getDefaultUI();
 					customUI.maptypes.hybrid = false;
 					map.setUI(customUI);
-					var marker = createMarker(point, {icon:vnwkIcon, draggable: true});
+					var marker = createMarker(point, "others");
 					map.addOverlay(marker);
-					marker.enableDragging();
-					GEvent.addListener(marker, "drag");
+					
+					<?php foreach ($mapmarkerList as $ms1) {	?>					
+					des = htmlspecialchars_decode("<?php echo str_replace("\n", "", $ms1['des'])?>", "ENT_QUOTES");	
+					map.addOverlay(createMarker(new GLatLng(<?php echo $ms1['latCoord']?>, <?php echo $ms1['longCoord']?>), "<?php echo $ms1['cat']?>", des));
+					<?php } ?>
 	            }
 	          }
 	   );
@@ -210,7 +252,8 @@ function showAddress(address)
 
 function load() {
      if (GBrowserIsCompatible()) {
-		var map = new GMap2(document.getElementById("gmap"), { size:new GSize(800,500)});
+	 	var spots ="<ul>";
+		map = new GMap2(document.getElementById("gmap"), { size:new GSize(800,500)});
 		var latCoord = 16.003575733881323;
 		<?php if (isset($dest->lat)) {?> latCoord=<?php echo $dest->lat?>;<?php } ?>
 		
@@ -224,8 +267,13 @@ function load() {
 		<?php foreach ($mapSpotList as $ms) {	?>
 		des = htmlspecialchars_decode("<?php echo str_replace("\n", "", $ms->des)?>", "ENT_QUOTES");	
 		map.addOverlay(createMarker(new GLatLng(<?php echo $ms->lat?>, <?php echo $ms->long?>), "<?php echo $ms->cat?>", des));
+		str = mapDir + mapIcons['<?php echo $ms->cat?>'];
+		spots += "<li><div><img src='"+str+"' class='spotsimg' align='left'/>"+des+"</div></li>";
 		<?php } ?>
-		
+		if(spots !=""){
+			spots +="</ul>";
+			document.getElementById("spots").innerHTML = spots;
+		}
 		var customUI = map.getDefaultUI();
         customUI.maptypes.hybrid = false;
         map.setUI(customUI)
@@ -237,8 +285,10 @@ function load() {
 </script>	
 </head>
 <body onload="load()" onunload="GUnload()" style="margin: 0; padding: 0;">
-
+<div>
+<div id='spots' style="float:right; width:200px;"><!-- --></div>
 <div id="gmap" ></div>
+</div>
 <div style="margin-left: 150px; margin-top: 5px;">
 	<div class="button" ><input type="text" id="search" size="50"/></div><div class="button" onclick="showAddress(document.getElementById('search').value);return false;"><a>Search</a></div>
 	<div class="button" style="margin-left: 10px;" onclick="window.print(); return false;"><a>Print</a></div>

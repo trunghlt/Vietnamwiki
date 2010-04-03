@@ -46,6 +46,7 @@ $arr = $u->query_id($editionElement->userId);
 		{
 				sendmail($row['email'],$row2['subject'],$message,0,$row2['from']);	
 		}
+echo getPostPermalink($postElement->id);
 }
 else{
 $u = new User;
@@ -55,14 +56,18 @@ $arr = $u->query_id($editionElement->userId);
 		$message = str_replace('{time}',date("d/m/Y  H:i a",$editionElement->editDateTime),$message);
 		$message = str_replace('{username}',$arr['username'],$message);
 		$message = str_replace('{title}',$editionElement->postTitle,$message);
+
+		$row = $u->query_level(1);
 		
-		$r = Email::query_post($postElement->id);	
-		foreach($r as $row)
-		{
-			sendmail($row['email'],$row2['subject'],$message,0,$row2['from']);
+		foreach($row as $arr2){
+			if($arr2['level']==1){
+				$message .= str_replace('{link}','This edition is waiting for your review before the official content is updated!',$row2['message']);
+			}
+			//sendmail($arr2['email'],$row2['subject'],$message,0,$row2['from']);
 		}
+echo "preview";
 }
-echo getPostPermalink($postElement->id);
+
 }
 else{
 echo 'null';

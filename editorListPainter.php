@@ -3,7 +3,9 @@ include("core/common.php");
 include("core/init.php");
 include("core/classes.php");
 $clean = array();
-$clean["postId"] = PostElement::filterId($_POST["postId"]);
+
+if(isset($_POST["postId"])){
+	$clean["postId"] = PostElement::filterId($_POST["postId"]);
 
 	$q = new db;
 	$q->query("	SELECT *
@@ -18,8 +20,21 @@ $clean["postId"] = PostElement::filterId($_POST["postId"]);
 		else
 			$editions2[] = $r;	
 	}	
+}
+else if(isset($_POST["Index"])){
+
+	$clean["Index"] = PostElement::filterId($_POST["Index"]);
+	$q = new db;
+	$q->query("	SELECT *
+				FROM editions
+				WHERE post_id = 0 and index_id=".$clean["Index"]."
+				ORDER BY accepted_time");
+	while ($r = mysql_fetch_array($q->re)) {
+		$index_edition[] = $r;
+	}	
+	 	
+}
 	
-	$editorCount = 0;
 	//Print information of a specific editor
 	function printEditorInfo($currentEdition) {
 		global $editorCount;
@@ -34,13 +49,20 @@ $clean["postId"] = PostElement::filterId($_POST["postId"]);
 		<?php
 		$editorCount++;
 	}
-
+if(isset($index_edition)){
+$editorCount = 0;
+	echo "<br /><span style='color: #888888'>Under admin's review</span>";
+	show($index_edition);
+}
+else if(isset($editions2) || isset($editions1)){
+$editorCount = 0;
 	echo "Posted & editted by";
 	show($editions1);
 if(isset($editions2)){
 	echo "<br /><span style='color: #888888'>Under admin's review</span>";
 	$editorCount = 0;
 	show($editions2);
+}
 }
 		
 function show($editions){

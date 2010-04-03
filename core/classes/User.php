@@ -143,6 +143,20 @@ class User {
 		else
 			return 0;
 		return $row;
+	}
+	
+	function query_level($level){
+		$q = new db();
+		$q->query(" SELECT *
+					FROM users
+					WHERE level=$level");
+		if($q->n>0){			
+			while($r = mysql_fetch_assoc($q->re))
+				$row[] = $r;
+		}
+		else
+			return 0;
+		return $row;		
 	}	
 }
 $user_info = new User;

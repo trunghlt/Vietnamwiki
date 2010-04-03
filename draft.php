@@ -24,6 +24,7 @@
 	$post_id = $draf;
 	
 
+
 	
 	if (isset($_GET["page"])) $page = $_GET["page"];
 	if (!isset($page)) $page = 1;
@@ -37,6 +38,10 @@
 	if($currentEdition->reference!='')
 	$reference = $currentEdition->reference;
 	else $reference='';
+	$des_index_id = new IndexElement;
+	$des_index_id->query($currentEdition->index_id);
+	
+	$destination = $des_index_id->destId;
 	?>
 
 	<div id="postContent">
@@ -106,6 +111,7 @@
 	}
 
 	$editorId = $currentEdition->userId;
+	
 	// username & post time information
 	$sql = "SELECT *
 			FROM users
@@ -146,6 +152,7 @@
 		<textarea cols="80" rows="10" name="s_mail" id="s_mail"></textarea>
 </div>
 <script language="javascript">
+
 jQuery(document).ready(function(){
 	loadToolbar("toolbar");
 	loadDraftRibbon(<?php echo $editionId?>,"ribbon");
@@ -272,7 +279,11 @@ function submitRestoreDraft(){
 	jQuery.post("/requests/restoreDraft.php", 
 				{editionId: <?php echo $editionId?>,type:document.getElementById('type').value},
 				function(response) {
-					window.location = "<?php echo getPostPermaLink($currentEdition->postId)?>";
+						window.location = "<?php 
+							if($currentEdition->postId!=0)
+								echo getPostPermaLink($currentEdition->postId);
+							else
+								echo "index2.php";?>";
 				}, 
 				"html");
 }

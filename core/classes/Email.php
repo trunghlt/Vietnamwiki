@@ -49,7 +49,7 @@ Class connect email  in database
 ***************************************************************/
 	static public function query_post($post_id){
 		$q=new Db;
-		$str = $q->query("select email from users where id IN (select user_id from follow where post_id=$post_id)");
+		$str = $q->query("select email,id from users where id IN (select user_id from follow where post_id=$post_id)");
 		while($r = mysql_fetch_assoc($q->re)){
 			if($r['email']!='')
 				$row[] = $r;

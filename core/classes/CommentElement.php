@@ -10,18 +10,19 @@ class CommentElement{
 	public $email;
 	public $name;
 	
-	public function query() {
+	public function query($id) {
 		$q = new Db;
 		$q->query("	SELECT *
 					FROM comments
-					WHERE comment_id = ".$this->id);
+					WHERE comment_id = ".$id);
 		$r = mysql_fetch_array($q->re);
-		$id = $r["comment_id"];
-		$postId = $r["post_id"];
-		$userId = $r["user_id"];
-		$posterIp = $r["poster_ip"];
-		$commentTime = $r["comment_time"];
-		$commentText = $r["comment_text"];
+		$this->id = $r["comment_id"];
+		$this->postId = $r["post_id"];
+		$this->userId = $r["user_id"];
+		$this->posterIp = $r["poster_ip"];
+		$this->commentTime = $r["comment_time"];
+		$this->commentText = $r["comment_text"];
+		$this->editionid = $r["edition_id"];		
 	}
 	
 	public function add() {
