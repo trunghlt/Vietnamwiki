@@ -170,7 +170,7 @@ else $reference = '';
 <script language="javascript">
 jQuery(document).ready(function(){
 	loadEdittingRibbon(<?php echo $post_id?>, "ribbon");
-	loadEditorList(<?php echo $post_id?>, "editorList");
+	loadEditorList(<?php echo $post_id?>, "editorList","");
 });
 
 function editClick() {
@@ -203,6 +203,7 @@ function submitLogin(dom,check) {
 						if(check==2){
 							document.getElementById('editpost').value = 'editpost';
 						}
+						jQuery('#field_not_login_comment').html("<input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='2'/>");						
 						Fill_EmailDialog.dialog('open');
 					}
 					else if(response == 'success'){
@@ -216,6 +217,7 @@ function submitLogin(dom,check) {
 					}
 					else
 					{
+						jQuery('#field_not_login_comment').html("<input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='2'/>");						
 						if(check==2)
 							edit_login.dialog('close');							
 					}

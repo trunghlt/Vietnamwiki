@@ -22,11 +22,12 @@ function convert(s) {
 }
 
 function submitComposeForm() {
-	currentDestItem.removeClass("active");
-	currentDestItem.addClass("linksmall");	
-	currentIndexItem.removeClass("activeIndex");
-	currentIndexItem.addClass("linksmall");	
-	currentMySlide.slideOut();	
+	
+	//currentDestItem.removeClass("active");
+	//currentDestItem.addClass("linksmall");	
+	//currentIndexItem.removeClass("activeIndex");
+	//currentIndexItem.addClass("linksmall");	
+	//currentMySlide.slideOut();	
 
 	var textComposeFrame = $("textComposeFrame");
 	var frameWindow = textComposeFrame.contentWindow;
@@ -34,14 +35,14 @@ function submitComposeForm() {
 	var destId = encodeURI(frameDocument.getElementById("location").value); 
 	var indexId = encodeURI(frameDocument.getElementById("index").value); 
 
-	currentDestItem = $("destItem_"+destId);
-	currentDestItem.removeClass("linksmall");
-	currentDestItem.addClass("active");
-	currentIndexItem = $("indexLink"+indexId);
-	currentIndexItem.removeClass("linksmall");
-	currentIndexItem.addClass("activeIndex");
-	currentMySlide = mySlide[destId];
-	currentMySlide.slideIn();
+	//currentDestItem = $("destItem_"+destId);
+	//currentDestItem.removeClass("linksmall");
+	//currentDestItem.addClass("active");
+	//currentIndexItem = $("indexLink"+indexId);
+	//currentIndexItem.removeClass("linksmall");
+	//currentIndexItem.addClass("activeIndex");
+	//currentMySlide = mySlide[destId];
+	//currentMySlide.slideIn();
 
 	var title = encodeURI(frameDocument.getElementById("title").value);
 	var smallImgURL = encodeURI(frameDocument.getElementById("smallImgURL").value);
@@ -53,7 +54,7 @@ function submitComposeForm() {
 	var submitPostRequest = new Request({	url: "submitComposeForm.php",
 											evalResponse: false
 											});	
-											
+										
 	submitPostRequest.send(	"indexId=" + indexId 
 							+ "&title=" + title
 							+ "&smallImgURL="+smallImgURL
@@ -61,14 +62,16 @@ function submitComposeForm() {
 							+ "&summary=" + summary
 							+ "&content=" + content
 							+ "&ref=" + ref);
-							
+						
 	submitPostRequest.addEvent('onComplete', function(response) {
-		switch(response){
+			//replace whitespace
+		switch(response.replace(/^\s+|\s+$/g,"")){
 		 case 'null':{
 				alert('Please insert Title, Summary, and content');
 		 }
 		 break;
-		 case '0':{
+		 case 'preview':{
+		 	
 		 	composeDialog.dialog('close');
 			post_review.dialog('open');
 			window.location = "index2.php";

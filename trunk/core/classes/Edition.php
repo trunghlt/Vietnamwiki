@@ -68,6 +68,9 @@ class Edition {
 			$this->editDateTime = $row["edit_date_time"];
 			$this->reference = $row["reference"];
 			$this->reject = $row["reject"];
+			$this->index_id = $row["index_id"];
+			$this->post_ip = $row["post_ip"];
+			$this->post_username = $row["post_username"];
 			return $row;
 	}
 	
@@ -181,18 +184,55 @@ class Edition {
 					WHERE (post_id = {$this->postId}) AND (edit_date_time > {$this->editDateTime}) AND checked=1") or die(mysql_error());
 		}
 		else if($type==2){
-		mysql_query("UPDATE posts_texts
-					SET post_subject = '{$this->postTitle}',
-						post_summary = '{$this->postSummary}',
-						post_text = '{$mysql["postContent"]}',
-						post_small_img_url = '{$this->postSmallImgURL}',
-						post_big_img_url = '{$this->postBigImgURL}',
-						reference = '".$mysql["reference"]."'
-					WHERE post_id = {$this->postId}") or die(mysql_error());
-
-		mysql_query("UPDATE editions
-					SET checked = 1
-					WHERE id = {$this->id}") or die(mysql_error());
+			if($this->postId != 0){
+					mysql_query("UPDATE posts_texts
+								SET post_subject = '{$this->postTitle}',
+									post_summary = '{$this->postSummary}',
+									post_text = '{$mysql["postContent"]}',
+									post_small_img_url = '{$this->postSmallImgURL}',
+									post_big_img_url = '{$this->postBigImgURL}',
+									reference = '".$mysql["reference"]."'
+								WHERE post_id = {$this->postId}") or die(mysql_error());
+			
+					mysql_query("UPDATE editions
+								SET checked = 1
+								WHERE id = {$this->id}") or die(mysql_error());
+			}
+			else{
+					mysql_query("INSERT INTO posts_texts
+								(post_subject, post_summary, post_text, post_small_img_url, post_big_img_url,reference)
+								VALUE ('".$this->postTitle."',
+									   '".$this->postSummary."',
+									   '".$mysql["postContent"]."',
+									   '".$this->postSmallImgURL."',
+									   '".$this->postBigImgURL."',
+									   '".$mysql["reference"]."')") or die(mysql_error());
+					$id = mysql_insert_id();
+					$sql = "SELECT COUNT(*) as n
+							FROM posts
+							WHERE index_id = ".$this->index_id;
+					$re = mysql_query($sql);
+					$row2 = mysql_fetch_array($re);
+					$ord = $row2["n"];	
+					$edittime = 1;			   
+					mysql_query('INSERT INTO posts
+								(post_id, index_id, post_time, poster_ip, post_username, post_edit_time, ord)
+								VALUE ('.$id.',
+									   "'.$this->index_id.'",
+									   "'.$this->editDateTime.'",
+									   "'.$this->post_ip.'",
+									   "'.$this->post_username.'",
+									   "'.$edittime.'",
+									   "'.$ord.'")');
+					mysql_query("INSERT INTO acts
+								(act_username, type, target, time) 
+								VALUE ('".$this->post_username."','create','".$id."','".$this->editDateTime."')");										
+					
+					mysql_query("UPDATE editions
+								SET checked = 1, post_id = $id
+								WHERE id = {$this->id}") or die(mysql_error());
+					Follow::set($this->userId,$id);			
+			}
 		}
 	
 	
@@ -268,6 +308,7 @@ class Edition {
 					mysql_query("UPDATE editions
 						SET post_id = '".$post_id."',checked = 1
 						WHERE id = ".$id) or die(mysql_error());
+
 					Follow::set($r['user_id'],$post_id);
 				}
 				else{

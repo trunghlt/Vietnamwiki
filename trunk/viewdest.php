@@ -140,10 +140,16 @@ if($numrow2 <= 5){
 	</li>
 </ul>
 </div>
-</div>
+</div><br />
+<div id="editorList" class="editorInfo"></div>
+<script language="javascript">
+jQuery(document).ready(function(){
+loadEditorList("", "editorList",<?php echo $index_id?>);
+});
+</script>
 <?php
 }
-	
+
 /*
 function write_link_dest($i , $c) {
 		global $dest_id;

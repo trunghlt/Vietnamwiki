@@ -138,7 +138,9 @@ class PostElement {
 		$q->query("	DELETE FROM posts_texts
 					WHERE post_id = ".$this->id);
 		$q->query(" DELETE FROM posts
-					WHERE post_id = ".$this->id);	
+					WHERE post_id = ".$this->id);
+		$q->query(" DELETE FROM follow
+					WHERE post_id = ".$this->id);						
 	}	
 	
 	public function save($user_id="") {

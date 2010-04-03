@@ -54,16 +54,9 @@ else if($_POST["type"]==2 && User::check_user(myUser_id(myip()),$postElement->id
 		$row2 = Email::query(1);
 		$str = 'http://www.vietnamwiki.net'.getPostPermalink($postElement->id);
 		
-		$message = str_replace('{link}',$str,$row2['message']);
-		$message = str_replace('{time}',date("d/m/Y H:i a",$editionElement->editDateTime),$message);
-		$message = str_replace('{username}',$arr['username'],$message);
-		$message = str_replace('{title}',$editionElement->postTitle,$message);
+
 		
-		$r = Email::query_post($postElement->id);
-		foreach($r as $row)
-		{
-			sendmail($row['email'],$row2['subject'],$message,0,$row2['from']);
-		}	
+	
 	$content = htmlspecialchars_decode($postElement->draft, ENT_QUOTES);
 	$content = str_replace("|", "&", $content);
 	$content = str_replace('\"', '"', $content);
@@ -71,6 +64,7 @@ else if($_POST["type"]==2 && User::check_user(myUser_id(myip()),$postElement->id
 
 	if($n == 1)
 	{
+		$str .= "<br /> This edition is waiting for your review before the official content is updated!"; 
 		echo "<script>";
 		echo "post_review.dialog('open');";
 		echo "</script>";
@@ -93,5 +87,15 @@ else if($_POST["type"]==2 && User::check_user(myUser_id(myip()),$postElement->id
 			echo HtmlSpecialChars($postElement->reference);
 		} 
 	}
+		$message = str_replace('{link}',$str,$row2['message']);
+		$message = str_replace('{time}',date("d/m/Y H:i a",$editionElement->editDateTime),$message);
+		$message = str_replace('{username}',$arr['username'],$message);
+		$message = str_replace('{title}',$editionElement->postTitle,$message);
+			
+		$r = Email::query_post($postElement->id);
+		foreach($r as $row)
+		{
+			sendmail($row['email'],$row2['subject'],$message,0,$row2['from']);
+		}	
 }
 ?>

@@ -173,7 +173,7 @@ var URL = "http://www.vietnamwiki.net";
 <?php if ($onload_js) { echo $onload_js; } ?>
 jQuery(document).ready(function(){
 	jQuery("a.iframe").fancybox({
-		'frameWidth': 	800,
+		'frameWidth': 	1000,
 		'frameHeight': 	530
 	});	
 });
