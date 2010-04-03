@@ -23,11 +23,11 @@ function convert(s) {
 
 function submitComposeForm() {
 	
-	//currentDestItem.removeClass("active");
-	//currentDestItem.addClass("linksmall");	
-	//currentIndexItem.removeClass("activeIndex");
-	//currentIndexItem.addClass("linksmall");	
-	//currentMySlide.slideOut();	
+	currentDestItem.removeClass("active");
+	currentDestItem.addClass("linksmall");	
+	currentIndexItem.removeClass("activeIndex");
+	currentIndexItem.addClass("linksmall");	
+	currentMySlide.slideOut();	
 
 	var textComposeFrame = $("textComposeFrame");
 	var frameWindow = textComposeFrame.contentWindow;
@@ -35,14 +35,14 @@ function submitComposeForm() {
 	var destId = encodeURI(frameDocument.getElementById("location").value); 
 	var indexId = encodeURI(frameDocument.getElementById("index").value); 
 
-	//currentDestItem = $("destItem_"+destId);
-	//currentDestItem.removeClass("linksmall");
-	//currentDestItem.addClass("active");
-	//currentIndexItem = $("indexLink"+indexId);
-	//currentIndexItem.removeClass("linksmall");
-	//currentIndexItem.addClass("activeIndex");
-	//currentMySlide = mySlide[destId];
-	//currentMySlide.slideIn();
+	currentDestItem = $("destItem_"+destId);
+	currentDestItem.removeClass("linksmall");
+	currentDestItem.addClass("active");
+	currentIndexItem = $("indexLink"+indexId);
+	currentIndexItem.removeClass("linksmall");
+	currentIndexItem.addClass("activeIndex");
+	currentMySlide = mySlide[destId];
+	currentMySlide.slideIn();
 
 	var title = encodeURI(frameDocument.getElementById("title").value);
 	var smallImgURL = encodeURI(frameDocument.getElementById("smallImgURL").value);
