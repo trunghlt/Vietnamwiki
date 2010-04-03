@@ -6,26 +6,10 @@
 	include('core/session.php');
 	include('core/filters.php');
 	include('header.php'); 
-	include('destination.php');
-	require_once("ajaxLoad.php");
-?>
-<td class="center">	
-
-<div style = "background: #EDEFF4; height: 28px;">
-	<div id="toolbar"></div>
-</div>
-
-<div id="contentTable">
-	<?php 
-	
 	$currentEdition = new Edition;
 	$editionId = $currentEdition->filterId($_GET["id"]); 
 	$draf = $currentEdition->filterId($_GET["id"]);
 	$post_id = $draf;
-	
-
-
-	
 	if (isset($_GET["page"])) $page = $_GET["page"];
 	if (!isset($page)) $page = 1;
 
@@ -42,8 +26,17 @@
 	$des_index_id->query($currentEdition->index_id);
 	
 	$destination = $des_index_id->destId;
-	?>
+	$index_id = $currentEdition->index_id;	
+	include('destination.php');
+	require_once("ajaxLoad.php");
+?>
+<td class="center">	
 
+<div style = "background: #EDEFF4; height: 28px;">
+	<div id="toolbar"></div>
+</div>
+
+<div id="contentTable">
 	<div id="postContent">
 		<?php 
 		//get number of pages
