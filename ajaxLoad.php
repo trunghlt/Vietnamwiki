@@ -18,13 +18,23 @@ Load editor list of post with postId into a dom
 - dom: the div filled with the returned content
 ->editor list HTML text
 --------------------------------------------------------*/
-function loadEditorList(postId, dom) {
-	jQuery.post("editorListPainter.php", 
-				{postId: postId}, 
-				function(response) {
-					jQuery("#"+dom).html(response);
-				}, 
-				"html");
+function loadEditorList(postId, dom, index) {
+	if(postId != "" && index == ""){
+		jQuery.post("editorListPainter.php", 
+					{postId: postId}, 
+					function(response) {
+						jQuery("#"+dom).html(response);
+					}, 
+					"html");
+	}
+	else if(postId == "" && index != ""){
+		jQuery.post("editorListPainter.php", 
+					{Index: index}, 
+					function(response) {
+						jQuery("#"+dom).html(response);
+					}, 
+					"html");	
+	}
 }	
 
 /*-------------------------------------------------------
