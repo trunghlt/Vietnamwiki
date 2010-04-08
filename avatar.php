@@ -7,12 +7,13 @@
 	$ava = $row["avatar"];
 
 	if (isset($ava) && $ava!='') { 
-		$fn = $ava;
+		if (isset($row["fbId"])) $avaUrl = $ava;
+		else $avaUrl = "images/avatars/$ava";
 	}
 	else {
-		$fn = "unknown.jpg";
+		$pAvatar = new TalkPHP_Gravatar();
+		$pAvatar->setEmail($row['email'])->setSize(80)->setRatingAsPG();
+		$avaUrl = $pAvatar->getAvatar();
 	}
-//$pAvatar = new TalkPHP_Gravatar();
-//$pAvatar->setEmail($row['email'])->setSize(80)->setRatingAsPG();
 ?>
-<img width="100px" height="100px" alt="avatar" src="images/avatars/<?php echo $fn//$pAvatar->getAvatar()?>" />
+<img width="100px" height="100px" alt="avatar" src="<?=$avaUrl?>" />
