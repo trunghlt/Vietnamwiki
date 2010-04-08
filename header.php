@@ -112,8 +112,8 @@ function load()
 {
   if (GBrowserIsCompatible())
   {
-	  mapDivs = document.getElementById("map");
-	  if(mapDivs > 0){
+	  //mapDivs = document.getElementById("map");
+	  mapDivs = document.getElementsByClassName("map");
 	  for (i = 0; i < mapDivs.length; i++) {
 		  var info = mapDivs[i].innerHTML.split(":")[1].split(",", 5);
 		  var map = new GMap2(mapDivs[i]);
@@ -123,7 +123,6 @@ function load()
 		  var customUI = map.getDefaultUI();
 		  customUI.maptypes.hybrid = false;
 		  map.setUI(customUI);
-	  }
 	  }
   }
 }
