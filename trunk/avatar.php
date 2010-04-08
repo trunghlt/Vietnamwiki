@@ -12,7 +12,7 @@
 	}
 	else {
 		$pAvatar = new TalkPHP_Gravatar();
-		$pAvatar->setEmail($row['email'])->setSize(80)->setRatingAsPG();
+		$pAvatar->setEmail($row['email'])->setSize(100)->setRatingAsPG();
 		$avaUrl = $pAvatar->getAvatar();
 	}
 ?>
