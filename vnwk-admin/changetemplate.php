@@ -127,8 +127,8 @@ function change_preview(){
 			str += "<br /><br /><div onclick='changemain("+color+")' class='change'>Agree Change</div></p>";
 			jQuery("#preview").html(str);
 			jQuery("a.iframe").fancybox({
-					'frameWidth': 	1000,
-					'frameHeight': 	500
+					'frameWidth': 	800,
+					'frameHeight': 	600
 				});
 		}
 		else{
