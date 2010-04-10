@@ -252,11 +252,9 @@ class Edition {
 		if(is_array($row))
 		{
 				mysql_query("UPDATE editions
-					SET post_text = '".$mysql["postContent"]."',checked = 1,reference='".$mysql["reference"]."',accepted_time=".time()." 
-					WHERE id = ".$id) or die(mysql_error());
+					SET post_text = '".$mysql["postContent"]."',checked = 1,reference='".$mysql["reference"]."',accepted_time=".time().",post_small_img_url = '$smal_img', post_big_img_url = '$big_url', post_summary = '$post_sum', post_subject ='$post_sub' WHERE id = ".$id) or die(mysql_error());
 				mysql_query("UPDATE posts_texts
-					SET post_text = '".$mysql["postContent"]."',reference='".$mysql["reference"]."' 
-					WHERE post_id = ".$post_id) or die(mysql_error());
+					SET post_text = '".$mysql["postContent"]."',reference='".$mysql["reference"]."', post_small_img_url = '$smal_img', post_big_img_url = '$big_url', post_summary = '$post_sum', post_subject ='$post_sub' WHERE post_id = ".$post_id) or die(mysql_error());
 		}
 		else{				
 				mysql_query("UPDATE editions

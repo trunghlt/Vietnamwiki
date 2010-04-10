@@ -177,3 +177,31 @@ jQuery(document).ready(function(){
 	});	
 });
 </script>
+<?php
+//change_template
+function change_template(){
+$color = new Color;
+$r = $color->query_setting();
+if(count($r)){
+	foreach($r as $value){
+		$arr2 = explode('-',$value['page']);
+		if($arr2[0] == 'view'){
+				for($i = 1 ; $i < count($arr2);	$i++)
+				{
+					if($arr2[$i]=='top'){
+						echo "<script>";
+						//echo "document.getElementById('header').style.background=\"none\"";		
+						echo "document.getElementById('header').style.background=\"$value[color]\"";
+						echo "</script>";
+					}
+					if($arr2[$i]=='body'){
+			echo "<script>";		
+			echo "document.body.style.background=\"$value[color] url(../css/images/bg/bg.gif) repeat-y scroll center center\"";
+			echo "</script>";		
+					}
+				}		
+		}
+	}
+}
+}
+?>

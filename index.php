@@ -1,6 +1,8 @@
 <?php
 include('core/common.php');
 include('core/init.php');
+include('core/classes/Db.php');
+include('core/classes/Color.php');
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -371,7 +373,7 @@ function cen(a ,b) {
 	<td width="355">
 		<div style="position: relative;">
 			<div usemap = "#map" style="width: 355px; height: 487px; overflow: hidden;">
-				<img usemap="#map" src="images/vnwkImageMap.png" style="border: none;"/>
+				<img usemap="#map" src="/images/vnwkImageMap.png" style="border: none;"/>
 			</div>
 		</div>
 		<MAP NAME = "map">
@@ -422,11 +424,40 @@ function cen(a ,b) {
 	</div>
 </div>
 <!-- Feedback form -->
-<?php 
+<?php
 include("feedback.php");
 include("googleAnalytical.php");
 ?>
 </span>
-
 </body>
+<?php 
+$color = new Color;
+$r = $color->query_setting();
+if(count($r) > 0){
+	foreach($r as $value){
+		$arr2 = explode('-',$value['page']);
+		if($arr2[0] == 'index'){
+				for($i = 1 ; $i < count($arr2);	$i++)
+				{
+					if($arr2[$i]=='top'){
+						echo "<script>";
+						echo "document.getElementById('top').style.background=\"$value[color]\"";
+						echo "</script>";				
+	
+					}
+					if($arr2[$i]=='body'){
+						echo "<script>";
+						echo "document.body.style.background=\"$value[color]\"";
+						echo "</script>";
+					}
+					if($arr2[$i]=='bottom'){
+						echo "<script>";
+						echo "document.getElementById('slideShowWrapper').style.background=\"$value[color]\"";
+						echo "</script>";					
+					}
+				}		
+		}
+	}
+}
+?>
 </html>

@@ -285,7 +285,7 @@ function smaller($a, $b) {
 function MakeTextViewable($text) {
 	  $s = HtmlSpecialChars($text);
 	  $s = str_replace(chr(13), '</p><p>', $s);
-	  $s = "<p>" . $s . "</p>";
+	  $s = "<span style='margin-bottom:10px;margin-top:10px;'>" . $s . "</span>";
 	  return $s;
 }
 
