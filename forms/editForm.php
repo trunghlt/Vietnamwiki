@@ -93,8 +93,9 @@ function submitEditForm() {
 		$("postContent").set('html', response);
 		<?php if(isset($draf)){?>
 			window.location = 'draft.php?id=<?php echo $draf?>';
-		<?php }elseif(isset($currentPostElement->id)){?>
-		loadEditorList(<?php echo $currentPostElement->id ?>, "editorList");
+		<?php }else if(isset($currentPostElement->id)){?>
+			window.location = '<?php echo getPostPermalink($currentPostElement->id)?>';
+			//loadEditorList(<?php //echo $currentPostElement->id ?>, "editorList");
 		<?php }?>
 	});
 	

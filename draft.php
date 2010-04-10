@@ -1,11 +1,18 @@
 <?php
+	session_start();
+	
+	$session_id = session_id();
 	include('core/common.php');
 	include('core/init.php');
 	include('core/classes.php');
 	include('core/classes/CommentElement.php');
 	include('core/session.php');
+	$ip = $_SERVER['REMOTE_ADDR'];
+	process($session_id, $ip);
+	
+	include("core/classes/Color.php");
 	include('core/filters.php');
-	include('header.php'); 
+	include('header.php');
 	$currentEdition = new Edition;
 	$editionId = $currentEdition->filterId($_GET["id"]); 
 	$draf = $currentEdition->filterId($_GET["id"]);
@@ -14,21 +21,32 @@
 	if (!isset($page)) $page = 1;
 
 	$page = pagePostFilter($page);		
-
+	
 	$currentEdition->query($editionId);
-
+	
 	$title = $currentEdition->postTitle;
 	$content = $currentEdition->postContent;
 	if($currentEdition->reference!='')
 	$reference = $currentEdition->reference;
 	else $reference='';
-	$des_index_id = new IndexElement;
-	$des_index_id->query($currentEdition->index_id);
+	if(isset($currentEdition->index_id) && $currentEdition->index_id!=''){
+		$des_index_id = new IndexElement;
+		$des_index_id->query($currentEdition->index_id);
+		$destination = $des_index_id->destId;
+		$index_id = $currentEdition->index_id;
+	}
+	else{
 	
-	$destination = $des_index_id->destId;
-	$index_id = $currentEdition->index_id;	
+		$get_index_id = new PostElement;
+		$get_index_id->query($currentEdition->postId);
+		$index_id = $get_index_id->indexId;
+		$des_index_id = new IndexElement;
+		$des_index_id->query($index_id);
+		$destination = $des_index_id->destId;
+	}	
 	include('destination.php');
 	require_once("ajaxLoad.php");
+change_template();
 ?>
 <td class="center">	
 

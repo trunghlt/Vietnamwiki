@@ -4,6 +4,7 @@ include('core/init.php');
 include('core/session.php');
 include('core/filters.php');
 include('core/classes.php');
+include('preprocess.php');
 include('header.php'); 
 include('destination.php');
 include('ajaxLoad.php');

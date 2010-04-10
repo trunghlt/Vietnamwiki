@@ -52,20 +52,20 @@ else if(isset($_POST["Index"])){
 if(isset($index_edition)){
 $editorCount = 0;
 	echo "<br /><span style='color: #888888'>Under admin's review</span>";
-	show($index_edition);
+	show($index_edition,"index_not_check");
 }
 else if(isset($editions2) || isset($editions1)){
 $editorCount = 0;
 	echo "Posted & editted by";
-	show($editions1);
+	show($editions1,"checked");
 if(isset($editions2)){
 	echo "<br /><span style='color: #888888'>Under admin's review</span>";
 	$editorCount = 0;
-	show($editions2);
+	show($editions2,"not_checked");
 }
 }
 		
-function show($editions){
+function show($editions,$type){
 	if (count($editions) > 3) {
 		for ($i = 0; $i <= 1; $i++) {
 			$e = $editions[$i];
@@ -77,8 +77,8 @@ function show($editions){
 			printEditorInfo($editionElement);
 		}
 		?>
-		<span id="etc">,...</span>
-		<span id="middleEditors" style="display: none;">
+		<span id="etc_<?php echo $type?>">,...</span>
+		<span id="middleEditors_<?php echo $type?>" style="display: none;">
 			<?php
 			for ($i = 2; $i <= count($editions) - 2; $i++) {
 				$e = $editions[$i];
@@ -100,21 +100,21 @@ function show($editions){
 		$editionElement->checked = $e["checked"];		
 		printEditorInfo($editionElement);
 		?>
-		<a class="link" id="showEditors" onClick="showEditors()" style="font-size: 11px;">(show all)</a>
-		<a class="link" id="hideEditors" onClick="hideEditors()" style="font-size: 11px; display: none;">(hide)</a>
+		<a class="link" id="showEditors_<?php echo $type?>" onClick="showEditors('<?php echo $type?>')" style="font-size: 11px;">(show all)</a>
+		<a class="link" id="hideEditors_<?php echo $type?>" onClick="hideEditors('<?php echo $type?>')" style="font-size: 11px; display: none;">(hide)</a>
 		<script language="javascript">
-		function showEditors() {
-			jQuery("#showEditors").hide();
-			jQuery("#etc").hide();
-			jQuery('#middleEditors').show();
-			jQuery("#hideEditors").show();
+		function showEditors(type) {
+			jQuery("#showEditors_"+type+"").hide();
+			jQuery("#etc_"+type+"").hide();
+			jQuery("#middleEditors_"+type+"").show();
+			jQuery("#hideEditors_"+type+"").show();
 		}
 		
-		function hideEditors() {
-			jQuery("#showEditors").show();
-			jQuery("#etc").show();
-			jQuery('#middleEditors').hide();
-			jQuery("#hideEditors").hide();
+		function hideEditors(type) {
+			jQuery("#showEditors_"+type+"").show();
+			jQuery("#etc_"+type+"").show();
+			jQuery("#middleEditors_"+type+"").hide();
+			jQuery("#hideEditors_"+type+"").hide();
 		}
 		</script>
 		<?php

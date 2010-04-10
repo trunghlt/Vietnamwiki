@@ -3,11 +3,13 @@ include('core/common.php');
 include('core/init.php');
 include('core/classes.php');
 include('core/session.php');
+include("core/classes/Color.php");
 include('preprocess.php');
 include('redirect.php');
 include('header.php'); 
 include("ajaxLoad.php");
 include('destination.php');
+change_template();
 ?>
     <td class="center">	
 	<div style = "background: #EDEFF4; height: 28px;">
@@ -76,6 +78,7 @@ function submitLogin(dom,check) {
 				}
 	});
 }
+
 </script>
 <?php
 include("forms/composeForm.php");
@@ -83,6 +86,3 @@ include("forms/loginForm.php");
 include("forms/register_email.php");
 include("footer.php");
 ?>
-
-
- 

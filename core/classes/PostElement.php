@@ -44,7 +44,10 @@ class PostElement {
 		$q->query("	SELECT *
 					FROM posts_texts
 					WHERE post_id = ".$this->id);
+		if($q->n ==0)
+			return 0;
 		$r = mysql_fetch_array($q->re);
+
 		$this->content = $r["post_text"];
 		$this->title = $r["post_subject"];
 		$this->summary = $r["post_summary"];
@@ -59,6 +62,7 @@ class PostElement {
 		$this->authorUsername = $r["post_username"];
 		$this->indexId = $r["index_id"];
 		$this->locked = $r["locked"];
+		return 1;
 			
 	}
 	

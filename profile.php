@@ -1,6 +1,5 @@
 <?php
 include('core/common.php');
-if (!isset($_REQUEST["username"])) die_to_index();
 include('core/init.php');
 include('core/classes/Db.php');
 include('core/classes/User.php');
@@ -11,6 +10,7 @@ include('core/classes/DestinationElement.php');
 include('core/classes/CommentElement.php');
 include('libraries/TalkPHP_Gravatar.php');
 include('core/session.php');
+if (!isset($_REQUEST["username"])) die_to_index();
 include("ajax_header.php");	
 include("header.php");
 include('topRibbon.php');

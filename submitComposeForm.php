@@ -63,7 +63,7 @@ $arr = $u->query_id($editionElement->userId);
 			if($arr2['level']==1){
 				$message .= str_replace('{link}','This edition is waiting for your review before the official content is updated!',$row2['message']);
 			}
-			//sendmail($arr2['email'],$row2['subject'],$message,0,$row2['from']);
+			sendmail($arr2['email'],$row2['subject'],$message,0,$row2['from']);
 		}
 echo "preview";
 }

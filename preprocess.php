@@ -12,7 +12,7 @@ session_start();
 $session_id = session_id();
 $ip = $_SERVER['REMOTE_ADDR'];
 process($session_id, $ip);
-$user_info->update();
+//$user_info->update();
 
 $photo = 0;
 if (strpos(selfURL(), "photo") > 0) {

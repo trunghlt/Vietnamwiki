@@ -86,7 +86,7 @@ else $reference = '';
 	if($reference!='')	{
 		$refTokens = preg_split("/\n/", $reference);?>
 		<br/>
-		<span onclick="jQuery('#refList').toggle()" style='cursor: pointer; color:black; font-weight: bold; font-size:9pt;'> <img src="css/images/bg/arrow.jpg"/> Reference</span> 
+		<span onclick="jQuery('#refList').toggle()" style='cursor: pointer; color:black; font-weight: bold; font-size:9pt; clear:both;'> <img src="css/images/bg/arrow.jpg"/> Reference</span> 
 		<ul id="refList" class="refList">
 		<?php foreach ($refTokens as $t) { ?>
 			<li><?php echo htmlspecialchars($t)?></li> 
