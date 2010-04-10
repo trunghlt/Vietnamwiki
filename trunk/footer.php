@@ -25,7 +25,7 @@ jQuery(document).ready(function(){
 	});
 });
 </script>
-<?php 
+<?php
 include("feedback.php");
 include("googleAnalytical.php")
 ?>

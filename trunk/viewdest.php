@@ -71,18 +71,18 @@ While ($row = mysql_fetch_array($result)) {
 		$bigImgURL = htmlspecialchars_decode($post["post_big_img_url"], ENT_QUOTES);
 		
 	?>
-	<div <?php if (isset($smallImgURL)) echo 'style="height: 110px;"'?>>
-	<div style="float: left; margin-right: 10px">				
+	<div <?php if (isset($smallImgURL)) echo 'style="height: 110px; margin-right: 10px; padding-bottom: 10px; "'?>>
 		<?php if ( isset($smallImgURL) && isset($bigImgURL) ) { ?>
 			<a rel="lightbox" href="<?php echo $bigImgURL?>">
-				<img class="postSmallImg" src="<?php echo $smallImgURL?>"/>
+				<img class="postSmallImg" src="<?php echo $smallImgURL?>" align="left" style="margin-right:10px;"/>
 			</a>
 		<?php } 
 			else if (isset($smallImgURL)) { ?>
-				<img class="postSmallImg" src="<?php echo $smallImgURL?>"/>
+				<img class="postSmallImg" src="<?php echo $smallImgURL?>" align="left" style="margin-right:10px;"/>
 		<?php }?>
-	</div>			
-	<div>
+
+				
+
 	<?php
 	//location 
 	/*
@@ -107,11 +107,10 @@ While ($row = mysql_fetch_array($result)) {
 	//content
 	$s = $content;      
 	$s = MakeTextViewable($s);      
-	echo $s . "<p>"; 
+	echo $s ; 
 	?>
 	</div>
-	</div>
-	<div style="border-bottom: 1px dotted gray; margin-bottom: 10px"></div>
+	<div style="border-bottom: 1px dotted gray; margin-bottom: 10px; padding-top:10px;"></div>
 	<?php
 	mysql_free_result($re2);
 } mysql_free_result($result);
@@ -126,7 +125,7 @@ if($numrow2 <= 5){
 	else if ($numrow2 == 1) {$str = "is currently only 1 topic";}
 	else $str = "are currently only ". $numrow2 . " topics";
 ?>
-<p class="note1">There <?php echo $str?> in this index. Is <?php echo $dest_name?> your hometown? Or do you just simply love this place? You know you can add a new topic here to recommend <?php echo $dest_name?> to worldwide travellers by clicking on the below button.</p>
+<div class="note1">There <?php echo $str?> in this index. Is <?php echo $dest_name?> your hometown? Or do you just simply love this place? You know you can add a new topic here to recommend <?php echo $dest_name?> to worldwide travellers by clicking on the below button.</div>
 
 <div id="mainMenu">
 <ul>

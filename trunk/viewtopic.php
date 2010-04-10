@@ -3,10 +3,14 @@
 	include('core/init.php');
 	include('core/classes.php');
 	include('core/session.php');
+	include('preprocess.php');
 	include('core/filters.php');
+	include("core/classes/Color.php");
 	include('core/classes/CommentElement.php');
 	$postElement = new PostElement;
-	$postElement->query(PostElement::filterId($_GET["id"]));
+	
+	if($postElement->query(PostElement::filterId($_GET["id"]))==0)
+		header("location:index2.php");
 	$indexElement = new IndexElement;
 	$indexElement->query($postElement->indexId);
 	$destination = $indexElement->destId;
@@ -17,6 +21,7 @@
 	include('destination.php');
 	$q = new Db;	
 	$user_info = new User;
+change_template();
 ?>
 <script type="text/javascript" src="js/tiny_mce/tiny_mce.js"></script>
     <td class="center">			

@@ -73,8 +73,8 @@ function set_update($value,$s){
 		echo "Don't allow restoring draft from accepted editors";
 	else
 		echo 'Allow restroing draft from accepted editors';*/
-?></a>
-</p>
+?><!--</a> </p>-->
+<p><a href="changetemplate.php" target="showframe">Change Template </a></p>
 <p><a href="#">Back up</a></p>
 </body>
 </html>
