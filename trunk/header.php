@@ -64,6 +64,7 @@ content = "<?php echo getSummary()?>">
 <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js"></script>
 <script type="text/javascript" src="/js/integrated.js"></script>
 <script type="text/javascript" src="js/jquery/fancybox/jquery.fancybox-1.2.6.pack.js"></script>
+<script type="text/javascript" src="js/jquery/jquery.tipbox.js"></script>
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAV1hMY6P-vcrStESIcmxsyBSg0YMtASE5KdM7LALqADHM9SZ_PBTZqozQ8fKlIDHry-cBnAxWYeYpSw" type="text/javascript"></script>
 <script>
 	jQuery.noConflict();
@@ -71,6 +72,29 @@ content = "<?php echo getSummary()?>">
 
 <link rel="stylesheet" href="js/jquery/fancybox/jquery.fancybox-1.2.6.css" type="text/css" media="screen"/>
 <link rel="stylesheet" type="text/css" href="/css/integrated.css" />
+<style>
+ /******* TIPBOX *******/  
+#tipBox{  
+background: #f7fafb;  
+ border: 1px solid #ace4ff;  
+ font-size: 10px;  
+ padding: 3px;  
+ width: 180px;  
+}  
+#tipBox.blue{  
+ color: #44a9da;  
+}  
+#tipBox.width{  
+ width: auto;  
+}  
+#tipBox.big{  
+ width: auto;  
+ font-size: 40px;  
+ line-height: 1em;  
+ padding: 1em;  
+}  
+/******* /TIPBOX *******/ 
+</style> 
 </head>
 
 <script type="text/javascript"><!--
@@ -174,7 +198,13 @@ jQuery(document).ready(function(){
 	jQuery("a.iframe").fancybox({
 		'frameWidth': 	1000,
 		'frameHeight': 	530
-	});	
+	});
+	jQuery(".price1").tipbox("< $10");
+	jQuery(".price2").tipbox("$10-$50");
+	jQuery(".price3").tipbox("$50-$100");
+	jQuery(".price4").tipbox("$100-$200");
+	jQuery(".price5").tipbox("$200-$500");
+	jQuery(".price6").tipbox("$500-$1000");
 });
 </script>
 <?php
