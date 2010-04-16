@@ -97,7 +97,7 @@ While ($row = mysql_fetch_array($result)) {
 	echo '<b>'.$dest.'</b><br>'; 	*/						
 	//title
 	$href = getPostPermalink($row["post_id"]);
-	echo "<a href='{$href}' class=\"head2\">". HtmlSpecialChars($title) . "</a><br>";      
+	echo "<a href='{$href}' class=\"head2\">". htmlspecialchars_decode($title) . "</a><br>";      
 	// post time information
 	/*
 	$posttime = $row['post_time'];
