@@ -1,11 +1,14 @@
-<?php include("top.php");?>
+<?php //include("top.php");?>
 <table class="main" cellspacing="0" cellpadding="0" align="center">
- <tbody><tr>
-    <td class="left" colspan=2>
-	<div>
-		<?php include("search.php");?>
-	</div>	
- </td>
+ <tbody>
+ <tr>
+ <td class="top_search" colspan=2>
+ 	<?php include("top.php"); ?>
+	</td>
+ </tr>
+ 	<tr>
+    <td colspan=2><div id="banner"><?php include("pic_banner.php");?></div></td>
+</tr>
  <tr>
  <td class="left">
 	<div id="destinationDiv">

@@ -2,7 +2,7 @@
  * $Id: editor_plugin_src.js 895 2008-07-10 14:34:23Z spocke $
  *
  * @author Moxiecode
- * @copyright Copyright © 2004-2008, Moxiecode Systems AB, All rights reserved.
+ * @copyright Copyright  2004-2008, Moxiecode Systems AB, All rights reserved.
  */
 
 (function() {
@@ -20,14 +20,13 @@
 			ed.addCommand('mcePreview', function() {
 				ed.windowManager.open({
 					file : ed.getParam("plugin_preview_pageurl", url + "/preview.html"),
-					width : parseInt(ed.getParam("plugin_preview_width", "550")),
-					height : parseInt(ed.getParam("plugin_preview_height", "600")),
+					width : 640,
+					height : 600,
 					resizable : "yes",
 					scrollbars : "yes",
-					popup_css : css.join(','),
-					inline : ed.getParam("plugin_preview_inline", 1)
+					popup_css : css.join(',')
 				}, {
-					base : ed.documentBaseURI.getURI()
+					base : ed.documentBaseURI.getURI()					
 				});
 			});
 

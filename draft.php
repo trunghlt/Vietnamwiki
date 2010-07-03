@@ -1,4 +1,4 @@
-<?php
+?php
 	session_start();
 	
 	$session_id = session_id();
@@ -315,3 +315,4 @@ include("forms/fill_comment_email_form.php");
 include("forms/fill_comment_name_form.php");
 include("footer.php");
 ?>
+

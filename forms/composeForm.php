@@ -22,19 +22,19 @@ function convert(s) {
 }
 
 function submitComposeForm() {
-	
+/*	
 	currentDestItem.removeClass("active");
 	currentDestItem.addClass("linksmall");	
 	currentIndexItem.removeClass("activeIndex");
 	currentIndexItem.addClass("linksmall");	
 	currentMySlide.slideOut();	
-
+*/
 	var textComposeFrame = $("textComposeFrame");
 	var frameWindow = textComposeFrame.contentWindow;
 	var frameDocument = frameWindow.document;
 	var destId = encodeURI(frameDocument.getElementById("location").value); 
 	var indexId = encodeURI(frameDocument.getElementById("index").value); 
-
+/*
 	currentDestItem = $("destItem_"+destId);
 	currentDestItem.removeClass("linksmall");
 	currentDestItem.addClass("active");
@@ -43,47 +43,51 @@ function submitComposeForm() {
 	currentIndexItem.addClass("activeIndex");
 	currentMySlide = mySlide[destId];
 	currentMySlide.slideIn();
-
+*/
 	var title = encodeURI(frameDocument.getElementById("title").value);
 	var smallImgURL = encodeURI(frameDocument.getElementById("smallImgURL").value);
 	var bigImgURL = encodeURI(frameDocument.getElementById("bigImgURL").value);
 	var summary = encodeURI(frameDocument.getElementById("summary").value);		
 	var content = convert(encodeURI(frameWindow.tinyMCE.activeEditor.getContent()));
 	var ref = encodeURI(frameDocument.getElementById("reference").value);
-	
-	var submitPostRequest = new Request({	url: "submitComposeForm.php",
-											evalResponse: false
-											});	
-										
-	submitPostRequest.send(	"indexId=" + indexId 
-							+ "&title=" + title
-							+ "&smallImgURL="+smallImgURL
-							+ "&bigImgURL=" + bigImgURL
-							+ "&summary=" + summary
-							+ "&content=" + content
-							+ "&ref=" + ref);
+	var preview = frameDocument.getElementById("preview").value;
+	var bool = true;
+	if(preview != 1)
+		bool = confirm("Do you want to continue submit");
+	if(bool == true){	
+		var submitPostRequest = new Request({	url: "submitComposeForm.php",
+												evalResponse: false
+												});	
+											
+		submitPostRequest.send(	"indexId=" + indexId 
+								+ "&title=" + title
+								+ "&smallImgURL="+smallImgURL
+								+ "&bigImgURL=" + bigImgURL
+								+ "&summary=" + summary
+								+ "&content=" + content
+								+ "&ref=" + ref);
 						
-	submitPostRequest.addEvent('onComplete', function(response) {
-			//replace whitespace
-		switch(response.replace(/^\s+|\s+$/g,"")){
-		 case 'null':{
-				alert('Please insert Title, Summary, and content');
-		 }
-		 break;
-		 case 'preview':{
-		 	
-		 	composeDialog.dialog('close');
-			post_review.dialog('open');
-			window.location = "index2.php";
-		 }
-		 break;
-		 default:
-		 {
-			window.location = response;
-			composeDialog.dialog('close');
-		 }break;
-		}
-	});
+		submitPostRequest.addEvent('onComplete', function(response) {
+				//replace whitespace
+			switch(response.replace(/^\s+|\s+$/g,"")){
+			 case 'null':{
+					alert('Please insert Title, Summary, and content');
+			 }
+			 break;
+			 case 'preview':{
+				composeDialog.dialog('close');
+				jQuery('#confirm').css('visibility','visible').dialog('open');
+				//window.location = "index2.php";
+			 }
+			 break;
+			 default:
+			 {
+				window.location = response;
+				composeDialog.dialog('close');
+			 }break;
+			}
+		});
+	}
 }
 jQuery(document).ready(function(){ 
 	composeDialog = jQuery("#composeDialog").dialog({
