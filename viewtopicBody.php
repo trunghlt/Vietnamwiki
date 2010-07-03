@@ -6,33 +6,50 @@ $page = isset($_GET["page"])? $_GET["page"] : 1;
 
 $page = pagePostFilter($page);		
 
-$currentPostElement = new PostElement;
-$currentPostElement->query($post_id);
+function get_post($id){
+	$memcache = new Memcache;
+	$memcache->connect("127.0.0.1", 11211);
+	$currentPostElement = new PostElement;
+	$currentPostElement->query($id);
+	$post = array('post_subject'=>$currentPostElement->title,'post_text'=>$currentPostElement->content,
+				  'reference'=>$currentPostElement->reference,'authorUsername'=>$currentPostElement->authorUsername,
+				  'indexId'=>$currentPostElement->indexId,'locked'=>$currentPostElement->locked,
+				  'summary'=>$currentPostElement->summary,'smallImgURL'=>$currentPostElement->smallImgURL,
+				  'bigImgURL'=>$currentPostElement->bigImgURL,'id'=>$currentPostElement->id
+				 );
+	$memcache->set("post_".$id,$post);
+	return $post;
+}
 
-$result = mysql_query("	SELECT * 
-						FROM posts 
-						WHERE post_id=$post_id") or die(mysql_error()); 
-$n = mysql_num_rows($result);
-if ($n == 0) die_to_index();
-$row = mysql_fetch_array($result);
-
+$post = $memcache->get("post_".$post_id);
+if($post == NULL){
+	$post = get_post($post_id);	 
+}
+/*
 //increase page_view
 if ($page == 1) {
 	mysql_query("UPDATE posts 
 				SET page_view='".($row["page_view"]+1)."' 
 				WHERE post_id='".$post_id."'") or die(mysql_error());
 }
+*/
+/*$post = $memcache->get("post");
 
-$sql = "SELECT post_subject, post_text, reference
-		FROM posts_texts
-		WHERE post_id='".$post_id."'";
-$re2 = mysql_query($sql) or die(mysql_error());
-$post = mysql_fetch_array($re2);
+if($post == NULL){
+	$sql = "SELECT post_subject, post_text, reference
+			FROM posts_texts
+			WHERE post_id='".$post_id."'";
+	$re2 = mysql_query($sql) or die(mysql_error());
+	
+	$post = mysql_fetch_array($re2);
+	$memcache->set("post",$post);
+}*/
 $title = $post['post_subject'];
 $content = $post['post_text'];
-if($post['reference']!=NULL)
-$reference = $post['reference'];
-else $reference = '';
+if($post['reference']!=NULL) 
+    $reference = $post['reference'];
+else 
+    $reference = '';
 ?>
 
 <div id="postContent">
@@ -78,15 +95,17 @@ else $reference = '';
 	}
 	
 	//title
-	echo "<h2>". HtmlSpecialChars($title) . "</h2>";      
+	echo "<h1>". HtmlSpecialChars($title) . "</h1>";      
 	
-	echo $s;
+	echo "<div id='postContent_relative'>";
+		echo $s;
+	echo "</div";
 	
 	//reference
 	if($reference!='')	{
 		$refTokens = preg_split("/\n/", $reference);?>
 		<br/>
-		<span onclick="jQuery('#refList').toggle()" style='cursor: pointer; color:black; font-weight: bold; font-size:9pt; clear:both;'> <img src="css/images/bg/arrow.jpg"/> Reference</span> 
+		<span onclick="jQuery('#refList').toggle()" style='cursor: pointer; color:black; font-weight: bold; font-size:9pt;margin-top:10px;'> <img src="css/images/bg/arrow.jpg"/> Reference</span> 
 		<ul id="refList" class="refList">
 		<?php foreach ($refTokens as $t) { ?>
 			<li><?php echo htmlspecialchars($t)?></li> 
@@ -150,13 +169,18 @@ else $reference = '';
 	
 	//tool bar		
 	if (logged_in()) {
-		$username = $row['post_username'];
-		$CurrentUser = myUsername(myip());
-		$sql = "SELECT *
-				FROM users
-				WHERE  username = '".$CurrentUser."'";
-		$q->query($sql);
-		$user_info = mysql_fetch_array($q->re);			
+		$username = $post['authorUsername'];//$currentPostElement->authorUsername;
+		$CurrentUser = $memcache->get("CurrentUser");
+		if($CurrentUser == NULL){
+			$CurrentUser = myUsername(myip());
+			$memcache->set("CurrentUser",$CurrentUser);
+		}
+		$user_info = $memcache->get("user_info");
+		if($user_info == NULL){
+			$u = new User;
+			$user_info = $u->query_username($CurrentUser);
+			$memcache->set("user_info",$user_info);				
+		}
 		$userId = $user_info["id"];
 	}
 	else {
@@ -175,6 +199,7 @@ jQuery(document).ready(function(){
 
 function editClick() {
 	//$("textEditFrame").contentWindow.location.reload(true);
+	jQuery('#editDialog').css('visibility','visible');
 	editDialog.dialog('open');
 }
 
@@ -204,6 +229,7 @@ function submitLogin(dom,check) {
 							document.getElementById('editpost').value = 'editpost';
 						}
 						jQuery('#field_not_login_comment').html("<input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='2'/>");						
+						jQuery('#FillEmailDialog').css('visibility','visible');	
 						Fill_EmailDialog.dialog('open');
 					}
 					else if(response == 'success'){
@@ -227,3 +253,4 @@ function submitLogin(dom,check) {
 </script>
 
 <?php include("commentListPainter.php"); ?>
+

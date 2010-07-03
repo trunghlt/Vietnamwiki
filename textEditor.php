@@ -27,15 +27,15 @@
 				width: "100%",
 				plugins : "googlemaps,safari,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,price",
 				// Theme options
-				theme_advanced_buttons1 : "insertlayer,pagebreak,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,formatselect,fontselect,fontsizeselect,|,googlemaps, googlemapsdel",
+				theme_advanced_buttons1 : "insertlayer,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,formatselect,fontselect,fontsizeselect,|,googlemaps, googlemapsdel",
 				theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,image,cleanup,code,|preview,|,forecolor,backcolor",
-				theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,|,print,preview,|,price",
+				theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,|,print,preview,|,price,|,template",
 				theme_advanced_toolbar_location : "top",
 				theme_advanced_toolbar_align : "left",
 				theme_advanced_resizing : false,
 			
 				// Example content CSS (should be your site CSS)
-				content_css : "/css/topic-content.css",
+				content_css : "/css/topic-content.css,/css/integrated.css",
 
 				//add iframe element
 				//extended_valid_elements : "fb:fan|[profile_id|stream|connections|logobar|width][frameborder][scrolling][marginheight][marginwidth]",
@@ -50,12 +50,35 @@
 				template_replace_values : {
 					username : "Some User",
 					staffid : "991234"
-				}
+				},
+				template_templates : [
+					{
+						title : "Template 1",
+						src : "/templates/t1.html",
+						description : "Add Template"
+					},
+					{
+						title : "Template 2",
+						src : "/templates/t2.html",
+						description : "Add Template"
+					},
+					{
+						title : "Template 3",
+						src : "/templates/t3.html",
+						description : "Add Template"
+					},
+					{
+						title : "Template 4",
+						src : "/templates/t4.html",
+						description : "Add Template"
+					}					
+				]
 			});
 </script>	
 <?php 
 $editting = isset($_GET["id"]);
 $edit_draf = isset($_GET["editionId_draf"]);
+$compose = isset($_GET["destId"]);
 $flag=1;
 if ($editting) {
 	$postId = postIdFilter($_GET["id"]);
@@ -101,7 +124,7 @@ elseif($edit_draf){
 			$destId = $indexElement->destId;	
 			
 }
-else {
+elseif($compose){
 	$destId = filterDestId($_GET["destId"]);
 }
 
@@ -111,6 +134,7 @@ function filterDestId($destId) {
 ?>
 
 <form>
+<input id="preview" type="hidden" value="preview"/>
   <div style="float: left; margin-right: 10px;">
 		<b><label>Location:</label></b> <br/>
 		<div id="loc" name="loc">

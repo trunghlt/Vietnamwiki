@@ -21,7 +21,7 @@
 	include('destination.php');
 	$q = new Db;	
 	$user_info = new User;
-change_template();
+//change_template();
 ?>
 <script type="text/javascript" src="js/tiny_mce/tiny_mce.js"></script>
     <td class="center">			
@@ -42,13 +42,11 @@ change_template();
 include("forms/editForm.php");
 include("forms/commentForm.php");
 include("forms/composeForm.php");
-include("forms/comment_login.php");
 include("forms/edit_login.php");
 include("forms/deleteConfirmForm.php");
 include("forms/loginForm.php");
 include('dialog.php');
 include("forms/register_email.php");
-include("forms/fill_comment_email_form.php");
-include("forms/fill_comment_name_form.php");
 include("footer.php");
 ?>
+
