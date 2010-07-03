@@ -1,18 +1,46 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>{#template_dlg.title}</title>
+	<script type="text/javascript" src="js/jquery-1.2.6.js"></script>
+	<script type="text/javascript" src="js/jquery.tipbox.js"></script>
 	<script type="text/javascript" src="../../tiny_mce_popup.js"></script>
 	<script type="text/javascript" src="js/template.js"></script>
 	<link href="css/template.css" rel="stylesheet" type="text/css" />
+	<link href="/css/topic-content.css" rel="stylesheet" type="text/css" />
 	<base target="_self" />
 </head>
-<body onresize="TemplateDialog.resize();"> 
-	<form onsubmit="TemplateDialog.insert();return false;">
+<body onResize="TemplateDialog.resize();"> 
+<script>
+	jQuery.noConflict();
+</script>
+<style>
+ /******* TIPBOX *******/  
+#tipBox{  
+background: #f7fafb;  
+ border: 1px solid #ace4ff;  
+ font-size: 10px;  
+ padding: 3px;  
+ width: 720px;  
+}  
+#tipBox.blue{  
+ color: #44a9da;  
+}  
+#tipBox.width{  
+ width: auto;  
+}  
+#tipBox.big{  
+ width: auto;  
+ font-size: 40px;  
+ line-height: 1em;  
+ padding: 1em;  
+}  
+/******* /TIPBOX *******/ 
+</style> 		
+	<form onSubmit="TemplateDialog.insert();return false;">
 		<div id="frmbody">
 			<div class="title">{#template_dlg.desc}</div>
 			<div class="frmRow"><label for="tpath" title="{#template_dlg.select}">{#template_dlg.label}:</label>
-			<select id="tpath" name="tpath" onchange="TemplateDialog.selectTemplate(this.options[this.selectedIndex].value, this.options[this.selectedIndex].text);" class="mceFocus">
-				<option value="">{#template_dlg.select}...</option>
+			<select id="tpath" name="tpath" onChange="TemplateDialog.selectTemplate(this.options[this.selectedIndex].value, this.options[this.selectedIndex].text);" class="mceFocus">
 			</select>
 			<span id="warning"></span></div>
 			<div class="frmRow"><label for="tdesc">{#template_dlg.desc_label}:</label>
@@ -29,11 +57,21 @@
 			</div>
 
 			<div style="float: right">
-				<input type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" />
+				<input type="button" id="cancel" name="cancel" value="{#cancel}" onClick="tinyMCEPopup.close();" />
 			</div>
 
 			<br style="clear:both" />
 		</div>
 	</form>
 </body> 
+<script language="javascript" type="text/javascript">
+		function tip(k){
+			switch(k){
+				case 0:jQuery(".temp1").tipbox("<div class=\"mceTmpl_1\"><div class=\"mceTmplcontent\"><div class=\"mceTmpl_1pic\" >img,photo... Select All and add here,don't clear</div><div class=\"mceTmpl_1content\" >Content...Select All and add here,don't clear</div><div class=\"mceTmplclear\"><!-- --></div></div></div>",1);break;
+				case 1:jQuery(".temp2").tipbox("<div class=\"mceTmpl_2\"><div class=\"mceTmplcontent\"><div class=\"mceTmpl_2content1\" >Content 1 Select All and add here,don't clear</div><div class=\"mceTmpl_2content2\" >Content 2 Select All and add here,don't clear</div><div class=\"mceTmplclear\"><!-- --></div></div></div>",1);break;
+				case 2:jQuery(".temp3").tipbox("<div class=\"mceTmpl_3\"><div class=\"mceTmplcontent\"><div class=\"mceTmpl_3content1\" >Content 1 Select All and add here,don't clear</div><div class=\"mceTmpl_3content2\" ><div class=\"mceTmpl_3pic\" >img,photo... Select All and add here,don't clear</div><div class=\"mceTmpl_3pic\" >img,photo... Select All and add here,don't clear</div><div class=\"mceTmpl_3pic\" >img,photo... Select All and add here,don't clear</div><div class=\"mceTmplclear\"><!-- --></div></div><div class=\"mceTmplclear\"><!-- --></div></div></div>",1);break;
+				case 3:jQuery(".temp4").tipbox("<div class=\"mceTmpl_4\"><div class=\"mceTmplcontent\"><div class=\"mceTmpl_4content1\" >Content 1 Select All and add here,don't clear</div><div class=\"mceTmpl_4content2\" ><div class=\"mceTmpl_4pic\" >img,photo... Select All and add here,don't clear</div><div class=\"mceTmpl_4pic\" >img,photo... Select All and add here,don't clear</div><div class=\"mceTmplclear\"><!-- --></div></div><div class=\"mceTmplclear\"><!-- --></div></div></div>",1);break;
+			}
+		}
+</script>
 </html> 

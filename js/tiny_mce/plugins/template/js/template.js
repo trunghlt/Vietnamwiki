@@ -9,7 +9,7 @@ var TemplateDialog = {
 	},
 
 	init : function() {
-		var ed = tinyMCEPopup.editor, tsrc, sel, x, u;
+		var ed = tinyMCEPopup.editor, tsrc, sel, x, u , k;
 
  		tsrc = ed.getParam("template_templates", false);
  		sel = document.getElementById('tpath');
@@ -20,9 +20,12 @@ var TemplateDialog = {
 				tsrc.push({title : tinyMCETemplateList[x][0], src : tinyMCETemplateList[x][1], description : tinyMCETemplateList[x][2]});
 		}
 
-		for (x=0; x<tsrc.length; x++)
+		for (x=0; x<tsrc.length; x++){
 			sel.options[sel.options.length] = new Option(tsrc[x].title, tinyMCEPopup.editor.documentBaseURI.toAbsolute(tsrc[x].src));
-
+			k = "temp"+(x+1);
+			document.getElementsByTagName("option")[x].className = k;
+			document.getElementsByTagName("option")[x].mouseover = tip(x);
+		}
 		this.resize();
 		this.tsrc = tsrc;
 	},
