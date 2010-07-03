@@ -1,4 +1,4 @@
- </tr>
+</tr>
 </tbody></table>
 
 <?php include("footLinks.php");?>

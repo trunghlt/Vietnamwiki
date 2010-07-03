@@ -44,13 +44,13 @@ function getReviewListHTML($postId) {
 					$pAvatar->setEmail($review->email)->setSize(80)->setRatingAsPG();?>
 					<img class="avatar" src="<?php echo $pAvatar->getAvatar()?>" height=50 width=50/>
 					<div class="reviewRate" style="background: url(/images/stars_map.png) 0 <?php echo -19*($review->rateValue - 1)*2 - 19 ?>px no-repeat;">&nbsp;</div>
-					&nbsp;reviewed by <span style="color: #3B5998; font-weight: bold;"><?php echo $review->name;?></span> at <?php echo $reviewDateTimeStr;?>
+					&nbsp;reviewed by <span style="color: #990000; font-weight: bold;"><?php echo $review->name;?></span> at <?php echo $reviewDateTimeStr;?>
 					<?php 					
 				}				
 				else {
 					?>
 					<div class="reviewRate" style="background: url(/images/stars_map.png) 0 <?php echo -19*($review->rateValue - 1)*2 - 19 ?>px no-repeat;">&nbsp;</div>
-					&nbsp; Reviewed by <?php   
+					&nbsp; Reviewed by <span style="color: #990000; font-weight: bold;"><?php   
 					if($review->name!='' && $review->email=='')
 						echo $review->name;
 					elseif($review->name=='' && $review->email==''){
@@ -58,7 +58,7 @@ function getReviewListHTML($postId) {
 						echo $user->username;
 					}
 					?> 
-					at <?php echo $reviewDateTimeStr;
+					</span> at <?php echo $reviewDateTimeStr;
 				} ?>
 				</div>
 					
@@ -114,7 +114,7 @@ function getToolbarHTML() {
 		if ($fbUserId || $loggedIn) { 
 			$un = myUsername(myip()); ?>
 			<strong> 
-			<a class="link" onClick="composeDialog.dialog('open')">Compose new entry</a>
+			<a class="link" onClick="jQuery('#composeDialog').css('visibility','visible');composeDialog.dialog('open')">Compose new entry</a>
 			/
 			<?php if ($loggedIn) { ?>
 				<?php echo $un ?>
@@ -131,7 +131,7 @@ function getToolbarHTML() {
 		<?php } 
 		else { ?>          
 			<b>
-			<a class='link' onClick="loginDialog.dialog('open')">log in</a>
+			<a class='link' onClick="jQuery('#loginDialog').css('visibility','visible');loginDialog.dialog('open');">log in</a>
 			/<a class='link' href="/signup.php" >sign up</a>			 
 			</b>
 	   <?php } ?>     

@@ -2,6 +2,7 @@
 include("../core/init.php");
 include("../core/classes/Db.php");
 include("../core/common.php");
+include("../upload2/watermark.php");
 
 function filterFtmp($ftmp){
 	return $ftmp;
@@ -64,7 +65,7 @@ function upload_image($ftmp, $loc, $des, $tags) {
 			$img = new img($original_path."/".$file_name);
 			$img->resize(100, 75, true);
 			$img->store($small_path."/".$file_name);	
-			
+			watermark($original_path."/".$file_name,"../images/watermark.png",$original_path."/".$file_name);
 			$sql = "INSERT INTO images 
 					(dest_id, des, tags, uploaded_at, user_id, filename)
 					VALUE ('".$loc."','".$des."','".$tags."','".$uploaded_at."','".myUser_id(myip())."','".$file_name."')";

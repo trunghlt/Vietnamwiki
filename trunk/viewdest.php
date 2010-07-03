@@ -97,7 +97,7 @@ While ($row = mysql_fetch_array($result)) {
 	echo '<b>'.$dest.'</b><br>'; 	*/						
 	//title
 	$href = getPostPermalink($row["post_id"]);
-	echo "<a href='{$href}' class=\"head2\">". htmlspecialchars_decode($title) . "</a><br>";      
+	echo "<a href='{$href}' class=\"head2\">". HtmlSpecialChars($title) . "</a><br>";      
 	// post time information
 	/*
 	$posttime = $row['post_time'];
@@ -127,16 +127,16 @@ if($numrow2 <= 5){
 ?>
 <div class="note1">There <?php echo $str?> in this index. Is <?php echo $dest_name?> your hometown? Or do you just simply love this place? You know you can add a new topic here to recommend <?php echo $dest_name?> to worldwide travellers by clicking on the below button.</div>
 
-<div id="mainMenu">
+<div class='button' style="margin-top:20px;">
 <ul>
-	<li id='link_add' value="0">
+<li id="link_add" value='<?php if(!logged_in()) echo 0; else echo 1; ?>'>
 <?php if(!logged_in()){?>
-		<a onClick="loginDialog.dialog('open')" >+ Add new topic</a>
+		<a onClick="jQuery('#loginDialog').css('visibility','visible').dialog('open')" >+ Add new topic</a>
 
 <?php }else{ ?>
-	<a onClick="composeDialog.dialog('open')">+ Add new topic</a>
+	<a onClick="jQuery('#composeDialog').css('visibility','visible').dialog('open')">+ Add new topic</a>
 <?php }?>
-	</li>
+</li>
 </ul>
 </div>
 </div><br />
@@ -175,3 +175,4 @@ if ($numrow > $num_per_page) {
 */
 //include("forms/composeForm.php");
 ?>
+

@@ -32,7 +32,7 @@ function submitEditForm() {
 	var frameDocument = frameWindow.document;
 	var destId = encodeURI(frameDocument.getElementById("location").value); 
 	var indexId = encodeURI(frameDocument.getElementById("index").value); 
-<?php if(isset($currentPostElement->id)) {?>
+/*
 	currentDestItem.removeClass("active");
 	currentDestItem.addClass("linksmall");	
 	currentIndexItem.removeClass("activeIndex");
@@ -49,8 +49,7 @@ function submitEditForm() {
 	currentIndexItem.addClass("activeIndex");
 	currentMySlide = mySlide[destId];
 	currentMySlide.slideIn();
-<?php }	?>
-
+*/
 	var title = frameDocument.getElementById("title").value;
 	var smallImgURL = frameDocument.getElementById("smallImgURL").value;
 	var bigImgURL = frameDocument.getElementById("bigImgURL").value;	
@@ -71,34 +70,42 @@ function submitEditForm() {
 				},
 				"html");
 */				
-	
-	var submitPostRequest = new Request({	url: "submitPost.php",
-											evalScripts: true
-											});	
-											
-	submitPostRequest.send( "id=" + id
-							+"&indexId=" + indexId 					
-							+ "&title=" + title
-							+ "&smallImgURL=" + smallImgURL
-							+ "&bigImgURL=" + bigImgURL
-							+ "&summary=" + summary
-							+ "&content=" + content
-							<?php if(isset($draf)) {?>
-							+ "&id_edition=" + <?php echo $draf?>
-							<?php } ?> 
-							+ "&ref=" + ref 
-							+ "&type=" + type);
-							
-	submitPostRequest.addEvent('onComplete', function(response) {
-		$("postContent").set('html', response);
-		<?php if(isset($draf)){?>
-			window.location = 'draft.php?id=<?php echo $draf?>';
-		<?php }else if(isset($currentPostElement->id)){?>
-			window.location = '<?php echo getPostPermalink($currentPostElement->id)?>';
-			//loadEditorList(<?php //echo $currentPostElement->id ?>, "editorList");
-		<?php }?>
-	});
-	
+	var preview = frameDocument.getElementById("preview").value;
+	var bool = true;
+	if(preview != 1)
+		bool = confirm("Do you want to continue submit");
+	if(bool == true){
+		var submitPostRequest = new Request({	url: "submitPost.php",
+												evalScripts: true
+												});	
+												
+		submitPostRequest.send( "id=" + id
+								+"&indexId=" + indexId 					
+								+ "&title=" + title
+								+ "&smallImgURL=" + smallImgURL
+								+ "&bigImgURL=" + bigImgURL
+								+ "&summary=" + summary
+								+ "&content=" + content
+								<?php if(isset($draf)) {?>
+								+ "&id_edition=" + <?php echo $draf?>
+								<?php } ?> 
+								+ "&ref=" + ref 
+								+ "&type=" + type);
+								
+		submitPostRequest.addEvent('onComplete', function(response) {
+			$("postContent").set('html', response);
+			<?php if(isset($draf)){?>
+				window.location = 'draft.php?id=<?php echo $draf?>';
+			<?php }else if(isset($currentPostElement->id)){?>
+				window.location = '<?php echo getPostPermalink($currentPostElement->id)?>';
+				loadEditorList(<?php echo $currentPostElement->id ?>, "editorList");
+			<?php  }?>
+		});
+		return true;
+	}
+	else{
+		return false;
+	}
 }
 
 jQuery(document).ready(function(){ 
@@ -114,7 +121,7 @@ jQuery(document).ready(function(){
 		},
 		buttons: {
 			'Submit': function() {
-				submitEditForm();
+				if(submitEditForm())
 				jQuery(this).dialog('close');
 			},
 			Cancel: function() {

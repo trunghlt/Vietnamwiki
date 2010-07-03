@@ -24,6 +24,7 @@ the user send to our website will be checked and confirmed before posted to offi
 <style type="text/css">
 body {
 	background-color: #8C0003;
+	background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 600, from(red), to(#000)); 
 	font-family: Arial,Helvetica,serif;
 	font-size: 10px;
 	padding: 0px;
@@ -367,7 +368,7 @@ function cen(a ,b) {
 	  <p class="style4">&nbsp;Language:  Vietnamese</p>
 	  <p class="style4">Area: <a href="http://en.wikipedia.org/wiki/1_E9_m%C2%B2" title="1 E9 m&sup2;" class="style6">331,689&nbsp;km&sup2;</a>&nbsp;(<a title="List of countries and outlying territories by area" href="http://en.wikipedia.org/wiki/List_of_countries_and_outlying_territories_by_area" style="color:#00FFFF">65th</a>)</p>
 	  <p class="style4">Population: 87,375,000&nbsp;(<a title="List of countries by population" href="http://en.wikipedia.org/wiki/List_of_countries_by_population" style="color:#00FFFF">13th</a>) </p>
-	  <p class="style4">GDP: $251.8 billion&nbsp;(<a title="List of countries by GDP (PPP)" href="http://en.wikipedia.org/wiki/List_of_countries_by_GDP_%28PPP%29" style="color:#00FFFF">36th</a>) </p>
+	  <p class="style4">GDP: $92.439 billion&nbsp;(<a title="List of countries by GDP (Nominal)" href="http://en.wikipedia.org/wiki/List_of_countries_by_GDP_%28PPP%29" style="color:#00FFFF">57th</a>) </p>
 	  <p class="style4">&nbsp;&nbsp;Currency: <span class="style6" lang="vi" xml:lang="vi"><a title="Vietnamese &#273;&#7891;ng" href="http://en.wikipedia.org/wiki/Vietnamese_%C4%91%E1%BB%93ng" style="color:#00FFFF">&#273;&#7891;ng</a> (&#8363;) (<a title="ISO 4217" href="http://en.wikipedia.org/wiki/ISO_4217" style="color:#00FFFF">VND</a>)</span></p>
 	  <p class="style4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time Zone: (UTC +7) </p></td>
 	<td width="355">
@@ -433,31 +434,32 @@ include("googleAnalytical.php");
 <?php 
 $color = new Color;
 $r = $color->query_setting();
-if(count($r) > 0){
-	foreach($r as $value){
-		$arr2 = explode('-',$value['page']);
-		if($arr2[0] == 'index'){
-				for($i = 1 ; $i < count($arr2);	$i++)
-				{
-					if($arr2[$i]=='top'){
-						echo "<script>";
-						echo "document.getElementById('top').style.background=\"$value[color]\"";
-						echo "</script>";				
-	
-					}
-					if($arr2[$i]=='body'){
-						echo "<script>";
-						echo "document.body.style.background=\"$value[color]\"";
-						echo "</script>";
-					}
-					if($arr2[$i]=='bottom'){
-						echo "<script>";
-						echo "document.getElementById('slideShowWrapper').style.background=\"$value[color]\"";
-						echo "</script>";					
-					}
-				}		
-		}
+if(count($r)>0){
+ foreach($r as $value){
+	$arr2 = explode('-',$value['page']);
+	if($arr2[0] == 'index'){
+			for($i = 1 ; $i < count($arr2);	$i++)
+			{
+				if($arr2[$i]=='top'){
+					echo "<script>";
+					echo "document.getElementById('top').style.background=\"$value[color]\"";
+					echo "</script>";				
+
+				}
+				if($arr2[$i]=='body'){
+					echo "<script>";
+					echo "document.body.style.background=\"$value[color]\"";
+					echo "</script>";
+				}
+				if($arr2[$i]=='bottom'){
+					echo "<script>";
+					echo "document.getElementById('slideShowWrapper').style.background=\"$value[color]\"";
+					echo "</script>";					
+				}
+			}		
 	}
+ }
 }
 ?>
 </html>
+

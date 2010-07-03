@@ -1,3 +1,4 @@
+<div class="seach_body">
 <h1>Search result:</h1>
 <?php
 function get_value_in_text(){
@@ -166,3 +167,5 @@ function change_value($v){
             		
  }
  ?>
+ </div>
+ <div class="clear_search"><!----></div>

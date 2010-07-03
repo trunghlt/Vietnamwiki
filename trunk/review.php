@@ -25,7 +25,7 @@ $pAvatar = new TalkPHP_Gravatar();
 		</div>
 		<div id='button'>
 		<?php //if(logged_in()){?>
-		<div class="button" style="margin: 20px 20px;" onClick="reviewDialog.dialog('open')"><a>+ Add a new review</a></div>
+		<div class="button" style="margin: 20px 20px;" onClick="jQuery('#review_Dialog').css('visibility','visible');reviewDialog.dialog('open')"><a>+ Add a new review</a></div>
 		<?php //}else{?>
 <!--<div class="button" style="margin: 20px 20px;" onClick="review_Dialog1.dialog('open')"><a>+ Add a new review</a></div>	-->	
 		<?php //}?>
@@ -66,17 +66,11 @@ $pAvatar = new TalkPHP_Gravatar();
 include("forms/loginForm.php");
 include("forms/composeForm.php");
 include("forms/reviewform.php");
-//include("forms/reviewform1.php");
-//include("forms/fill_comment_email_form.php");
-//include("forms/fill_comment_name_form.php");
+include("forms/register_email.php");
 include("footer.php");
 ?>
 <script type="text/javascript">
-	<?php //if(logged_in()){?>
-		//document.getElementById('review1').innerHTML="<?php //echo "$str_rate"?>";
-	<?php //}else{?>
-		//document.getElementById('review2').innerHTML="<?php //echo "$str_rate"?>";
-	<?php //}?>
+
 function submitReview(dom,email,name) {
 	if(email=='' && name=='' ){
 	jQuery.post("submitReview.php",
@@ -100,9 +94,7 @@ function signOut() {
 	jQuery.post("/requests/logout.php", {}, 
 				function(response) {
 					loadToolbar("toolbar");
-				//document.getElementById('button').innerHTML="<div class='button' style='margin: 20px 20px;' onClick=review_Dialog1.dialog('open') ><a>+ Add a new review</a></div>";
-				//document.getElementById('review1').innerHTML="<div style='height:0;'></div>";
-				//document.getElementById('review2').innerHTML="<?php //echo "$str_rate"?>";
+
 				document.getElementById('reviewText').value="";
 				document.getElementById('field_not_login').innerHTML="Email :<br /><input class='field' name='fill_email_review' id='fill_email_review' type='text' style='width:250px' value=''/><br />Name :<br /><input class='field' name='fill_name_review' id='fill_name_review' type='text' style='width:250px' value=''/><br /><input class='field' name='check_login' id='check_login' type='hidden' value='1'/>";
 				});
@@ -114,10 +106,22 @@ function submitLogin() {
 	loginForm.send();
 	loginForm.get("send").addEvent("onComplete", function(response){
 		loadToolbar("toolbar");
-		//document.getElementById('button').innerHTML="<div class='button' style='margin: 20px 20px;' onClick=reviewDialog.dialog('open') ><a>+ Add a new review</a></div>";
-		//document.getElementById('review1').innerHTML="<?php //echo "$str_rate"?>";
-		document.getElementById('reviewText').value="";
-		jQuery('#field_not_login').html("<input class='field' name='check_login' id='check_login' type='hidden' value='2'/>");
+				if(response==-2)
+					alert("This user has been banned");
+				else{
+					if(response != '' && response != 'success'){
+						jQuery('#FillEmailDialog').css('visibility','visible');
+						Fill_EmailDialog.dialog('open');
+						document.getElementById('reviewText').value="";
+						jQuery('#field_not_login').html("<input class='field' name='check_login' id='check_login' type='hidden' value='2'/>");						
+					}
+					else{
+						document.getElementById('reviewText').value="";
+						jQuery('#field_not_login').html("<input class='field' name='check_login' id='check_login' type='hidden' value='2'/>");						
+					}
+				}
+					
+
 	});
 }
 </script>

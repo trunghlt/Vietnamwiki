@@ -20,7 +20,7 @@
 			height: auto; 
 			width: 200px; 
 			float: left; 
-			background-color: rgb(255, 255, 255);
+			background-color:#E0E0E0; /*rgb(255, 255, 255);*/
 			padding: 0px 10px 10px 10px;
 			display: none;
 		}

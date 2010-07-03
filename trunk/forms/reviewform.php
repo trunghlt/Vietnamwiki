@@ -69,17 +69,21 @@ jQuery(document).ready(function(){
 		buttons: {
 			'Submit': function() {
 				if (getRateValue() == 0) {
+					jQuery('#mustRateAlert').css('visibility','visible');
 					mustRateAlert.dialog("open");
 				}
 				else if (jQuery("#reviewText").val().length <= 140) {
+					jQuery('#reviewLowerBound').css('visibility','visible');
 					reviewLowerBound.dialog("open");
 				}
 				else {
 					
 					if(jQuery("#check_login").val() == 1){
 						
-						if(jQuery("#fill_name_review").val() == '' && jQuery("#fill_email_review").val() == '')
+						if(jQuery("#fill_name_review").val() == '' && jQuery("#fill_email_review").val() == ''){
+							jQuery('#mustName_EmailAlert').css('visibility','visible');
 							mustNameEmailAlert.dialog("open");
+						}
 						else{
 							submitReview('reviewText','fill_email_review','fill_name_review');
 							resetRating();

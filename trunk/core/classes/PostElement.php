@@ -63,7 +63,6 @@ class PostElement {
 		$this->indexId = $r["index_id"];
 		$this->locked = $r["locked"];
 		return 1;
-			
 	}
 	
 	public function add($user_id="") {
@@ -157,7 +156,8 @@ class PostElement {
 		$q = new db;
 		$mysql["content"] = mysql_real_escape_string($this->content);
 		$mysql["reference"] = mysql_real_escape_string($this->reference);
-		
+		$memcache = new Memcache;
+		$memcache->connect("127.0.0.1", 11211);		
 		if($user_id != ""){
 			$q->query("select property_value
 						from setting
@@ -184,6 +184,9 @@ class PostElement {
 								WHERE post_id = ".$this->id);
 					$this->draft = $this->content;
 					Follow::set($user_id,$this->id);
+					$post = $memcache->get("post_".$this->id);
+					if($post != NULL)
+						$memcache->delete("post_".$this->id);
 					return 0;				
 				}
 				else{
@@ -211,6 +214,9 @@ class PostElement {
 							WHERE post_id = ".$this->id);
 					$this->draft = $this->content;
 				Follow::set($user_id,$this->id);
+				$post = $memcache->get("post_".$this->id);
+				if($post != NULL)
+					$memcache->delete("post_".$this->id);
 					return 0;			
 			}
 		}

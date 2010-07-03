@@ -19,6 +19,9 @@ include('permalink.php');
 include("APIs.php");
 include('fbconnect.php');
 
+#Initialise memcached
+$memcache = new Memcache;
+$memcache->connect("127.0.0.1", 11211);
 
 function dieToInvalidInput() {
 	header("location: /");		
@@ -283,7 +286,7 @@ function smaller($a, $b) {
 }
 
 function MakeTextViewable($text) {
-	  $s = htmlspecialchars_decode($text);
+	  $s = HtmlSpecialChars($text);
 	  $s = str_replace(chr(13), '</p><p>', $s);
 	  $s = "<span style='margin-bottom:10px;margin-top:10px;'>" . $s . "</span>";
 	  return $s;
@@ -342,10 +345,15 @@ function update_image($id, $loc, $des, $tags) {
 	}
 	
 	function filter_content_script($s){
-		$str = str_replace('<script>',' ',$s);
+		$str = str_replace('<script',' ',$s);
 		$str = str_replace('</script>',' ',$str);
-		$str = str_replace('<iframe>',' ',$str);
+		$str = str_replace('<frameset',' ',$str);
+		$str = str_replace('</frameset>',' ',$str);
+		$str = str_replace('<iframe',' ',$str);
 		$str = str_replace('</iframe>',' ',$str);
+		$str = str_replace('<frame',' ',$str);
+		$str = str_replace('</frame>',' ',$str);
 		return $str;
-	}		
+	}			
 ?>
+
