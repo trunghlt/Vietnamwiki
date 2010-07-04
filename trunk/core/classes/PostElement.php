@@ -68,7 +68,8 @@ class PostElement {
 	public function add($user_id="") {
 		//Add map spots in the post to the database
 		MapSpot::addMapSpots(htmlspecialchars_decode($this->content, ENT_QUOTES), $this->id);
-		
+		$memcache = new Memcache;
+		$memcache->connect("127.0.0.1", 11211);
 		$q = new db;
 		if($user_id!=""){
 			$q->query("select property_value
@@ -104,7 +105,10 @@ class PostElement {
 					$q->query("	INSERT INTO acts
 								(act_username, type, target, time) 
 								VALUE ('".$this->authorUsername."','create','".$this->id."','".time()."')");
-					Follow::set($user_id,$this->id);
+					$index = $memcache->get("index_".$this->indexId);
+					if($index != NULL)
+						$memcache->delete("index_".$this->id);
+					Follow::set($user_id,$this->indexId);
 				}
 				else{
 					$this->id = 0;					
@@ -131,7 +135,10 @@ class PostElement {
 					$q->query("	INSERT INTO acts
 								(act_username, type, target, time) 
 								VALUE ('".$this->authorUsername."','create','".$this->id."','".time()."')");
-						Follow::set($user_id,$this->id);				
+						Follow::set($user_id,$this->id);
+					$index = $memcache->get("index_".$this->indexId);
+					if($index != NULL)
+						$memcache->delete("index_".$this->indexId);				
 			}
 		}
 	}
@@ -235,6 +242,27 @@ class PostElement {
 		}
 		else
 			return 0;	
+	}
+	public function query_id($id) {
+		$q = new db;
+		$q->query("	SELECT *
+					FROM posts_texts
+					WHERE post_id = '$id'");
+		if($q->n > 0)
+			return mysql_fetch_assoc($q->re);
+	}	
+	public function query_rowByIndex($index='') {
+		$q = new db;
+		if($index!=NULL)
+			$q->query("	SELECT *
+						FROM posts
+						WHERE index_id = $index");
+		else
+			$q->query("	SELECT *
+						FROM posts");			
+		if($q->n > 0)
+			return $q->n;
+		return 0;
 	}
 }
 ?>
