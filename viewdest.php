@@ -5,11 +5,11 @@ echo "<h1>Latest Headlines</h1>";
 db_connect();
 $dest_id = isset($_GET["id"])? $_GET["id"] : 1;
 $dest_id = htmlspecialchars($dest_id , ENT_QUOTES);
-
-
-	$r1 = mysql_query("SELECT d.EngName,i.dest_id FROM index_menu i, destinations d where i.id=$index_id and d.id = i.dest_id");
-	$arr1 = mysql_fetch_array($r1);
-	$dest_name = $arr1['EngName'];
+$c_post = new PostElement;
+$query = new Active;
+$r1 = $query->select("d.EngName,i.dest_id","index_menu i, destinations d", "i.id=$index_id and d.id = i.dest_id");
+foreach($r1 as $arr1)
+$dest_name = $arr1['EngName'];
 
 
 //$request = ($dest_id == 1)? "" : "WHERE index_id = '".$index_id."'";
@@ -47,20 +47,18 @@ Sorted by: <a style="<?php echo $style1 ?>" href= "<?php echo $href?>">posted ti
 //content		
 $num_per_page = 20;
 $page = isset($_GET["page"])? $_GET["page"] : 1;
-$result = mysql_query("SELECT * FROM posts") or die(mysql_error()); 
-$numrow = mysql_num_rows($result);
+$numrow = $c_post->query_rowByIndex();
 if (($page - 1) * $num_per_page > $numrow) die_to_index();
 $start = ($page - 1) * $num_per_page;
 $end = $page * $num_per_page;
-$result = mysql_query("SELECT * FROM posts ".$request." ORDER BY ".$sort_query." DESC LIMIT ".$start.",".$end) or die(mysql_error());
-$result2 = mysql_query("SELECT * FROM posts ".$request) or die(mysql_error()); 
-$numrow2 = mysql_num_rows($result2);
-While ($row = mysql_fetch_array($result)) {       
-	$sql = "SELECT *
-			FROM posts_texts
-			WHERE post_id='".$row['post_id']."'";
-	$re2 = mysql_query($sql) or die(mysql_error());
-	$post = mysql_fetch_array($re2);
+$query->orderby($sort_query,"DESC");
+$query->limit($start,$end);
+$r = $query->select('',"posts","index_id = '".$index_id."'");
+//$result = mysql_query("SELECT * FROM posts ".$request." ORDER BY ".$sort_query." DESC LIMIT ".$start.",".$end) or die(mysql_error());
+$numrow2 = $c_post->query_rowByIndex($index_id);
+if($r != NULL)
+foreach ($r as $row) {       
+	$post = $c_post->query_id($row['post_id']);
 	$title = $post['post_subject'];
 	$content = $post['post_summary'];
 	
@@ -112,8 +110,7 @@ While ($row = mysql_fetch_array($result)) {
 	</div>
 	<div style="border-bottom: 1px dotted gray; margin-bottom: 10px; padding-top:10px;"></div>
 	<?php
-	mysql_free_result($re2);
-} mysql_free_result($result);
+}
 
 ?>
 
@@ -128,7 +125,7 @@ if($numrow2 <= 5){
 <div class="note1">There <?php echo $str?> in this index. Is <?php echo $dest_name?> your hometown? Or do you just simply love this place? You know you can add a new topic here to recommend <?php echo $dest_name?> to worldwide travellers by clicking on the below button.</div>
 
 <div class='button' style="margin-top:20px;">
-<ul>
+<ul style="float:left;">
 <li id="link_add" value='<?php if(!logged_in()) echo 0; else echo 1; ?>'>
 <?php if(!logged_in()){?>
 		<a onClick="jQuery('#loginDialog').css('visibility','visible').dialog('open')" >+ Add new topic</a>
@@ -140,7 +137,7 @@ if($numrow2 <= 5){
 </ul>
 </div>
 </div><br />
-<div id="editorList" class="editorInfo"></div>
+<div id="editorList" class="editorInfo" style="clear:left"></div>
 <script language="javascript">
 jQuery(document).ready(function(){
 loadEditorList("", "editorList",<?php echo $index_id?>);

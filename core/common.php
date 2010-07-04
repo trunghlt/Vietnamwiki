@@ -356,4 +356,3 @@ function update_image($id, $loc, $des, $tags) {
 		return $str;
 	}			
 ?>
-

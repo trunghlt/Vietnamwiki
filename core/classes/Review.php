@@ -77,17 +77,27 @@ class Review {
 					(user_id, post_id, rate_value, review_text, review_date_time,name,email)
 					VALUES ({$this->userId}, {$this->postId}, {$this->rateValue}, '{$mysql["reviewText"]}', {$this->reviewDateTime},'{$this->name}','{$this->email}')");		
 		$this->id = mysql_insert_id();
+		$memcache = new Memcache;
+		$memcache->connect("127.0.0.1", 11211);
+		$review = $memcache->get("review_".$this->postId);
+			if($review != NULL)
+					$memcache->delete("review_".$this->postId);			
 	}
 	
 	public function save() {
 		$mysql["reviewText"] = htmlspecialchars($this->reviewText, ENT_QUOTES);
 		Db::sQuery("UPDATE reviews
 					SET user_id = {$this->userId},
-						post_id = {$this->posstId},
+						post_id = {$this->postId},
 						rate_value = '{$mysql["reviewText"]}',
 						review_text = {$this->reviewText},
 						review_date_time = {$this->reviewDateTime}
-					WHERE id = {$this->id}");					
+					WHERE id = {$this->id}");
+		$memcache = new Memcache;
+		$memcache->connect("127.0.0.1", 11211);
+		$review = $memcache->get("review_".$this->postId);
+			if($review != NULL)
+					$memcache->delete("review_".$this->postId);					
 	}
 }
 ?>
