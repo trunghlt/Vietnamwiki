@@ -1,7 +1,6 @@
 <?php include("ajaxLoad.php");
 include('dialog.php');
 ?>
-
 <div id="editDialog" title="Edit entry">
 
 	<iframe style="	margin: 0px 0px 0px -10px; 
@@ -14,13 +13,12 @@ include('dialog.php');
 			src="textEditor.php?<?php 
 			if(isset($draf)) 
 				echo "editionId_draf=".$draf;
-			elseif(isset($currentPostElement->id))
-					echo "id=".$currentPostElement->id;?>">
+			elseif(isset($post['id']))
+					echo "id=".$post['id'];?>">
 	</iframe>  	
 
 </div>
 <script language="javascript">
-
 function convert(s) {
 	s = s.replace(/&/g,'|');
 	return s;
@@ -57,10 +55,10 @@ function submitEditForm() {
 	var content = convert(frameWindow.tinyMCE.activeEditor.getContent());
 	var ref = encodeURI(frameDocument.getElementById("reference").value);
 	var id = <?php if(isset($draf)) echo $currentEdition->postId;
-					 elseif(isset($currentPostElement->id))
-							echo $currentPostElement->id;?>;
+					 elseif(isset($post['id']))
+							echo $post['id'];?>;
 	var type = <?php if(isset($draf)) echo '1';
-					 elseif(isset($currentPostElement->id))
+					 elseif(isset($post['id']))
 							echo '2';?>;
 /*	
 	jQuery.post("submitPost.php",

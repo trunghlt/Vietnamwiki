@@ -30,7 +30,14 @@ $pAvatar = new TalkPHP_Gravatar();
 <!--<div class="button" style="margin: 20px 20px;" onClick="review_Dialog1.dialog('open')"><a>+ Add a new review</a></div>	-->	
 		<?php //}?>
 		</div>
-		<div id="reviewList"><?php echo getReviewListHTML($post_id); ?></div>
+		<div id="reviewList"><?php 
+			$review = $memcache->get("review_".$post_id);
+			if($review == NULL){
+				$review = getReviewListHTML($post_id);
+				$memcache->set("review_".$post_id,$review);
+			}
+			echo $review ; 
+		?></div>
 	</td>
 </tr>
 </tbody>

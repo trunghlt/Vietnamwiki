@@ -11,5 +11,5 @@ include('core/classes/Review.php');
 include('core/classes/Email.php');
 include('core/classes/Follow.php');
 include('core/classes/MapSpot.php');
-
+include('core/classes/ActiveRecord.php');
 ?>
