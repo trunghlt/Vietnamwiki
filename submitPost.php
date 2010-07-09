@@ -3,7 +3,7 @@ include("core/init.php");
 include("core/common.php");
 include("core/classes.php");
 include("libraries/sendmail.php");
-
+//Edit Edition
 
 $postElement = new PostElement();
 $postElement->id = $postElement->filterId($_POST["id"]);
@@ -52,10 +52,7 @@ else if($_POST["type"]==2 && User::check_user(myUser_id(myip()),$postElement->id
 	$editionElement->editDateTime = time();
 	$editionElement->add();
 		$row2 = Email::query(1);
-		$str = 'http://www.vietnamwiki.net'.getPostPermalink($postElement->id);
-		
-
-		
+		$str = 'http://www.vietnamwiki.net/draft.php?id='.$editionElement->id;
 	
 	$content = htmlspecialchars_decode($postElement->draft, ENT_QUOTES);
 	$content = str_replace("|", "&", $content);
@@ -64,7 +61,6 @@ else if($_POST["type"]==2 && User::check_user(myUser_id(myip()),$postElement->id
 
 	if($n == 1)
 	{
-		$str .= "<br /> This edition is waiting for your review before the official content is updated!"; 
 		echo "<script>";
 		echo "jQuery('#confirm').css('visibility','visible').dialog('open');";
 		echo "</script>";
@@ -95,7 +91,8 @@ else if($_POST["type"]==2 && User::check_user(myUser_id(myip()),$postElement->id
 		$r = Email::query_post($postElement->id);
 		foreach($r as $row)
 		{
-			sendmail($row['email'],$row2['subject'],$message,0,$row2['from']);
+			if(c_email($row['email']))
+				sendmail($row['email'],$row2['subject'],$message,0,$row2['from']);
 		}	
 }
 ?>

@@ -343,7 +343,7 @@ function update_image($id, $loc, $des, $tags) {
 		mysql_free_result($result);
 		return $row["logged_in"];
 	}
-	
+// filter content when user post new edition	
 	function filter_content_script($s){
 		$str = str_replace('<script',' ',$s);
 		$str = str_replace('</script>',' ',$str);
@@ -354,5 +354,11 @@ function update_image($id, $loc, $des, $tags) {
 		$str = str_replace('<frame',' ',$str);
 		$str = str_replace('</frame>',' ',$str);
 		return $str;
-	}			
+	}
+// check email
+function c_email($s){
+	$str = "/[a-zA-Z0-9._]+\@[a-zA-Z0-9]{2,}\.[a-zA-Z]{2,}/";	
+     if (!strpos($s, '@') || !preg_match($str,$s)) return false;
+	 return true;
+}			
 ?>
