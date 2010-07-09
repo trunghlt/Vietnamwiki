@@ -11,7 +11,9 @@ include('ajaxLoad.php');
 ?>
 <td class="center">	
 	<div style = "background: #EDEFF4; height: 28px;">
-		<div id ="toolbar"></div>
+		<div id="menuWrapper">
+			<div id="toolbar"></div>
+		</div>
 	</div>
 	<div id="contentTable">
 		<?php include("photoBody.php");?>
