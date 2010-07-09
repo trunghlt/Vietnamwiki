@@ -14,7 +14,7 @@ $postElement->bigImgURL = htmlspecialchars($postElement->filterImgURL(urldecode(
 $postElement->authorUsername = myUsername(myip());
 $postElement->reference = htmlspecialchars($postElement->filterReference(urldecode($_POST["ref"])));
 $postElement->add(myUser_id(myip()));	
-
+//create new Post
 $editionElement = new Edition();
 $editionElement->postId = $postElement->id;
 $editionElement->userId = myUser_id(myip());
@@ -36,7 +36,7 @@ if($editionElement->postId != 0){
 $u = new User;
 $arr = $u->query_id($editionElement->userId);		
 		$message = str_replace('{link}',$str,$row2['message']);
-		$message = str_replace('{time}',date("d/m/Y   H:i a",$editionElement->editDateTime),$message);
+		$message = str_replace('{time}',date("d/m/Y H:i a",$editionElement->editDateTime),$message);
 		$message = str_replace('{username}',$arr['username'],$message);
 		$message = str_replace('{title}',$editionElement->postTitle,$message);
 		
@@ -44,26 +44,35 @@ $arr = $u->query_id($editionElement->userId);
 		
 		foreach($r as $row)
 		{
-				sendmail($row['email'],$row2['subject'],$message,0,$row2['from']);	
+				if(c_email($row['email']))
+					sendmail($row['email'],$row2['subject'],$message,0,$row2['from']);	
 		}
 echo getPostPermalink($postElement->id);
 }
 else{
 $u = new User;
 $arr = $u->query_id($editionElement->userId);
-		$row2 = Email::query(1);
-		$message = str_replace('{link}','',$row2['message']);		
-		$message = str_replace('{time}',date("d/m/Y  H:i a",$editionElement->editDateTime),$message);
+		$row2 = Email::query(3);
+		//$message = str_replace('{link}','',$row2['message']);
+		$index = new IndexElement;
+		$index->query($editionElement->index_id);
+		$des = new DestinationElement;
+		$des->query($index->destId);
+		$des->queryById();
+		$str = $des->engName." -> ".$index->name;
+				
+		$message = str_replace('{time}',date("d/m/Y H:i a",$editionElement->editDateTime),$row2['message']);
 		$message = str_replace('{username}',$arr['username'],$message);
-		$message = str_replace('{title}',$editionElement->postTitle,$message);
+		$message = str_replace('{title}',$str,$message);
 
 		$row = $u->query_level(1);
 		
 		foreach($row as $arr2){
 			if($arr2['level']==1){
-				$message .= str_replace('{link}','This edition is waiting for your review before the official content is updated!',$row2['message']);
+				$message = str_replace('{message}','This post is waiting for your review before the official content is updated!',$message);
 			}
-			sendmail($arr2['email'],$row2['subject'],$message,0,$row2['from']);
+			if(c_email($arr2['email']))
+				sendmail($arr2['email'],$row2['subject'],$message,0,$row2['from']);
 		}
 echo "preview";
 }
