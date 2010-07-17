@@ -7,23 +7,21 @@
 	include('core/classes.php');
 	include('core/classes/CommentElement.php');
 	include('core/session.php');
+	$currentEdition = new Edition;
+	$editionId = $currentEdition->filterId($_GET["id"]); 
+	if($currentEdition->query($editionId) == 0)
+		header("location:index.php");
 	$ip = $_SERVER['REMOTE_ADDR'];
 	process($session_id, $ip);
-	
 	include("core/classes/Color.php");
 	include('core/filters.php');
 	include('header.php');
-	$currentEdition = new Edition;
-	$editionId = $currentEdition->filterId($_GET["id"]); 
 	$draf = $currentEdition->filterId($_GET["id"]);
 	$post_id = $draf;
 	if (isset($_GET["page"])) $page = $_GET["page"];
 	if (!isset($page)) $page = 1;
 
-	$page = pagePostFilter($page);		
-	
-	$currentEdition->query($editionId);
-	
+	$page = pagePostFilter($page);
 	$title = $currentEdition->postTitle;
 	$content = $currentEdition->postContent;
 	if($currentEdition->reference!='')
@@ -46,7 +44,7 @@
 	}	
 	include('destination.php');
 	require_once("ajaxLoad.php");
-change_template();
+//change_template();
 ?>
 <td class="center">	
 

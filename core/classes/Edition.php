@@ -57,6 +57,8 @@ class Edition {
 			$r = mysql_query("	SELECT *
 								FROM editions
 								WHERE id = $id");
+			if(mysql_num_rows($r)==0)
+				return 0;
 			$row = mysql_fetch_array($r);
 			$this->userId = $row["user_id"];
 			$this->postId = $row["post_id"];
