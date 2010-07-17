@@ -4,6 +4,10 @@ include('core/init.php');
 include('core/classes.php');
 include('core/session.php');
 include("core/classes/Color.php");
+	$check_index = new Edition;
+	if($check_index->query(Edition::filterId($_GET["index_id"]))==0)
+		header("location:index.php");
+
 include('preprocess.php');
 include('redirect.php');
 include('header.php'); 
