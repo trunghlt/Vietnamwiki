@@ -5,7 +5,7 @@
 	include('core/session.php');
 	include('preprocess.php');
 	include('core/filters.php');
-	include("core/classes/Color.php");
+	//include("core/classes/Color.php");
 	include('core/classes/CommentElement.php');
 	$postElement = new PostElement;
 	

@@ -13,6 +13,7 @@ if($draft){
 else{
 	$str_comment = "post_id = ".$post_id; 
 }
+
 $com = new CommentElement;
 $arr_com = $com->query_num($str_comment);
 $n = $arr_com['n'];
