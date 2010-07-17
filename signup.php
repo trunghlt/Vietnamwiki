@@ -53,32 +53,60 @@ if (isset($username)) {
 	}
 	else { //if information is invalid
 		include('header.php');
-		include("top.php");
+		//include("top.php");
 		?>		
-		<table width="800px" align="center"><tbody>
+		<table width="800px" align="center" cellspacing="0" cellpadding="0" class="main"><tbody>
+			<tr>
+		 		<td class="top_search">
+					<?php include("top.php"); ?>
+				</td>
+		 	</tr>
+			<tr>
+				<td><div id="banner"><?php include("pic_banner.php");?></div></td>
+			</tr>
 		<?php
         foreach ($s as $error) {
 			echo "<tr><td>";
 			if ($error !== 'ok') error_alert($error);
 			echo "</td></tr>";
 		}
-		echo '</tbody></table>';
 		set_new_confirm_id($session_id);
-		include('registration_form.php');   					
-		include('footer.php');
+		echo "<tr>";
+			echo "<td>";
+				include('registration_form.php');
+			echo "</td>";  					
+		echo "</tr>";
+		echo "<tr>";
+			echo "<td>";include('footer.php');echo "</td>";
+		echo "</tr>";
+		echo '</tbody></table>';
 	}				
 }
 else {
 	include('header.php');
-	include("top.php");
+	//include("top.php");
     ?>
-	<table width="800px" align="center"><tbody>
-	<tr><td class="left"><?php include("search.php");?></td></tr>
-	</tbody></table>
+	<table width="800px" align="center" cellspacing="0" cellpadding="0" class="main"><tbody>
+	<tr>
+		<td class="top_search">
+			<?php include("top.php"); ?>
+		</td>
+	</tr>
+	<tr>
+		<td><div id="banner"><?php include("pic_banner.php");?></div></td>
+	</tr>
+<!--	<tr><td class="left"><?php //include("search.php");?></td></tr> -->
 	<?php
 	set_new_confirm_id($session_id);
-	include('registration_form.php');   								
-	include('footer.php');
+		echo "<tr>";
+			echo "<td>";
+				include('registration_form.php');
+			echo "</td>";  					
+		echo "</tr>";
+		echo "<tr>";
+			echo "<td>";include('footer.php');echo "</td>";
+		echo "</tr>";
+		echo '</tbody></table>';
 }		
  ?>	
 </html>

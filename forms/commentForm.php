@@ -17,7 +17,7 @@
 	<br />
 	<input type="text" id="postId" name="postId" value="<?php 
 	if(isset($draf)) echo '0';
-	elseif(isset($currentPostElement->id)) echo $currentPostElement->id;?>" style="visibility:hidden; display: none"/>
+	elseif(isset($post["id"])) echo $post["id"];?>" style="visibility:hidden; display: none"/>
 	 <?php if(isset($draf)){ ?>
 <input type="text" id="editionId" name="editionId" value="<?php echo $draf?>" style="visibility:hidden; display: none"/> 
 	<?php } ?>

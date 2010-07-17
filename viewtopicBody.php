@@ -235,7 +235,8 @@ function submitLogin(dom,check) {
 					else if(response == 'success'){
 						loadToolbar("toolbar");
 						if(check==2){
-							edit_login.dialog('close');	
+							edit_login.dialog('close');
+							jQuery('#editDialog').css('visibility','visible');	
 							editDialog.dialog('open');
 						}
 						loadEdittingRibbon(<?php echo $post_id?>, "ribbon");

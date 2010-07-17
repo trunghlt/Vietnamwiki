@@ -60,7 +60,7 @@ include("../libraries/sendmail.php");
 			$message = str_replace('{content}',$commentElement->commentText,$row2comment['message']);
 			$message = str_replace('{time}',date("d/m/Y   H:i a",$commentElement->commentTime),$message);
 			$message = str_replace('{username}',$name,$message);
-			$message = str_replace('{title}',$tittle,$message);
+			$message = str_replace('{tittle}',$tittle,$message);
 			
 			$rcomment = Email::query_post($commentElement->postId);
 			
