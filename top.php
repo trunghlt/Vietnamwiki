@@ -1,5 +1,3 @@
-<div id="wrapper">
-<p class='header_top'></p>
 <div id="header">
 <div id="left">
 	<!--<a style="text-decoration:none;" href="/"><span class="logo"><img src="images/logo.png" /></span></a><br />-->
@@ -13,7 +11,7 @@
     </div>
 	
 </div>
-<div style="margin:0px 0px 0px 280px;"><span style="font-family:Arial; font-size:14px;"><a href="/" style="text-decoration:none; color:#FFFFFF;">Your Wiki about an Amazing Vietnam</a></span></div>
+<div style="margin:0px 0px 0px 260px"><span style="font-family:Arial; font-size:14px;"><a href="/" style="text-decoration:none; color:#FFFFFF;">Your open encyclopedia about an Amazing Vietnam</a></span></div>
 	<!--
 	<div id="left">
 		<a style="text-decoration:none;" href="/"><span class="logo">VietnamWiki.net</span></a>
@@ -43,4 +41,3 @@
 	-->
 	
 </div>
-</div> <!--WRAPPER-->

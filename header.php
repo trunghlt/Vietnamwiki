@@ -65,10 +65,11 @@ content = "<?php echo getSummary()?>">
 <script type="text/javascript" src="/js/integrated.js"></script>
 <script type="text/javascript" src="js/jquery/fancybox/jquery.fancybox-1.2.6.pack.js"></script>
 <script type="text/javascript" src="js/jquery/jquery.tipbox.js"></script>
-<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAV1hMY6P-vcrStESIcmxsyBSg0YMtASE5KdM7LALqADHM9SZ_PBTZqozQ8fKlIDHry-cBnAxWYeYpSw" type="text/javascript"></script>
+<script type="text/javascript" src="js/jQuery.fullBg.js"></script>
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAV1hMY6P-vcrStESIcmxsyBT6xYYt3L8kyrregkxWzQhl2XmzkRRwJXeyUWjeICm6nYeVvYDtg1Br7Q" type="text/javascript"></script>
 <script>
 	jQuery.noConflict();
-</script>
+</script>f
 
 <link rel="stylesheet" href="js/jquery/fancybox/jquery.fancybox-1.2.6.css" type="text/css" media="screen"/>
 <link rel="stylesheet" type="text/css" href="/css/integrated.css" />
@@ -182,7 +183,8 @@ if (window.attachEvent) {
 // --></script>
 
 <!--  BODY -->
-<body bgcolor="#D8D8D8">
+<body id="body" "bgcolor="#D8D8D8">
+<img id="background" class="fullBg"/>
 <div id="grandWrapper">
 <?php echo render_fbconnect_init_js();?>
 
@@ -205,5 +207,44 @@ jQuery(document).ready(function(){
 	jQuery(".price4").tipbox("$100-$200");
 	jQuery(".price5").tipbox("$200-$500");
 	jQuery(".price6").tipbox("$500-$1000");
+	
+	var img = new Image();
+	jQuery(img).load(function() {
+		jQuery(this).addClass("fullBg");
+		jQuery("#body").append(this);
+		jQuery(this).css("display", "none");
+		jQuery(this).fullBg();
+		jQuery(this).fadeIn(500);
+	}).attr("src", "http://farm5.static.flickr.com/4095/4808812935_a022eb7660_b.jpg");
+	
 });
+</script>	
+<?php
+//change_template
+	function change_template(){
+	$color = new Color;
+	$r = $color->query_setting();
+	if(count($r)){
+		foreach($r as $value){
+			$arr2 = explode('-',$value['page']);
+			if($arr2[0] == 'view'){
+					for($i = 1 ; $i < count($arr2);	$i++)
+					{
+						if($arr2[$i]=='top'){
+							echo "<script>";
+							//echo "document.getElementById('header').style.background=\"none\"";		
+							echo "document.getElementById('header').style.background=\"$value[color]\"";
+							echo "</script>";
+						}
+						if($arr2[$i]=='body'){
+				echo "<script>";		
+				echo "document.body.style.background=\"$value[color] url(../css/images/bg/bg.gif) repeat-y scroll center center\"";
+				echo "</script>";		
+						}
+					}		
+			}
+		}
+	}
+}
+
 </script>

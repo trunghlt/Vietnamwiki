@@ -64,8 +64,6 @@ body {
 	padding-top: 10px;
 	margin-top: -10px; 
 	margin-bottom: 20px; 
-	background: #660000;
-	border-bottom: 2px solid #550000;
 }
 
 #realTop {
@@ -110,7 +108,27 @@ body {
 		margin-left: 2px;
 		margin-top: 2px;
 	}
-	
+#maincontent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  width: 100%;
+  height: 100%;
+	/*
+  background: #000;
+  opacity: 0.9; 
+  filter: alpha(opacity=90);*/
+}
+
+.fullBg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}	
 /******* TIPBOX *******/
 #tipBox{
 	background: #f7fafb;
@@ -147,11 +165,19 @@ body {
 <script type="text/javascript" src="js/jquery/jquery-1.2.6.js"></script>
 <script type="text/javascript" src="js/jquery/jquery.tipbox.js"></script>
 <script type="text/javascript" src="js/shortcut.js"></script>
+<script type="text/javascript" src="js/jQuery.fullBg.js"></script>
+
+<script type="text/javascript"> 
+jQuery(function($) {
+	$("#background").fullBg();
+});
+</script>
 </head>
 
 
 <body>
-
+<img src="http://farm4.static.flickr.com/3155/2920945558_3b2f59a505_b.jpg" id="background" class="fullBg"/>
+<div id="maincontent">
 <script language="JavaScript1.2">
 
 jQuery().ready(function(){
@@ -160,7 +186,6 @@ jQuery().ready(function(){
 		window.location = "signup.php";
 	});		
 });
-
 
 var IE = document.all?true:false
 
@@ -430,6 +455,7 @@ include("feedback.php");
 include("googleAnalytical.php");
 ?>
 </span>
+</div>
 </body>
 <?php 
 $color = new Color;
