@@ -415,13 +415,18 @@ html, body {
 }
 
 #grandWrapper {
-	position: relative;
+	position: absolute;
 	height: auto !important;
 	min-height: 100%;
+	margin: 0;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 50;	
 	}
 	
 #header {
-	width: 807px;
+	width: 100$;
 	background:#db1c00;
 /*
 	background-color: #600003;
@@ -442,7 +447,7 @@ html, body {
 	font-size: 2.5em; 
 	font-weight: bold;
 	color: #FFFFFF;
-	font-family:Lucida Handwriting;
+	font-family: Arial;
 }
 	#header #left {
 		/*margin-top:10px;*/
@@ -493,7 +498,7 @@ html, body {
 			#mainMenu ul li.selected a {			
 				color:#C00000;
 				font-size:13px;
-				padding:5px 10px 6px;
+				padding:5px 10px 7px;
 			}
 			
 			#mainMenu ul li.selected a:hover {			
@@ -520,7 +525,7 @@ html, body {
 				font-size : 13px;
 				font-weight : bold;
 				/*padding : 3px 11px;*/
-				padding:5px 10px 6px;
+				padding:5px 10px 7px;
 				margin-bottom:-2px;
 				margin-top:-2px;
 				white-space : nowrap;
@@ -548,7 +553,7 @@ html, body {
 }
 	#contentTable #postContent {
 		margin-top: 0px;
-		padding: 5px 5px 5px 5px;
+		padding: 10px;
 	}
 	#contentTable #postContent #postContent_relative{
 		position:relative;
@@ -594,7 +599,7 @@ html, body {
         
 		#reviewList div.reviewElement div.reviewBody {
 			margin-bottom: 20px;
-			font-size: 12px;
+			font-size: 14px;
 			padding: 5px 5px 5px 10px;
 		}
 		
@@ -630,6 +635,15 @@ div.button {
 	margin:0;
 	padding:0;	
 }
+
+.fullBg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}	
 
 td {
 	vertical-align: top;
@@ -903,7 +917,7 @@ table.leftmenu{
 }
 
 #destinationDiv{
-	
+	margin-left: 10px;	
 }
 
 table.main {
@@ -911,9 +925,11 @@ table.main {
 	clear: both;
 	/*margin-bottom: 50px;*/
 	background: #FFF;
+	/*
 	-moz-box-shadow: 0px 6px 10px #AAA;
 	-webkit-box-shadow: 0px 6px 10px #AAA;
 	box-shadow: 0px 6px 10px #AAA;
+	*/
 	/*border:1px solid #CDCD9B;
 	border-bottom:none;*/
 }
@@ -931,23 +947,24 @@ a.linksmall:hover {
 }
 
 .index_des a.linksmall{
-	/*color: #333333;*/
-	color:#FFFFFF;
+	color: #0645AD;
 	font-family: Arial, Helvetica, serif;
 	font-size:12px;
 	text-decoration:none;
 }
 .index_active .linksmall{
-	color:#ACA741;
+	color: #333;
 	font-family: Arial, Helvetica, serif;
-	font-size:12px;
+	font-size: 12px;
+	line-height: 18px;
 	text-decoration:none;
 }
 .des_active .linksmall{
 	color:#C00000;
 }
 .des .linksmall{
-	color:#FFFFFF;
+	color:#333;
+	font-size: 12px;
 }
 
 .head3  {
@@ -1622,7 +1639,6 @@ div.demo-description {
 	visibility:hidden;
 }
 .des{
-	background:#ACA741;
 }
 .clear_search{
 	clear:both;

@@ -1,8 +1,8 @@
+<div class="head3" style="margin-left: -10px">Destinations</div>
 <table class="leftmenu" cellpadding="0" cellspacing="0">
 <tbody>
 
 <!--DESTINATION MENU-->
-<tr bordercolor="#FFFFFF"><td colspan="2" class="head3" >Destinations</td></tr>
 <tr><td height="1" bgcolor="#e7e6e6" colspan="2"></td></tr>
 <?php
 if (!isset($destination)) { $destination = 0; $index_id = 0; $photo = 0;}
