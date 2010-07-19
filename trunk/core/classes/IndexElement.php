@@ -12,6 +12,8 @@ class IndexElement{
 					FROM index_menu
 					WHERE id = ".$this->id);
 		$r = mysql_fetch_array($q->re);
+		if($q->n==0)
+			return 0;
 		$this->destId = $r["dest_id"];
 		$this->name = $r["name"];
 		$this->locked = $r["locked"];
@@ -21,5 +23,4 @@ class IndexElement{
 		return filterNumeric($id);
 	}
 }
-
 ?>

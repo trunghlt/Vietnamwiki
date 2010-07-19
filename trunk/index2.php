@@ -4,7 +4,7 @@ include('core/init.php');
 include('core/classes.php');
 include('core/session.php');
 include("core/classes/Color.php");
-	$check_index = new Edition;
+	$check_index = new IndexElement;
 	if($check_index->query(Edition::filterId($_GET["index_id"]))==0)
 		header("location:index.php");
 
