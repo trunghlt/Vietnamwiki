@@ -498,7 +498,7 @@ html, body {
 			#mainMenu ul li.selected a {			
 				color:#C00000;
 				font-size:13px;
-				padding:5px 10px 7px;
+				padding:5px 10px 6px;
 			}
 			
 			#mainMenu ul li.selected a:hover {			
@@ -525,7 +525,7 @@ html, body {
 				font-size : 13px;
 				font-weight : bold;
 				/*padding : 3px 11px;*/
-				padding:5px 10px 7px;
+				padding:5px 10px 6px;
 				margin-bottom:-2px;
 				margin-top:-2px;
 				white-space : nowrap;
@@ -923,6 +923,7 @@ table.leftmenu{
 table.main {
 	width: 806px;
 	clear: both;
+	margin-top: 20px;
 	/*margin-bottom: 50px;*/
 	background: #FFF;
 	/*

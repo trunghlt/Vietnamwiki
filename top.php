@@ -5,8 +5,8 @@
     <a style="text-decoration:none;" href="/"><span class="logo">VietnamWiki.Net</span></a>
 	<br />
 		<form action="search_display.php" id="cse-search-box">
-			<input style="height: 20px" type="text" id="search_text" name="search_text"  />
-			<input style="font-size: 14px; padding: 3px 8px;" type="submit" name="sa" value="Search"/>
+			<input style="padding: 2px 5px; height: 20px; font-size: 16px;" type="text" id="search_text" name="search_text"  />
+			<input style="font-size: 14px; padding: 3px 10px;" type="submit" name="sa" value="Search"/>
 		</form>
     </div>
 	
