@@ -17,6 +17,7 @@ class IndexElement{
 		$this->destId = $r["dest_id"];
 		$this->name = $r["name"];
 		$this->locked = $r["locked"];
+		return $q->n;
 	}	 
 	
 	public static function filterId($id) {
