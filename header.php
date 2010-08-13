@@ -69,7 +69,7 @@ content = "<?php echo getSummary()?>">
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAV1hMY6P-vcrStESIcmxsyBT6xYYt3L8kyrregkxWzQhl2XmzkRRwJXeyUWjeICm6nYeVvYDtg1Br7Q" type="text/javascript"></script>
 <script>
 	jQuery.noConflict();
-</script>f
+</script>
 
 <link rel="stylesheet" href="js/jquery/fancybox/jquery.fancybox-1.2.6.css" type="text/css" media="screen"/>
 <link rel="stylesheet" type="text/css" href="/css/integrated.css" />
@@ -184,7 +184,6 @@ if (window.attachEvent) {
 
 <!--  BODY -->
 <body id="body" "bgcolor="#D8D8D8">
-<img id="background" class="fullBg"/>
 <div id="grandWrapper">
 <?php echo render_fbconnect_init_js();?>
 

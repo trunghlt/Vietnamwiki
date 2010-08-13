@@ -26,6 +26,36 @@ class DestinationElement {
 		$this->long = $r["long"];
 		$this->zoomlevel = $r["zoomlevel"];
 	}
+
+    public static function getAllDestinations() {
+        $destinations = Mem::$memcache->get("allDestinationElements");
+        if ($destinations == NULL) {    
+            $q = new Db;
+            $q->query("	SELECT * 
+			            FROM destinations
+			            ORDER BY ord");
+            $destinations = array();
+            while ($d = mysql_fetch_object($q->re, "DestinationElement")) {
+                $destinations[] = $d;
+            }
+            Mem::$memcache->set("allDestinationElements", $destinations);
+        }
+        return $destinations;
+    }
+    
+    public static function getAllMapImages() {
+    	$result = Mem::$memcache->get("DestMapImageHash");
+    	if ($result == NULL) {
+			$mapImages = MapImage::getAllMapImages();
+			$result = array();
+			foreach ($mapImages as $img) {
+				if (!array_key_exists($img->dest_id, $result)) { $result[$img->dest_id] = array();}
+				$result[$img->dest_id][] = $img;
+			}
+			Mem::$memcache->set("DestMapImageHash", $result);
+		}
+		return $result;
+    }
 	
 	public function setMapDetail($lat, $long, $zoomlevel) {
 		$clean["lat"] = htmlspecialchars($lat, ENT_QUOTES);
