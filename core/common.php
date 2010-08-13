@@ -23,6 +23,12 @@ include('fbconnect.php');
 $memcache = new Memcache;
 $memcache->connect("127.0.0.1", 11211);
 
+class Mem {
+    public static $memcache;    
+}
+Mem::$memcache = new Memcache;
+Mem::$memcache->connect("127.0.0.1", 11211);
+
 function dieToInvalidInput() {
 	header("location: /");		
 }

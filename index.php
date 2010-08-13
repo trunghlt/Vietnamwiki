@@ -3,6 +3,8 @@ include('core/common.php');
 include('core/init.php');
 include('core/classes/Db.php');
 include('core/classes/Color.php');
+include('core/classes/DestinationElement.php');
+include('core/classes/MapImage.php');
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -160,7 +162,7 @@ body {
 <link rel="shortcut icon" href="/images/icon.png"/>
 
 <script type='text/javascript' src='js/slideshow.js'> </script>
-<script type='text/javascript' src='js/graph.js'> </script>
+<script type='text/javascript' src='js/graph.packer.js'> </script>
 <script type='text/javascript' src='js/corner/cvi_corner_lib.js'> </script>
 <script type="text/javascript" src="js/jquery/jquery-1.2.6.js"></script>
 <script type="text/javascript" src="js/jquery/jquery.tipbox.js"></script>
@@ -169,14 +171,20 @@ body {
 
 <script type="text/javascript"> 
 jQuery(function($) {
-	$("#background").fullBg();
+    var img = new Image();
+	jQuery(img).load(function() {
+		jQuery(this).addClass("fullBg");
+		jQuery("#body").append(this);
+		jQuery(this).css("display", "none");
+		jQuery(this).fullBg();
+		jQuery(this).fadeIn(500);
+	}).attr("src", "http://farm4.static.flickr.com/3155/2920945558_3b2f59a505_b.jpg");
 });
 </script>
 </head>
 
 
-<body>
-<img src="http://farm4.static.flickr.com/3155/2920945558_3b2f59a505_b.jpg" id="background" class="fullBg"/>
+<body id="body">
 <div id="maincontent">
 <script language="JavaScript1.2">
 
@@ -230,19 +238,13 @@ var i = 0;
 var j = 0;
 </script>
 <?php
-	$sql = "SELECT id
-			FROM destinations";
-	$re = mysql_query($sql) or die(mysql_error());
-	
+    $allDestinationElements = DestinationElement::getAllDestinations();
+	$allMapImages = DestinationElement::getAllMapImages();
 	$i = 0;
-	while ($r = mysql_fetch_array($re)) {
+	foreach ($allDestinationElements as $d) {
 		?>
 		<?php
-		$dest_id = $r["id"];
-		$sql = "SELECT *
-				FROM map_images
-				WHERE dest_id = $dest_id";
-		$re2 = mysql_query($sql) or die(mysql_error());
+		$dest_id = $d->id;
 		$j = 0;
 		?>
 		<script language="javascript">
@@ -250,16 +252,13 @@ var j = 0;
 		dest_ids[<?php echo $i?>] = <?php echo $dest_id ?>;
 		</script>		
 		<?php
-		while ($r2 = mysql_fetch_array($re2)) {
-			?>
-			<script language="javascript">
-			<?php		
-			echo "imgs[".$i."][".$j."] = '".$r2["URL"]."';";
-			?>			
-			</script>
-			<?php
-				echo "<img id='img".$i."_".$j."' SRC='".$r2["URL"]."' style='position:absolute;visibility:hidden;top:-200;z-index:+2;' width=69 height=60 border=0 />";			
-			$j++;
+		if (array_key_exists($dest_id, $allMapImages)) {
+			foreach ($allMapImages[$dest_id] as $img) { ?>
+				<script language="javascript"><?php echo "imgs[".$i."][".$j."] = '".$r2["URL"]."';"; ?></script>
+				<?php
+					echo "<img id='img".$i."_".$j."' SRC='{$img->URL}' style='position:absolute;visibility:hidden;top:-200;z-index:+2;' width=69 height=60 border=0 />";			
+				$j++;
+			}
 		}
 		$i++;
 	}
@@ -454,7 +453,6 @@ function cen(a ,b) {
 include("feedback.php");
 include("googleAnalytical.php");
 ?>
-</span>
 </div>
 </body>
 <?php 
