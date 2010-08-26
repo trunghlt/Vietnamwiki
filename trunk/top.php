@@ -11,7 +11,7 @@
     </div>
 	
 </div>
-<div style="margin:0px 0px 0px 260px"><span style="font-family:Arial; font-size:14px;"><a href="/" style="text-decoration:none; color:#FFFFFF;">Your open encyclopedia about an Amazing Vietnam</a></span></div>
+<div style="text-align: center;"><span style="font-family:Arial; font-size:14px;"><a href="/" style="text-decoration:none; color:#FFFFFF;">Your open encyclopedia about an Amazing Vietnam</a></span></div>
 	<!--
 	<div id="left">
 		<a style="text-decoration:none;" href="/"><span class="logo">VietnamWiki.net</span></a>

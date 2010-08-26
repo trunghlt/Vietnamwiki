@@ -191,7 +191,7 @@ if (window.attachEvent) {
 var mySlide = new Array();
 var composeDialog, editDialog, loginDialog, invalidLoginDialog, 
 	deleteConfirmDialog, commentDialog, photoUploadDialog, photoEditDialog, tendayWeatherDialog,
-	restoreConfirmDialog, reviewDialog, mustRateAlert, reviewLowerBound;
+	restoreConfirmDialog, reviewDialog, mustRateAlert, reviewLowerBound, edit_login, Fill_EmailDialog, Email_Comment;
 var currentDestItem, currentIndexItem, currentMySlide, commentSlide;
 var URL = "http://www.vietnamwiki.net";
 <?php if ($onload_js) { echo $onload_js; } ?>

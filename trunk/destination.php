@@ -2,12 +2,12 @@
 <table class="main" cellspacing="0" cellpadding="0" align="center">
  <tbody>
  <tr>
- <td class="top_search" colspan=2>
+ <td class="top_search" colspan=3>
  	<?php include("top.php"); ?>
 	</td>
  </tr>
  	<tr>
-    <td colspan=2><div id="banner"><?php include("pic_banner.php");?></div></td>
+    <td colspan=3><div id="banner"><?php include("pic_banner.php");?></div></td>
 </tr>
  <tr>
  <td class="left">

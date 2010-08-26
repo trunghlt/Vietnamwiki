@@ -70,8 +70,7 @@ jQuery(document).ready(function(){
 			'Submit': function() {
 				if(jQuery("#check_login_comment").val() == 1){
 					if(jQuery("#fill_name_comment").val() == '' && jQuery("#fill_email_comment").val() == ''){
-						jQuery('#EmailComment1').css('visibility','visible');	
-						Email_Comment.dialog("open");
+						jQuery('#EmailComment1').css('visibility','visible').dialog("open");
 					}
 					else{
 						submitComment();
