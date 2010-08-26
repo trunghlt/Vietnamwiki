@@ -426,7 +426,7 @@ html, body {
 	}
 	
 #header {
-	width: 100$;
+	width: 100%;
 	background:#db1c00;
 /*
 	background-color: #600003;
@@ -464,7 +464,6 @@ html, body {
 		border:#999999 solid 1px;
 		width:400px;
 	}
-
 #toolbar{
 	padding-right: 5px;
 }
@@ -898,18 +897,22 @@ width: 100%;
 td.left {
 	width : 180px;
 	vertical-align: top;
-	border-right: 1px solid #C8C8C8;
-	border-bottom: 1px solid #C8C8C8;
-	border-left: 1px solid #C8C8C8;
 }
+
 td.center {
 	width : 640px;
 	vertical-align: top;
-	border-bottom: 1px solid #C8C8C8;
 	background:#FFFFFF;
-	border-right:1px solid #C8C8C8;
+        border-left: 1px solid #C8C8C8;
+        border-right: 1px solid #C8C8C8;
 }
 
+td.right{
+    width: 200px;    
+}
+#view_qanda{
+    padding: 5px;
+}
 table.leftmenu{
 	width: 180px;
 	background-color: white;
@@ -921,11 +924,12 @@ table.leftmenu{
 }
 
 table.main {
-	width: 806px;
+	width: 1020px;
 	clear: both;
 	margin-top: 20px;
 	/*margin-bottom: 50px;*/
 	background: #FFF;
+        border: 1px solid #C8C8C8;
 	/*
 	-moz-box-shadow: 0px 6px 10px #AAA;
 	-webkit-box-shadow: 0px 6px 10px #AAA;
@@ -1651,4 +1655,29 @@ div.demo-description {
 	margin:0px;
 	padding:0px;
 }
-
+#qanda{
+    width: 180px;
+    float: left;
+    font-family:Arial,Helvetica,serif;
+    font-size: 12px;
+}
+#qanda ul{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    list-style-position: outside;
+}
+#qanda ul li ul{
+    margin-left: 30px;
+}
+#qanda ul li ul li{
+    margin-bottom: 10px;
+}
+.question{
+    float: left;
+    width: 180px;
+    margin-bottom: 10px;
+}
+#qanda img{
+    padding: 3px 2px 2px 0px;
+}

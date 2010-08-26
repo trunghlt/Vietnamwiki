@@ -199,8 +199,7 @@ jQuery(document).ready(function(){
 
 function editClick() {
 	//$("textEditFrame").contentWindow.location.reload(true);
-	jQuery('#editDialog').css('visibility','visible');
-	editDialog.dialog('open');
+	jQuery('#editDialog').css('visibility','visible').dialog('open');
 }
 
 function signOut() {
@@ -229,15 +228,13 @@ function submitLogin(dom,check) {
 							document.getElementById('editpost').value = 'editpost';
 						}
 						jQuery('#field_not_login_comment').html("<input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='2'/>");						
-						jQuery('#FillEmailDialog').css('visibility','visible');	
-						Fill_EmailDialog.dialog('open');
+						jQuery('#FillEmailDialog').css('visibility','visible').dialog('open');
 					}
 					else if(response == 'success'){
 						loadToolbar("toolbar");
 						if(check==2){
 							edit_login.dialog('close');
-							jQuery('#editDialog').css('visibility','visible');	
-							editDialog.dialog('open');
+							jQuery('#editDialog').css('visibility','visible').dialog('open');
 						}
 						loadEdittingRibbon(<?php echo $post_id?>, "ribbon");
 						jQuery('#field_not_login_comment').html("<input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='2'/>");											

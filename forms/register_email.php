@@ -27,8 +27,7 @@ jQuery(document).ready(function(){
 				if(document.getElementById('editpost').value == 'editpost'){
 							document.getElementById('editpost').value = 'value';
 							edit_login.dialog('close');
-							jQuery('#editDialog').css('visibility','visible');
-							editDialog.dialog('open');			
+							jQuery('#editDialog').css('visibility','visible').dialog('open');
 				}
 				jQuery(this).dialog('close');
 			}
@@ -46,8 +45,7 @@ function submitEmail(dom){
 							if(document.getElementById('editpost').value == 'editpost'){
 									document.getElementById('editpost').value = 'value';
 									edit_login.dialog('close');
-									jQuery('#editDialog').css('visibility','visible');
-									editDialog.dialog('open');
+									jQuery('#editDialog').css('visibility','visible').dialog('open');
 							}
 							
 						}
