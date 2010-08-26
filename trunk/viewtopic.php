@@ -35,6 +35,9 @@
 			<?php include("viewtopicBody.php") ?>
 		</div>
 	</td>
+     <td classs="right">
+        <?php include('listquestion.php');?>
+    </td>
 </tr>
 </tbody>
 </table>
