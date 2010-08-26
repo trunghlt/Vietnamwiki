@@ -1,4 +1,4 @@
-<div class="head3" style="margin-left: -10px">Destinations</div>
+<div class="head3" style="margin-left: -10px;width: 180px;">Destinations</div>
 <table class="leftmenu" cellpadding="0" cellspacing="0">
 <tbody>
 

@@ -10,7 +10,7 @@ if (logged_in() || chkFbLoggedIn()) {
 	$q->query("select property_value from setting where property_name='ALLOW_RESTORE_DRAFT'");
 	$r = mysql_fetch_array($q->re);	
 ?>
-	<a class='link' onClick="jQuery('#commentDialog').css('visibility','visible');commentDialog.dialog('open')"> Comment </a>
+	<a class='link' onClick="jQuery('#commentDialog').css('visibility','visible').dialog('open')"> Comment </a>
 <?php
 	$id = Edition::filterId($_REQUEST["Id"]);
 	if($id != ''){
@@ -20,7 +20,7 @@ if (logged_in() || chkFbLoggedIn()) {
 	?>
 		| <a class='link' id='edit_link' onClick='editClick()'> Edit </a>
 	<?php
-			echo "|<a class='link' onClick='jQuery('#deleteConfirmDialog').css('visibility','visible');deleteConfirmDialog.dialog(\"open\")'> Delete </a>";
+			echo "|<a class='link' onClick='jQuery('#deleteConfirmDialog').css('visibility','visible').dialog(\"open\")'> Delete </a>";
 		}
 		if ($currentUser->level == 1 && $row['checked']==1) {
 ?>
@@ -30,14 +30,14 @@ if (logged_in() || chkFbLoggedIn()) {
 		else if ($currentUser->level == 1 && $row['checked']==0){
 ?>
 		| <a class='link' onClick="restoreDraft('2')">Accept this draft</a>	
-		| <a class='link' onClick="jQuery('#rej_confirm').css('visibility','visible');rej.dialog('open')">Reject</a>	
+		| <a class='link' onClick="jQuery('#rej_confirm').css('visibility','visible').dialog('open')">Reject</a>	
 <?php		
 		}
 	}
 }
 else{
 ?>
-	<a class='link' onClick="jQuery('#commentDialog').css('visibility','visible');commentDialog.dialog('open')"> Comment </a>
+	<a class='link' onClick="jQuery('#commentDialog').css('visibility','visible').dialog('open')"> Comment </a>
 <?php
 }
 ?>

@@ -27,6 +27,9 @@ include('destination.php');
 		</div>
 	</div>
 	</td>
+    <td classs="right">
+        <?php include('listquestion.php');?>
+    </td>
    </tr>
   </tbody></table>
 <script language="javascript">

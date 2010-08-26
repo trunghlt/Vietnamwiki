@@ -144,7 +144,38 @@ class User {
 			return 0;
 		return $row;
 	}
-	
+        // Get User's avatar
+	function getUserAvatar($row){
+            $q = new db();
+                    $fbId = 0;
+                    if($row["user_id"]!=0){
+                            $user_com = new User;
+                            $x = $user_com->query_id($row["user_id"]);
+                            if (isset($x["fbId"])) $fbId = (int) $x["fbId"];
+                            $email = $x["email"];
+                            $name = $x["username"];
+                    }
+                    else {
+                            $email = $row["email"];
+                            $name = $row["username"];
+                    }
+                    if ($fbId != 0) {
+                            try {
+                                    $fbUserInfo = facebook_client()->api_client->users_getInfo($fbId, "pic_square");
+                                    $avatarURL = $fbUserInfo[0]["pic_square"];
+                                    $q->query("UPDATE users SET avatar='{$avatarURL}' WHERE id={$row["user_id"]}");
+                            }
+                            catch (Exception $e) {
+                                    $avatarURL = $x["avatar"];
+                            }
+                    }
+                    else {
+                            $pAvatar = new TalkPHP_Gravatar();
+                            $pAvatar->setEmail($email)->setSize(80)->setRatingAsPG();
+                            $avatarURL = $pAvatar->getAvatar();
+                    }
+                return $avatarURL;
+        }
 	function query_level($level){
 		$q = new db();
 		$q->query(" SELECT *

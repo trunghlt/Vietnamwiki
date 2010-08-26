@@ -114,7 +114,7 @@ function getToolbarHTML() {
 		if ($fbUserId || $loggedIn) { 
 			$un = myUsername(myip()); ?>
 			<strong> 
-			<a class="link" onClick="jQuery('#composeDialog').css('visibility','visible');composeDialog.dialog('open')">Compose new entry</a>
+			<a class="link" onClick="jQuery('#composeDialog').css('visibility','visible').dialog('open')">Compose new entry</a>
 			/
 			<?php if ($loggedIn) { ?>
 				<?php echo $un ?>
@@ -131,7 +131,7 @@ function getToolbarHTML() {
 		<?php } 
 		else { ?>          
 			<b>
-			<a class='link' onClick="jQuery('#loginDialog').css('visibility','visible');loginDialog.dialog('open');">log in</a>
+			<a class='link' onClick="jQuery('#loginDialog').css('visibility','visible').dialog('open');">log in</a>
 			/<a class='link' href="/signup.php" >sign up</a>			 
 			</b>
 	   <?php } ?>     

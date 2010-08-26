@@ -50,7 +50,47 @@ Return num
 		}
 		
 	}
-		
+/***************************************************************
+delete table
+ * $table :table's name
+ * $where :condition
+***************************************************************/
+	function delete($table, $where=''){
+                if($where=='')
+                    $where = "where $where";
+
+		$this->query("delete from $table $where");
+	}
+/***************************************************************
+Update table
+ * $table :table's name
+ * $arr :array include record's name and value
+ * $where :condition
+***************************************************************/
+	function update($table,$arr,$where){
+		foreach($arr as $key=>$value){
+			$str[] = "$key = '$value'";
+		}
+		$str2 = implode(",",$str);
+		$this->query("update $table set $str2 where $where");
+	}
+/***************************************************************
+Add table
+ * $table :table's name
+ * $arr :array include record's name and value
+***************************************************************/
+	function add($table,$arr){
+		foreach($arr as $key=>$value){
+			$arr1[] = "$key";
+                        if(is_string($value))
+                            $arr2[] = "'$value'";
+                        else
+                            $arr2[] = "$value";
+		}
+		$str = implode(",",$arr1);
+                $str1 = implode(",",$arr2);
+		$this->query("Insert into $table($str) values ($str1)");
+	}
 /***************************************************************
 Free old result
 ***************************************************************/
@@ -63,22 +103,22 @@ Free old result
 /***************************************************************
 Set value $this->order
 ***************************************************************/
-	public function orderby($order,$range = ''){
+	public function orderby($order){
 
-			$this->order = "$order $range";
+			$this->order = "$order";
 	}	
 /***************************************************************
 Set value $this->limit
 ***************************************************************/
-	public function limit($start,$length){
+	public function limit($str){
 
-			$this->limit = "$start ,$length";
+			$this->limit = "$str";
 	} 
 /***************************************************************
 command select can change by option
 Return value in array
 ***************************************************************/				 	
-	public function select($col,$table,$where){
+	public function select($col='',$table='',$where=''){
 		if($col == ''){	
 			$col = '*';
 		}
