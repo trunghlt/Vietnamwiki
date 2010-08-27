@@ -43,6 +43,8 @@
 </table>
 <?php 
 include("forms/editForm.php");
+include("forms/askquestion.php");
+include("forms/replyquestion.php");
 include("forms/commentForm.php");
 include("forms/composeForm.php");
 include("forms/edit_login.php");

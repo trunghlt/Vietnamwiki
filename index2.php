@@ -91,6 +91,8 @@ function submitLogin(dom,check) {
 </script>
 <?php
 include("forms/composeForm.php");
+include("forms/askquestion.php");
+include("forms/replyquestion.php");
 include("forms/loginForm.php");
 include("forms/register_email.php");
 include("footer.php");
