@@ -1,4 +1,7 @@
 <?php
+//MESSAGES
+define("NOPREVIEW_CONFIRM_MSG", "You haven't previewed your edition yet! Are you sure you still want to submit your edition ?");
+
 //URL
 define("URL",  "http://www.vietnamwiki.net/");
 define("ROOT", "http://www.vietnamwiki.net");

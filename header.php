@@ -60,12 +60,10 @@ content = "<?php echo getSummary()?>">
 
 <meta name="verify-v1" content="IyUL1eYMgjAMGDWrAeniu500lWWLUCONXP+II/s3I2s=" />
     
-<script type="text/javascript" src="/js/mootools-1.2.3-core-yc.js"></script>
+<!--<script type="text/javascript" src="/js/mootools-1.2.3-core-yc.js"></script>-->
 <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js"></script>
 <script type="text/javascript" src="/js/integrated.js"></script>
 <script type="text/javascript" src="js/jquery/fancybox/jquery.fancybox-1.2.6.pack.js"></script>
-<script type="text/javascript" src="js/jquery/jquery.tipbox.js"></script>
-<script type="text/javascript" src="js/jQuery.fullBg.js"></script>
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAV1hMY6P-vcrStESIcmxsyBT6xYYt3L8kyrregkxWzQhl2XmzkRRwJXeyUWjeICm6nYeVvYDtg1Br7Q" type="text/javascript"></script>
 <script>
 	jQuery.noConflict();
@@ -74,6 +72,21 @@ content = "<?php echo getSummary()?>">
 <link rel="stylesheet" href="js/jquery/fancybox/jquery.fancybox-1.2.6.css" type="text/css" media="screen"/>
 <link rel="stylesheet" type="text/css" href="/css/integrated.css" />
 <style>
+/*******TIP WINDOW*******/
+#tipWindow {
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	left: 90%;
+	top: 500px;
+	border : 2px solid white;
+	z-index: 51;
+	opacity: 0.2;
+    filter: alpha(opacity=20);
+	background: #AAA;
+    position: fixed;
+}
+
  /******* TIPBOX *******/  
 #tipBox{  
 background: #f7fafb;  
@@ -96,7 +109,6 @@ background: #f7fafb;
 }  
 /******* /TIPBOX *******/ 
 </style> 
-</head>
 
 <script type="text/javascript"><!--
 var mapIcons = new Array();
@@ -181,21 +193,26 @@ if (window.attachEvent) {
     }, false);
 }
 // --></script>
+</head>
 
 <!--  BODY -->
 <body id="body" "bgcolor="#D8D8D8">
 <div id="grandWrapper">
+<div id="tipWindow"></div>
+
 <?php echo render_fbconnect_init_js();?>
 
 <script language="javascript">
 var mySlide = new Array();
 var composeDialog, editDialog, loginDialog, invalidLoginDialog, 
 	deleteConfirmDialog, commentDialog, photoUploadDialog, photoEditDialog, tendayWeatherDialog,
-	restoreConfirmDialog, reviewDialog, mustRateAlert, reviewLowerBound, edit_login, Fill_EmailDialog, Email_Comment;
-var currentDestItem, currentIndexItem, currentMySlide, commentSlide,Email_question,questionDialog,Email_answer,answerDialog;
+	restoreConfirmDialog, reviewDialog, mustRateAlert, reviewLowerBound;
+var currentDestItem, currentIndexItem, currentMySlide, commentSlide;
 var URL = "http://www.vietnamwiki.net";
 <?php if ($onload_js) { echo $onload_js; } ?>
 jQuery(document).ready(function(){
+	jQuery("#tipWindow").mouseover(function() {jQuery("#main").fadeOut(1000);});
+    jQuery("#tipWindow").mouseout(function() {jQuery("#main").fadeIn(1000);});
 	jQuery("a.iframe").fancybox({
 		'frameWidth': 	1000,
 		'frameHeight': 	530
@@ -214,7 +231,7 @@ jQuery(document).ready(function(){
 		jQuery(this).css("display", "none");
 		jQuery(this).fullBg();
 		jQuery(this).fadeIn(500);
-	}).attr("src", "http://farm5.static.flickr.com/4095/4808812935_a022eb7660_b.jpg");
+	}).attr("src", "http://imm.io/media/14/14ZH.jpg");
 	
 });
 </script>	
@@ -245,5 +262,4 @@ jQuery(document).ready(function(){
 		}
 	}
 }
-
-</script>
+?>

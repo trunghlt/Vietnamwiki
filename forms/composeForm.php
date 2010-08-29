@@ -2,7 +2,8 @@
 include('dialog.php');
 ?>
 <div id="composeDialog" title="Edit entry">
-
+	<div id="composeDialogContent"></div>
+	<!--
 	<iframe style="	margin: 0px 0px 0px -10px; 
 					border: 0px; 
 					padding: 0px 0px 0px 0px;
@@ -12,7 +13,7 @@ include('dialog.php');
 			id="textComposeFrame"				
 			src="textEditor.php?destId=<?php echo $destination?>">
 	</iframe>  	
-
+	-->
 </div>
 <script language="javascript">
 
@@ -29,7 +30,7 @@ function submitComposeForm() {
 	currentIndexItem.addClass("linksmall");	
 	currentMySlide.slideOut();	
 */
-	var textComposeFrame = $("textComposeFrame");
+	var textComposeFrame = document.getElementById("textComposeFrame");
 	var frameWindow = textComposeFrame.contentWindow;
 	var frameDocument = frameWindow.document;
 	var destId = encodeURI(frameDocument.getElementById("location").value); 
@@ -52,47 +53,36 @@ function submitComposeForm() {
 	var ref = encodeURI(frameDocument.getElementById("reference").value);
 	var preview = frameDocument.getElementById("preview").value;
 	var bool = true;
-	if(preview != 1)
-		bool = confirm("Do you want to continue submit");
+	if(preview != 1) bool = confirm("<?=NOPREVIEW_CONFIRM_MSG?>");
 	if(bool == true){	
-		var submitPostRequest = new Request({	url: "submitComposeForm.php",
-												evalResponse: false
-												});	
-											
-		submitPostRequest.send(	"indexId=" + indexId 
-								+ "&title=" + title
-								+ "&smallImgURL="+smallImgURL
-								+ "&bigImgURL=" + bigImgURL
-								+ "&summary=" + summary
-								+ "&content=" + content
-								+ "&ref=" + ref);
-						
-		submitPostRequest.addEvent('onComplete', function(response) {
-				//replace whitespace
-			switch(response.replace(/^\s+|\s+$/g,"")){
-			 case 'null':{
-					alert('Please insert Title, Summary, and content');
-			 }
-			 break;
-			 case 'preview':{
-				composeDialog.dialog('close');
-				jQuery('#confirm').css('visibility','visible').dialog('open');
-				//window.location = "index2.php";
-			 }
-			 break;
-			 default:
-			 {
-				window.location = response;
-				composeDialog.dialog('close');
-			 }break;
-			}
-		});
+		jQuery.post("submitComposeForm.php",{indexId: indexId, title: title, smallImgURL: smallImgURL,
+											 bigImgURL: bigImgURL, summary: summary, content: content, ref: ref}, 
+											function(response){				
+												switch(response.replace(/^\s+|\s+$/g,"")){
+												 case 'null':{
+														alert('Please insert Title, Summary, and content !');
+												 }
+												 break;
+												 case 'preview':{
+													composeDialog.dialog('close');
+													jQuery('#confirm').css('visibility','visible').dialog('open');
+													//window.location = "index2.php";
+												 }
+												 break;
+												 default:
+												 {
+													window.location = response;
+													composeDialog.dialog('close');
+												 }break;
+												}
+											}
+		);
 	}
 }
 jQuery(document).ready(function(){ 
 	composeDialog = jQuery("#composeDialog").dialog({
 		autoOpen: false,
-		width: '720',
+		width: '720px',
 		height: 'auto',
 		modal: true,
 		resizable: false,
@@ -107,6 +97,18 @@ jQuery(document).ready(function(){
 			Cancel: function() {
 				jQuery(this).dialog('close');
 			}
+		}
+	});
+	jQuery("#composeDialog").bind("dialogopen", function(event, ui) {
+		if (jQuery("#composeDialogContent > iframe").size() == 0) {
+			composeDialogContent = document.getElementById("composeDialogContent");
+			iframe = document.createElement("IFRAME");
+			iframe.setAttribute("src", "textEditor.php?destId=<?=$destination?>");
+			iframe.setAttribute("id", "textComposeFrame");
+			iframe.style.width = "700px";
+			iframe.style.height = "750px";
+			iframe.style.border = "0px";
+			composeDialogContent.appendChild(iframe);
 		}
 	});
 });	
