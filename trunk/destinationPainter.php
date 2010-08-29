@@ -1,4 +1,5 @@
-<div class="head3" style="margin-left: -10px;width: 180px;">Destinations</div>
+<div class="head3" style="margin-left: -10px; width: 180px;">Destinations</div>
+
 <table class="leftmenu" cellpadding="0" cellspacing="0">
 <tbody>
 
@@ -67,9 +68,9 @@ While ($row = mysql_fetch_array($result)) {
 							<a class="<?php echo $indexItemClass?> iframe" href="map.php?id=<?php echo $destId?>">Map</a>
 						<?php } else {?>
 							<a id="indexLink<?php echo $r["id"]?>" class="<?php echo $indexItemClass?>" href="<?php echo getIndexPermalink($r["id"])?>">
-							<?php echo $r["name"];?>
+							<?=$r["name"];?>
+							</a>
 						<?php } ?>
-						</a>
 					</li>
 			<?php }	
 			} ?>
@@ -82,16 +83,6 @@ While ($row = mysql_fetch_array($result)) {
 		</ul>
 		</div>
 		<script language="javascript">
-/*			mySlide["<?php //echo $row["id"]?>"] = new Fx.Slide('itemList_<?php //echo $row["id"]?>');
-			
-			<?php //if ($row["id"] != $destination) { ?>
-				mySlide["<?php //echo $row["id"]?>"].hide();
-			<?php //} ?> 
-			$('destItem_<?php //echo $row["id"]?>').addEvent('click', function(e) {					
-				e = new Event(e);
-				mySlide["<?php //echo $row["id"]?>"].toggle();
-				e.stop();
-			});*/
 			<?php if ($row["id"] != $destination) { ?>
 				jQuery("#itemList_<?php echo $row["id"]?>").hide();
 				jQuery("#itemList_<?php echo $row["id"]?>").attr('class','index_des');
