@@ -2,7 +2,8 @@
 include('dialog.php');
 ?>
 <div id="editDialog" title="Edit entry">
-
+	<div id="editDialogContent"></div>
+	<!--
 	<iframe style="	margin: 0px 0px 0px -10px; 
 					border: 0px; 
 					padding: 0px 0px 0px 0px;
@@ -16,7 +17,7 @@ include('dialog.php');
 			elseif(isset($post['id']))
 					echo "id=".$post['id'];?>">
 	</iframe>  	
-
+	-->
 </div>
 <script language="javascript">
 function convert(s) {
@@ -30,24 +31,6 @@ function submitEditForm() {
 	var frameDocument = frameWindow.document;
 	var destId = encodeURI(frameDocument.getElementById("location").value); 
 	var indexId = encodeURI(frameDocument.getElementById("index").value); 
-/*
-	currentDestItem.removeClass("active");
-	currentDestItem.addClass("linksmall");	
-	currentIndexItem.removeClass("activeIndex");
-	currentIndexItem.addClass("linksmall");	
-	currentMySlide.slideOut();
-	
-
-	
-	currentDestItem = $("destItem_"+destId);
-	currentDestItem.removeClass("linksmall");
-	currentDestItem.addClass("active");
-	currentIndexItem = $("indexLink"+indexId);
-	currentIndexItem.removeClass("linksmall");
-	currentIndexItem.addClass("activeIndex");
-	currentMySlide = mySlide[destId];
-	currentMySlide.slideIn();
-*/
 	var title = frameDocument.getElementById("title").value;
 	var smallImgURL = frameDocument.getElementById("smallImgURL").value;
 	var bigImgURL = frameDocument.getElementById("bigImgURL").value;	
@@ -60,45 +43,25 @@ function submitEditForm() {
 	var type = <?php if(isset($draf)) echo '1';
 					 elseif(isset($post['id']))
 							echo '2';?>;
-/*	
-	jQuery.post("submitPost.php",
-				{id: id, indexId: indexId, title: title, smallImgURL: smallImgURL, bigImgURL: bigImgURL, summary: summary, content: content},
-				function(response) {
-					jQuery("#postContent").html(response);
-				},
-				"html");
-*/				
 	var preview = frameDocument.getElementById("preview").value;
 	var bool = true;
 	if(preview != 1)
-		bool = confirm("Do you want to continue submit");
+		bool = confirm("<?=NOPREVIEW_CONFIRM_MSG?>");
 	if(bool == true){
-		var submitPostRequest = new Request({	url: "submitPost.php",
-												evalScripts: true
-												});	
-												
-		submitPostRequest.send( "id=" + id
-								+"&indexId=" + indexId 					
-								+ "&title=" + title
-								+ "&smallImgURL=" + smallImgURL
-								+ "&bigImgURL=" + bigImgURL
-								+ "&summary=" + summary
-								+ "&content=" + content
-								<?php if(isset($draf)) {?>
-								+ "&id_edition=" + <?php echo $draf?>
-								<?php } ?> 
-								+ "&ref=" + ref 
-								+ "&type=" + type);
-								
-		submitPostRequest.addEvent('onComplete', function(response) {
-			$("postContent").set('html', response);
-			<?php if(isset($draf)){?>
-				window.location = 'draft.php?id=<?php echo $draf?>';
-			<?php }else if(isset($currentPostElement->id)){?>
-				window.location = '<?php echo getPostPermalink($currentPostElement->id)?>';
-				loadEditorList(<?php echo $currentPostElement->id ?>, "editorList");
-			<?php  }?>
-		});
+		jQuery.post("submitPost.php", {id: id, indexId: indexId, title: title, smallImgURL: smallImgURL,
+									   bigImgURL: bigImgURL, summary: summary, content: content,
+									   <?if(isset($draf)){?>id_edition: <?=$draf.","?> <?}?>
+									   ref: ref, type: type}, 
+									   function(response) {
+									       	jQuery("#postContent").html(response);
+											<?if(isset($draf)){?> 
+												window.location = 'draft.php?id=<?=$draf?>'; 
+											<?}
+											else if(isset($currentPostElement->id)) {?>
+												window.location = '<?=getPostPermalink($currentPostElement->id)?>';
+												loadEditorList(<?=$currentPostElement->id?>, "editorList");
+											<?}?>
+									   });
 		return true;
 	}
 	else{
@@ -109,7 +72,7 @@ function submitEditForm() {
 jQuery(document).ready(function(){ 
 	editDialog = jQuery("#editDialog").dialog({
 		autoOpen: false,
-		width: '720',
+		width: '720px',
 		height: 'auto',
 		modal: true,
 		resizable: false,
@@ -127,5 +90,17 @@ jQuery(document).ready(function(){
 			}
 		}
 	});
+	jQuery("#editDialog").bind("dialogopen", function(event, ui) {
+		if (jQuery("#editDialogContent > iframe").size() == 0) {
+			editDialogContent = document.getElementById("editDialogContent");
+			iframe = document.createElement("IFRAME");
+			iframe.setAttribute("src", "textEditor.php?<?=isset($draf)? 'editionId_draf='.$draf: isset($post['id'])? 'id='.$post['id']:'';?>");
+			iframe.setAttribute("id", "textEditFrame");
+			iframe.style.width = "700px";
+			iframe.style.height = "750px";
+			iframe.style.border = "0px";
+			editDialogContent.appendChild(iframe);
+		}
+	});	
 });	
 </script>

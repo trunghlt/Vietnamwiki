@@ -82,7 +82,7 @@ body {
 		height: 28px; 
 		vertical-align: middle; 
 		float: middle;
-		background: #FFCCFF;
+		background: #F0F0F0;
 		border: 1px solid rgb(180, 180, 180);
 		vertical-align: middle;
 	}
