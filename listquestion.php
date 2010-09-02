@@ -16,8 +16,8 @@ jQuery(document).ready(function(){
     function question(){
  	jQuery('#questionDialog').css('visibility','visible').dialog('open');
     }
-    function answer(name){
+    function answer(id){
  	jQuery('#answerDialog').css('visibility','visible').dialog('open');
+        jQuery('#questionId').val(id);
     }
-    
 </script>
