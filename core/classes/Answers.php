@@ -74,7 +74,7 @@ add new record
                                 "date"=>$this->date,
                                 "ip"=>$this->ip
                             );
-                $q->add('answer', $arr);
+                $this->id = $q->add('answer', $arr);
                 $memcache->delete("ans");
 	}
 /***************************************************************
