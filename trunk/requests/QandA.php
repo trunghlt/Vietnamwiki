@@ -17,10 +17,7 @@ include("../core/classes/Answers.php");
                 }
                 else
                 {
-                    if($v['username']!='' || $v['username']!=NULL)
                         $str = "<font color='#DB1C00' style='font-weight:bold;' >$v[username]</font>";
-                    else
-                        $str = '<font color="#DB1C00" style="font-weight:bold;" >Guest</font>';
                 }
                 return $str;
         }
@@ -100,7 +97,7 @@ include("../core/classes/Answers.php");
             echo "<ul>";
             foreach ($q_s as $key=>$v){
                 if($key >= $s && $key < $r ){
-                    echo "<li><div class='question'><img src='".$v['avatar']."' height=30 width=30 align='left'/> $v[name] : ".$v['content']."    <a style='cursor: pointer; color: #DB1C00;text-decoration: underline;' onclick='answer(\"askquestion\");' >Rely</a></div>";
+                    echo "<li><div class='question'><img src='".$v['avatar']."' height=30 width=30 align='left'/> $v[name] : ".$v['content']."    <a style='cursor: pointer; color: #DB1C00;text-decoration: underline;' onclick='answer($v[id]);' >Rely</a></div>";
                     if(count($a_r)){
                         echo "<ul>";
                         foreach ($a_r as $v2)

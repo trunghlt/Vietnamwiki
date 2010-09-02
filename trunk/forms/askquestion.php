@@ -56,7 +56,7 @@ jQuery(document).ready(function(){
 		buttons: {
 			'Submit': function() {
 				if(jQuery("#check_login_question").val() == 1){
-					if(jQuery("#fill_name_question").val() == '' && jQuery("#fill_email_question").val() == ''){
+					if(jQuery("#fill_name_question").val() == '' || jQuery("#fill_email_question").val() == ''|| checkEmail(jQuery("#fill_email_question").val())==false){
 						jQuery('#Emailquestion1').css('visibility','visible').dialog("open");
 					}
 					else{
@@ -75,4 +75,8 @@ jQuery(document).ready(function(){
 		}
 	});
 });
+    function checkEmail(test){
+        reg = /^[a-zA-Z0-9._]+\@[a-zA-Z0-9]{2,}\.[a-zA-Z]{2,}$/;
+        return reg.test(test);
+    }
 </script>

@@ -15,12 +15,7 @@
 	<?php }?>
 	</div>
 	<br />
-	<input type="text" id="postId" name="postId" value="<?php
-	if(isset($draf)) echo '0';
-	elseif(isset($post["id"])) echo $post["id"];?>" style="visibility:hidden; display: none"/>
-	 <?php if(isset($draf)){ ?>
-<input type="text" id="editionId" name="editionId" value="<?php echo $draf?>" style="visibility:hidden; display: none"/>
-	<?php } ?>
+        <input type="hidden" id="questionId" name="questionId" />
 	<textarea 	id="answerText"
 				name="answerText"
 				rows="3"
@@ -30,17 +25,6 @@
 </div>
 <div id="Emailanswer1" title="Alert">You must fill Name or Email</div>
 <script language="javascript">
-function submitanswer(){
-	var myHTMLRequest = new Request.HTML({url: "requests/updateanswerList.php", evalResponse: true}).post($("answerForm"));
-	myHTMLRequest.addEvent("onSuccess",function(responseTree, responseElements, responseHTML, responseJavaScript){
-		$("answerList").set("html", responseHTML);
-		var newScript = document.createElement('script');
-		newScript.language = 'javascript';
-		newScript.text = responseJavaScript;
-		$("answerList").appendChild(newScript);
-	});
-}
-
 jQuery(document).ready(function(){
 	Email_answer = jQuery("#Emailanswer1").dialog({autoOpen: false});
 	answerDialog = jQuery("#answerDialog").dialog({
@@ -56,7 +40,7 @@ jQuery(document).ready(function(){
 		buttons: {
 			'Submit': function() {
 				if(jQuery("#check_login_answer").val() == 1){
-					if(jQuery("#fill_name_answer").val() == '' && jQuery("#fill_email_answer").val() == ''){
+					if(jQuery("#fill_name_answer").val() == '' || jQuery("#fill_email_answer").val() == ''|| checkEmail(jQuery("#fill_email_answer").val())==false){
 						jQuery('#Emailanswer1').css('visibility','visible').dialog("open");
 					}
 					else{
@@ -75,4 +59,11 @@ jQuery(document).ready(function(){
 		}
 	});
 });
+    function submitanswer(){
+    jQuery.post('requests/submitanswer.php',jQuery('#answerForm').serialize(),function(reponse){ alert(reponse);});
+    }
+    function checkEmail(test){
+        reg = /^[a-zA-Z0-9._]+\@[a-zA-Z0-9]{2,}\.[a-zA-Z]{2,}$/;
+        return reg.test(test);
+    }
 </script>
