@@ -90,6 +90,7 @@ Add table
 		$str = implode(",",$arr1);
                 $str1 = implode(",",$arr2);
 		$this->query("Insert into $table($str) values ($str1)");
+                return @mysql_insert_id();
 	}
 /***************************************************************
 Free old result
