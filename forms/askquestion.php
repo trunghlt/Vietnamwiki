@@ -14,13 +14,21 @@
 		<input class="field" name="check_login_question" id="check_login_question" type="hidden" value="2"/>
 	<?php }?>
 	</div>
+    <?php
+        if(isset($post_id) && $post_id>0){
+            echo "<input class=\"field\" name=\"postId\" id=\"postId\" type=\"hidden\" value=\"$post_id\"/>";
+            echo "<input class=\"field\" name=\"indexId\" id=\"indexId\" type=\"hidden\" value=\"$index_id\"/>";
+            echo "<input class=\"field\" name=\"destId\" id=\"destId\" type=\"hidden\" value=\"$destination\"/>";
+        }
+        else if(isset($index_id) && $index_id>0){
+            $post_q = new PostElement;
+            $row_q = $post_q->query("",$index_id);
+            echo "<input class=\"field\" name=\"postId\" id=\"postId\" type=\"hidden\" value=\"".$row_q[0]['post_id']."\"/>";
+            echo "<input class=\"field\" name=\"indexId\" id=\"indexId\" type=\"hidden\" value=\"$index_id\"/>";
+            echo "<input class=\"field\" name=\"destId\" id=\"destId\" type=\"hidden\" value=\"$dest_id\"/>";
+        }
+    ?>
 	<br />
-	<input type="text" id="postId" name="postId" value="<?php
-	if(isset($draf)) echo '0';
-	elseif(isset($post["id"])) echo $post["id"];?>" style="visibility:hidden; display: none"/>
-	 <?php if(isset($draf)){ ?>
-<input type="text" id="editionId" name="editionId" value="<?php echo $draf?>" style="visibility:hidden; display: none"/>
-	<?php } ?>
 	<textarea 	id="questionText"
 				name="questionText"
 				rows="3"
@@ -30,17 +38,6 @@
 </div>
 <div id="Emailquestion1" title="Alert">You must fill Name or Email</div>
 <script language="javascript">
-function submitquestion(){
-	var myHTMLRequest = new Request.HTML({url: "requests/updatequestionList.php", evalResponse: true}).post($("questionForm"));
-	myHTMLRequest.addEvent("onSuccess",function(responseTree, responseElements, responseHTML, responseJavaScript){
-		$("questionList").set("html", responseHTML);
-		var newScript = document.createElement('script');
-		newScript.language = 'javascript';
-		newScript.text = responseJavaScript;
-		$("questionList").appendChild(newScript);
-	});
-}
-
 jQuery(document).ready(function(){
 	Email_question = jQuery("#Emailquestion1").dialog({autoOpen: false});
 	questionDialog = jQuery("#questionDialog").dialog({
@@ -75,6 +72,9 @@ jQuery(document).ready(function(){
 		}
 	});
 });
+  function submitquestion(){
+    jQuery.post('requests/submitquestion.php',jQuery('#questionForm').serialize(),function(reponse){ load_qanda(0);alert(reponse);});
+    }
     function checkEmail(test){
         reg = /^[a-zA-Z0-9._]+\@[a-zA-Z0-9]{2,}\.[a-zA-Z]{2,}$/;
         return reg.test(test);
