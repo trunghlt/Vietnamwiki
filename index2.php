@@ -5,7 +5,7 @@ include('core/classes.php');
 include('core/session.php');
 include("core/classes/Color.php");
 	$check_index = new IndexElement;
-	if($check_index->query(Edition::filterId($_GET["index_id"]))==0)
+	if($_GET["index_id"]!='' && $check_index->query(Edition::filterId($_GET["index_id"]))==0)
 		header("location:index.php");
 
 include('preprocess.php');

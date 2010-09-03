@@ -38,31 +38,41 @@ class PostElement {
 		return $reference;
 	}
 		
-	public function query($id) {
+	public function query($id='',$index='') {
 		$q = new db;
-		$this->id = $id; 
-		$q->query("	SELECT *
-					FROM posts_texts
-					WHERE post_id = ".$this->id);
-		if($q->n ==0)
-			return 0;
-		$r = mysql_fetch_array($q->re);
+                if($id!='' && $index==''){
+                    $this->id = $id;
+                    $q->query("	SELECT *
+                                            FROM posts_texts
+                                            WHERE post_id = ".$this->id);
+                    if($q->n ==0)
+                            return 0;
+                    $r = mysql_fetch_array($q->re);
 
-		$this->content = $r["post_text"];
-		$this->title = $r["post_subject"];
-		$this->summary = $r["post_summary"];
-		$this->smallImgURL = $r["post_small_img_url"];
-		$this->bigImgURL = $r["post_big_img_url"];
-		$this->reference = $r['reference'];	
-		
-		$q->query("	SELECT *
-					FROM posts
-					WHERE post_id = ".$this->id);
-		$r = mysql_fetch_array($q->re);
-		$this->authorUsername = $r["post_username"];
-		$this->indexId = $r["index_id"];
-		$this->locked = $r["locked"];
-		return 1;
+                    $this->content = $r["post_text"];
+                    $this->title = $r["post_subject"];
+                    $this->summary = $r["post_summary"];
+                    $this->smallImgURL = $r["post_small_img_url"];
+                    $this->bigImgURL = $r["post_big_img_url"];
+                    $this->reference = $r['reference'];
+
+                    $q->query("	SELECT *
+                                            FROM posts
+                                            WHERE post_id = ".$this->id);
+                    $r = mysql_fetch_array($q->re);
+                    $this->authorUsername = $r["post_username"];
+                    $this->indexId = $r["index_id"];
+                    $this->locked = $r["locked"];
+                    return 1;
+                }
+                elseif($id=='' && $index!=''){
+                     $q->query("SELECT * FROM posts where index_id=$index");
+                    if($q->n ==0)
+                            return 0;
+                    while($r = mysql_fetch_assoc($q->re))
+                            $row[] = $r;
+                    return $row;
+                }
 	}
 	
 	public function add($user_id="") {

@@ -237,12 +237,14 @@ function submitLogin(dom,check) {
 							jQuery('#editDialog').css('visibility','visible').dialog('open');
 						}
 						loadEdittingRibbon(<?php echo $post_id?>, "ribbon");
-						jQuery('#field_not_login_comment').html("<input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='2'/>");											
+						jQuery('#field_not_login_comment').html("<input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='2'/>");
+                                               
 					}
 					else
 					{
 						jQuery('#field_not_login_comment').html("<input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='2'/>");						
-						if(check==2)
+						
+                                                if(check==2)
 							edit_login.dialog('close');							
 					}
 				}

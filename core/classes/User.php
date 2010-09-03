@@ -149,8 +149,7 @@ class User {
             $q = new db();
                     $fbId = 0;
                     if($row["user_id"]!=0){
-                            $user_com = new User;
-                            $x = $user_com->query_id($row["user_id"]);
+                            $x = $this->query_id($row["user_id"]);
                             if (isset($x["fbId"])) $fbId = (int) $x["fbId"];
                             $email = $x["email"];
                             $name = $x["username"];
@@ -159,7 +158,7 @@ class User {
                             $email = $row["email"];
                             $name = $row["username"];
                     }
-                    if ($fbId != 0) {
+                    if ($fbId != 0&& $fbId != NULL&&$fbId != '') {
                             try {
                                     $fbUserInfo = facebook_client()->api_client->users_getInfo($fbId, "pic_square");
                                     $avatarURL = $fbUserInfo[0]["pic_square"];
