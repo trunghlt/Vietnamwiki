@@ -25,6 +25,14 @@ Variables
 	public $date;
         public $ip;
 /***************************************************************
+delete current memcaches
+***************************************************************/
+        function deleteMencache(){
+		$memcache = new Memcache;
+		$memcache->connect("127.0.0.1", 11211);
+                $memcache->delete("ans");
+        }
+/***************************************************************
 Get num row in query
 Return num
  * $arr : array coditions
@@ -75,7 +83,7 @@ add new record
                                 "ip"=>$this->ip
                             );
                 $this->id = $q->add('answer', $arr);
-                $memcache->delete("ans");
+                $this->deleteMencache();
 	}
 /***************************************************************
 delete table answer
@@ -90,7 +98,7 @@ delete table answer with condition
 	public function delete_id($id) {
 		$q = new Active;
 		$q->delete('answer',"id=$id");
-                $memcache->delete("ans");
+                $this->deleteMencache();
 	}
 /***************************************************************
 edit a record in table answer
@@ -102,12 +110,12 @@ edit a record in table answer
                                 "question_id"=>$this->question_id,
                                 "username"=>$this->username,
                                 "email"=>$this->email,
-                                "content"=>$this->content,                                
+                                "content"=>$this->content,
                                 "date"=>$this->date,
                                 "ip"=>$this->ip
                             );
                 $q->update('answer', $arr,"id=$this->id");
-                $memcache->delete("ans");
+                $this->deleteMencache();;
 	}
 }
 ?>

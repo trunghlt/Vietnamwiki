@@ -11,7 +11,7 @@ include("../core/classes/Answers.php");
         $u = new User;
         function getname($v){
             global $u;
-                if($v['user_id']!='' || $v['user_id']!=NULl){
+                if(($v['user_id']!='' || $v['user_id']!=NULL) && $v['user_id']!=0){
                     $r_u = $u->query_id($v['user_id']);
                     $str = "<font color='#DB1C00' style='font-weight:bold;'>".$r_u['username']."</font>";
                 }
@@ -99,7 +99,7 @@ include("../core/classes/Answers.php");
                 if($key >= $s && $key < $r ){
                     echo "<li><div class='question'><img src='".$v['avatar']."' height=30 width=30 align='left'/> $v[name] : ".$v['content']."    <a style='cursor: pointer; color: #DB1C00;text-decoration: underline;' onclick='answer($v[id]);' >Rely</a></div>";
                     if(count($a_r)){
-                        echo "<ul>";
+                        echo "<ul style=''>";
                         foreach ($a_r as $v2)
                         {
                             if($v2['question_id']==$v['id'])
@@ -116,6 +116,8 @@ include("../core/classes/Answers.php");
 <br />
 <div class="phantrang">
 <?php
+$memcache->delete("ques");
+$memcache->delete("ans");
 	$tranghh = ($s/$row_per_page)+1;
 	for($i = 1;$i <= $num_page; $i++)
 		if($i != $tranghh)

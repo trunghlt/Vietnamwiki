@@ -60,7 +60,7 @@ jQuery(document).ready(function(){
 	});
 });
     function submitanswer(){
-    jQuery.post('requests/submitanswer.php',jQuery('#answerForm').serialize(),function(reponse){ alert(reponse);});
+    jQuery.post('requests/submitanswer.php',jQuery('#answerForm').serialize(),function(reponse){ load_qanda(0);});
     }
     function checkEmail(test){
         reg = /^[a-zA-Z0-9._]+\@[a-zA-Z0-9]{2,}\.[a-zA-Z]{2,}$/;
