@@ -15,7 +15,7 @@
 	<?php }?>
 	</div>
     <?php
-        if(isset($post_id) && $post_id>0){
+ /*       if(isset($post_id) && $post_id>0){
             echo "<input class=\"field\" name=\"postId\" id=\"postId\" type=\"hidden\" value=\"$post_id\"/>";
             echo "<input class=\"field\" name=\"indexId\" id=\"indexId\" type=\"hidden\" value=\"$index_id\"/>";
             echo "<input class=\"field\" name=\"destId\" id=\"destId\" type=\"hidden\" value=\"$destination\"/>";
@@ -26,7 +26,10 @@
             echo "<input class=\"field\" name=\"postId\" id=\"postId\" type=\"hidden\" value=\"".$row_q[0]['post_id']."\"/>";
             echo "<input class=\"field\" name=\"indexId\" id=\"indexId\" type=\"hidden\" value=\"$index_id\"/>";
             echo "<input class=\"field\" name=\"destId\" id=\"destId\" type=\"hidden\" value=\"$dest_id\"/>";
-        }
+        }*/
+            echo "<input class=\"field\" name=\"postId\" id=\"postId\" type=\"hidden\" value=\"$post_id\"/>";
+            echo "<input class=\"field\" name=\"indexId\" id=\"indexId\" type=\"hidden\" value=\"$index_id\"/>";
+            echo "<input class=\"field\" name=\"destId\" id=\"destId\" type=\"hidden\" value=\"$destination\"/>";
     ?>
 	<br />
 	<textarea 	id="questionText"

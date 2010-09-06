@@ -1,7 +1,7 @@
 <div id="answerDialog" title="answer">
 <form id="answerForm">
 	<div id='field_not_login_answer'>
-	<?php if(!logged_in()) {?>
+	<?php if(!logged_in()) { ?>
 		<p>Email: (required)<br />
 		<input class="field" name="fill_email_answer" id="fill_email_answer" type="text" style="width:250px" value=""/><br />
 		<span style="font-size: 9px; color: #777;">We loathe spamming. We will never spam you! We use your email to display your <a href="http://en.gravatar.com/">Gravatar</a>.</span></p>

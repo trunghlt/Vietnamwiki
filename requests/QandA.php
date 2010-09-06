@@ -8,6 +8,7 @@ include('../libraries/TalkPHP_Gravatar.php');
 include("../core/classes/Questions.php");
 include("../core/classes/Answers.php");
 
+
         $u = new User;
         function getname($v){
             global $u;
@@ -116,8 +117,7 @@ include("../core/classes/Answers.php");
 <br />
 <div class="phantrang">
 <?php
-$memcache->delete("ques");
-$memcache->delete("ans");
+
 	$tranghh = ($s/$row_per_page)+1;
 	for($i = 1;$i <= $num_page; $i++)
 		if($i != $tranghh)
@@ -126,3 +126,10 @@ $memcache->delete("ans");
 			echo " ".$i." ";
 ?>
 </div>
+<?php
+$post_id = $_POST["post_id"];
+$index_id = $_POST["index_id"];
+$destination = $_POST["destination"];
+include("../forms/askquestion.php");
+include("../forms/replyquestion.php");
+?>
