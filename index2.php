@@ -41,6 +41,11 @@ jQuery(function(){
 function signOut() {
 	jQuery.post("/requests/logout.php", {}, 
 				function(response) {
+                                        jQuery('#questionDialog').remove();
+                                        jQuery('#answerDialog').remove();
+                                        jQuery("#Emailquestion1").remove();
+                                        jQuery("#Emailanswer1").remove();
+                                        load_qanda(0);
 					loadToolbar("toolbar");
 						if(document.getElementById('link_add').value == 1){
 							document.getElementById('link_add').value = 0;
@@ -77,7 +82,7 @@ function submitLogin(dom,check) {
 					}
 					else if(response == 'success'){
 						loadToolbar("toolbar");
-						
+                                                load_qanda(0);
 						if(document.getElementById('link_add').value == 0){
 							document.getElementById('link_add').value = 1;
 							document.getElementById('link_add').innerHTML = "<a onClick=\"jQuery('#composeDialog').css('visibility','visible').dialog('open')\">+ Add new topic</a>";
