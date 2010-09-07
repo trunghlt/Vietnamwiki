@@ -1,4 +1,4 @@
-<div id='confirm' title='Review' >Your post have been submited.Admin will review this post.Thanks</div>
+<div id='confirm' title='Review' >Your post has been submited. Moderators will review this post and send you an email to let you know if your edit is confirmed. Thanks !</div>
 <script>
 jQuery(document).ready(function(){ 
 	post_review = jQuery("#confirm").dialog({
