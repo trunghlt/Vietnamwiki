@@ -15,18 +15,6 @@
 	<?php }?>
 	</div>
     <?php
- /*       if(isset($post_id) && $post_id>0){
-            echo "<input class=\"field\" name=\"postId\" id=\"postId\" type=\"hidden\" value=\"$post_id\"/>";
-            echo "<input class=\"field\" name=\"indexId\" id=\"indexId\" type=\"hidden\" value=\"$index_id\"/>";
-            echo "<input class=\"field\" name=\"destId\" id=\"destId\" type=\"hidden\" value=\"$destination\"/>";
-        }
-        else if(isset($index_id) && $index_id>0){
-            $post_q = new PostElement;
-            $row_q = $post_q->query("",$index_id);
-            echo "<input class=\"field\" name=\"postId\" id=\"postId\" type=\"hidden\" value=\"".$row_q[0]['post_id']."\"/>";
-            echo "<input class=\"field\" name=\"indexId\" id=\"indexId\" type=\"hidden\" value=\"$index_id\"/>";
-            echo "<input class=\"field\" name=\"destId\" id=\"destId\" type=\"hidden\" value=\"$dest_id\"/>";
-        }*/
             echo "<input class=\"field\" name=\"postId\" id=\"postId\" type=\"hidden\" value=\"$post_id\"/>";
             echo "<input class=\"field\" name=\"indexId\" id=\"indexId\" type=\"hidden\" value=\"$index_id\"/>";
             echo "<input class=\"field\" name=\"destId\" id=\"destId\" type=\"hidden\" value=\"$destination\"/>";
@@ -76,7 +64,7 @@ jQuery(document).ready(function(){
 	});
 });
   function submitquestion(){
-    jQuery.post('requests/submitquestion.php',jQuery('#questionForm').serialize(),function(reponse){ load_qanda(0);alert(reponse);});
+    jQuery.post('requests/submitquestion.php',jQuery('#questionForm').serialize(),function(reponse){ load_qanda(0);});
     }
     function checkEmail(test){
         reg = /^[a-zA-Z0-9._]+\@[a-zA-Z0-9]{2,}\.[a-zA-Z]{2,}$/;
