@@ -52,13 +52,13 @@ if (($page - 1) * $num_per_page > $numrow) die_to_index();
 $start = ($page - 1) * $num_per_page;
 $end = $page * $num_per_page;
 $query->orderby($sort_query,"DESC");
-$query->limit($start,$end);
+$query->limit("$start,$end");
 $r = $query->select('',"posts","index_id = '".$index_id."'");
 //$result = mysql_query("SELECT * FROM posts ".$request." ORDER BY ".$sort_query." DESC LIMIT ".$start.",".$end) or die(mysql_error());
 $numrow2 = $c_post->query_rowByIndex($index_id);
 if($r != NULL)
-foreach ($r as $row) {       
-	$post = $c_post->query_id($row['post_id']);
+foreach ($r as $row) {
+        $post = $c_post->query_id($row['post_id']);
 	$title = $post['post_subject'];
 	$content = $post['post_summary'];
 	
@@ -69,7 +69,7 @@ foreach ($r as $row) {
 		$bigImgURL = htmlspecialchars_decode($post["post_big_img_url"], ENT_QUOTES);
 		
 	?>
-	<div <?php if (isset($smallImgURL)) echo 'style="height: 110px; margin-right: 10px; padding-bottom: 10px; "'?>>
+	<div <?php if (isset($smallImgURL)) echo 'style="margin-right: 10px; padding-bottom: 10px; "'?>>
 		<?php if ( isset($smallImgURL) && isset($bigImgURL) ) { ?>
 			<a rel="lightbox" href="<?php echo $bigImgURL?>">
 				<img class="postSmallImg" src="<?php echo $smallImgURL?>" align="left" style="margin-right:10px;"/>
@@ -108,7 +108,7 @@ foreach ($r as $row) {
 	echo $s ; 
 	?>
 	</div>
-	<div style="border-bottom: 1px dotted gray; margin-bottom: 10px; padding-top:10px;"></div>
+<div style="border-bottom: 1px dotted gray; margin-bottom: 10px; padding-top:10px;"></div>
 	<?php
 }
 
