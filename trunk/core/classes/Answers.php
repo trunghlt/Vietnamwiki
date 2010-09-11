@@ -28,9 +28,7 @@ Variables
 delete current memcaches
 ***************************************************************/
         function deleteMencache(){
-		$memcache = new Memcache;
-		$memcache->connect("127.0.0.1", 11211);
-                $memcache->delete("ans");
+		Mem::$memcache->delete("ans");
         }
 /***************************************************************
 Get num row in query
@@ -117,5 +115,29 @@ edit a record in table answer
                 $q->update('answer', $arr,"id=$this->id");
                 $this->deleteMencache();;
 	}
+/***************************************************************
+Get answer
+***************************************************************/
+       public static function getA(){
+            $u = new User;
+            $n_row = self::query();
+            $i= 0;
+            foreach ($n_row as $v){
+                $arr[$i] = array( 'id'=>$v['id'],
+                              'question_id'=>$v['question_id'],
+                              'user_id'=>$v['user_id'],
+                              'username'=>$v['username'],
+                              'email'=>$v['email'],
+                              'content'=>$v['content'],
+                              'date'=>$v['date'],
+                              'ip'=>$v['ip'],
+                              'avatar'=>$u->getUserAvatar($v),
+                              'name'=>$u->getname($v)
+                                     );
+                $i = $i+1;
+            }
+            Mem::$memcache->set("ans",$arr);
+            return $arr;
+        }
 }
 ?>
