@@ -165,9 +165,7 @@ class Edition {
 		
 	//Restore a draft
 	public function restore($type='') {		
-		//Update posts_texts	
-		$memcache = new Memcache;
-		$memcache->connect("127.0.0.1", 11211);
+		//Update posts_texts
 		$mysql["postContent"] = mysql_real_escape_string($this->postContent);
 		$mysql["reference"] = mysql_real_escape_string($this->reference);
 		if($this->postId != 0){
@@ -182,9 +180,9 @@ class Edition {
 						post_big_img_url = '{$this->postBigImgURL}',
 						reference = '".$mysql["reference"]."'
 					WHERE post_id = {$this->postId}") or die(mysql_error());
-					$post = $memcache->get("post_".$this->id);
+					$post = Mem::$memcache->get("post_".$this->id);
 					if($post != NULL)
-						$memcache->delete("post_".$this->id);		
+						Mem::$memcache->delete("post_".$this->id);
 		//Delete all later editions
 		mysql_query("DELETE FROM editions
 					WHERE (post_id = {$this->postId}) AND (edit_date_time > {$this->editDateTime}) AND checked=1") or die(mysql_error());
@@ -203,9 +201,9 @@ class Edition {
 					mysql_query("UPDATE editions
 								SET checked = 1
 								WHERE id = {$this->id}") or die(mysql_error());
-					$post = $memcache->get("post_".$this->id);
+					$post = Mem::$memcache->get("post_".$this->id);
 					if($post != NULL)
-						$memcache->delete("post_".$this->id);
+						Mem::$memcache->delete("post_".$this->id);
 			}
 			else{
 					mysql_query("INSERT INTO posts_texts
@@ -255,8 +253,6 @@ class Edition {
 					 where post_id = '$post_id'") or die(mysql_error());
 		$row = mysql_fetch_assoc($re);
 		//Post has been exsited yet?
-		$memcache = new Memcache;
-		$memcache->connect("127.0.0.1", 11211);
 		if(is_array($row))
 		{
 				mysql_query("UPDATE editions
@@ -265,9 +261,9 @@ class Edition {
 				mysql_query("UPDATE posts_texts
 					SET post_text = '".$mysql["postContent"]."',reference='".$mysql["reference"]."' 
 					WHERE post_id = ".$post_id) or die(mysql_error());
-					$post = $memcache->get("post_".$this->id);
+					$post = Mem::$memcache->get("post_".$this->id);
 					if($post != NULL)
-						$memcache->delete("post_".$this->id);
+						Mem::$memcache->delete("post_".$this->id);
 		}
 		else{				
 				mysql_query("UPDATE editions

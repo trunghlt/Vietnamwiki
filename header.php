@@ -68,9 +68,14 @@ content = "<?php echo getSummary()?>">
 <script>
 	jQuery.noConflict();
 </script>
-
+<script src="js/jquery.jcarousel.js" language="javascript"></script>
 <link rel="stylesheet" href="js/jquery/fancybox/jquery.fancybox-1.2.6.css" type="text/css" media="screen"/>
 <link rel="stylesheet" type="text/css" href="/css/integrated.css" />
+<!--[if lt IE 7]>
+<link rel="stylesheet" type="text/css" href="css/ie7/skin.css" />
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="css/tango/skin.css" />
+<script type="text/javascript" src="js/jquery.jcarousel.js"></script>
 <style>
 /*******TIP WINDOW*******/
 #tipWindow {

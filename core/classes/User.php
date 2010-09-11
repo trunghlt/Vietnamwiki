@@ -187,7 +187,18 @@ class User {
 		else
 			return 0;
 		return $row;		
-	}	
+	}
+        function getname($v){
+                if(($v['user_id']!='' || $v['user_id']!=NULL) && $v['user_id']!=0){
+                    $r_u = $this->query_id($v['user_id']);
+                    $str = "<font color='#DB1C00' style='font-weight:bold;'>".$r_u['username']."</font>";
+                }
+                else
+                {
+                        $str = "<font color='#DB1C00' style='font-weight:bold;' >$v[username]</font>";
+                }
+                return $str;
+        }
 }
 $user_info = new User;
 ?>

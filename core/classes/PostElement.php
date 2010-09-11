@@ -78,8 +78,6 @@ class PostElement {
 	public function add($user_id="") {
 		//Add map spots in the post to the database
 		MapSpot::addMapSpots(htmlspecialchars_decode($this->content, ENT_QUOTES), $this->id);
-		$memcache = new Memcache;
-		$memcache->connect("127.0.0.1", 11211);
 		$q = new db;
 		if($user_id!=""){
 			$q->query("select property_value
@@ -115,9 +113,9 @@ class PostElement {
 					$q->query("	INSERT INTO acts
 								(act_username, type, target, time) 
 								VALUE ('".$this->authorUsername."','create','".$this->id."','".time()."')");
-					$index = $memcache->get("index_".$this->indexId);
+					$index = Mem::$memcache->get("index_".$this->indexId);
 					if($index != NULL)
-						$memcache->delete("index_".$this->id);
+						Mem::$memcache->delete("index_".$this->id);
 					Follow::set($user_id,$this->indexId);
 				}
 				else{
@@ -146,9 +144,9 @@ class PostElement {
 								(act_username, type, target, time) 
 								VALUE ('".$this->authorUsername."','create','".$this->id."','".time()."')");
 						Follow::set($user_id,$this->id);
-					$index = $memcache->get("index_".$this->indexId);
+					$index = Mem::$memcache->get("index_".$this->indexId);
 					if($index != NULL)
-						$memcache->delete("index_".$this->indexId);				
+						Mem::$memcache->delete("index_".$this->indexId);
 			}
 		}
 	}
@@ -173,8 +171,7 @@ class PostElement {
 		$q = new db;
 		$mysql["content"] = mysql_real_escape_string($this->content);
 		$mysql["reference"] = mysql_real_escape_string($this->reference);
-		$memcache = new Memcache;
-		$memcache->connect("127.0.0.1", 11211);		
+	
 		if($user_id != ""){
 			$q->query("select property_value
 						from setting
@@ -201,9 +198,9 @@ class PostElement {
 								WHERE post_id = ".$this->id);
 					$this->draft = $this->content;
 					Follow::set($user_id,$this->id);
-					$post = $memcache->get("post_".$this->id);
+					$post = Mem::$memcache->get("post_".$this->id);
 					if($post != NULL)
-						$memcache->delete("post_".$this->id);
+						Mem::$memcache->delete("post_".$this->id);
 					return 0;				
 				}
 				else{
@@ -231,9 +228,9 @@ class PostElement {
 							WHERE post_id = ".$this->id);
 					$this->draft = $this->content;
 				Follow::set($user_id,$this->id);
-				$post = $memcache->get("post_".$this->id);
+				$post = Mem::$memcache->get("post_".$this->id);
 				if($post != NULL)
-					$memcache->delete("post_".$this->id);
+					Mem::$memcache->delete("post_".$this->id);
 					return 0;			
 			}
 		}
