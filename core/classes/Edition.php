@@ -1,7 +1,7 @@
 <?php
 class Edition {
 	public $id;
-	public $userId;
+	public $yy;
 	public $postId;
 	public $postContent;
 	public $postSummary;
@@ -377,5 +377,21 @@ class Edition {
 			}	
 			return NULL;
 	}
+/***************************************************************
+Choose method save or add
+***************************************************************/
+        public function c_method(){
+            $q = new Db;
+            $q->query("select * from editions where user_id = $this->userId and post_id = $this->postId");
+            if($q->n>0){
+                    $r = mysql_fetch_assoc($q->re);
+                    $this->id = $r['id'];
+                    $this->save();
+                    return 1;
+            }
+            else
+                $this->add();
+                return 0;
+        }
 }
 ?>

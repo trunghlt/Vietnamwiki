@@ -41,10 +41,6 @@ jQuery(function(){
 function signOut() {
 	jQuery.post("/requests/logout.php", {}, 
 				function(response) {
-                                        jQuery('#questionDialog').remove();
-                                        jQuery('#answerDialog').remove();
-                                        jQuery("#Emailquestion1").remove();
-                                        jQuery("#Emailanswer1").remove();
                                         load_qanda(0);
 					loadToolbar("toolbar");
 						if(document.getElementById('link_add').value == 1){

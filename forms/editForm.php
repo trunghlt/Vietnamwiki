@@ -1,6 +1,7 @@
 <?php include("ajaxLoad.php");
 include('dialog.php');
 ?>
+<img src ="../images/indicator.gif" style="display:none;" id="load_wait"/>
 <div id="editDialog" title="Edit entry">
 	<div id="editDialogContent"></div>
 	<!--
@@ -44,10 +45,14 @@ function submitEditForm() {
 					 elseif(isset($post['id']))
 							echo '2';?>;
 	var preview = frameDocument.getElementById("preview").value;
+        var c_method = frameDocument.getElementById("c_method").value;
 	var bool = true;
+        var bool2 = true;
 	if(preview != 1)
 		bool = confirm("<?=NOPREVIEW_CONFIRM_MSG?>");
-	if(bool == true){
+	if(c_method == 1)
+		bool = confirm("<?=REPLACE_OLD_EDITION?>");
+	if(bool == true && bool2 == true){
 		jQuery.post("submitPost.php", {id: id, indexId: indexId, title: title, smallImgURL: smallImgURL,
 									   bigImgURL: bigImgURL, summary: summary, content: content,
 									   <?php if(isset($draf)){?>id_edition: <?=$draf.","?> <?php }?>
@@ -58,6 +63,9 @@ function submitEditForm() {
 												window.location = 'draft.php?id=<?=$draf?>'; 
 											<?php }
 											else if(isset($post['id'])) {
+                                                                                            ?>
+                                                                                               //jQuery('#load_wait').show().delay('400').hide();
+                                                                                            <?php
                                                                                                if(User::check_user_post(myUser_id(myip()))==TRUE){
 
                                                                                             ?>
@@ -92,8 +100,10 @@ jQuery(document).ready(function(){
 		},
 		buttons: {
 			'Submit': function() {
-				if(submitEditForm())
-				jQuery(this).dialog('close');
+				if(submitEditForm()){
+                                    jQuery(this).dialog('close');
+                                    
+                                }
 			},
 			Cancel: function() {
 				jQuery(this).dialog('close');
