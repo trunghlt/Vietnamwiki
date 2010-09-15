@@ -33,7 +33,7 @@ if($_POST["type"]==1 && User::check_user(myUser_id(myip()),$postElement->id))
 {
 	$editionElement->id = $postElement->filterId($_POST["id_edition"]);	
 	$editionElement->save();
-	$content = htmlspecialchars_decode($editionElement->postContent, ENT_QUOTES);
+/*	$content = htmlspecialchars_decode($editionElement->postContent, ENT_QUOTES);
 	$content = str_replace("|", "&", $content);
 	$content = str_replace('\"', '"', $content);
 	$content = str_replace("\'", "'", $content);
@@ -43,7 +43,7 @@ if($_POST["type"]==1 && User::check_user(myUser_id(myip()),$postElement->id))
 	{
 		echo "<h2 style='color:black; font-size:9pt;'>Reference :</h2>";
 		echo HtmlSpecialChars($postElement->reference);
-	}
+	}*/
 }
 else if($_POST["type"]==2 && User::check_user(myUser_id(myip()),$postElement->id))
 {
@@ -54,12 +54,25 @@ else if($_POST["type"]==2 && User::check_user(myUser_id(myip()),$postElement->id
 		$row2 = Email::query(1);
 		$str = 'http://www.vietnamwiki.net/draft.php?id='.$editionElement->id;
 	
-	$content = htmlspecialchars_decode($postElement->draft, ENT_QUOTES);
+
+        $message = str_replace('{link}',$str,$row2['message']);
+        $message = str_replace('{time}',date("d/m/Y H:i a",$editionElement->editDateTime),$message);
+        $message = str_replace('{username}',$arr['username'],$message);
+        $message = str_replace('{title}',$editionElement->postTitle,$message);
+
+        $r = Email::query_post($postElement->id);
+        foreach($r as $row)
+        {
+                if(c_email($row['email']))
+                        sendmail($row['email'],$row2['subject'],$message,0,$row2['from']);
+        }
+
+ /*
+ 	$content = htmlspecialchars_decode($postElement->draft, ENT_QUOTES);
 	$content = str_replace("|", "&", $content);
 	$content = str_replace('\"', '"', $content);
 	$content = str_replace("\'", "'", $content);
-
-	if($n == 1)
+        if($n == 1)
 	{
 		echo "<script>";
 		echo "jQuery('#confirm').css('visibility','visible').dialog('open');";
@@ -68,11 +81,11 @@ else if($_POST["type"]==2 && User::check_user(myUser_id(myip()),$postElement->id
 		echo $content;
 		if($postElement->reference!='')
 		{
-			$re = mysql_query('select * from posts_texts where post_id='.$postElement->id);
-			$row = mysql_fetch_array($re);
+                        $postElement->query($postElement->id);
 			echo "<h2 style='color:black; font-size:9pt;'>Reference :</h2>";
-			echo HtmlSpecialChars($row['reference']);
-		}
+			echo HtmlSpecialChars($postElement->reference);
+
+                }
 	}
 	else{
 	echo "<h2>". $postElement->title . "</h2>";      
@@ -82,17 +95,6 @@ else if($_POST["type"]==2 && User::check_user(myUser_id(myip()),$postElement->id
 			echo "<h2 style='color:black; font-size:9pt;'>Reference :</h2>";
 			echo HtmlSpecialChars($postElement->reference);
 		} 
-	}
-		$message = str_replace('{link}',$str,$row2['message']);
-		$message = str_replace('{time}',date("d/m/Y H:i a",$editionElement->editDateTime),$message);
-		$message = str_replace('{username}',$arr['username'],$message);
-		$message = str_replace('{title}',$editionElement->postTitle,$message);
-			
-		$r = Email::query_post($postElement->id);
-		foreach($r as $row)
-		{
-			if(c_email($row['email']))
-				sendmail($row['email'],$row2['subject'],$message,0,$row2['from']);
-		}	
+	}*/
 }
 ?>

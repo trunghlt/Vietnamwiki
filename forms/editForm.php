@@ -12,10 +12,10 @@ include('dialog.php');
 			name="textEditFrame"
 			id="textEditFrame"				
 			src="textEditor.php?<?php 
-			if(isset($draf)) 
+			/*if(isset($draf))
 				echo "editionId_draf=".$draf;
 			elseif(isset($post['id']))
-					echo "id=".$post['id'];?>">
+					echo "id=".$post['id'];*/?>">
 	</iframe>  	
 	-->
 </div>
@@ -50,17 +50,27 @@ function submitEditForm() {
 	if(bool == true){
 		jQuery.post("submitPost.php", {id: id, indexId: indexId, title: title, smallImgURL: smallImgURL,
 									   bigImgURL: bigImgURL, summary: summary, content: content,
-									   <?if(isset($draf)){?>id_edition: <?=$draf.","?> <?}?>
+									   <?php if(isset($draf)){?>id_edition: <?=$draf.","?> <?php }?>
 									   ref: ref, type: type}, 
 									   function(response) {
-									       	jQuery("#postContent").html(response);
-											<?if(isset($draf)){?> 
+									       	
+											<?php if(isset($draf)){?>
 												window.location = 'draft.php?id=<?=$draf?>'; 
-											<?}
-											else if(isset($currentPostElement->id)) {?>
-												window.location = '<?=getPostPermalink($currentPostElement->id)?>';
-												loadEditorList(<?=$currentPostElement->id?>, "editorList");
-											<?}?>
+											<?php }
+											else if(isset($post['id'])) {
+                                                                                               if(User::check_user_post(myUser_id(myip()))==TRUE){
+
+                                                                                            ?>
+                                                                                                    window.location = '<?=getPostPermalink($currentPostElement->id)?>';
+                                                                                                   /* loadEditorList(<?//=$currentPostElement->id?>, "editorList");*/
+											<?php 
+                                                                                                }
+                                                                                                else{?>
+                                                                                                    jQuery('#confirm').css('visibility','visible').dialog('open');
+                                                                                         <?php
+                                                                                                }
+                                                                                            }
+                                                                                        ?>
 									   });
 		return true;
 	}
