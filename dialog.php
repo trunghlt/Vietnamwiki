@@ -14,6 +14,9 @@ jQuery(document).ready(function(){
 		buttons: {
 			'Submit': function() {
 				jQuery(this).dialog('close');
+                                    <?php if(isset($post['id'])) {?>
+                                       window.location = '<?=getPostPermalink($post['id'])?>';
+                                       <?php }?>
 			}
 		}
 	});
