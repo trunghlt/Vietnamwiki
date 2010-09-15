@@ -93,6 +93,7 @@ if ($editting) {
 
 	if($re){
 		$row1 = mysql_fetch_array($re);
+                $input_check_method = '<input id="c_method" type="hidden" value="1"/>';
 		if($row1['edit_date_time'] > $rr['post_edit_time']){
 			$indexElement = new IndexElement();
 			$indexElement->query($rr['index_id']);
@@ -108,6 +109,7 @@ if ($editting) {
 		}
 	}
 	else{
+                        $input_check_method = '<input id="c_method" type="hidden" value="0"/>';
 			$currentPostElement =  new PostElement;
 			$currentPostElement->query($postId);
 			$indexElement = new IndexElement();
@@ -135,6 +137,9 @@ function filterDestId($destId) {
 
 <form>
 <input id="preview" type="hidden" value="preview"/>
+<?php
+    echo $input_check_method;
+?>
   <div style="float: left; margin-right: 10px;">
 		<b><label>Location:</label></b> <br/>
 		<div id="loc" name="loc">

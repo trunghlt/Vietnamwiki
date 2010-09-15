@@ -50,7 +50,7 @@ else if($_POST["type"]==2 && User::check_user(myUser_id(myip()),$postElement->id
 	$u = new User;
 	$arr = $u->query_id($editionElement->userId);	
 	$editionElement->editDateTime = time();
-	$editionElement->add();
+	$editionElement->c_method();
 		$row2 = Email::query(1);
 		$str = 'http://www.vietnamwiki.net/draft.php?id='.$editionElement->id;
 	
