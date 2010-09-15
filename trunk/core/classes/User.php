@@ -104,15 +104,38 @@ class User {
 		$q->query("update users set email='".$email."' where id=".$id);
 	}
 	
-	static public function check_user($user_id,$post_id){
+	static public function check_user($user_id,$post_id=''){
 		$q = new db;
 			$q->query('select * from users where id='.$user_id.' and level=1');
-			if($q->re==NULL)
+			if($q->re==FALSE)
 			{
-				$q->query('select * from follow where user_id='.$user_id.' and post_id='.$post_id);
-					return $q->re;
+				if($post_id!=''){
+                                    $q->query('select * from follow where user_id='.$user_id.' and post_id='.$post_id);
+                                            return $q->re;
+                                }
 			}
 			return $q->re;
+	}
+	static public function check_user_post($user_id){
+		$q = new db;
+		if($user_id != ""){
+			$q->query("select property_value
+						from setting
+						where property_name = 'ALLOW_DIRECT_UPDATE'");
+			$row = mysql_fetch_assoc($q->re);
+			//Allow user =1
+			if($row['property_value']==0){
+				$q->query("select level
+							from users
+							where id='".$user_id."'");
+				$row2 = mysql_fetch_assoc($q->re);
+				if($row2['level']==1){
+                                    return TRUE;
+                                }
+                                return FALSE;
+                        }
+                        return TRUE;
+                }
 	}
 	/*-----------------------------------------------------------
 	Assign values of an array into user's properties
