@@ -1,7 +1,6 @@
 <?php include("ajaxLoad.php");
 include('dialog.php');
 ?>
-<img src ="../images/indicator.gif" style="display:none;" id="load_wait"/>
 <div id="editDialog" title="Edit entry">
 	<div id="editDialogContent"></div>
 	<!--
@@ -58,14 +57,10 @@ function submitEditForm() {
 									   <?php if(isset($draf)){?>id_edition: <?=$draf.","?> <?php }?>
 									   ref: ref, type: type}, 
 									   function(response) {
-									       	
 											<?php if(isset($draf)){?>
 												window.location = 'draft.php?id=<?=$draf?>'; 
 											<?php }
 											else if(isset($post['id'])) {
-                                                                                            ?>
-                                                                                               //jQuery('#load_wait').show().delay('400').hide();
-                                                                                            <?php
                                                                                                if(User::check_user_post(myUser_id(myip()))==TRUE){
 
                                                                                             ?>
@@ -98,7 +93,7 @@ jQuery(document).ready(function(){
 			backgroundColor: '#000',
 			opacity: 0.5
 		},
-		buttons: {
+                buttons: {
 			'Submit': function() {
 				if(submitEditForm()){
                                     jQuery(this).dialog('close');

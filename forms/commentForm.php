@@ -44,14 +44,9 @@ function updateCommentText(reviewText) {
 }
 
 function submitComment(){
-	var myHTMLRequest = new Request.HTML({url: "requests/updateCommentList.php", evalResponse: true}).post($("commentForm"));
-	myHTMLRequest.addEvent("onSuccess",function(responseTree, responseElements, responseHTML, responseJavaScript){
-		$("commentList").set("html", responseHTML);
-		var newScript = document.createElement('script');
-		newScript.language = 'javascript';
-		newScript.text = responseJavaScript;
-		$("commentList").appendChild(newScript);
-	});	
+        jQuery.post('requests/updateCommentList.php', jQuery('#commentForm').serialize(), function(response){
+            jQuery('#commentList').html(response);
+        });
 }
 
 jQuery(document).ready(function(){
