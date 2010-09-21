@@ -252,6 +252,7 @@ function submitLogin(dom,check) {
 				}
 	});
 }
+
 </script>
 
 <?php include("commentListPainter.php"); ?>
