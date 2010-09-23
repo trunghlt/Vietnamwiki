@@ -61,14 +61,17 @@ function submitEditForm() {
 												window.location = 'draft.php?id=<?=$draf?>'; 
 											<?php }
 											else if(isset($post['id'])) {
+                                                                                            
                                                                                                if(User::check_user_post(myUser_id(myip()))==TRUE){
 
                                                                                             ?>
-                                                                                                    window.location = '<?=getPostPermalink($currentPostElement->id)?>';
+                                                                                                   
+                                                                                                    window.location = '<?=getPostPermalink($post['id'])?>';
                                                                                                    /* loadEditorList(<?//=$currentPostElement->id?>, "editorList");*/
 											<?php 
                                                                                                 }
                                                                                                 else{?>
+                                                                                                   // alert(response);
                                                                                                     jQuery('#confirm').css('visibility','visible').dialog('open');
                                                                                          <?php
                                                                                                 }
