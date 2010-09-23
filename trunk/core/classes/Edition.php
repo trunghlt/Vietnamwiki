@@ -144,26 +144,93 @@ class Edition {
 		$this->id = mysql_insert_id();		
 	}
 	
-	public function save() {	
-		$mysql["postContent"] = mysql_real_escape_string($this->postContent);
-		$mysql["reference"] = mysql_real_escape_string($this->reference);
-		mysql_query("UPDATE editions
-					SET user_id = ".$this->userId.",
-						post_id = ".$this->postId.",
-						post_subject = '".$this->postTitle."',
-						post_summary = '".$this->postSummary."',
-						post_text = '".$mysql["postContent"]."',
-						post_small_img_url = '".$this->postSmallImgURL."',
-						post_big_img_url = '".$this->postBigImgURL."',
-						index_id = '".$this->index_id."',
-						post_ip= '".$this->post_ip."',
-						post_username = '".$this->post_username."',
-						reference = '".$mysql["reference"]."'
-					WHERE id = ".$this->id) or die(mysql_error());		
+	public function save_edition() {
+		$this->post_ip = myip();
+                $mysql["postContent"] = mysql_real_escape_string($this->postContent);
+                $mysql["reference"] = mysql_real_escape_string($this->reference);
+		$re = mysql_query("select property_value
+						   from setting
+						   where property_name = 'ALLOW_DIRECT_UPDATE'");
+		$row = mysql_fetch_assoc($re);
+		//Check if not allow will be change check'value
+		if($row['property_value']==0){
+                        $re1 = mysql_query("select level
+							from users
+							where id='".$this->userId."'");
+                        $row2 = mysql_fetch_assoc($re1);
+			if($row2['level']==0){	
+                            mysql_query("UPDATE editions
+                                                    SET user_id = ".$this->userId.",
+                                                            post_id = ".$this->postId.",
+                                                            post_subject = '".$this->postTitle."',
+                                                            post_summary = '".$this->postSummary."',
+                                                            post_text = '".$mysql["postContent"]."',
+                                                            post_small_img_url = '".$this->postSmallImgURL."',
+                                                            post_big_img_url = '".$this->postBigImgURL."',
+                                                            index_id = '".$this->index_id."',
+                                                            post_ip= '".$this->post_ip."',
+                                                            post_username = '".$this->post_username."',
+                                                            checked = 0,
+                                                            accepted_time = 0,
+                                                            reference = '".$mysql["reference"]."'
+                                                    WHERE id = ".$this->id) or die(mysql_error());
+                        }
+                        else{
+                             mysql_query("UPDATE editions
+                                                    SET user_id = ".$this->userId.",
+                                                            post_id = ".$this->postId.",
+                                                            post_subject = '".$this->postTitle."',
+                                                            post_summary = '".$this->postSummary."',
+                                                            post_text = '".$mysql["postContent"]."',
+                                                            post_small_img_url = '".$this->postSmallImgURL."',
+                                                            post_big_img_url = '".$this->postBigImgURL."',
+                                                            index_id = '".$this->index_id."',
+                                                            post_ip= '".$this->post_ip."',
+                                                            post_username = '".$this->post_username."',
+                                                            checked = 1,
+                                                            accepted_time = $this->editDateTime,
+                                                            reference = '".$mysql["reference"]."'
+                                                    WHERE id = ".$this->id) or die(mysql_error());
+                        }
+                }
+                else{
+                     mysql_query("UPDATE editions
+                                            SET user_id = ".$this->userId.",
+                                                    post_id = ".$this->postId.",
+                                                    post_subject = '".$this->postTitle."',
+                                                    post_summary = '".$this->postSummary."',
+                                                    post_text = '".$mysql["postContent"]."',
+                                                    post_small_img_url = '".$this->postSmallImgURL."',
+                                                    post_big_img_url = '".$this->postBigImgURL."',
+                                                    index_id = '".$this->index_id."',
+                                                    post_ip= '".$this->post_ip."',
+                                                    post_username = '".$this->post_username."',
+                                                    checked = 1,
+                                                    accepted_time = $this->editDateTime,
+                                                    reference = '".$mysql["reference"]."'
+                                            WHERE id = ".$this->id) or die(mysql_error());
+                }
 	}
-	
-		
-	//Restore a draft
+	//save_draf
+        public function  save(){
+              $mysql["postContent"] = mysql_real_escape_string($this->postContent);
+              $mysql["reference"] = mysql_real_escape_string($this->reference);
+              mysql_query("UPDATE editions
+                                    SET user_id = ".$this->userId.",
+                                            post_id = ".$this->postId.",
+                                            post_subject = '".$this->postTitle."',
+                                            post_summary = '".$this->postSummary."',
+                                            post_text = '".$mysql["postContent"]."',
+                                            post_small_img_url = '".$this->postSmallImgURL."',
+                                            post_big_img_url = '".$this->postBigImgURL."',
+                                            index_id = '".$this->index_id."',
+                                            post_ip= '".$this->post_ip."',
+                                            post_username = '".$this->post_username."',
+                                            reference = '".$mysql["reference"]."'
+                                    WHERE id = ".$this->id) or die(mysql_error());
+        }
+
+        //Restore a draft
 	public function restore($type='') {		
 		//Update posts_texts
 		$mysql["postContent"] = mysql_real_escape_string($this->postContent);
@@ -386,7 +453,7 @@ Choose method save or add
             if($q->n>0){
                     $r = mysql_fetch_assoc($q->re);
                     $this->id = $r['id'];
-                    $this->save();
+                    $this->save_edition();
                     return 1;
             }
             else

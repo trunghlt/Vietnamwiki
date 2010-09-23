@@ -49,20 +49,22 @@ else if(isset($_POST["Index"])){
 		<?php
 		$editorCount++;
 	}
-if(isset($index_edition)){
+if(isset($index_edition) && count($index_edition)>0){
 $editorCount = 0;
 	echo "<br /><span style='color: #888888'>Under admin's review</span>";
 	show($index_edition,"index_not_check");
 }
 else if(isset($editions2) || isset($editions1)){
 $editorCount = 0;
-	echo "Posted & editted by";
-	show($editions1,"checked");
-if(isset($editions2)){
-	echo "<br /><span style='color: #888888'>Under admin's review</span>";
-	$editorCount = 0;
-	show($editions2,"not_checked");
-}
+        if(isset($editions1) && count($editions1)>0){
+            echo "Posted & editted by";
+            show($editions1,"checked");
+        }
+        if(isset($editions2) && count($editions2)>0){
+            echo "<br /><span style='color: #888888'>Under admin's review</span>";
+            $editorCount = 0;
+            show($editions2,"not_checked");
+        }
 }
 		
 function show($editions,$type){

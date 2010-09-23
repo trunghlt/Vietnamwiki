@@ -88,13 +88,12 @@ if ($editting) {
 
 	$user_post = myUser_id(myip());
 	$sql = "select * from editions where post_id = '".$postId."'and user_id ='".$user_post."' 
-			and checked = 0 order by edit_date_time desc";
+			and checked = 0";
 	$re = mysql_query($sql);
-
-	if($re){
+	if(mysql_num_rows($re)>0){
 		$row1 = mysql_fetch_array($re);
                 $input_check_method = '<input id="c_method" type="hidden" value="1"/>';
-		if($row1['edit_date_time'] > $rr['post_edit_time']){
+		/*if($row1['edit_date_time'] > $rr['post_edit_time']){
 			$indexElement = new IndexElement();
 			$indexElement->query($rr['index_id']);
 			$destId = $indexElement->destId;
@@ -107,6 +106,11 @@ if ($editting) {
 			$indexElement->query($currentPostElement->indexId);
 			$destId = $indexElement->destId;
 		}
+                 */
+                $indexElement = new IndexElement();
+                $indexElement->query($rr['index_id']);
+                $destId = $indexElement->destId;
+                $flag = 2;
 	}
 	else{
                         $input_check_method = '<input id="c_method" type="hidden" value="0"/>';
@@ -256,7 +260,6 @@ function filterDestId($destId) {
 			$content = str_replace("|", "&", $content);		 
 			$content = str_replace('\"', '"', $content);
 			$content = str_replace("\'", "'", $content);
-			
 			echo $content;
 		}
 		elseif($edit_draf) {
