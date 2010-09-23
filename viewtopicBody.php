@@ -193,8 +193,8 @@ else
 
 <script language="javascript">
 jQuery(document).ready(function(){
-	loadEdittingRibbon(<?php echo $post_id?>, "ribbon");
-	loadEditorList(<?php echo $post_id?>, "editorList","");
+        loadEditorList(<?php echo $post_id?>, "editorList","");
+	loadEdittingRibbon(<?php echo $post_id?>, "ribbon");	
 });
 
 function editClick() {
@@ -240,11 +240,12 @@ function submitLogin(dom,check) {
 						loadEdittingRibbon(<?php echo $post_id?>, "ribbon");
 						jQuery('#field_not_login_comment').html("<input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='2'/>");
                                                 load_qanda(0);
+                                               
 					}
 					else
 					{
 						jQuery('#field_not_login_comment').html("<input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='2'/>");
-
+                                               
 						load_qanda(0);
                                                 if(check==2)
 							edit_login.dialog('close');							

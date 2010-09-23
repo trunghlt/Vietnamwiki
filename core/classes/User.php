@@ -116,7 +116,7 @@ class User {
 			}
 			return $q->re;
 	}
-	static public function check_user_post($user_id){
+	static public function check_user_post($user_id,$post_id=''){
 		$q = new db;
 		if($user_id != ""){
 			$q->query("select property_value
@@ -131,6 +131,15 @@ class User {
 				$row2 = mysql_fetch_assoc($q->re);
 				if($row2['level']==1){
                                     return TRUE;
+                                }
+                                if($post_id!=''){
+                                    $q->query("select checked
+							from editions
+							where id='".$user_id."' and post_id = '".$post_id."'");
+                                    $r = mysql_fetch_assoc($q->re);
+                                    if($r['checked']==1){
+                                        return TRUE;
+                                    }
                                 }
                                 return FALSE;
                         }
