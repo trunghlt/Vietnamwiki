@@ -135,10 +135,23 @@ class User {
                                 if($post_id!=''){
                                     $q->query("select checked
 							from editions
-							where id='".$user_id."' and post_id = '".$post_id."'");
-                                    $r = mysql_fetch_assoc($q->re);
-                                    if($r['checked']==1){
-                                        return TRUE;
+							where user_id='".$user_id."' and post_id = '".$post_id."'");
+
+                                    if(mysql_num_rows($q->re)==1){
+                                        $r = mysql_fetch_assoc($q->re);
+
+                                            if($r['checked']==1){
+                                                return TRUE;
+                                            }
+                                            
+                                    }
+                                    else if(mysql_num_rows($q->re)>1)
+                                    {
+                                        while($r = mysql_fetch_assoc($q->re)){
+                                            if($r['checked']==1){
+                                                return TRUE;
+                                            }
+                                        }
                                     }
                                 }
                                 return FALSE;

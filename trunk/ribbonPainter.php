@@ -9,9 +9,11 @@ if (logged_in() || chkFbLoggedIn()) {
 	$currentUser = new User;
 	$currentUser->query(myUser_id(myip())); ?>
 	<a class='link' onClick="jQuery('#commentDialog').css('visibility','visible').dialog('open')"> Comment </a>
-	<?php if ((!$postElement->locked)||($currentUser->level == 1)) { ?>
+	<?php
+                
+                if ((!$postElement->locked)||($currentUser->level == 1)|| User::check_user_post($currentUser->id, $clean["postId"])) { ?>
 		|<a class='link' id='edit_link' onClick='editClick()'> Edit </a>			
-		<?php if ($currentUser->username == $postElement->authorUsername ) {
+		<?php if ($currentUser->level == 1){//$currentUser->username == $postElement->authorUsername ) {
 			echo "|<a class='link' onClick='jQuery(\"#deleteConfirmDialog\").css(\"visibility\",\"visible\").dialog(\"open\")'> Delete </a>";
 		}		
 	}

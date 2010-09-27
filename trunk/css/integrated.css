@@ -35,7 +35,7 @@ html, body {
 	}
 	
 #header {
-	width: 100$;
+	width: 100px;
 	background:#db1c00;
 /*
 	background-color: #600003;
@@ -156,6 +156,9 @@ html, body {
 #contentTable{
 	background-color: white;
 	clear:both;
+}
+.clear{
+    clear:both;
 }
 #contentTable .seach_body{
 	padding: 5px 5px 5px 5px;
