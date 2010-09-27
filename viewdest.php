@@ -107,6 +107,7 @@ foreach ($r as $row) {
 	$s = MakeTextViewable($s);      
 	echo $s ; 
 	?>
+                                <div class="clear"></div>
 	</div>
 <div style="border-bottom: 1px dotted gray; margin-bottom: 10px; padding-top:10px;"></div>
 	<?php
