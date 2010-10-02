@@ -7,8 +7,7 @@ $page = isset($_GET["page"])? $_GET["page"] : 1;
 $page = pagePostFilter($page);		
 
 function get_post($id){
-	$memcache = new Memcache;
-	$memcache->connect("127.0.0.1", 11211);
+	//$memcache = new Memcache;
 	$currentPostElement = new PostElement;
 	$currentPostElement->query($id);
 	$post = array('post_subject'=>$currentPostElement->title,'post_text'=>$currentPostElement->content,
@@ -17,11 +16,11 @@ function get_post($id){
 				  'summary'=>$currentPostElement->summary,'smallImgURL'=>$currentPostElement->smallImgURL,
 				  'bigImgURL'=>$currentPostElement->bigImgURL,'id'=>$currentPostElement->id
 				 );
-	$memcache->set("post_".$id,$post);
+	Mem::$memcache->set("post_".$id,$post);
 	return $post;
 }
 
-$post = $memcache->get("post_".$post_id);
+$post = Mem::$memcache->get("post_".$post_id);
 if($post == NULL){
 	$post = get_post($post_id);	 
 }
@@ -93,7 +92,8 @@ else
 		<span style="font-size: 9px; color: #CC0000;"><?php echo $translatedNotif; ?></span>
 		<?php
 	}
-	
+           
+            echo "<div id='flash_hn'></div>";
 	//title
 	echo "<h1>". HtmlSpecialChars($title) . "</h1>";      
 	
@@ -194,7 +194,16 @@ else
 <script language="javascript">
 jQuery(document).ready(function(){
         loadEditorList(<?php echo $post_id?>, "editorList","");
-	loadEdittingRibbon(<?php echo $post_id?>, "ribbon");	
+	loadEdittingRibbon(<?php echo $post_id?>, "ribbon");
+        <?php
+            if($post_id == 29)
+            {
+        ?>
+                get_flash_hn();
+        <?php
+            }
+        ?>
+
 });
 
 function editClick() {
@@ -211,7 +220,12 @@ function signOut() {
 					jQuery('#field_not_login_comment').html("Email :<br /><input class='field' name='fill_email_comment' id='fill_email_comment' type='text' style='width:250px' value=''/><br />Name :<br /><input class='field' name='fill_name_comment' id='fill_name_comment' type='text' style='width:250px' value=''/><br /><input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='1'/>");
 				});
 }
-
+function get_flash_hn() {
+	jQuery.post("/requests/get_flash_hn.php", {},
+				function(response) {
+					jQuery('#flash_hn').html(response);
+				});
+}
 function submitLogin(dom,check) {	
 	jQuery.post("/requests/postLogin.php", jQuery("#"+dom).serialize(), 
 			function(response){
