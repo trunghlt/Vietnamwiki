@@ -35,7 +35,7 @@ html, body {
 	}
 	
 #header {
-	width: 100px;
+	width: 100%;
 	background:#db1c00;
 /*
 	background-color: #600003;
@@ -49,6 +49,7 @@ html, body {
 	background: url(/css/images/topBar.gif) repeat-x scroll;
 	height: 35px;
 */
+	text-align: center;
 	height: 80px;
 	margin-bottom:1px;
 }
@@ -215,8 +216,11 @@ html, body {
 			padding: 5px 5px 5px 10px;
 		}
 		
-		
-div.button {
+.clear {
+	clear: both;
+}
+
+	div.button {
 	float: left;
 	position: relative;
 	background-color : #cdcd9b;
@@ -511,7 +515,6 @@ td.left {
 	width : 180px;
 	vertical-align: top;
 	border-right: 1px solid #C8C8C8;
-	border-bottom: 1px solid #C8C8C8;
 	border-left: 1px solid #C8C8C8;
 }
 
@@ -535,18 +538,9 @@ table.leftmenu{
 }
 
 table.main {
-	width: 806px;
 	clear: both;
 	margin-top: 20px;
-	/*margin-bottom: 50px;*/
 	background: #FFF;
-	/*
-	-moz-box-shadow: 0px 6px 10px #AAA;
-	-webkit-box-shadow: 0px 6px 10px #AAA;
-	box-shadow: 0px 6px 10px #AAA;
-	*/
-	/*border:1px solid #CDCD9B;
-	border-bottom:none;*/
 }
 .main .top_search {
 	border-right:none;
@@ -1271,36 +1265,44 @@ div.demo-description {
 }
 
 #qanda{
-    width: 180px;
+    width: 190px;
     float: left;
     font-family:Arial,Helvetica,serif;
     font-size: 12px;
     
 }
+
+
 #qanda ul{
     list-style: none;
     margin: 0px;
     padding: 0px;
     list-style-position: outside;
 }
+
+#view_qanda > ul > li {
+    border-bottom: 1px #DDD solid;
+}
+
 #qanda ul li{
-    padding-top: 10px
+    padding-top: 10px;
 }
 #qanda ul li ul{
     margin-left: 30px;
 }
 #qanda ul li ul li{
     margin-bottom: 10px;
+	clear: both;
 }
 .question{
     text-align: left;
     width: 180px;
     margin-bottom: 10px;
-    margin-top: 10px;
 }
 #qanda img{
     padding: 3px 2px 2px 0px;
 }
 #view_qanda{
+    margin: 5px;
     overflow: inherit;
 }

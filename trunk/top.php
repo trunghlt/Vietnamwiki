@@ -9,6 +9,6 @@
 			</form>
 		</div>	
 	</div>
-	<div style="margin:0px 0px 0px 260px"><span style="font-family:Arial; font-size:14px;"><a href="/" style="text-decoration:none; color:#FFFFFF;">Your open encyclopedia about an Amazing Vietnam</a></span></div>
+	<div style="margin:0px auto 0px auto"><span style="font-family:Arial; font-size:14px;"><a href="/" style="text-decoration:none; color:#FFFFFF;">Your open encyclopedia about an Amazing Vietnam</a></span></div>
 </div>
 
