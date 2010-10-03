@@ -15,23 +15,28 @@ include("ajaxLoad.php");
 include('destination.php');
 //change_template();
 ?>
-    <td class="center">	
-	<div style = "background: #EDEFF4; height: 28px;">
-    <div id="menuWrapper">
-		<div id="toolbar"></div>
-        </div>
+<td class="center">	
+<div style = "background: #EDEFF4; height: 28px;">
+<div id="menuWrapper">
+	<div id="toolbar"></div>
+    </div>
+</div>
+<div id='col2'>
+	<div id="contentTable">
+	<?php include("viewdest.php");?>
 	</div>
-	<div id='col2'>
-		<div id="contentTable">
-		<?php include("viewdest.php");?>
-		</div>
-	</div>
-	</td>
-    <td classs="right">
-        <?php include('listquestion.php');?>
-    </td>
-   </tr>
-  </tbody></table>
+</div>
+</td>
+<td classs="right">
+    <?php include('listquestion.php');?>
+</td>
+</tr>
+<tr>
+<td colspan=3>
+	<?php include("footLinks.php");?>
+</td>
+</tr>
+</tbody></table>
 <script language="javascript">
 jQuery(function(){
 	loadToolbar("toolbar");

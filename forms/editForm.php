@@ -58,25 +58,16 @@ function submitEditForm() {
 									   ref: ref, type: type}, 
 									   function(response) {
 											<?php if(isset($draf)){?>
+										       	jQuery('#confirm').css('visibility','visible').dialog('open');
 												window.location = 'draft.php?id=<?=$draf?>'; 
 											<?php }
 											else if(isset($post['id'])) {
-                                                                                            
-                                                                                               if(User::check_user_post(myUser_id(myip()))==TRUE){
-
-                                                                                            ?>
-                                                                                                   
-                                                                                                    window.location = '<?=getPostPermalink($post['id'])?>';
-                                                                                                   /* loadEditorList(<?//=$currentPostElement->id?>, "editorList");*/
-											<?php 
-                                                                                                }
-                                                                                                else{?>
-                                                                                                   // alert(response);
-                                                                                                    jQuery('#confirm').css('visibility','visible').dialog('open');
-                                                                                         <?php
-                                                                                                }
-                                                                                            }
-                                                                                        ?>
+                                                if(User::check_user_post(myUser_id(myip()))==TRUE){ ?>
+                                                     window.location = '<?=getPostPermalink($currentPostElement->id)?>';
+											<?php } else{?>
+                                                jQuery('#confirm').css('visibility','visible').dialog('open');
+                                            <?php }                                                                                        
+           									} ?>
 									   });
 		return true;
 	}
@@ -98,10 +89,7 @@ jQuery(document).ready(function(){
 		},
                 buttons: {
 			'Submit': function() {
-				if(submitEditForm()){
-                                    jQuery(this).dialog('close');
-                                    
-                                }
+				if(submitEditForm()) jQuery(this).dialog('close');
 			},
 			Cancel: function() {
 				jQuery(this).dialog('close');

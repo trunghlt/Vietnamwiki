@@ -1,7 +1,6 @@
 </tr>
 </tbody></table>
 
-<?php include("footLinks.php");?>
 
 <div id="invalidLoginDialog" title="Alert">
 	Your usernamse/password is invalid !

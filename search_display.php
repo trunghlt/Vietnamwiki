@@ -12,13 +12,19 @@ include('destination.php');
 include('ajaxLoad.php');
 ?> 
 
-	<td  valign="top">	
-		<div style = "background: #EDEFF4; height: 28px;">
+	<td  class="center" valign="top">	
+		<div id="menuWrapper">
 			<div id ="toolbar"></div>
 		</div>
+		
 		<div id="contentTable">
 			<?php include("sbody.php");?>
 		</div>
+	</td>
+</tr>
+<tr>
+	<td colspan=3>
+		<?php include("footLinks.php");?>
 	</td>
 </tr>
 </tbody>

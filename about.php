@@ -9,20 +9,22 @@ include('core/session.php');
 include("ajax_header.php");
 include('header.php'); 
 include('destination.php');
-?>
-  
-
-    <td class="center">	
-	<?php include('toolbar.php'); ?>
-	<div id='col2'>
-		<table class="contentTable"><tbody><tr><td >
-		<?php include("view_about.php");?>
-		</td><tr></tbody></table>
-	</div>
-	</td>
-   </tr>
-  </tbody></table>
-  
+?> 
+<td class="center">	
+<?php include('toolbar.php'); ?>
+<div id='col2'>
+	<table class="contentTable"><tbody><tr><td >
+	<?php include("view_about.php");?>
+	</td><tr></tbody></table>
+</div>
+</td>
+</tr>
+<tr>
+<td colspan=3>
+	<?php include("footLinks.php");?>
+</td>
+</tr>
+</tbody></table>  
 <?php
 include("footer.php");
 ?>

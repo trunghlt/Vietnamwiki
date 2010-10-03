@@ -26,7 +26,7 @@ the user send to our website will be checked and confirmed before posted to offi
 <style type="text/css">
 body {
 	background-color: #8C0003;
-	background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 600, from(red), to(#000)); 
+	background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 800, from(#DB1C00), to(#000)); 
 	font-family: Arial,Helvetica,serif;
 	font-size: 10px;
 	padding: 0px;
@@ -34,8 +34,8 @@ body {
 }
 .style2 {font-weight: bold}
 .style4 {color: #FFFFFF}
-.style5 {color: #00CCFF}
-.style6 {color: #00FFFF}
+.style5 {color: #ACA741}
+.style6 {color: #ACA741}
 
 .logo {
 	font-size: 2.6em;
@@ -170,6 +170,7 @@ body {
 <script type="text/javascript" src="js/jQuery.fullBg.js"></script>
 
 <script type="text/javascript"> 
+/*
 jQuery(function($) {
     var img = new Image();
 	jQuery(img).load(function() {
@@ -180,6 +181,7 @@ jQuery(function($) {
 		jQuery(this).fadeIn(500);
 	}).attr("src", "http://farm4.static.flickr.com/3155/2920945558_3b2f59a505_b.jpg");
 });
+*/
 </script>
 </head>
 
@@ -390,10 +392,10 @@ function cen(a ,b) {
 	<td width="263"><p class="style4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Capital: <a href="http://www.vietnamwiki.net/Ha_Noi-Overview-I72" class="style5">Hanoi</a></p>
 	  <p class="style4">&nbsp;&nbsp;&nbsp;Biggest city: <a href="http://www.vietnamwiki.net/Ho_Chi_Minh-Overview-Ho_Chi_Minh_general_information-P11" class="style6">Ho Chi Minh</a></p>
 	  <p class="style4">&nbsp;Language:  Vietnamese</p>
-	  <p class="style4">Area: <a href="http://en.wikipedia.org/wiki/1_E9_m%C2%B2" title="1 E9 m&sup2;" class="style6">331,689&nbsp;km&sup2;</a>&nbsp;(<a title="List of countries and outlying territories by area" href="http://en.wikipedia.org/wiki/List_of_countries_and_outlying_territories_by_area" style="color:#00FFFF">65th</a>)</p>
-	  <p class="style4">Population: 87,375,000&nbsp;(<a title="List of countries by population" href="http://en.wikipedia.org/wiki/List_of_countries_by_population" style="color:#00FFFF">13th</a>) </p>
-	  <p class="style4">GDP: $92.439 billion&nbsp;(<a title="List of countries by GDP (Nominal)" href="http://en.wikipedia.org/wiki/List_of_countries_by_GDP_%28PPP%29" style="color:#00FFFF">57th</a>) </p>
-	  <p class="style4">&nbsp;&nbsp;Currency: <span class="style6" lang="vi" xml:lang="vi"><a title="Vietnamese &#273;&#7891;ng" href="http://en.wikipedia.org/wiki/Vietnamese_%C4%91%E1%BB%93ng" style="color:#00FFFF">&#273;&#7891;ng</a> (&#8363;) (<a title="ISO 4217" href="http://en.wikipedia.org/wiki/ISO_4217" style="color:#00FFFF">VND</a>)</span></p>
+	  <p class="style4">Area: <a href="http://en.wikipedia.org/wiki/1_E9_m%C2%B2" title="1 E9 m&sup2;" class="style6">331,689&nbsp;km&sup2;</a>&nbsp;(<a title="List of countries and outlying territories by area" href="http://en.wikipedia.org/wiki/List_of_countries_and_outlying_territories_by_area" style="color:#ACA741">65th</a>)</p>
+	  <p class="style4">Population: 87,375,000&nbsp;(<a title="List of countries by population" href="http://en.wikipedia.org/wiki/List_of_countries_by_population" style="color:#ACA741">13th</a>) </p>
+	  <p class="style4">GDP: $92.439 billion&nbsp;(<a title="List of countries by GDP (Nominal)" href="http://en.wikipedia.org/wiki/List_of_countries_by_GDP_%28PPP%29" style="color:#ACA741">57th</a>) </p>
+	  <p class="style4">&nbsp;&nbsp;Currency: <span class="style6" lang="vi" xml:lang="vi"><a title="Vietnamese &#273;&#7891;ng" href="http://en.wikipedia.org/wiki/Vietnamese_%C4%91%E1%BB%93ng" style="color:#ACA741">&#273;&#7891;ng</a> (&#8363;) (<a title="ISO 4217" href="http://en.wikipedia.org/wiki/ISO_4217" style="color:#ACA741">VND</a>)</span></p>
 	  <p class="style4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time Zone: (UTC +7) </p></td>
 	<td width="355">
 		<div style="position: relative;">
@@ -414,20 +416,20 @@ function cen(a ,b) {
 		<AREA SHAPE = "DEFAULT" NOHREF>
 		</MAP>	
 		<div align="center">
-			<a style="color:#00FFFF; color: yellow;" href="/Vietnam_general-General-Vietnam-P32">I don't know where to go ?!</a>
+			<a style="color:#ACA741; color: #ACA741;" href="/Vietnam_general-General-Vietnam-P32">I don't know where to go ?!</a>
 		</div>
 		</td>
 	<td width="263">
-		<p align="right" class="style4"> <span class="style6"><a href="/Vietnam_general-Overview-Vietnam-P32" style="color:#00FFFF">Top destinations</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
-		<p align="right" class="style4 style6"> <a href="/Vietnam_general-Passport__Visa-I39" style="color:#00FFFF">Passport & Visa&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-		<p align="right" class="style4 style6"><a href="/Vietnam_general-Tradition__culture-I58" style="color:#00FFFF">Tradition &amp; Culture</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-		<p align="right" class="style4 style6"><a href="/Vietnam_general-Travel_information-I116" style="color:#00FFFF">Travel information</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-		<p align="right" class="style4 style6"><a href="/Vietnam_general-Food-I123" style="color:#00FFFF">Food&nbsp;</a>&nbsp;&nbsp;&nbsp;</p>
-		<p align="right" class="style4 style6"><a href="/Vietnam_general-Currency-I59" style="color:#00FFFF">Currency</a>&nbsp;&nbsp;&nbsp;</p>
-		<p align="right" class="style4 style6"><a href="/Vietnam_general-Climate-I61" style="color:#00FFFF">Climate&nbsp;</a>&nbsp;&nbsp;</p>
-		<p align="right" class="style4 style6"><a href="/Vietnam_general-Holiday-I60" style="color:#00FFFF">Holiday</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-		<p align="right" class="style4 style6"><a href="/Vietnam_general-History-I43" style="color:#00FFFF">History&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-		<p align="right" class="style4"><span class="style6"><a href="photo.php?dest_id=3&amp;page=1" style="color:#00FFFF">Photos</a>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></td>
+		<p align="right" class="style4"> <span class="style6"><a href="/Vietnam_general-Overview-Vietnam-P32" style="color:#ACA741">Top destinations</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+		<p align="right" class="style4 style6"> <a href="/Vietnam_general-Passport__Visa-I39" style="color:#ACA741">Passport & Visa&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+		<p align="right" class="style4 style6"><a href="/Vietnam_general-Tradition__culture-I58" style="color:#ACA741">Tradition &amp; Culture</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+		<p align="right" class="style4 style6"><a href="/Vietnam_general-Travel_information-I116" style="color:#ACA741">Travel information</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+		<p align="right" class="style4 style6"><a href="/Vietnam_general-Food-I123" style="color:#ACA741">Food&nbsp;</a>&nbsp;&nbsp;&nbsp;</p>
+		<p align="right" class="style4 style6"><a href="/Vietnam_general-Currency-I59" style="color:#ACA741">Currency</a>&nbsp;&nbsp;&nbsp;</p>
+		<p align="right" class="style4 style6"><a href="/Vietnam_general-Climate-I61" style="color:#ACA741">Climate&nbsp;</a>&nbsp;&nbsp;</p>
+		<p align="right" class="style4 style6"><a href="/Vietnam_general-Holiday-I60" style="color:#ACA741">Holiday</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+		<p align="right" class="style4 style6"><a href="/Vietnam_general-History-I43" style="color:#ACA741">History&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+		<p align="right" class="style4"><span class="style6"><a href="photo.php?dest_id=3&amp;page=1" style="color:#ACA741">Photos</a>&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></td>
 	</tr>
 	<tr>
 	</tr>

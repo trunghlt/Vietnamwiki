@@ -15,8 +15,8 @@ $mapmarkerList = MapSpot::query();
 <head>
 <style type="text/css">
 #spots img{
-	width:25px;
-	height:25px;
+	width:50px;
+	height:50px;
 }
 #spots{
 	font-size:10pt;
@@ -30,9 +30,10 @@ $mapmarkerList = MapSpot::query();
 	display:block;
 	clear:left;
 }
+
 #spots .spotsimg{
-	width:50px;
-	height:50px;
+	width:30px;
+	height:30px;
 	
 }
 div.button {
@@ -89,10 +90,13 @@ select.icon-menu option {
 	line-height: 40px;
 	height: 40px;
 }
+
 </style>
 
-<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAV1hMY6P-vcrStESIcmxsyBSg0YMtASE5KdM7LALqADHM9SZ_PBTZqozQ8fKlIDHry-cBnAxWYeYpSw" type="text/javascript"></script>
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAV1hMY6P-vcrStESIcmxsyBT6xYYt3L8kyrregkxWzQhl2XmzkRRwJXeyUWjeICm6nYeVvYDtg1Br7Q" type="text/javascript"></script>
+<script src="http://gmaps-utility-library.googlecode.com/svn/trunk/extinfowindow/release/src/extinfowindow.js" type="text/javascript"></script>
 <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/mapInfoWindow.css" />
 <script type="text/javascript">
 //<![CDATA[
 if (window.attachEvent) {
@@ -114,7 +118,7 @@ mapIcons["shop"] = "shoppingmall.png";
 mapIcons["bank"] = "bank.png";
 mapIcons["hotel"] = "hotel.png";
 
-function createMarker(point, cat, des) {
+function createMarker(map, point, cat, des) {
 	var vnwkIcon = new GIcon();
 	vnwkIcon.image = mapDir + mapIcons[cat];
 	vnwkIcon.shadowSize = new GSize(0, 0);
@@ -130,7 +134,7 @@ function createMarker(point, cat, des) {
     var marker = new GMarker(point, {icon: vnwkIcon, draggable: false});
     if (des!='') {
 	    GEvent.addListener(marker, "click", function() {
-		  marker.openInfoWindowHtml(des);
+		  marker.openExtInfoWindow(map, "opacity_window", des);
 	    });
     }
     return marker;
@@ -236,12 +240,12 @@ function showAddress(address)
 					var customUI = map.getDefaultUI();
 					customUI.maptypes.hybrid = false;
 					map.setUI(customUI);
-					var marker = createMarker(point, "others");
+					var marker = createMarker(map, point, "others");
 					map.addOverlay(marker);
 					
 					<?php foreach ($mapmarkerList as $ms1) {	?>					
 					des = htmlspecialchars_decode("<?php echo str_replace("\n", "", $ms1['des'])?>", "ENT_QUOTES");	
-					map.addOverlay(createMarker(new GLatLng(<?php echo $ms1['latCoord']?>, <?php echo $ms1['longCoord']?>), "<?php echo $ms1['cat']?>", des));
+					map.addOverlay(createMarker(map, new GLatLng(<?php echo $ms1['latCoord']?>, <?php echo $ms1['longCoord']?>), "<?php echo $ms1['cat']?>", des));
 					<?php } ?>
 	            }
 	          }
@@ -266,7 +270,7 @@ function load() {
 
 		<?php foreach ($mapSpotList as $ms) {	?>
 		des = htmlspecialchars_decode("<?php echo str_replace("\n", "", $ms->des)?>", "ENT_QUOTES");	
-		map.addOverlay(createMarker(new GLatLng(<?php echo $ms->lat?>, <?php echo $ms->long?>), "<?php echo $ms->cat?>", des));
+		map.addOverlay(createMarker(map, new GLatLng(<?php echo $ms->lat?>, <?php echo $ms->long?>), "<?php echo $ms->cat?>", des));
 		str = mapDir + mapIcons['<?php echo $ms->cat?>'];
 		spots += "<li><div><img src='"+str+"' class='spotsimg' align='left'/>"+des+"</div></li>";
 		<?php } ?>
@@ -286,7 +290,7 @@ function load() {
 </head>
 <body onload="load()" onunload="GUnload()" style="margin: 0; padding: 0;">
 <div>
-<div id='spots' style="float:right; width:200px;"><!-- --></div>
+<div id='spots' style="float:right; width:190px;"><!-- --></div>
 <div id="gmap" ></div>
 </div>
 <div style="margin-left: 150px; margin-top: 5px;">
