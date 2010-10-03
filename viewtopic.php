@@ -37,7 +37,11 @@ $user_info = new User;
 	</td>
      <td classs="right">
         <?php include('listquestion.php');?>
-    </td>
+    </td></tr>
+<tr>
+	<td colspan=3>
+		<?php include("footLinks.php");?>
+	</td>
 </tr>
 </tbody>
 </table>

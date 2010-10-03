@@ -2,12 +2,12 @@
  <tbody>
  <tr>
 <td class="top_search" colspan=3>
-    <img src="images/testlayout.jpg" width="100%" height="204px"/>
-  <!--	<?php //include("top.php"); ?>
+    <!--<img src="images/testlayout.jpg" width="100%" height="204px"/> -->
+  <?php include("top.php"); ?>
 	</td>
  </tr>
  	<tr>
-    <td colspan=3><div id="banner"><?php //include("pic_banner.php");?></div>--></td>
+    <td colspan=3><div id="banner"><?php include("pic_banner.php");?></div></td>
 </tr>
  <tr>
 <td class="left">

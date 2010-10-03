@@ -16,7 +16,7 @@ include("../core/classes/Answers.php");
         if($a_r == NULL){
             $a_r = Answers::getA();
         }
-	$row_per_page = 3;
+	$row_per_page = 5;
 	$s = $_POST["start"];
         if(count($q_s)>0){
             $n_row = count($q_s);
@@ -33,17 +33,17 @@ include("../core/classes/Answers.php");
             echo "<ul>";
             foreach ($q_s as $key=>$v){
                 if($key >= $s && $key < $r ){
-                    echo "<li><div class='question'><img src='".$v['avatar']."' height=30 width=30 align='left'/> $v[name] : ".$v['content']."    <a style='cursor: pointer; color: #DB1C00;text-decoration: underline;' onclick='answer($v[id]);' >Rely</a></div>";
+                    echo "<li><div class='question'><img src='".$v['avatar']."' height=30 width=30 align='left'/>$v[name]:".$v['content']."    <a style='cursor: pointer; color: #DB1C00;text-decoration: underline;' onclick='answer($v[id]);' >reply</a></div>";
                     if(count($a_r)){
                         echo "<ul style=''>";
                         foreach ($a_r as $v2)
                         {
                             if($v2['question_id']==$v['id'])
-                                echo "<li><img src='".$v2['avatar']."' height=30 width=30 align='left'/>  $v2[name] : ".$v2["content"]."</li>";
+                                echo "<li><img src='".$v2['avatar']."' height=30 width=30 align='left'/>$v2[name]:".$v2["content"]."</li>";
                         }
                         echo "</ul>";
                     }
-                    echo "</li>";
+                    echo "<div class='clear'></div></li>";
                 }
             }
             echo "</ul>";
