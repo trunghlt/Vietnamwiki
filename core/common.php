@@ -18,19 +18,21 @@ define('TEMP_UPLOAD_FOLDER', 'upload2/upload/');
 define('COL', 3);
 define('ROW', 3);
 
+$MEMCACHED_PORT = 11212;
+
 include('permalink.php');
 include("APIs.php");
 include('fbconnect.php');
 
 #Initialise memcached
 $memcache = new Memcache;
-$memcache->connect("127.0.0.1", 11211);
+$memcache->connect("127.0.0.1", $MEMCACHED_PORT);
 
 class Mem {
     public static $memcache;    
 }
 Mem::$memcache = new Memcache;
-Mem::$memcache->connect("127.0.0.1", 11211);
+Mem::$memcache->connect("127.0.0.1", $MEMCACHED_PORT);
 
 function dieToInvalidInput() {
 	header("location: /");		
