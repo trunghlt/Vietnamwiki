@@ -177,10 +177,6 @@ class PostElement {
                                         SET index_id = ".$this->indexId."
                                         WHERE post_id = ".$this->id);
                 $this->draft = $this->content;
-                Follow::set($user_id,$this->id);
-                $post = Mem::$memcache->get("post_".$this->id);
-                if($post != NULL)
-                        Mem::$memcache->delete("post_".$this->id);
                 return 0;
         }
 	public function save($user_id="") {

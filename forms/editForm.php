@@ -62,12 +62,10 @@ function submitEditForm() {
 												window.location = 'draft.php?id=<?=$draf?>'; 
 											<?php }
 											else if(isset($post['id'])) {
-                                                if(User::check_user_post(myUser_id(myip()))==TRUE){ ?>
-                                                               // alert(response);
-                                                     window.location = '<?=getPostPermalink($currentPostElement->id)?>';
+                                                if(User::check_user(myUser_id(myip()),$post['id'])>0){ ?>
+                                                     window.location = '<?=getPostPermalink($post['id'])?>';
 											<?php } else{?>
                                                 jQuery('#confirm').css('visibility','visible').dialog('open');
-                                                //alert(response);
                                             <?php }                                                                                        
            									} ?>
 									   });
