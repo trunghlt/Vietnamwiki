@@ -3,21 +3,6 @@ include('dialog.php');
 ?>
 <div id="editDialog" title="Edit entry">
 	<div id="editDialogContent"></div>
-	<!--
-	<iframe style="	margin: 0px 0px 0px -10px; 
-					border: 0px; 
-					padding: 0px 0px 0px 0px;
-					width: 700px; 
-					height: 750px;" 
-			name="textEditFrame"
-			id="textEditFrame"				
-			src="textEditor.php?<?php 
-			/*if(isset($draf))
-				echo "editionId_draf=".$draf;
-			elseif(isset($post['id']))
-					echo "id=".$post['id'];*/?>">
-	</iframe>  	
-	-->
 </div>
 <script language="javascript">
 function convert(s) {
@@ -51,7 +36,7 @@ function submitEditForm() {
 		bool = confirm("<?=NOPREVIEW_CONFIRM_MSG?>");
 	if(c_method == 1)
 		bool = confirm("<?=REPLACE_OLD_EDITION?>");
-	if(bool == true && bool2 == true){
+	if((bool == true) && (bool2 == true)){
 		jQuery.post("submitPost.php", {id: id, indexId: indexId, title: title, smallImgURL: smallImgURL,
 									   bigImgURL: bigImgURL, summary: summary, content: content,
 									   <?php if(isset($draf)){?>id_edition: <?=$draf.","?> <?php }?>
@@ -60,7 +45,7 @@ function submitEditForm() {
 											<?php if(isset($draf)){?>
 										       	jQuery('#confirm').css('visibility','visible').dialog('open');
 												window.location = 'draft.php?id=<?=$draf?>'; 
-											<?php }
+											<?php } 											
 											else if(isset($post['id'])) {
                                                 if(User::check_user(myUser_id(myip()),$post['id'])>0){ ?>
                                                      window.location = '<?=getPostPermalink($post['id'])?>';
