@@ -14,7 +14,7 @@ $postElement->bigImgURL = htmlspecialchars($postElement->filterImgURL(urldecode(
 $postElement->content = htmlspecialchars(PostElement::filterContent(urldecode(filter_content_script($_POST["content"])), ENT_QUOTES));
 $postElement->indexId = $postElement->filterId(urldecode($_POST["indexId"]));
 $postElement->reference = htmlspecialchars($postElement->filterReference(urldecode($_POST["ref"])));
-if($_POST["type"]==2 && User::check_user(myUser_id(myip()),$postElement->id)){
+if($_POST["type"]==2 && User::check_user(myUser_id(myip()),$postElement->id)>0){
 	$n = $postElement->save(myUser_id(myip()));
 }
 $editionElement = new Edition();
@@ -29,10 +29,10 @@ $editionElement->index_id = $postElement->indexId;
 $editionElement->post_ip = myip();
 $editionElement->post_username = myUsername(myip());
 $editionElement->reference = $postElement->reference;
-if($_POST["type"]==1 && User::check_user(myUser_id(myip()),$postElement->id))
+if($_POST["type"]==1 && User::check_user(myUser_id(myip()),$postElement->id)>0)
 {
 	$editionElement->id = $postElement->filterId($_POST["id_edition"]);	
-	//$editionElement->save();
+	$editionElement->save();
 /*	$content = htmlspecialchars_decode($editionElement->postContent, ENT_QUOTES);
 	$content = str_replace("|", "&", $content);
 	$content = str_replace('\"', '"', $content);
@@ -45,14 +45,19 @@ if($_POST["type"]==1 && User::check_user(myUser_id(myip()),$postElement->id))
 		echo HtmlSpecialChars($postElement->reference);
 	}*/
 }
-else if($_POST["type"]==2)
-{
-	$u = new User;
-	$arr = $u->query_id($editionElement->userId);	
-	$editionElement->editDateTime = time();
+else if($_POST["type"]==2){
+    $u = new User;
+    $arr = $u->query_id($editionElement->userId);
+    $editionElement->editDateTime = time();
+    if(User::check_user(myUser_id(myip()),$postElement->id)>0)
+    {
 	$editionElement->c_method();
-		$row2 = Email::query(1);
-		$str = 'http://www.vietnamwiki.net/draft.php?id='.$editionElement->id;
+    }
+    else{
+        $editionElement->add();
+    }
+        $row2 = Email::query(1);
+	$str = 'http://www.vietnamwiki.net/draft.php?id='.$editionElement->id;
 	
 
         $message = str_replace('{link}',$str,$row2['message']);
@@ -96,5 +101,7 @@ else if($_POST["type"]==2)
 			echo HtmlSpecialChars($postElement->reference);
 		} 
 	}*/
+
+    
 }
 ?>
