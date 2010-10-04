@@ -32,7 +32,7 @@ $editionElement->reference = $postElement->reference;
 if($_POST["type"]==1 && User::check_user(myUser_id(myip()),$postElement->id))
 {
 	$editionElement->id = $postElement->filterId($_POST["id_edition"]);	
-	$editionElement->save();
+	//$editionElement->save();
 /*	$content = htmlspecialchars_decode($editionElement->postContent, ENT_QUOTES);
 	$content = str_replace("|", "&", $content);
 	$content = str_replace('\"', '"', $content);
@@ -45,12 +45,12 @@ if($_POST["type"]==1 && User::check_user(myUser_id(myip()),$postElement->id))
 		echo HtmlSpecialChars($postElement->reference);
 	}*/
 }
-else if($_POST["type"]==2 && User::check_user(myUser_id(myip()),$postElement->id))
+else if($_POST["type"]==2)
 {
 	$u = new User;
 	$arr = $u->query_id($editionElement->userId);	
 	$editionElement->editDateTime = time();
-	$editionElement->save();
+	$editionElement->c_method();
 		$row2 = Email::query(1);
 		$str = 'http://www.vietnamwiki.net/draft.php?id='.$editionElement->id;
 	

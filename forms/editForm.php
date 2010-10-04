@@ -63,9 +63,11 @@ function submitEditForm() {
 											<?php }
 											else if(isset($post['id'])) {
                                                 if(User::check_user_post(myUser_id(myip()))==TRUE){ ?>
+                                                               // alert(response);
                                                      window.location = '<?=getPostPermalink($currentPostElement->id)?>';
 											<?php } else{?>
                                                 jQuery('#confirm').css('visibility','visible').dialog('open');
+                                                //alert(response);
                                             <?php }                                                                                        
            									} ?>
 									   });
