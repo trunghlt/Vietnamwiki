@@ -19,16 +19,18 @@ if($start_pos) $end_pos = strpos(substr($fd, $start_pos), $stop) + $start_pos;
 }
 fclose($url);
 
-	$info=str_replace($str_to_replace, $str_replace, $extra_data.$result);
-	$info=str_replace($str_to_replace1, $str_replace1, $info);
-	$info=str_replace('src="', 'src="http://hanoi1000.vn/', $info);
-	$info=str_replace('krpano.swf', 'http://hanoi1000.vn/krpano.swf', $info);
+	//$info=str_replace($str_to_replace, $str_replace, $extra_data.$result);
+	//$info=str_replace($str_to_replace1, $str_replace1, $info);
+	
+	$info=str_replace('krpano.swf', 'http://hanoi1000.vn/krpano.swf', $result);
 	$info=str_replace('gigapixel.xml', 'http://hanoi1000.vn/gigapixel.xml', $info);
+        $info=str_replace('src="', 'src="http://hanoi1000.vn/', $info);
+        $info=str_replace('<body>', '', $info);
 return $info;
 } 
 ?>
 <?php
-		$url="http://hanoi1000.vn/";
+		$url="http://hanoi1000.vn/index.html?view.hlookat=0.00&view.vlookat=0.00&view.fov=1.4";
 		$start='<body>';
 		$end='<div id="footer">';
 		echo getdata($url,$start,$end,'','','','','');
