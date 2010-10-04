@@ -73,7 +73,7 @@ Return num
                     return $r;
                 }
                 else {
-                    return 0;
+                	return Null;
                 }
 	}
 /***************************************************************
@@ -136,22 +136,25 @@ Getquestion
             $u = new User;
             $n_row = self::query("","","date desc");
             $i= 0;
-            foreach ($n_row as $v){
-                $arr[$i] = array( 'id'=>$v['id'],
-                              'user_id'=>$v['user_id'],
-                              'username'=>$v['username'],
-                              'email'=>$v['email'],
-                              'content'=>$v['content'],
-                              'topic_id'=>$v['topic_id'],
-                              'index_id'=>$v['index_id'],
-                              'dest_id'=>$v['dest_id'],
-                              'date'=>$v['date'],
-                              'ip'=>$v['ip'],
-                              'avatar'=>$u->getUserAvatar($v),
-                              'name'=>$u->getname($v)
-                                     );
-                $i = $i+1;
-            }
+            $arr = array();
+            if ($n_row != Null) {
+		        foreach ($n_row as $v){
+		            $arr[$i] = array( 'id'=>$v['id'],
+		                          'user_id'=>$v['user_id'],
+		                          'username'=>$v['username'],
+		                          'email'=>$v['email'],
+		                          'content'=>$v['content'],
+		                          'topic_id'=>$v['topic_id'],
+		                          'index_id'=>$v['index_id'],
+		                          'dest_id'=>$v['dest_id'],
+		                          'date'=>$v['date'],
+		                          'ip'=>$v['ip'],
+		                          'avatar'=>$u->getUserAvatar($v),
+		                          'name'=>$u->getname($v)
+		                                 );
+		            $i = $i+1;
+		        }
+		    }
             Mem::$memcache->set("ques",$arr);
             return $arr;
         }

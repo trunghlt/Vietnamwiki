@@ -326,5 +326,4 @@ include("footer.php");
 
 </body>
 </html>
-:wq
 

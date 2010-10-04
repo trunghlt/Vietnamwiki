@@ -1,7 +1,7 @@
 RewriteEngine On
 
 RewriteRule ^about$ /about.php [L]
-RewriteRule ^jobs$/jobs.php [L]
+RewriteRule ^jobs$ /jobs.php [L]
 
 RewriteRule ^.*-I([0-9]+)$ /index2.php?index_id=$1 [L]
 RewriteRule ^.*-I([0-9]+)-Sview$ /index2.php?index_id=$1&sort=view [L]
