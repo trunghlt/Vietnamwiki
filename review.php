@@ -40,6 +40,11 @@ $pAvatar = new TalkPHP_Gravatar();
 		?></div>
 	</td>
 </tr>
+<tr>
+<td colspan=3>
+	<?php include("footLinks.php");?>
+</td>
+</tr>
 </tbody>
 </table>
 

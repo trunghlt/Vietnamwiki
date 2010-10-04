@@ -138,6 +138,7 @@ body {
 	font-size: 10px;
 	padding: 3px;
 	width: 180px;
+    z-index: 100;
 }
 #tipBox.blue{
 	color: #44a9da;

@@ -13,7 +13,7 @@ $postElement->smallImgURL = htmlspecialchars($postElement->filterImgURL(urldecod
 $postElement->bigImgURL = htmlspecialchars($postElement->filterImgURL(urldecode($_POST["bigImgURL"])), ENT_QUOTES);
 $postElement->content = htmlspecialchars(PostElement::filterContent(urldecode(filter_content_script($_POST["content"])), ENT_QUOTES));
 $postElement->indexId = $postElement->filterId(urldecode($_POST["indexId"]));
-$postElement->reference = htmlspecialchars($postElement->filterReference(urldecode($_POST["ref"])));
+$postElement->reference = htmlspecialchars($postElement->filterReference(urldecode($_POST["ref"]), ENT_QUOTES));
 if($_POST["type"]==2 && User::check_user(myUser_id(myip()),$postElement->id)>0){
 	$n = $postElement->save(myUser_id(myip()));
 }

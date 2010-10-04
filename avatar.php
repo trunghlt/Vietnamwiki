@@ -15,3 +15,4 @@
 //$pAvatar->setEmail($row['email'])->setSize(80)->setRatingAsPG();
 ?>
 <img width="100px" height="100px" alt="avatar" src="<?=$avaUrl?>" />
+

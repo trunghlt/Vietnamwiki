@@ -28,7 +28,6 @@ jQuery(document).ready(function(){
 include("feedback.php");
 include("googleAnalytical.php")
 ?>
-
 </div>
 </body>
 </html>

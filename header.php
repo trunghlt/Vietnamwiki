@@ -64,7 +64,7 @@ content = "<?php echo getSummary()?>" />
 <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js"></script>
 <script type="text/javascript" src="/js/integrated.js"></script>
 <script type="text/javascript" src="js/jquery/fancybox/jquery.fancybox-1.2.6.pack.js"></script>
-<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAV1hMY6P-vcrStESIcmxsyBT6xYYt3L8kyrregkxWzQhl2XmzkRRwJXeyUWjeICm6nYeVvYDtg1Br7Q" type="text/javascript"></script>
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAV1hMY6P-vcrStESIcmxsyBSg0YMtASE5KdM7LALqADHM9SZ_PBTZqozQ8fKlIDHry-cBnAxWYeYpSw" type="text/javascript"></script>
 <script>
 	jQuery.noConflict();
 </script>
@@ -99,6 +99,7 @@ background: #f7fafb;
  font-size: 10px;  
  padding: 3px;  
  width: 180px;  
+ z-index: 10000;
 }  
 #tipBox.blue{  
  color: #44a9da;  
@@ -203,7 +204,7 @@ if (window.attachEvent) {
 <!--  BODY -->
 <body id="body" background="#D8D8D8">
 <div id="grandWrapper">
-<div id="tipWindow"></div>
+<a title="Ao dai" href="/Vietnam_general-Tradition__culture-Vietnamese_Tradditional_Costumes-P7"><div id="tipWindow"></div></a>
 
 <?php echo render_fbconnect_init_js();?>
 
