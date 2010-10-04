@@ -75,11 +75,50 @@ class Edition {
 			$this->post_username = $row["post_username"];
 			return $row;
 	}
-	
-	public function add() {
-		$mysql["postContent"] = mysql_real_escape_string($this->postContent);
+/*
+ function Update, insert edition
+ */
+	public function insert_edition($checked=0,$time=0){
+ 		$mysql["postContent"] = mysql_real_escape_string($this->postContent);
 		$mysql["reference"] = mysql_real_escape_string($this->reference);
 		$this->post_ip = myip();
+		mysql_query("INSERT INTO editions
+                                (user_id, post_id, post_subject, post_summary, post_text, edit_date_time, post_small_img_url, post_big_img_url,index_id,post_ip,post_username,checked,reference,accepted_time)
+                                VALUE ('".$this->userId."',
+                                                '".$this->postId."',
+                                                '".$this->postTitle."',
+                                                '".$this->postSummary."',
+                                                '".$mysql["postContent"]."',
+                                                '".$this->editDateTime."',
+                                                '".$this->postSmallImgURL."',
+                                                '".$this->postBigImgURL."',
+                                                '".$this->index_id."',
+                                                '".$this->post_ip."',
+                                                '".$this->post_username."','".$checked."',
+                                                '".$mysql["reference"]."','".$time."')") or die(mysql_error());
+        }
+  	public function update_edition($checked=0,$time=0){
+            	$this->post_ip = myip();
+                $mysql["postContent"] = mysql_real_escape_string($this->postContent);
+                $mysql["reference"] = mysql_real_escape_string($this->reference);
+                mysql_query("UPDATE editions
+                                        SET user_id = ".$this->userId.",
+                                                post_id = ".$this->postId.",
+                                                post_subject = '".$this->postTitle."',
+                                                post_summary = '".$this->postSummary."',
+                                                post_text = '".$mysql["postContent"]."',
+                                                post_small_img_url = '".$this->postSmallImgURL."',
+                                                post_big_img_url = '".$this->postBigImgURL."',
+                                                index_id = '".$this->index_id."',
+                                                post_ip= '".$this->post_ip."',
+                                                post_username = '".$this->post_username."',
+                                                checked = '".$checked."',
+                                                accepted_time = '".$time."',
+                                                reference = '".$mysql["reference"]."'
+                                        WHERE id = ".$this->id) or die(mysql_error());
+        }
+
+	public function add() {
 		//follow
 		if($this->postId != 0){
 			Follow::set($this->userId,$this->postId);
@@ -95,55 +134,25 @@ class Edition {
 							where id='".$this->userId."'");
 		$row2 = mysql_fetch_assoc($re1);	
 			if($row2['level']==0){			
-				mysql_query("INSERT INTO editions
-							(user_id, post_id, post_subject, post_summary, post_text, edit_date_time, post_small_img_url, post_big_img_url,index_id,post_ip,post_username,checked,reference,accepted_time)
-							VALUE ('".$this->userId."', 
-									'".$this->postId."', 
-									'".$this->postTitle."', 
-									'".$this->postSummary."', 
-									'".$mysql["postContent"]."', 
-									'".$this->editDateTime."',
-									'".$this->postSmallImgURL."', 
-									'".$this->postBigImgURL."',							
-									'".$this->index_id."',
-									'".$this->post_ip."',
-									'".$this->post_username."','0',
-									'".$mysql["reference"]."',0)") or die(mysql_error());
+                            $this->insert_edition();
 			}
 
 			else{
-				mysql_query("INSERT INTO editions
-							(user_id, post_id, post_subject, post_summary, post_text, edit_date_time, post_small_img_url, post_big_img_url,index_id,post_ip,post_username,checked,reference,accepted_time)
-							VALUE ('".$this->userId."',
-								   '".$this->postId."',
-								   '".$this->postTitle."', 
-								   '".$this->postSummary."', 
-								   '".$mysql["postContent"]."', 
-								   '".$this->editDateTime."',
-								   '".$this->postSmallImgURL."', 
-								   '".$this->postBigImgURL."',							
-								   '".$this->index_id."',
-								   '".$this->post_ip."',
-								   '".$this->post_username."','1',
-								   '".$mysql["reference"]."',
-								   '".$this->editDateTime."')") or die(mysql_error());			
+	                     $this->insert_edition(1,$this->editDateTime);
 			}
 		}
 		else{
-		mysql_query("INSERT INTO editions
-					(user_id, post_id, post_subject, post_summary, post_text, edit_date_time, post_small_img_url, post_big_img_url,index_id,post_ip,post_username,checked,reference,accepted_time)
-					VALUE ('".$this->userId."', '".$this->postId."', '".$this->postTitle."', '".$this->postSummary."', '".$mysql["postContent"]."', 
-							'".$this->editDateTime."',
-							'".$this->postSmallImgURL."',
-							'".$this->postBigImgURL."',							
-							'".$this->index_id."','".$this->post_ip."',
-							'".$this->post_username."','1',
-							'".$mysql["reference"]."',
-							'".$this->editDateTime."')") or die(mysql_error());
+                            $this->insert_edition(1,$this->editDateTime);
 		}
 		$this->id = mysql_insert_id();		
 	}
-	
+	public function add_edition(){
+             $this->insert_edition(1,$this->editDateTime);
+             Follow::set($this->userId,$this->postId);
+             $post = Mem::$memcache->get("post_".$this->postId);
+             if($post != NULL)
+                    Mem::$memcache->delete("post_".$this->postId);
+        }
 	public function save_edition() {
 		$this->post_ip = myip();
                 $mysql["postContent"] = mysql_real_escape_string($this->postContent);
@@ -159,57 +168,24 @@ class Edition {
 							where id='".$this->userId."'");
                         $row2 = mysql_fetch_assoc($re1);
 			if($row2['level']==0){	
-                            mysql_query("UPDATE editions
-                                                    SET user_id = ".$this->userId.",
-                                                            post_id = ".$this->postId.",
-                                                            post_subject = '".$this->postTitle."',
-                                                            post_summary = '".$this->postSummary."',
-                                                            post_text = '".$mysql["postContent"]."',
-                                                            post_small_img_url = '".$this->postSmallImgURL."',
-                                                            post_big_img_url = '".$this->postBigImgURL."',
-                                                            index_id = '".$this->index_id."',
-                                                            post_ip= '".$this->post_ip."',
-                                                            post_username = '".$this->post_username."',
-                                                            checked = 0,
-                                                            accepted_time = 0,
-                                                            reference = '".$mysql["reference"]."'
-                                                    WHERE id = ".$this->id) or die(mysql_error());
+                                $this->update_edition();
                         }
                         else{
-                             mysql_query("UPDATE editions
-                                                    SET user_id = ".$this->userId.",
-                                                            post_id = ".$this->postId.",
-                                                            post_subject = '".$this->postTitle."',
-                                                            post_summary = '".$this->postSummary."',
-                                                            post_text = '".$mysql["postContent"]."',
-                                                            post_small_img_url = '".$this->postSmallImgURL."',
-                                                            post_big_img_url = '".$this->postBigImgURL."',
-                                                            index_id = '".$this->index_id."',
-                                                            post_ip= '".$this->post_ip."',
-                                                            post_username = '".$this->post_username."',
-                                                            checked = 1,
-                                                            accepted_time = $this->editDateTime,
-                                                            reference = '".$mysql["reference"]."'
-                                                    WHERE id = ".$this->id) or die(mysql_error());
+                                $this->update_edition(1,$this->editDateTime);
+                                Follow::set($this->userId,$this->postId);
+                                $post = Mem::$memcache->get("post_".$this->postId);
+                                if($post != NULL)
+                                        Mem::$memcache->delete("post_".$this->postId);
                         }
                 }
                 else{
-                     mysql_query("UPDATE editions
-                                            SET user_id = ".$this->userId.",
-                                                    post_id = ".$this->postId.",
-                                                    post_subject = '".$this->postTitle."',
-                                                    post_summary = '".$this->postSummary."',
-                                                    post_text = '".$mysql["postContent"]."',
-                                                    post_small_img_url = '".$this->postSmallImgURL."',
-                                                    post_big_img_url = '".$this->postBigImgURL."',
-                                                    index_id = '".$this->index_id."',
-                                                    post_ip= '".$this->post_ip."',
-                                                    post_username = '".$this->post_username."',
-                                                    checked = 1,
-                                                    accepted_time = $this->editDateTime,
-                                                    reference = '".$mysql["reference"]."'
-                                            WHERE id = ".$this->id) or die(mysql_error());
+                                $this->update_edition(1,$this->editDateTime);
+                                Follow::set($this->userId,$this->postId);
+                                $post = Mem::$memcache->get("post_".$this->postId);
+                                if($post != NULL)
+                                        Mem::$memcache->delete("post_".$this->postId);
                 }
+
 	}
 	//save_draf
         public function  save(){
@@ -457,7 +433,7 @@ Choose method save or add
                     return 1;
             }
             else
-                $this->add();
+                $this->add_edition();
                 return 0;
         }
 }

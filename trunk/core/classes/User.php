@@ -107,14 +107,14 @@ class User {
 	static public function check_user($user_id,$post_id=''){
 		$q = new db;
 			$q->query('select * from users where id='.$user_id.' and level=1');
-			if($q->re==FALSE)
+			if($q->n==0)
 			{
 				if($post_id!=''){
                                     $q->query('select * from follow where user_id='.$user_id.' and post_id='.$post_id);
-                                            return $q->re;
+                                            return $q->n;
                                 }
 			}
-			return $q->re;
+			return $q->n;
 	}
 	static public function check_user_post($user_id,$post_id=''){
 		$q = new db;
