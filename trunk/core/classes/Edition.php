@@ -429,7 +429,7 @@ Choose method save or add
             if($q->n>0){
                     $r = mysql_fetch_assoc($q->re);
                     $this->id = $r['id'];
-                    $this->save_edition();
+                    $this->save();
                     return 1;
             }
             else
