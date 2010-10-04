@@ -19,7 +19,7 @@ function get_post($id){
 	Mem::$memcache->set("post_".$id,$post);
 	return $post;
 }
-Mem::$memcache->delete("post_29");
+
 $post = Mem::$memcache->get("post_".$post_id);
 if($post == NULL){
 	$post = get_post($post_id);	 
