@@ -92,8 +92,10 @@ else
 		<span style="font-size: 9px; color: #CC0000;"><?php echo $translatedNotif; ?></span>
 		<?php
 	}
-           
-            echo "<div id='flash_hn'></div>";
+       // echo "<div id='flash_hn'></div>";
+            if($post_id == 29){
+                echo '<iframe src ="http://hanoi1000.vn/index.html?view.hlookat=0.00&view.vlookat=0.00&view.fov=1.0" width="100%" height="300px" frameborder="0" ><p>Your browser does not support iframes.</p></iframe>';
+            }
 	//title
 	echo "<h1>". HtmlSpecialChars($title) . "</h1>";      
 	
@@ -195,15 +197,6 @@ else
 jQuery(document).ready(function(){
         loadEditorList(<?php echo $post_id?>, "editorList","");
 	loadEdittingRibbon(<?php echo $post_id?>, "ribbon");
-        <?php
-            if($post_id == 29)
-            {
-        ?>
-                get_flash_hn();
-        <?php
-            }
-        ?>
-
 });
 
 function editClick() {
@@ -220,12 +213,12 @@ function signOut() {
 					jQuery('#field_not_login_comment').html("Email :<br /><input class='field' name='fill_email_comment' id='fill_email_comment' type='text' style='width:250px' value=''/><br />Name :<br /><input class='field' name='fill_name_comment' id='fill_name_comment' type='text' style='width:250px' value=''/><br /><input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='1'/>");
 				});
 }
-function get_flash_hn() {
-	jQuery.post("/requests/get_flash_hn.php", {},
+/*function getflashhn() {
+	jQuery.post("requests/get_flash_hn.php",{},
 				function(response) {
 					jQuery('#flash_hn').html(response);
 				});
-}
+}*/
 function submitLogin(dom,check) {	
 	jQuery.post("/requests/postLogin.php", jQuery("#"+dom).serialize(), 
 			function(response){

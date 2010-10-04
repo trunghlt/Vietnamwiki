@@ -47,16 +47,16 @@ function getSummary() {
 
 <link rel="shortcut icon" href="/images/icon.png"/>
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <meta name = "KEYWORDS" 
 content = "vietnam, Viet Nam, vietnamwiki, wiki, guide, travel, Sapa, Hanoi, 
 Ha Noi, Hue, Hoian, Hoi an, Myson, My Son, Ha Long, halong, phong nha, ke bang,
 Nha Trang, Nhatrang, Dalat, Da Lat, Mui ne, muine, Vung tau, Saigon, Sai Gon, 
-Ho Chi Minh, Mekong delta, Phu Quoc"> 
+Ho Chi Minh, Mekong delta, Phu Quoc" />
 
 <meta name="Description" 
-content = "<?php echo getSummary()?>">
+content = "<?php echo getSummary()?>" />
 
 <meta name="verify-v1" content="IyUL1eYMgjAMGDWrAeniu500lWWLUCONXP+II/s3I2s=" />
     
@@ -201,7 +201,7 @@ if (window.attachEvent) {
 </head>
 
 <!--  BODY -->
-<body id="body" "bgcolor="#D8D8D8">
+<body id="body" background="#D8D8D8">
 <div id="grandWrapper">
 <div id="tipWindow"></div>
 
