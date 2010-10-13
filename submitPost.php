@@ -57,8 +57,7 @@ else if($_POST["type"]==2){
         $editionElement->add();
     }
         $row2 = Email::query(1);
-	$str = 'http://www.vietnamwiki.net/draft.php?id='.$editionElement->id;
-	
+	$str = 'http://www.vietnamwiki.net'.getPostPermalink($postElement->id);
 
         $message = str_replace('{link}',$str,$row2['message']);
         $message = str_replace('{time}',date("d/m/Y H:i a",$editionElement->editDateTime),$message);
