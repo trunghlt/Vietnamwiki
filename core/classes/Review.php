@@ -72,7 +72,7 @@ class Review {
 	}	
 	
 	public function add() {
-		$mysql["reviewText"] = htmlspecialchars($this->reviewText, ENT_QUOTES);
+		$mysql["reviewText"] = $this->reviewText;
 		Db::sQuery("INSERT INTO reviews
 					(user_id, post_id, rate_value, review_text, review_date_time,name,email)
 					VALUES ({$this->userId}, {$this->postId}, {$this->rateValue}, '{$mysql["reviewText"]}', {$this->reviewDateTime},'{$this->name}','{$this->email}')");		
