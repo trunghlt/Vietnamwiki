@@ -171,7 +171,7 @@ class User {
 		if($q->n>0){			
 			while($r = mysql_fetch_assoc($q->re))
 				$row = $r;
-			return $row;
+			return @$row;
 		}
 		else
 			return 0;
@@ -187,7 +187,7 @@ class User {
 		}
 		else
 			return 0;
-		return $row;
+		return @$row;
 	}
         // Get User's avatar
 	function getUserAvatar($row){
@@ -218,7 +218,7 @@ class User {
                             $pAvatar->setEmail($email)->setSize(80)->setRatingAsPG();
                             $avatarURL = $pAvatar->getAvatar();
                     }
-                return $avatarURL;
+                return @$avatarURL;
         }
 	function query_level($level){
 		$q = new db();
@@ -231,7 +231,7 @@ class User {
 		}
 		else
 			return 0;
-		return $row;		
+		return @$row;		
 	}
         function getname($v){
                 if(($v['user_id']!='' || $v['user_id']!=NULL) && $v['user_id']!=0){
@@ -242,7 +242,7 @@ class User {
                 {
                         $str = "<font color='#DB1C00' style='font-weight:bold;' >$v[username]</font>";
                 }
-                return $str;
+                return @$str;
         }
 }
 $user_info = new User;
