@@ -25,6 +25,7 @@ Class connect email  in database
 
 ***************************************************************/		
 		static public function query($id=''){
+                        $row2 = NULL;
 			if($id!=''){
 				$where = "where id=$id"; 
 			}
@@ -35,7 +36,7 @@ Class connect email  in database
 			while($row = mysql_fetch_assoc($re)){
 				$row2 = $row;
 			}
-			return $row2;
+			return @$row2;
 		}
 
 /***************************************************************
@@ -50,11 +51,11 @@ Class connect email  in database
 	static public function query_post($post_id){
 		$q=new Db;
 		$str = $q->query("select email,id from users where id IN (select user_id from follow where post_id=$post_id)");
-		while($r = mysql_fetch_assoc($q->re)){
+                while($r = mysql_fetch_assoc($q->re)){
 			if($r['email']!='')
 				$row[] = $r;
 		}
-		return $row;
+		return @$row;
 	}
 }
 ?>
