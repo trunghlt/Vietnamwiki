@@ -135,7 +135,7 @@ class MapSpot {
 		
 		while($r = mysql_fetch_assoc($q->re))
 			$arr[] = $r;
-		return $arr;
+		return @$arr;
 	}
 }
 ?>

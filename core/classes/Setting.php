@@ -26,7 +26,7 @@ class Setting {
 			$r[$row['property_name']] = $row['property_value'];
 		}
 		$this->free();
-		return $r;
+		return @$r;
 	}
 /***************************************************************
 

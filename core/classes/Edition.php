@@ -390,7 +390,7 @@ class Edition {
 				while($r = mysql_fetch_assoc($re_row))
 					$arr[] = $r;
 				$arr['n'] = mysql_num_rows($re_row);		
-				return $arr;
+				return @$arr;
 	}
 	
 	public function query_post($post_id,$user_id,$type_query){
@@ -416,7 +416,7 @@ class Edition {
 			{
 				while($row = mysql_fetch_assoc($q->re))
 					$r1[] = $row;
-				return $r1;	
+				return @$r1;	
 			}	
 			return NULL;
 	}

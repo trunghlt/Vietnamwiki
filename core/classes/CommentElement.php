@@ -53,7 +53,7 @@ class CommentElement{
 			else 
 				return 0;
 			@mysql_free_result($q->re);
-				return $r;
+				return @$r;
 	}
 	public function query_num($str,$s='',$num=''){
 		$q = new Db;
@@ -72,7 +72,7 @@ class CommentElement{
 		else
 			return 0;
 			$r['n'] = $q->n;
-		return $r;
+		return @$r;
 		
 	}
 }
