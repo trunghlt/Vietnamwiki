@@ -143,7 +143,7 @@ Select table follow
 		
 			while($row = mysql_fetch_assoc($q->re))
 				$r[] = $row;
-			return $r;
+			return @$r;
 		
 	}
 
@@ -180,7 +180,7 @@ Select table follow
 					//return 0;
 			//}
 			$r['n'] =  $active->get_num();
-			return $r;
+			return @$r;
 		}
 		else{
 				$active->limit($start,$numpage);
@@ -189,7 +189,7 @@ Select table follow
 					//return 0;
 			//}
 			$r['n'] =  $active->get_num();
-			return $r;		
+			return @$r;		
 		}
 	}
 }

@@ -71,7 +71,7 @@ class PostElement {
                             return 0;
                     while($r = mysql_fetch_assoc($q->re))
                             $row[] = $r;
-                    return $row;
+                    return @$row;
                 }
 	}
 	
@@ -212,7 +212,7 @@ class PostElement {
 			{
 				$row[] =$r;
 			}
-			return $row;
+			return @$row;
 		}
 		else
 			return 0;	

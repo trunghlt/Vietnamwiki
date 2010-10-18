@@ -73,7 +73,7 @@ class DestinationElement {
 		$q->query('SELECT * FROM countries');
 		while($row = mysql_fetch_assoc($q->re))
 			$r[] = $row;
-		return $r;
+		return @$r;
 	}	
 }
 ?>

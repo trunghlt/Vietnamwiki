@@ -37,7 +37,7 @@ class Message {
 		else
 			return 0;
 		mysql_free_result($q->re);	
-		return $r;
+		return @$r;
 		
 	}
 /***************************************************************
