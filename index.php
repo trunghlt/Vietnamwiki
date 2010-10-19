@@ -257,7 +257,7 @@ var j = 0;
 		<?php
 		if (array_key_exists($dest_id, $allMapImages)) {
 			foreach ($allMapImages[$dest_id] as $img) { ?>
-				<script language="javascript"><?php echo "imgs[".$i."][".$j."] = '".$r2["URL"]."';"; ?></script>
+				<script language="javascript"><?php echo "imgs[".$i."][".$j."] = '".$img->URL."';"; ?></script>
 				<?php
 					echo "<img id='img".$i."_".$j."' SRC='{$img->URL}' style='position:absolute;visibility:hidden;top:-200;z-index:+2;' width=69 height=60 border=0 />";			
 				$j++;
