@@ -1,10 +1,12 @@
 <script>
 function upload_image_click() {
-	if (chkLoggedIn()) { 
+	if (chkLoggedIn()) {
+                loginDialog.css('visibility','hidden').dialog("close");
 		photoUploadDialog.css('visibility','visible').dialog("open");
 	}
 	else {
-		loginDialog.css('visibility','visible').dialog("open");
+                photoUploadDialog.css('visibility','hidden').dialog("close");
+                loginDialog.css('visibility','visible').dialog("open");
 	}	
 }
 </script>
