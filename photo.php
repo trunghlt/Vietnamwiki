@@ -34,10 +34,10 @@ function signOut() {
 				});
 }
 
-function submitLogin() {	
-	jQuery.post("requests/postLogin.php", jQuery("#loginForm").serialize(), function(data) {
-		loadToolbar("toolbar");
-	});
+function submitLogin() {
+        jQuery.post("/requests/postLogin.php", jQuery("#loginForm").serialize(),function(response){
+            loadToolbar("toolbar");            
+        });
 }
 </script>
 <?php
