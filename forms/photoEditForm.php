@@ -1,13 +1,3 @@
-<script language="javascript">
-function imageEditClick(id) {
-	if (chkLoggedIn()){
-		jQuery.post("requests/updatePhotoEditForm.php", {id: id}, function(data) {
-			jQuery("#photoEditDialogContent").html(data);
-		});	
-		photoEditDialog.dialog("open");
-	}
-}
-</script>
  <div id="photoEditDialog" title="Edit image information">
  <div id="photoEditDialogContent">
  	<?php 
@@ -18,12 +8,6 @@ function imageEditClick(id) {
 </div>
 </div>
 <script type="text/javascript">
-function submitPhotoEditForm(){
-	jQuery.post("requests/postEdittedImage.php", {dest_id:<?=$dest_id?>, page:<?=$page?>}, function(data) {
-		jQuery("#imageList").html(data);
-	}
-}
-
 jQuery(document).ready(function(){ 
 	photoEditDialog = jQuery("#photoEditDialog").dialog({
 		autoOpen: false,
@@ -45,6 +29,19 @@ jQuery(document).ready(function(){
 			}
 		}
 	});
-});	
+});
+function imageEditClick(ids) {
+	if (chkLoggedIn()){
+		jQuery.post("requests/updatePhotoEditForm.php", {id: ids}, function(data) {
+			jQuery("#photoEditDialogContent").html(data);
+		});	
+		photoEditDialog.dialog("open");
+	}
+}
+function submitPhotoEditForm(){
+	jQuery.post("requests/postEdittedImage.php", {dest_id:<?=$dest_id?>, page:<?=$page?>}, function(data) {
+		jQuery("#imageList").html(data);
+	});
+}	
 </script>
 
