@@ -38,11 +38,9 @@ function upload_image_click() {
 
 <script type="text/javascript">
 function submitPhoto(){
-	$("photoUploadForm").set("send", {url: "requests/uploadImage.php"});
-	$("photoUploadForm").get("send").addEvent("onComplete", function(response){
+	jQuery.post("requests/uploadImage.php", jQuery("#photoUploadForm").serialize(), function(data) {
 		window.location.reload(true);
 	});
-	$("photoUploadForm").send();	
 }
 
 jQuery(document).ready(function(){ 

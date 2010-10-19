@@ -68,7 +68,7 @@ While ($row = mysql_fetch_array($result)) {
 							<a class="<?php echo $indexItemClass?> iframe" href="map.php?id=<?php echo $destId?>">Map</a>
 						<?php } else {?>
 							<a id="indexLink<?php echo $r["id"]?>" class="<?php echo $indexItemClass?>" href="<?php echo getIndexPermalink($r["id"])?>">
-							<?=$r["name"];?>
+							<?php echo $r["name"];?>
 							</a>
 						<?php } ?>
 					</li>

@@ -1,11 +1,9 @@
 <script language="javascript">
 function imageEditClick(id) {
-	var request = new Request({url: "requests/updatePhotoEditForm.php"});
-	request.send("id="+id);
-	request.addEvent("onComplete", function(response){
-		$("photoEditDialogContent").set("html", response);
-	});	
-	if (chkLoggedIn()) {
+	if (chkLoggedIn()){
+		jQuery.post("requests/updatePhotoEditForm.php", {id: id}, function(data) {
+			jQuery("#photoEditDialogContent").html(data);
+		});	
 		photoEditDialog.dialog("open");
 	}
 }
@@ -21,11 +19,9 @@ function imageEditClick(id) {
 </div>
 <script type="text/javascript">
 function submitPhotoEditForm(){
-	$("photoEditForm").set("send", {url: "requests/postEdittedImage.php?dest_id=<?php echo $dest_id?>&page=<?php echo $page?>", method: "get"});
-	$("photoEditForm").send();
-	$("photoEditForm").get("send").addEvent("onComplete", function(response){
-		$("imageList").set("html", response);
-	});
+	jQuery.post("requests/postEdittedImage.php", {dest_id:<?=$dest_id?>, page:<?=$page?>}, function(data) {
+		jQuery("#imageList").html(data);
+	}
 }
 
 jQuery(document).ready(function(){ 

@@ -35,10 +35,7 @@ function signOut() {
 }
 
 function submitLogin() {	
-	var loginForm = $("loginForm");
-	loginForm.set("send", {	url: "requests/postLogin.php", evalScripts: true});
-	loginForm.send();
-	loginForm.get("send").addEvent("onComplete", function(response){
+	jQuery.post("requests/postLogin.php", jQuery("#loginForm").serialize(), function(data) {
 		loadToolbar("toolbar");
 	});
 }
