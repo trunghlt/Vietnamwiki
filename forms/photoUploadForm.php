@@ -39,8 +39,7 @@ function upload_image_click() {
 <script type="text/javascript">
 function submitPhoto(){
 	jQuery.post("requests/uploadImage.php", jQuery("#photoUploadForm").serialize(), function(data) {
-                alert(data);
-		//window.location.reload(true);
+		window.location.reload(true);
 	});
 }
 
