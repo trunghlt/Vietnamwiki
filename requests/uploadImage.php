@@ -69,7 +69,8 @@ function upload_image($ftmp, $loc, $des, $tags) {
 			$sql = "INSERT INTO images 
 					(dest_id, des, tags, uploaded_at, user_id, filename)
 					VALUE ('".$loc."','".$des."','".$tags."','".$uploaded_at."','".myUser_id(myip())."','".$file_name."')";
-			$q->query($sql);
+			echo $q->query($sql);
+			echo $sql;
 			$handle->clean();
 		}
 	}
