@@ -12,7 +12,7 @@
  <tr>
 <td class="left">
 	<div id="destinationDiv">
-		<?include("destinationPainter.php");?>   
+		<?php include("destinationPainter.php");?>   
 	</div>   
 </td>
 
