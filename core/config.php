@@ -38,4 +38,5 @@ $base_fb_url     = 'connect.facebook.com';
  * Then copy/paste the resulting feed bundle ID here.
  */
 $feed_bundle_id  = 99999999;
+$MEMCACHED_PORT = 11212;
 ?>
