@@ -1,11 +1,9 @@
 <script>
 function upload_image_click() {
-	if (chkLoggedIn()) {
-                loginDialog.css('visibility','hidden').dialog("close");
+	if (chkLoggedIn()==true) {
 		photoUploadDialog.css('visibility','visible').dialog("open");
 	}
 	else {
-                photoUploadDialog.css('visibility','hidden').dialog("close");
                 loginDialog.css('visibility','visible').dialog("open");
 	}	
 }
@@ -41,7 +39,8 @@ function upload_image_click() {
 <script type="text/javascript">
 function submitPhoto(){
 	jQuery.post("requests/uploadImage.php", jQuery("#photoUploadForm").serialize(), function(data) {
-		window.location.reload(true);
+                alert(data);
+		//window.location.reload(true);
 	});
 }
 
