@@ -1,9 +1,18 @@
 <script language="javascript">
-var loggedIn;
 function chkLoggedIn(){
-        jQuery.post("requests/chkLoggedIn.php",{},function(response){loggedIn = parseInt(response);});
-	if (loggedIn == 1) return true;
-	return false;
+    var isExist = 0;
+    jQuery.ajax({
+        async: false,
+        type: "POST",
+	url: "requests/chkLoggedIn.php",
+	data: "",
+	success: function(msg){
+	     isExist = msg;
+	}
+    });
+    if(isExist==1)
+        return true;
+    return false;
 }
 </script>
 <div id="imageList">
