@@ -93,11 +93,12 @@ else
 		<?php
 	}
        // echo "<div id='flash_hn'></div>";
-            if($post_id == 29){
-                echo '<iframe src ="http://hanoi1000.vn/index.html?view.hlookat=0.00&view.vlookat=0.00&view.fov=1.0" width="100%" height="300px" frameborder="0" ><p>Your browser does not support iframes.</p></iframe>';
+            if($post_id == 29){?>
+                <div style="height: 180px; overflow: hidden;"><iframe src ="http://hanoi1000.vn/index.html?view.hlookat=0.00&view.vlookat=0.00&view.fov=1.0" width="100%" height="300px" frameborder="0" ><p>Your browser does not support iframes.</p></iframe></div>
+		<?
             }
 	//title
-	echo "<h1>". HtmlSpecialChars($title) . "</h1>";      
+	echo "<h1>$title</h1>";      
 	
 	echo "<div id='postContent_relative'>";
 		echo $s;

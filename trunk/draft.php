@@ -88,7 +88,7 @@
 		//title
 		?>
 		<div class="largeDraftIcon"></div>
-		<h2 style="padding-left: 40px;"><?php echo HtmlSpecialChars($title)?> (draft)</h2>
+		<h2 style="padding-left: 40px;"><?=$title?> (draft)</h2>
 		<?php echo $s;
 		if($reference!='')
 		{
