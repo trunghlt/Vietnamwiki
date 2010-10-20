@@ -120,14 +120,19 @@ if (chk_sql_injection($dest_id)&&(chk_sql_injection($page))) {
 						<br/>
 						
 						<?php if (logged_in()) { ?>
-							<div align="center">
+							<div align="center" class="editpho">
 								<a	href="#" 
 									class="small_link" 
 									onclick="imageEditClick(<?php echo $img["id"]?>)">
 									[edit]
 								</a>
 							</div>
-						<?php } ?>
+						<?php }else{?>
+         						<div align="center" class="editpho"><!-- --></div>
+                                                <?php
+                                                      }
+                                                ?>
+
 						<br/>
 					<?php } ?>
 				</td>
