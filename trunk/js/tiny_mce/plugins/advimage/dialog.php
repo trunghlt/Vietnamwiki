@@ -37,8 +37,8 @@ if (isset($_GET["task"])) {
 							ORDER BY uploaded_at DESC
 							LIMIT ".$s.",".$t;*/
 					//$q->query($sql);
-					$q->orderby('uploaded_at','desc');
-					$q->limit($s,$t);
+					$q->orderby('uploaded_at desc');
+					$q->limit("$s,$t");
 					$row = $q->select('','images',"dest_id = $dest_id");
 
 					$d = 0;
