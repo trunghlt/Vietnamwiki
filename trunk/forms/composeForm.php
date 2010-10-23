@@ -45,11 +45,11 @@ function submitComposeForm() {
 	currentMySlide = mySlide[destId];
 	currentMySlide.slideIn();
 */
-	var title = encodeURI(frameDocument.getElementById("title").value);
+	var title = frameDocument.getElementById("title").value;
 	var smallImgURL = encodeURI(frameDocument.getElementById("smallImgURL").value);
 	var bigImgURL = encodeURI(frameDocument.getElementById("bigImgURL").value);
-	var summary = encodeURI(frameDocument.getElementById("summary").value);		
-	var content = convert(encodeURI(frameWindow.tinyMCE.activeEditor.getContent()));
+	var summary = frameDocument.getElementById("summary").value;		
+	var content = convert(frameWindow.tinyMCE.activeEditor.getContent());
 	var ref = encodeURI(frameDocument.getElementById("reference").value);
 	var preview = frameDocument.getElementById("preview").value;
 	var bool = true;
