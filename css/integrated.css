@@ -542,6 +542,7 @@ table.main {
 	clear: both;
 	margin-top: 20px;
 	background: #FFF;
+	width: 1000px;
 }
 .main .top_search {
 	border-right:none;

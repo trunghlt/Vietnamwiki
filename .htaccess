@@ -1,5 +1,8 @@
 RewriteEngine On
 
+RewriteCond %{HTTP_HOST} ^vietnamwiki\.net$ [NC]
+RewriteRule ^(.*)$ http://www.vietnamwiki.net/$1 [R=301,L]
+
 RewriteRule ^about$ /about.php [L]
 RewriteRule ^jobs$ /jobs.php [L]
 

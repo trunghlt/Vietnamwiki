@@ -29,7 +29,7 @@ include('fbconnect.php');
 #Initialise memcached
 $memcache = new Memcache;
 $memcache->connect("127.0.0.1", $MEMCACHED_PORT);
-//$memcache->flush();
+$memcache->flush();
 class Mem {
     public static $memcache;    
 }
