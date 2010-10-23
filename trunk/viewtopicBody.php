@@ -97,6 +97,14 @@ else
                 <div style="height: 180px; overflow: hidden;"><iframe src ="http://hanoi1000.vn/index.html?view.hlookat=0.00&view.vlookat=0.00&view.fov=1.0" width="100%" height="300px" frameborder="0" ><p>Your browser does not support iframes.</p></iframe></div>
 		<?
             }
+
+	if ($post_id == 32) {?>
+		<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FVietnamWikinet%2F161569890530861%3Fv%3Dwall&amp;layout=button_count&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:80px; height:21px; float:right;" allowTransparency="true"></iframe>
+	<?}
+	if ($post_id == 9) {?>
+		<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FHoi-An%2F360046378805&amp;layout=button_count&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:80px; height:21px; float: right;" allowTransparency="true"></iframe>
+	<?}
+
 	//title
 	echo "<h1>$title</h1>";      
 	

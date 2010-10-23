@@ -11,8 +11,8 @@ function watermark($des,$scr,$namefile){
 		$watermark = @imagecreatefrompng($scr); // file watermark
 		list($watermark_width, $watermark_height) = getimagesize($scr);
 		
-		$watermark_p = imagecreatetruecolor(200, 50);
-		imagecopyresampled($watermark_p, $watermark, 0, 0, 0, 0, 200, 50, $watermark_width, $watermark_height);
+		$watermark_p = imagecreatetruecolor(150, 25);
+		imagecopyresampled($watermark_p, $watermark, 0, 0, 0, 0, 150, 25, $watermark_width, $watermark_height);
 		$watermarkp_width = imagesx($watermark_p);  
 		$watermarkp_height = imagesy($watermark_p);
 		
