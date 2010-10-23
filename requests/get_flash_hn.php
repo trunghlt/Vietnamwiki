@@ -23,8 +23,8 @@ fclose($url);
 	//$info=str_replace($str_to_replace1, $str_replace1, $info);
 	
 	$info=str_replace('krpano.swf', 'http://hanoi1000.vn/krpano.swf', $result);
-	$info=str_replace('gigapixel.xml', 'http://hanoi1000.vn/gigapixel.xml', $info);
-        $info=str_replace('src="', 'src="http://hanoi1000.vn/', $info);
+	$info=str_replace('gigapixel.xml', 'gigapixel.xml', $info);
+        $info=str_replace('src="', 'src="http://www.vietnamwiki.net/', $info);
         //$info=str_replace('<body>', '', $info);
 return $info;
 } 

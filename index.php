@@ -376,8 +376,9 @@ function cen(a ,b) {
 
 <!----------------SEARCH-------------------- -->
 <div align="center" id="realTop">
-	<span class="logo">VietnamWiki.net</span>
-	<span style="font-size:1.6em; color: yellow; cursor: default;">&#223;eta</span><br />
+	<span class="logo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VietnamWiki.net</span>
+	<span style="font-size:1.6em; color: yellow; cursor: default;">&#223;eta</span>
+	<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FVietnamWikinet%2F161569890530861%3Fv%3Dwall&amp;layout=button_count&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:80px; height:21px;" allowTransparency="true"></iframe>
 	<form id="searchForm" action="search_display.php" id="search">
 		<input id="search_text" name="search_text" size=70 type="text"/>
 		<input type="button" id="searchButton" value="Search" id="search"/>
