@@ -19,6 +19,7 @@ define('COL', 3);
 define('ROW', 3);
 
 $MEMCACHED_PORT = 11211;
+$GOOGLE_API_KEY = "ABQIAAAAV1hMY6P-vcrStESIcmxsyBSg0YMtASE5KdM7LALqADHM9SZ_PBTZqozQ8fKlIDHry-cBnAxWYeYpSw"; 
 
 include('permalink.php');
 include("APIs.php");
