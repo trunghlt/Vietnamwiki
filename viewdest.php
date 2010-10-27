@@ -62,10 +62,10 @@ foreach ($r as $row) {
 	$title = $post['post_subject'];
 	$content = $post['post_summary'];
 	
-	if (isset($post["post_small_img_url"])) 
+	if (isset($post["post_small_img_url"]) and (trim($post["post_small_img_url"]) != "")) 
 		$smallImgURL = htmlspecialchars_decode($post["post_small_img_url"], ENT_QUOTES);
 	
-	if (isset($post["post_big_img_url"]))
+	if (isset($post["post_big_img_url"]) and (trim($post["post_big_img_url"]) != ""))
 		$bigImgURL = htmlspecialchars_decode($post["post_big_img_url"], ENT_QUOTES);
 		
 	?>
@@ -82,27 +82,8 @@ foreach ($r as $row) {
 				
 
 	<?php
-	//location 
-	/*
-	$sql = "SELECT EngName
-			  FROM destinations
-			  WHERE id=(SELECT dest_id
-						FROM posts
-						WHERE post_id = '".$row["post_id"]."')";
-	$re3 = mysql_query($sql);
-	$a = mysql_fetch_array($re3);
-	$dest = $a['EngName'];
-	echo '<b>'.$dest.'</b><br>'; 	*/						
-	//title
 	$href = getPostPermalink($row["post_id"]);
 	echo "<a href='{$href}' class=\"head2\">$title</a><br>";      
-	// post time information
-	/*
-	$posttime = $row['post_time'];
-	$timelabel = date("d M, Y H:i", $posttime);
-	echo "<span class='style2'>". $timelabel . "</span><p>";
-	*/
-	//content
 	$s = $content;      
 	$s = MakeTextViewable($s);      
 	echo $s ; 
