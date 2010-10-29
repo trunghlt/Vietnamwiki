@@ -376,10 +376,17 @@ class Edition {
 					WHERE id = ".$this->id);
 	}
 	//reject edidion
-	public function reject($id){
+	public function reject($id,$user_id){
 		$q = new Db;
-		$q->query("	UPDATE editions set reject=1
-					WHERE id = ".$id);
+                $q->query("SELECT post_id FROM editions WHERE id = ".$id);
+                $r = array();
+                $r = mysql_fetch_assoc($q->re);
+                if($q->n>0){
+                    if($r["post_id"]!=0)
+                          $q->query("	DELETE FROM follow WHERE user_id = ".$user_id."and post_id=".$r["post_id"]);
+
+                }
+		$q->query("DELETE FROM editions WHERE id = ".$id);               
 	}
 	//check number row 
 	static public function get_num($user_id){

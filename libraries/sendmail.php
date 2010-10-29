@@ -36,6 +36,6 @@ function sendmail($to,$subject,$message,$type,$from){
 		$headers .= "From: VietnamWiKi<$from> \n";
 		$headers .= "X-Mailer: PHP/" . phpversion()."\n";
 	}	
-	return mail($to1, $subject, $message, $headers);
+	return @mail($to1, $subject, $message, $headers);
 }
 ?> 
