@@ -15,7 +15,7 @@ $user_info = new User;
 /*$str_rate="<span id='rateStatus'>Please rate...</span><br/><div id='rateMe' title='Please rate this topic'><div onclick='rateIt(this)' id='_1' class='none' title='This is very bad, never try it !!!' onmouseover='rating(this)' onmouseout='off(this)'>&nbsp;</div><div onclick='rateIt(this)' id='_2' class='none' title='This is bad, I don't recommend it' onmouseover='rating(this)' onmouseout='off(this)'>&nbsp;</div><div onclick='rateIt(this)' id='_3' class='none' title='This is ok, no thing special' onmouseover='rating(this)' onmouseout='off(this)'>&nbsp;</div><div onclick='rateIt(this)' id='_4' class='none' title='This is good, I recommend it' onmouseover='rating(this)' onmouseout='off(this)'>&nbsp;</div><div onclick='rateIt(this)' id='_5' class='none' title='This is very good, highly recommend !!!' onmouseover='rating(this)' onmouseout='off(this)'>&nbsp;</div></div>";*/
 $pAvatar = new TalkPHP_Gravatar();
 ?>
-    <td class="center">			
+    <td class="center" style="width:820px;">
 		<div id="menuWrapper">
 			<?php
 			$post_id = PostElement::filterId($_GET["id"]);
@@ -112,8 +112,24 @@ function signOut() {
 				});
 }
 
-function submitLogin() {	
-	var loginForm = $("loginForm");
+function submitLogin() {
+        jQuery.post("requests/postLogin.php",jQuery('#loginForm').serialize(),function(response){
+ 		loadToolbar("toolbar");
+                if(response==-2)
+                        alert("This user has been banned");
+                else{
+                        if(response != '' && response != 'success'){
+                                jQuery('#FillEmailDialog').css('visibility','visible').dialog('open');
+                                document.getElementById('reviewText').value="";
+                                jQuery('#field_not_login').html("<input class='field' name='check_login' id='check_login' type='hidden' value='2'/>");
+                        }
+                        else if(response == 'success'){
+                                document.getElementById('reviewText').value="";
+                                jQuery('#field_not_login').html("<input class='field' name='check_login' id='check_login' type='hidden' value='2'/>");
+                        }
+                }
+        });
+	/*var loginForm = $("loginForm");
 	loginForm.set("send", {	url: "requests/postLogin.php", evalScripts: true});
 	loginForm.send();
 	loginForm.get("send").addEvent("onComplete", function(response){
@@ -134,7 +150,7 @@ function submitLogin() {
 				}
 					
 
-	});
+	});*/
 }
 </script>
 
