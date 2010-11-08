@@ -153,7 +153,7 @@ function createMarker(point, cat, des) {
 
 function load() 
 {
-  if (GBrowserIsCompatible())
+  if(GBrowserIsCompatible())
   {
 	  //mapDivs = document.getElementById("map");
 	  mapDivs = document.getElementsByClassName("map");
