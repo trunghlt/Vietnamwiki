@@ -9,7 +9,7 @@ include('header.php');
 include('destination.php');
 include('ajaxLoad.php');
 ?>
-<td class="center">	
+<td class="center" style="width:820px;">
 	<div style = "background: #EDEFF4; height: 28px;">
 		<div id="menuWrapper">
 			<div id="toolbar"></div>
