@@ -532,7 +532,7 @@ table.leftmenu{
 	background-color: white;
 	border: none;
 }
-td.right{
+td .right{
     width: 180px;
 }
 #destinationDiv{
