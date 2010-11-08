@@ -56,9 +56,8 @@ delete table
  * $where :condition
 ***************************************************************/
 	function delete($table, $where=''){
-                if($where=='')
+                if($where!='')
                     $where = "where $where";
-
 		$this->query("delete from $table $where");
 	}
 /***************************************************************

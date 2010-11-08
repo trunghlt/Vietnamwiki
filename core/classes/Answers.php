@@ -35,8 +35,12 @@ Get num row in query
 Return num
  * $arr : array coditions
 ***************************************************************/
-	public function query($arr='') {
+	public function query($arr='',$limit='',$orderby='') {
 		$q = new Active;
+                if($limit!='')
+                    $q->limit ($limit);
+                if($orderby!='')
+                    $q->orderby ($orderby);
 		$r = $q->select('','answer',$arr);
               /*  if($q->get_num()==1){
                     $this->id = $r["id"];

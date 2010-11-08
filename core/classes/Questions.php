@@ -101,6 +101,7 @@ delete table question
 	public function remove() {
 		$q = new Active;
 		$q->delete('question');
+
 	}
 /***************************************************************
 delete table question with condition
@@ -108,6 +109,7 @@ delete table question with condition
 	public function delete_id($id) {
 		$q = new Active;
 		$q->delete('question',"id=$id");
+                $q->delete("answer","question_id=$id");
                 $this->deleteMencache();
 	}
 /***************************************************************

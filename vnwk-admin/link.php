@@ -59,6 +59,7 @@ function set_update($value,$s){
 <p><a href="#">Slide management</a></p>
 <p><a href="user_frame.php" target="showframe">User management</a></p>
 <p><a href="map_frame.php" target="showframe">Map management</a></p>
+<p><a href="QandA_frame.php" target="showframe">Questions & Answers management</a></p>
 <p><a href="link.php?value=<?php echo $r['ALLOW_DIRECT_UPDATE']?>&type=up_content" >
 <?php 
 	if($r['ALLOW_DIRECT_UPDATE']==1)
