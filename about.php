@@ -6,7 +6,6 @@ include('core/classes/User.php');
 include('core/classes/IndexElement.php');
 include('core/classes/DestinationElement.php');
 include('core/session.php');
-include("ajax_header.php");
 include('header.php'); 
 include('destination.php');
 ?> 
