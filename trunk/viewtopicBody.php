@@ -93,11 +93,14 @@ else
 		<?php
 	}
        // echo "<div id='flash_hn'></div>";
-            if($post_id == 29){?>
-                <div style="height: 180px; overflow: hidden;"><iframe src ="http://hanoi1000.vn/index.html?view.hlookat=0.00&view.vlookat=0.00&view.fov=1.0" width="100%" height="300px" frameborder="0" ><p>Your browser does not support iframes.</p></iframe></div>
-		<?}
-
-	if ($post_id == 32) { //vietnamwiki.net facebook page
+    /*
+    if ($post_id == 29){ $panorama = "http://hanoi1000.vn/index.html?view.hlookat=0.00&view.vlookat=0.00&view.fov=1.0"; }
+    if ($post_id == 11){ $panorama = "http://panorama.vn/saigon/240/";}
+    */    
+    ?>
+    <?if (isset($panorama)) {?><div style="height: 180px; overflow: hidden; margin-bottom: 10px;"><iframe src ="<?=$panorama?>" width="100%" height="300px" frameborder="0" ><p>Your browser does not support iframes.</p></iframe></div><?}?>
+	
+<?	if ($post_id == 32) { //vietnamwiki.net facebook page
 		$like_url = "http%3A%2F%2Fwww.facebook.com%2Fpages%2FVietnamWikinet%2F161569890530861%3Fv%3Dwall";
 	}
 	else if ($post_id == 9) { //Hoi An facebook page

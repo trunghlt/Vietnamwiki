@@ -11,6 +11,7 @@ include('core/classes/MapImage.php');
 <head>
 <title>VietnamWiki.net - A complete travel guide to Vietnam</title>
 
+<meta property="fb:admins" content="720015688" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <meta name="google-site-verification" content="q881hf8rrSH1ilmcOwIR3Mz1Ue-UULkCj-qlxzp8KiE" />
 <meta name = "KEYWORDS" 
@@ -26,8 +27,8 @@ the user send to our website will be checked and confirmed before posted to offi
 
 <style type="text/css">
 body {
-	background-color: #8C0003;
 	background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 800, from(#DB1C00), to(#000)); 
+	background-color: #8C0003;
 	font-family: Arial,Helvetica,serif;
 	font-size: 10px;
 	padding: 0px;
