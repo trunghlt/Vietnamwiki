@@ -47,6 +47,7 @@ function getSummary() {
 
 <link rel="shortcut icon" href="/images/icon.png"/>
 
+<meta property="fb:admins" content="720015688" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <meta name = "KEYWORDS" 
