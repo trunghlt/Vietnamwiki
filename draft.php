@@ -257,6 +257,9 @@ function submitLogin(dom,check) {
 			function(response){
 				if(response==-2)
 					alert("This user has been banned");
+				else if(response == 'false'){
+                                    alert("Login's fail");
+                                }
 				else
 				{
 					if(response != '' && response != 'success'){
