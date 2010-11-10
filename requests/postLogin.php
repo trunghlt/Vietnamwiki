@@ -25,7 +25,7 @@ $password = $_POST["password"];
 function chkLogin() {
 	global $username, $password;
 	if (chkInject($username)||chkInject($password)) {
-		return false;
+		echo 'false';
 	}
 	else {
 	  	$id = userid($username, $password);
@@ -45,7 +45,7 @@ function chkLogin() {
 		 		echo $id;
 			}
 		 	else 
-				return false;
+				echo 'false';
 	}
 }
 chkLogin();
