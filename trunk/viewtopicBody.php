@@ -243,7 +243,10 @@ function submitLogin(dom,check) {
 				{
 					alert("This user has been banned");
 				}
-				else
+				else if(response == 'false'){
+                                    alert("Login's fail");
+                                }
+                                else
 				{
 					if(response != '' && response != 'success'){
 						loadToolbar("toolbar");
