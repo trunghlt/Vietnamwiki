@@ -7,7 +7,7 @@ their knowledge about Vietnam under the supervision of VietnamWiki.net team. Eve
 the user send to our website will be checked and confirmed before posted to official pages");
 
 if (isset($_GET["id"])) {
-	$postId = postIdFilter($_GET["id"]);
+	$postId = IndexElement::filterId($_GET["id"]);
 }
 	
 function getTitle() {
