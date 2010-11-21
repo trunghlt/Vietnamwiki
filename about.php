@@ -9,7 +9,7 @@ include('core/session.php');
 include('header.php'); 
 include('destination.php');
 ?> 
-<td class="center">	
+<td class="center" style="width:820px;">	
 <?php include('toolbar.php'); ?>
 <div id='col2'>
 	<table class="contentTable"><tbody><tr><td >
