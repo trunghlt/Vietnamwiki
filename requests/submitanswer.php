@@ -38,7 +38,7 @@ include("../libraries/sendmail.php");
 		if($Answers->id != 0)
 		{
                         $r2 = $q->query("id=".$Answers->question_id);
-                        if($r2[0]['user_id']!='' || $r2[0]['user_id']!=NULL){
+                        if($r2[0]['user_id']!='' && $r2[0]['user_id']!=NULL && $r2[0]['user_id']!=0){
                             $r_name = $user->query_id($r2[0]['user_id']);
                             $name_question = $r_name['username'];
                             $email = $r_name['email'];
@@ -56,7 +56,7 @@ include("../libraries/sendmail.php");
                         $message = str_replace('{Link to Vietnam General page}',"<a href='$str' > Click here</a>",$message);
                        
                         if($email!='' || $email!=NULL){
-                            sendmail($email,$row2answer['subject'],$message,0,$row2answer['from']);
+                            sendmail($email,$row2answer['subject'],$message,1,$row2answer['from']);
                         }
 		}
 ?>
