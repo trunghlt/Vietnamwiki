@@ -31,10 +31,10 @@ function signOut() {
 	jQuery.post("/requests/logout.php", {}, 
 				function(response) {
 					loadToolbar("toolbar");
+                                        loadNotification();
                                         jQuery(".editpho").html("<div align=\"center\" id=\"editpho\"><!-- --></div>");
 				});
 }
-
 function submitLogin() {
         jQuery.post("/requests/postLogin.php", jQuery("#loginForm").serialize(),function(response){            
                 if(response==-2)
@@ -47,6 +47,7 @@ function submitLogin() {
                                 jQuery('#FillEmailDialog').css('visibility','visible').dialog('open');
                         }
                           loadToolbar("toolbar");
+                          loadNotification();
                           jQuery(".editpho").html("<a	href=\"#\" class=\"small_link\" onclick=\"imageEditClick(<?php echo $img["id"]?>)\"> [edit] </a>");
                 }
         });

@@ -39,6 +39,7 @@ function signOut() {
 	jQuery.post("/requests/logout.php", {}, 
 				function(response) {
 					loadToolbar("toolbar");
+                                        loadNotification();
 				});
 }
 
@@ -48,6 +49,7 @@ function submitLogin() {
 	loginForm.send();
 	loginForm.get("send").addEvent("onComplete", function(response){
 		loadToolbar("toolbar");
+                loadNotification();
 	});
 }
 </script>
