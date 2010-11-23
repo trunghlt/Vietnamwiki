@@ -513,14 +513,14 @@ width: 100%;
 }
 
 td.left {
-	width : 180px;
+	width : 20%;
 	vertical-align: top;
 	border-right: 1px solid #C8C8C8;
 	border-left: 1px solid #C8C8C8;
 }
 
 td.center {
-	width : 100%;
+	width : 60%;
 	vertical-align: top;
 	border-bottom: 1px solid #C8C8C8;
 	background:#FFFFFF;
@@ -533,7 +533,7 @@ table.leftmenu{
 	border: none;
 }
 td.right{
-    width: 180px;
+    width: 20%;
 }
 #destinationDiv{
 	margin-left: 10px;	
