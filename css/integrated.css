@@ -520,7 +520,7 @@ td.left {
 }
 
 td.center {
-	width : 640px;
+	width : 100%;
 	vertical-align: top;
 	border-bottom: 1px solid #C8C8C8;
 	background:#FFFFFF;
