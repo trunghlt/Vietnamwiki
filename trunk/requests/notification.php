@@ -14,6 +14,7 @@ if(!logged_in() && Notification::Checkip(myip())==0){
 	position:absolute;
 	top:20px; /* in conjunction with left property, decides the text position */
 	left:100px;
+	font-size: 14px;
 	width:799px; /* optional, though better have one */
         height:64px;
         text-align: center;
