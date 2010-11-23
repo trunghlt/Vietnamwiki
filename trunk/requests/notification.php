@@ -7,7 +7,7 @@ include("../core/classes/Notification.php");
 if(!logged_in() && Notification::Checkip(myip())==0){
 ?>
    <div>
-     Do you know that VietnamWiki is an open encyclopedia, meaning that you can create and edit articles yourself ? <span class="click_notification" onclick="agree_notification();">Click here</span>
+     Do you know that VietnamWiki is an open encyclopedia, meaning that you can create and edit articles yourself ? <span class="click_notification" onclick="agree_notification();">Yes, I know</span>
    </div>
 <style>
     #image_text #text_notification {
