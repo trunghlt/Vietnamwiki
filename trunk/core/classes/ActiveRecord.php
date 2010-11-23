@@ -24,10 +24,16 @@ Return array result
 ***************************************************************/
 
 	public function get_result(){
-		if($this->re){
+		if($this->re!=null){
+                    if(mysql_num_rows($this->re)>0){
 			while($row = mysql_fetch_assoc($this->re))
 				$row2[] = $row;
+                    }
+                    else
+                       $row2=0;
 		}
+                else
+                    $row2=0;
 		return @$row2;
 	}
 
@@ -159,6 +165,7 @@ Return value in array
 	
 		$sql = "select $col from $table $where $order $limit";
 		$this->query($sql);
+
 		return $this->get_result();
 	}
 }

@@ -532,7 +532,7 @@ table.leftmenu{
 	background-color: white;
 	border: none;
 }
-td .right{
+td.right{
     width: 180px;
 }
 #destinationDiv{
@@ -1269,7 +1269,7 @@ div.demo-description {
 }
 
 #qanda{
-    width: 190px;
+    width: 180px;
     float: left;
     font-family:Arial,Helvetica,serif;
     font-size: 12px;
