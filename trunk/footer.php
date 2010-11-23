@@ -32,7 +32,6 @@ function loadNotification(){
     function agree_notification(){
         jQuery.post("/requests/agreenotification.php", {},function(data){
             loadNotification();
-            alert("Thanks");
         });
     }
 </script>
