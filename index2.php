@@ -40,7 +40,6 @@ include('destination.php');
 <script language="javascript">
 jQuery(function(){
 	loadToolbar("toolbar");
-	
 });
 
 function signOut() {
@@ -53,7 +52,8 @@ function signOut() {
 							document.getElementById('link_add').innerHTML = "<a onClick=\"jQuery('#loginDialog').css('visibility','visible').dialog('open')\">+ Add new topic</a>";							
 						}
 					jQuery('#field_not_login_comment').html("Email :<br /><input class='field' name='fill_email_comment' id='fill_email_comment' type='text' style='width:250px' value=''/><br />Name :<br /><input class='field' name='fill_name_comment' id='fill_name_comment' type='text' style='width:250px' value=''/><br /><input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='1'/>");					
-				});
+                                        loadNotification();
+                                });
 }
 /*
 function submitLogin() {	
@@ -93,6 +93,7 @@ function submitLogin(dom,check) {
 						}
 						jQuery('#field_not_login_comment').html("<input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='2'/>");
 					}
+                                        loadNotification();
 				}
 	});
 }

@@ -101,12 +101,11 @@ function submitReview(dom,email,name) {
 				"html");
 	}			
 }
-
 function signOut() {
 	jQuery.post("/requests/logout.php", {}, 
 				function(response) {
 					loadToolbar("toolbar");
-
+                                        loadNotification();
 				document.getElementById('reviewText').value="";
 				document.getElementById('field_not_login').innerHTML="Email :<br /><input class='field' name='fill_email_review' id='fill_email_review' type='text' style='width:250px' value=''/><br />Name :<br /><input class='field' name='fill_name_review' id='fill_name_review' type='text' style='width:250px' value=''/><br /><input class='field' name='check_login' id='check_login' type='hidden' value='1'/>";
 				});
@@ -130,6 +129,7 @@ function submitLogin() {
                                 document.getElementById('reviewText').value="";
                                 jQuery('#field_not_login').html("<input class='field' name='check_login' id='check_login' type='hidden' value='2'/>");
                         }
+                        loadNotification();
                 }
         });
 	/*var loginForm = $("loginForm");

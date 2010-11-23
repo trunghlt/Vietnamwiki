@@ -35,7 +35,7 @@ $user_info = new User;
 			<?php include("viewtopicBody.php") ?>
 		</div>
 	</td>
-     <td classs="right">
+     <td class="right">
         <?php include('listquestion.php');?>
     </td>
 </tr>
