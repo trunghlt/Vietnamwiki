@@ -65,7 +65,10 @@ function upload_image($ftmp, $loc, $des, $tags) {
 			$img = new img($original_path."/".$file_name);
 			$img->resize(100, 75, true);
 			$img->store($small_path."/".$file_name);	
-			watermark($original_path."/".$file_name,"../images/watermark.png",$original_path."/".$file_name);
+
+			//Watermark original images with VietnamWiki logo
+			//watermark($original_path."/".$file_name,"../images/watermark.png",$original_path."/".$file_name);
+
 			$sql = "INSERT INTO images 
 					(dest_id, des, tags, uploaded_at, user_id, filename)
 					VALUE ('".$loc."','".$des."','".$tags."','".$uploaded_at."','".myUser_id(myip())."','".$file_name."')";
