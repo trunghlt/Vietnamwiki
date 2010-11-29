@@ -1,5 +1,5 @@
 <div id='qanda'>
-<div class="head3" style="margin-left: 0px; width: 165px;padding:6px">Questions and Answers</div>
+<div class="head3" style="margin-left: 0px; width: 167px;padding:6px">Questions and Answers</div>
 <div class="button" style="margin-top: 10px; margin-left: 35px;"><a onclick='question();' >Ask a question</a></div>
 <div style="clear: both"></div>
 <div id="view_qanda"><!-- --></div>
