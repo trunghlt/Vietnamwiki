@@ -157,12 +157,10 @@ function load()
   if(GBrowserIsCompatible())
   {
 	  //mapDivs = document.getElementById("map");
-          var mapDivs = 0;
-	  mapDivs = document.getElementById("map");
-          if(mapDivs.length==1){
-	  //for (i = 0; i < mapDivs.length; i++) {
-		  var info = mapDivs[1].innerHTML.split(":")[1].split(",", 5);
-		  var map = new GMap2(mapDivs[1]);
+	  mapDivs = document.getElementsByClassName("map");
+	  for (i = 0; i < mapDivs.length; i++) {
+		  var info = mapDivs[i].innerHTML.split(":")[1].split(",", 5);
+		  var map = new GMap2(mapDivs[i]);
 		  var center = new GLatLng(parseFloat(info[0]),parseFloat(info[1]));
 		  map.setCenter(center, parseInt(info[3]));
 		  map.addOverlay(new createMarker(center, info[2], info[4]));

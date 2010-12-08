@@ -5,7 +5,6 @@
         </a>
        <div id="text_notification"></div>
     </div>
-
 <style>
     #image_text {
 	position:relative;

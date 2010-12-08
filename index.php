@@ -11,7 +11,7 @@ include('core/classes/MapImage.php');
 <head>
 <title>VietnamWiki.net - A complete travel guide to Vietnam</title>
 
-<meta property="fb:admins" content="720015688" />
+<meta property="fb:page_id" content="161569890530861" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <meta name="google-site-verification" content="q881hf8rrSH1ilmcOwIR3Mz1Ue-UULkCj-qlxzp8KiE" />
 <meta name = "KEYWORDS" 
