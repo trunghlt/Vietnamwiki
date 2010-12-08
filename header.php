@@ -238,7 +238,7 @@ jQuery(document).ready(function(){
 		jQuery(this).css("display", "none");
 		jQuery(this).fullBg();
 		jQuery(this).fadeIn(500);
-	}).attr("src", "http://imm.io/media/14/14ZH.jpg");
+	}).attr("src", "images/backgrounds/aodai.jpg");
 	
 });
 </script>	
