@@ -46,7 +46,7 @@
 	require_once("ajaxLoad.php");
 //change_template();
 ?>
-<td class="center" style="width:820px;">
+<td class="center">
 
 <div style = "background: #EDEFF4; height: 28px;">
 	<div id="menuWrapper">
@@ -151,6 +151,7 @@
 	<br/><br/><br/>
 
 </div><!--contentTable-->
+
 <input type="hidden" id='type' name="type" />
 <div id="restoreConfirmDialog" title="Alert">
 	Restoring this draft will make all later drafts deleted. Are you sure you still want to restore this draft ?
@@ -307,8 +308,20 @@ function editClick() {
 	editDialog.dialog('open');
 }
 </script>
+<?php include("commentListPainter.php"); ?>
+</td>
+<td classs="right">
+    <?php include('listquestion.php');?>
+</td>
+</tr>
+<tr>
+<td colspan=3>
+    <?php include("footLinks.php");?>
+</td>
+</tr>
+</tbody></table>
+
 <?php
-include("commentListPainter.php");
 include("forms/loginForm.php");
 include("forms/composeForm.php");
 include("forms/editForm.php");
