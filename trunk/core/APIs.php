@@ -122,6 +122,7 @@ function getToolbarHTML() {
 				echo $currentFbUserInfo["name"];;
 			} ?>
 			/<a class='link' href='/profile.php?username=<?php echo $un?>'>profile</a>
+                        / <a class='link' href="/feed.php?username=<?php echo $un?>">Home</a>
 			/<?php if ($fbUserId) { ?>
 				<a class="link" onclick="FB.Connect.logout(function() { signOut(); refresh_page(); })">log out</a>
 			<?php } else { ?>

@@ -22,6 +22,6 @@ else{
 ?>
 	<!--commentlogin.dialog('open') replace in comment-->
 	<a class='link' onClick="jQuery('#commentDialog').css('visibility','visible').dialog('open')"> Comment </a>
-	|<a class='link' onClick="jQuery('#editloginDialog').css('visibility','visible').dialog('open')"> Edit </a>
+	|<a class='link' onClick="jQuery('#type_login').val(2);loginDialog.css('visibility','visible').dialog('open')"> Edit </a>
 <?php
 }?>

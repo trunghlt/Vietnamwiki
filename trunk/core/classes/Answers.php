@@ -24,6 +24,7 @@ Variables
 	public $content;
 	public $date;
         public $ip;
+        public $like_a;
 /***************************************************************
 delete current memcaches
 ***************************************************************/
@@ -63,11 +64,11 @@ Return num
                             );
                     return $arr;
                 }*/
-                if($q->get_num()>0){
-                    return $r;
+                if(is_array($r)){
+                   return $r;
                 }
                 else {
-                    return 0;
+                    return null;
                 }
 	}
 /***************************************************************
@@ -102,6 +103,7 @@ delete table answer with condition
 		$q->delete('answer',"id=$id");
                 $this->deleteMencache();
 	}
+        
 /***************************************************************
 edit a record in table answer
 ***************************************************************/
@@ -119,15 +121,25 @@ edit a record in table answer
                 $q->update('answer', $arr,"id=$this->id");
                 $this->deleteMencache();;
 	}
+
 /***************************************************************
 Get answer
+ * id: id question
 ***************************************************************/
-       public static function getA(){
+       public static function getA($id=0){
             $u = new User;
-            $n_row = self::query();
+            if($id==0){
+                $n_row = self::query();
+            }
+            else
+            {
+                $arr_query = array('question_id'=>$id);
+                $n_row = self::query($arr_query,"","like_a desc, date desc");
+            }
             $i= 0;
             $arr = array();
-            if ($n_row != 0) {
+            
+            if (is_array($n_row)) {
 		        foreach ($n_row as $v){
 		            $arr[$i] = array( 'id'=>$v['id'],
 		                          'question_id'=>$v['question_id'],
@@ -138,13 +150,16 @@ Get answer
 		                          'date'=>$v['date'],
 		                          'ip'=>$v['ip'],
 		                          'avatar'=>$u->getUserAvatar($v),
+                                          'like_a'=>$v['like_a'],
 		                          'name'=>$u->getname($v)
 		                                 );
 		            $i = $i+1;
 		        }
-		    }
-            Mem::$memcache->set("ans",$arr);
-            return $arr;
+                        if($id==0)
+                            Mem::$memcache->set("ans",$arr);
+                        return $arr;
+             }
+             return 0;
         }
 }
 ?>

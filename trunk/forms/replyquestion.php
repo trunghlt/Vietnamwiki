@@ -10,7 +10,15 @@
 		<input class="field" name="fill_name_answer" id="fill_name_answer" type="text" style="width:250px" value=""/><br /></p>
 
 		<input class="field" name="check_login_answer" id="check_login_answer" type="hidden" value="1"/>
-	<?php }else{?>
+	<?php }else{
+                if($r_q_u["email"]=="" || $r_q_u["email"]==null){
+        ?>
+		<p>Email: (required)<br />
+		<input class="field" name="fill_email_answer" id="fill_email_answer" type="text" style="width:250px" value=""/><br />
+		<span style="font-size: 9px; color: #777;">We loathe spamming. We will never spam you! We use your email to display your <a href="http://en.gravatar.com/">Gravatar</a>.</span></p>
+        <?php
+                }
+        ?>
 		<input class="field" name="check_login_answer" id="check_login_answer" type="hidden" value="2"/>
 	<?php }?>
 	</div>
@@ -23,10 +31,8 @@
 	<br/>
 </form>
 </div>
-<div id="Emailanswer1" title="Alert">You must fill Name or Email</div>
 <script language="javascript">
 jQuery(document).ready(function(){
-	Email_answer = jQuery("#Emailanswer1").dialog({autoOpen: false});
 	answerDialog = jQuery("#answerDialog").dialog({
 		autoOpen: false,
 		height: 'auto',
@@ -41,16 +47,26 @@ jQuery(document).ready(function(){
 			'Submit': function() {
 				if(jQuery("#check_login_answer").val() == 1){
 					if(jQuery("#fill_name_answer").val() == '' || jQuery("#fill_email_answer").val() == ''|| checkEmail(jQuery("#fill_email_answer").val())==false){
-						jQuery('#Emailanswer1').css('visibility','visible').dialog("open");
+						jQuery('#Emailquestion').css('visibility','visible').dialog("open");
 					}
-					else{
+					else{      
 						submitanswer();
 						jQuery(this).dialog('close');
 					}
 				}
 				else{
+                                            if(jQuery("input").index(jQuery("#fill_email_answer"))!=-1){
+                                                if(jQuery("#fill_email_answer").val() == ''|| checkEmail(jQuery("#fill_email_answer").val())==false)
+                                                    jQuery('#Emailquestion').css('visibility','visible').dialog("open");
+                                                else{
+                                                    submitanswer();
+                                                    jQuery(this).dialog('close');
+                                                }
+                                            }
+                                            else{
 						submitanswer();
 						jQuery(this).dialog('close');
+                                            }
 				}
 			},
 			Cancel: function() {
@@ -61,9 +77,5 @@ jQuery(document).ready(function(){
 });
     function submitanswer(){
     jQuery.post('requests/submitanswer.php',jQuery('#answerForm').serialize(),function(reponse){ load_qanda(0);});
-    }
-    function checkEmail(test){
-        reg = /^[a-zA-Z0-9._]+\@[a-zA-Z0-9]{2,}\.[a-zA-Z]{2,}$/;
-        return reg.test(test);
     }
 </script>

@@ -10,7 +10,17 @@
 		<input class="field" name="fill_name_question" id="fill_name_question" type="text" style="width:250px" value=""/><br /></p>
 
 		<input class="field" name="check_login_question" id="check_login_question" type="hidden" value="1"/>
-	<?php }else{?>
+	<?php }else{
+                $q_u = new User;
+                $r_q_u = $q_u->query_id(myUser_id(myip()));
+                if($r_q_u["email"]=="" || $r_q_u["email"]==null){
+        ?>
+		<p>Email: (required)<br />
+		<input class="field" name="fill_email_question" id="fill_email_question" type="text" style="width:250px" value=""/><br />
+		<span style="font-size: 9px; color: #777;">We loathe spamming. We will never spam you! We use your email to display your <a href="http://en.gravatar.com/">Gravatar</a>.</span></p>
+        <?php
+                }
+        ?>
 		<input class="field" name="check_login_question" id="check_login_question" type="hidden" value="2"/>
 	<?php }?>
 	</div>
@@ -27,10 +37,17 @@
 	<br/>
 </form>
 </div>
-<div id="Emailquestion1" title="Alert">You must fill Name or Email</div>
+<div id="Emailquestion" title="Alert">You must fill Name or Email</div>
 <script language="javascript">
 jQuery(document).ready(function(){
-	Email_question = jQuery("#Emailquestion1").dialog({autoOpen: false});
+	Email_question = jQuery("#Emailquestion").dialog({
+                            autoOpen: false,
+                            buttons:{
+                                Cancel: function() {
+                                        jQuery(this).dialog('close');
+                                }
+                            }
+                        });
 	questionDialog = jQuery("#questionDialog").dialog({
 		autoOpen: false,
 		height: 'auto',
@@ -45,7 +62,7 @@ jQuery(document).ready(function(){
 			'Submit': function() {
 				if(jQuery("#check_login_question").val() == 1){
 					if(jQuery("#fill_name_question").val() == '' || jQuery("#fill_email_question").val() == ''|| checkEmail(jQuery("#fill_email_question").val())==false){
-						jQuery('#Emailquestion1').css('visibility','visible').dialog("open");
+						jQuery('#Emailquestion').css('visibility','visible').dialog("open");
 					}
 					else{
 						submitquestion();
@@ -53,8 +70,18 @@ jQuery(document).ready(function(){
 					}
 				}
 				else{
+                                    if(jQuery("input").index(jQuery("#fill_email_question"))!=-1){
+                                        if(jQuery("#fill_email_question").val() == ''|| checkEmail(jQuery("#fill_email_question").val())==false)
+                                            jQuery('#Emailquestion').css('visibility','visible').dialog("open");
+                                        else{
+                 				submitquestion();
+						jQuery(this).dialog('close');
+                                        }
+                                    }
+                                    else{
 						submitquestion();
 						jQuery(this).dialog('close');
+                                    }
 				}
 			},
 			Cancel: function() {

@@ -17,7 +17,10 @@ if($_POST['check_login_question']==1){
 else if($_POST['check_login_question']==2){
     $Questions->user_id = myUser_id(myip());
     $Questions->username = '';
-    $Questions->email = '';
+    if(isset($_POST["fill_email_question"]))
+        $Questions->email = filter_content_script($_POST["fill_email_question"]);
+    else
+        $Questions->email = "";
 }
 $Questions->topic_id = filter_content_script($_POST["postId"]);
 $Questions->index_id = filter_content_script($_POST["indexId"]);

@@ -140,7 +140,6 @@ Select table follow
 		$q = new Db;
 		$str = "SELECT * FROM follow WHERE post_id=$post_id and user_id=$user_id";
 		$q->query($str);
-		
 			while($row = mysql_fetch_assoc($q->re))
 				$r[] = $row;
 			return @$r;
@@ -179,8 +178,11 @@ Select table follow
 			//if($active->get_num() == 0){
 					//return 0;
 			//}
-			$r['n'] =  $active->get_num();
-			return @$r;
+                        if(is_array($r)){
+                            $r['n'] =  $active->get_num();
+                            return $r;
+                        }
+			return 0;
 		}
 		else{
 				$active->limit($start,$numpage);
@@ -188,8 +190,11 @@ Select table follow
 			//if($active->get_num() == 0){
 					//return 0;
 			//}
-			$r['n'] =  $active->get_num();
-			return @$r;		
+                        if(is_array($r)){
+                            $r['n'] =  $active->get_num();
+                            return $r;
+                        }
+			return 0;
 		}
 	}
 }

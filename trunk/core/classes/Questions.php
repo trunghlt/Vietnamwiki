@@ -26,11 +26,13 @@ Variables
 	public $dest_id;
 	public $date;
         public $ip;
+        public $like_q;
 /***************************************************************
 delete current memcaches
 ***************************************************************/
         function deleteMencache(){
 		Mem::$memcache->delete("ques");
+                Mem::$memcache->delete("ques_like");
         }
 /***************************************************************
 Get num row in query
@@ -69,11 +71,12 @@ Return num
                             );
                     return $arr;
                 }
-                else*/ if($q->get_num()>0){
+                else*/
+                if(is_array($r)){
                     return $r;
                 }
                 else {
-                	return Null;
+                	return 0;
                 }
 	}
 /***************************************************************
@@ -132,14 +135,25 @@ edit a record in table question
                 $this->deleteMencache();
 	}
 /***************************************************************
-Getquestion
+Get question
+ * type:
+ *      + = 1 : get by time
+ *      + = 2 : get by like
 ***************************************************************/
-        public static function getQ(){
+        public static function getQ($type=1){
             $u = new User;
-            $n_row = self::query("","","date desc");
+            if($type == 1){
+                $str = "date desc";
+                $memcache_name = "ques";
+            }
+            else{
+                $str = "like_q desc, date desc";
+                $memcache_name = "ques_like";
+            }
+            $n_row = self::query("","",$str);
             $i= 0;
             $arr = array();
-            if ($n_row != Null) {
+            if (is_array($n_row)) {
 		        foreach ($n_row as $v){
 		            $arr[$i] = array( 'id'=>$v['id'],
 		                          'user_id'=>$v['user_id'],
@@ -152,13 +166,15 @@ Getquestion
 		                          'date'=>$v['date'],
 		                          'ip'=>$v['ip'],
 		                          'avatar'=>$u->getUserAvatar($v),
+                                          'like_q'=>$v['like_q'],
 		                          'name'=>$u->getname($v)
 		                                 );
 		            $i = $i+1;
 		        }
-		    }
-            Mem::$memcache->set("ques",$arr);
-            return $arr;
+                        Mem::$memcache->set($memcache_name,$arr);
+                        return $arr;
+            }
+            return 0;
         }
 }
 ?>

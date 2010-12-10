@@ -15,18 +15,21 @@ include("../libraries/sendmail.php");
 
 		$Answers = new Answers;
                 $user = new User;
-                
+         if(is_numeric($_POST["questionId"])){
 		$Answers->question_id = $_POST["questionId"];
                 if($_POST['check_login_answer']==1){
                     $Answers->user_id = 0;
-                    $Answers->username = $_POST["fill_name_answer"];
-                    $Answers->email = $_POST["fill_email_answer"];
+                    $Answers->username = filter_content_script($_POST["fill_name_answer"]);
+                    $Answers->email = filter_content_script($_POST["fill_email_answer"]);
                     $name_answer = $Answers->username;
                 }
                 else if($_POST['check_login_answer']==2){
                     $Answers->user_id = myUser_id(myip());
                     $Answers->username = '';
-                    $Answers->email = '';
+                    if(isset($_POST["fill_email_answer"]))
+                        $Answers->email = filter_content_script($_POST["fill_email_answer"]);
+                    else
+                        $Answers->email = '';
                     $r = $user->query_id($Answers->user_id);
                     $name_answer = $r['username'];
                 }
@@ -41,10 +44,13 @@ include("../libraries/sendmail.php");
                         if($r2[0]['user_id']!='' && $r2[0]['user_id']!=NULL && $r2[0]['user_id']!=0){
                             $r_name = $user->query_id($r2[0]['user_id']);
                             $name_question = $r_name['username'];
-                            $email = $r_name['email'];
+                            if($r_name['email']!="" && $r_name['email']!=null)
+                                $email = $r_name['email'];
+                            else
+                                $email = $r2[0]['email'];
                         }
                         else{
-                            $name_question = $r2[0]['username'];
+                            $name_question = $r2[0]['username'];                            
                             $email = $r2[0]['email'];
                         }
 
@@ -59,4 +65,5 @@ include("../libraries/sendmail.php");
                             sendmail($email,$row2answer['subject'],$message,1,$row2answer['from']);
                         }
 		}
+         }
 ?>

@@ -53,9 +53,30 @@ function updateReviewText(reviewText) {
 
 jQuery(document).ready(function(){ 
 	loadToolbar("toolbar");
-	reviewLowerBound = jQuery("#reviewLowerBound").dialog({autoOpen: false});
-	mustRateAlert = jQuery("#mustRateAlert").dialog({autoOpen: false});
-	mustNameEmailAlert = jQuery("#mustName_EmailAlert").dialog({autoOpen: false});
+	reviewLowerBound = jQuery("#reviewLowerBound").dialog({
+            autoOpen: false,
+            buttons:{
+  		Cancel: function() {
+			jQuery(this).dialog('close');
+		}
+            }
+        });
+	mustRateAlert = jQuery("#mustRateAlert").dialog({
+                            autoOpen: false,
+                            buttons:{
+                                Cancel: function() {
+                                        jQuery(this).dialog('close');
+                                }
+                            }
+                        });
+	mustNameEmailAlert = jQuery("#mustName_EmailAlert").dialog({
+                                autoOpen: false,
+                                buttons:{
+                                    Cancel: function() {
+                                        jQuery(this).dialog('close');
+                                    }
+                                }
+                             });
 	reviewDialog = jQuery("#review_Dialog").dialog({
 		autoOpen: false,
 		height: 'auto',
