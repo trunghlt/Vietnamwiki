@@ -4,6 +4,7 @@
 		<input class="field" name="username" id="username" type="text" style="width:130px" /><br/>
 		Password:
 		<input class="field" name="password" id="password" type="password" style="width:130px" />
+                <input class="filed" name="type_login" id="type_login" type="hidden" value="1" />
 	</form>
 	<div style="padding-top: 10px;"><?php echo render_fbconnect_button();?></div>
 </div>
@@ -21,7 +22,7 @@ jQuery(document).ready(function(){
 		},		
 		buttons: {
 			Login: function() {
-				submitLogin('loginForm',1);
+                                submitLogin('loginForm',jQuery("#type_login").val());
 				jQuery(this).dialog('close');
 			},
 			Cancel: function() {

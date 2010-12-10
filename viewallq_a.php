@@ -1,0 +1,122 @@
+<?php
+session_start();
+$session_id = session_id();
+include('core/common.php');
+include('core/init.php');
+include('core/classes.php');
+include('core/session.php');
+	$ip = $_SERVER['REMOTE_ADDR'];
+	process($session_id, $ip);
+include('core/filters.php');
+include('header.php');
+include('destination.php');
+include('ajaxLoad.php');
+
+?>
+<style>
+    #view_qanda > ul > li {
+        border-bottom: double;
+    }
+.question{
+    text-align: left;
+    width: 800px;
+    margin-bottom: 10px;
+}
+</style>
+    <td class="center" style="width:820px;">
+		<div id="menuWrapper"><div id="toolbar"><?php getToolbarHTML();?></div></div>
+		<div id="contentTable">
+                    <div>
+                        <h1>Questions and Answers</h1>
+                        <div class="sort">
+                            <select id="method_sort" onchange="load_qanda(0);">
+                                <option value="1" seleted>Sort Question By Time</option>
+                                <option value="2">Sort Question By Like</option>
+                            </select>
+                        </div>
+                        <div id="qanda" style="width:820px !important;"><div id="view_qanda"><!-- --></div></div>
+                    </div>
+		</div>
+	</td>
+</tr>
+<tr>
+	<td colspan=3>
+		<?php include("footLinks.php");?>
+	</td>
+</tr>
+</tbody>
+</table>
+<script type="text/javascript">
+ jQuery(document).ready(function(){
+     load_qanda(0);
+});
+function signOut() {
+	jQuery.post("/requests/logout.php", {},
+				function(response) {
+                                    set_value();
+                                });
+}
+//Set value when user register successfully email
+function set_value(){
+    loadToolbar("toolbar");
+    loadNotification();
+    load_qanda(0);
+}
+//end
+function submitLogin(dom,check) {
+	jQuery.post("/requests/postLogin.php", jQuery("#"+dom).serialize(),
+			function(response){
+				if(response == -2)
+				{
+					alert("This user has been banned");
+				}
+				else if(response == 'false'){
+                                    alert("Login's fail");
+                                }
+                                else
+				{
+					if(response != '' && response != 'success'){
+						document.getElementById('id_user').value = response;
+
+                                                var str = jQuery("#"+dom).serialize().split("&");
+                                                var name = str[0].split("=");
+                                                jQuery("#name_user").val(name[1]);
+						document.getElementById('editpost').value = 'search';
+                                                jQuery('#FillEmailDialog').css('visibility','visible').dialog("open");
+					}
+					else if(response == 'success'){
+                                                loginDialog.dialog("close");                                                
+                                                set_value();
+					}
+				}
+	});
+}
+    function load_qanda(id){
+        jQuery('#questionDialog').remove();
+        jQuery('#answerDialog').remove();
+        jQuery("#Emailquestion").remove();
+        jQuery.post("/requests/QandA.php",{start:id,num_row:10,type:jQuery("#method_sort").val(),sort:1},function(response){jQuery("#view_qanda").html(response);});
+    }
+    function question(){
+       jQuery('#questionDialog').css('visibility','visible').dialog('open');
+    }
+    function answer(id){
+ 	jQuery('#answerDialog').css('visibility','visible').dialog('open');
+        jQuery('#questionId').val(id);
+    }
+    function sortanswer(id){
+        jQuery.post("/requests/sortAnswer.php",{id_q:id},function(response){
+                                    if(response!="" && response!=null)
+                                        jQuery("#q"+id).html(response);
+                                });
+    }
+    function like(_id,_type,_v){
+        jQuery.post("/requests/like.php",{id:_id,type:_type,value:_v},function(response){load_qanda(0);});
+    }
+</script>
+<?php
+include("forms/composeForm.php");
+include("forms/loginForm.php");
+include("forms/register_email.php");
+include("footer.php");
+?>

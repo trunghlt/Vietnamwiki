@@ -7,11 +7,12 @@ $dest_id = isset($_GET["id"])? $_GET["id"] : 1;
 $dest_id = htmlspecialchars($dest_id , ENT_QUOTES);
 $c_post = new PostElement;
 $query = new Active;
-$r1 = $query->select("d.EngName,i.dest_id","index_menu i, destinations d", "i.id=$index_id and d.id = i.dest_id");
-foreach($r1 as $arr1)
-$dest_name = $arr1['EngName'];
-
-
+$r1 = $query->select("d.EngName,i.dest_id,i.name","index_menu i, destinations d", "i.id=$index_id and d.id = i.dest_id");
+if(is_array($r1))
+foreach($r1 as $arr1){
+    $dest_name = $arr1['EngName'];
+    $index_name = $arr1['name'];
+}
 //$request = ($dest_id == 1)? "" : "WHERE index_id = '".$index_id."'";
 $request = "WHERE index_id = '".$index_id."'";
 //sort
@@ -56,7 +57,7 @@ $query->limit("$start,$end");
 $r = $query->select('',"posts","index_id = '".$index_id."'");
 //$result = mysql_query("SELECT * FROM posts ".$request." ORDER BY ".$sort_query." DESC LIMIT ".$start.",".$end) or die(mysql_error());
 $numrow2 = $c_post->query_rowByIndex($index_id);
-if($r != NULL)
+if(is_array($r))
 foreach ($r as $row) {
         $post = $c_post->query_id($row['post_id']);
 	$title = $post['post_subject'];
@@ -107,13 +108,14 @@ if($numrow2 <= 5){
 <div class="note1">There <?php echo $str?> in this index. Is <?php echo $dest_name?> your hometown? Or do you just simply love this place? You know you can add a new topic here to recommend <?php echo $dest_name?> to worldwide travellers by clicking on the below button.</div>
 
 <div class='button' style="margin-top:20px;">
+<input type="hidden" value="0" id="check_method_login"/>
 <ul style="float:left;">
 <li id="link_add" value='<?php if(!logged_in()) echo 0; else echo 1; ?>'>
 <?php if(!logged_in()){?>
-		<a onClick="jQuery('#loginDialog').css('visibility','visible').dialog('open')" >+ Add new topic</a>
+		<a onClick="jQuery('#loginDialog').css('visibility','visible').dialog('open');jQuery('#check_method_login').val(1);" >+ Add new topic</a>
 
 <?php }else{ ?>
-	<a onClick="jQuery('#composeDialog').css('visibility','visible').dialog('open')">+ Add new topic</a>
+	<a onClick="jQuery('#composeDialog').css('visibility','visible').dialog('open');">+ Add new topic</a>
 <?php }?>
 </li>
 </ul>

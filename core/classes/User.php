@@ -104,7 +104,7 @@ class User {
 		$q->query("update users set email='".$email."' where id=".$id);
 	}
 	
-	static public function check_user($user_id,$post_id=''){
+	public static function check_user($user_id,$post_id=''){
 		$q = new db;
 			$q->query('select * from users where id='.$user_id.' and level=1');
 			if($q->n==0)
@@ -116,7 +116,7 @@ class User {
 			}
 			return $q->n;
 	}
-	static public function check_user_post($user_id,$post_id=''){
+	public static function check_user_post($user_id,$post_id=''){
 		$q = new db;
 		if($user_id != ""){
 			$q->query("select property_value
@@ -168,7 +168,7 @@ class User {
 		$q->query(" SELECT *
 					FROM users
 					WHERE username='$username'");
-		if($q->n>0){			
+		if($q->n>0 && $q->re){
 			while($r = mysql_fetch_assoc($q->re))
 				$row = $r;
 			return @$row;
@@ -204,14 +204,14 @@ class User {
                             $name = $row["username"];
                     }
                     if ($fbId != 0&& $fbId != NULL&&$fbId != '') {
-                            try {
-                                    $fbUserInfo = facebook_client()->api_client->users_getInfo($fbId, "pic_square");
-                                    $avatarURL = $fbUserInfo[0]["pic_square"];
-                                    $q->query("UPDATE users SET avatar='{$avatarURL}' WHERE id={$row["user_id"]}");
-                            }
-                            catch (Exception $e) {
+//                            try {
+//                                    $fbUserInfo = facebook_client()->api_client->users_getInfo($fbId, "pic_square");
+//                                    $avatarURL = $fbUserInfo[0]["pic_square"];
+//                                    $q->query("UPDATE users SET avatar='{$avatarURL}' WHERE id={$row["user_id"]}");
+//                            }
+//                            catch (Exception $e) {
                                     $avatarURL = $x["avatar"];
-                            }
+//                            }
                     }
                     else {
                             $pAvatar = new TalkPHP_Gravatar();
@@ -243,6 +243,10 @@ class User {
                         $str = "<font color='#DB1C00' style='font-weight:bold;' >$v[username]</font>";
                 }
                 return @$str;
+        }
+        public static function updateTimeLogin($id){
+		$q = new db();
+		$q->query("UPDATE users SET lastLogin=".time()." WHERE id=".$id);
         }
 }
 $user_info = new User;

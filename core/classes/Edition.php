@@ -57,8 +57,10 @@ class Edition {
 			$r = mysql_query("	SELECT *
 								FROM editions
 								WHERE id = $id");
-			if(mysql_num_rows($r)==0)
-				return 0;
+			if($r==false )
+                            return 0;
+                        if(mysql_num_rows($r)==0)
+                            return 0;
 			$row = mysql_fetch_array($r);
 			$this->userId = $row["user_id"];
 			$this->postId = $row["post_id"];
@@ -394,10 +396,16 @@ class Edition {
 						FROM editions
 						WHERE user_id=$user_id and checked=0";
 				$re_row = mysql_query($str) or die(mysql_error());
-				while($r = mysql_fetch_assoc($re_row))
-					$arr[] = $r;
-				$arr['n'] = mysql_num_rows($re_row);		
-				return @$arr;
+                                if($re_row){
+                                    $num = mysql_num_rows($re_row);
+                                    if($num>0){
+                                       while($r = mysql_fetch_assoc($re_row))
+                                            $arr[] = $r;
+                                        $arr['n'] = mysql_num_rows($re_row);
+                                        return $arr;
+                                    }
+                                }
+				return 0;
 	}
 	
 	public function query_post($post_id,$user_id,$type_query){

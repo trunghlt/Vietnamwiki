@@ -12,7 +12,7 @@ include('destination.php');
 include('ajaxLoad.php');
 ?> 
 
-	<td  class="center" valign="top">	
+	<td  class="center" valign="top" style="width:820px;">
 		<div id="menuWrapper">
 			<div id ="toolbar"></div>
 		</div>
@@ -43,18 +43,44 @@ function signOut() {
 				});
 }
 
-function submitLogin() {	
-	var loginForm = $("loginForm");
-	loginForm.set("send", {	url: "requests/postLogin.php", evalScripts: true});
-	loginForm.send();
-	loginForm.get("send").addEvent("onComplete", function(response){
-		loadToolbar("toolbar");
-                loadNotification();
+//Set value when user register successfully email
+function set_value(){
+    loadToolbar("toolbar");
+    loadNotification();
+}
+//end
+function submitLogin(dom,check) {
+	jQuery.post("/requests/postLogin.php", jQuery("#"+dom).serialize(),
+			function(response){
+				if(response == -2)
+				{
+					alert("This user has been banned");
+				}
+				else if(response == 'false'){
+                                    alert("Login's fail");
+                                }
+                                else
+				{
+					if(response != '' && response != 'success'){
+						document.getElementById('id_user').value = response;
+
+                                                var str = jQuery("#"+dom).serialize().split("&");
+                                                var name = str[0].split("=");
+                                                jQuery("#name_user").val(name[1]);
+						document.getElementById('editpost').value = 'search';
+                                                jQuery('#FillEmailDialog').css('visibility','visible').dialog("open");
+					}
+					else if(response == 'success'){
+                                                loginDialog.dialog("close");
+                                                set_value();
+					}
+				}
 	});
 }
 </script>
 <?php
 include("forms/composeForm.php");
 include("forms/loginForm.php");
+include("forms/register_email.php");
 include("footer.php");
 ?>

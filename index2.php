@@ -3,7 +3,7 @@ include('core/common.php');
 include('core/init.php');
 include('core/classes.php');
 include('core/session.php');
-include("core/classes/Color.php");
+//include("core/classes/Color.php");
 	$check_index = new IndexElement;
 	if($_GET["index_id"]!='' && $check_index->query(Edition::filterId($_GET["index_id"]))==0)
 		header("location:index.php");
@@ -47,11 +47,12 @@ function signOut() {
 				function(response) {
                                         load_qanda(0);
 					loadToolbar("toolbar");
+                                        //jQuery(a[id="#link_add"]);
+                                        jQuery('#check_method_login').val(0);
 						if(document.getElementById('link_add').value == 1){
 							document.getElementById('link_add').value = 0;
-							document.getElementById('link_add').innerHTML = "<a onClick=\"jQuery('#loginDialog').css('visibility','visible').dialog('open')\">+ Add new topic</a>";							
-						}
-					jQuery('#field_not_login_comment').html("Email :<br /><input class='field' name='fill_email_comment' id='fill_email_comment' type='text' style='width:250px' value=''/><br />Name :<br /><input class='field' name='fill_name_comment' id='fill_name_comment' type='text' style='width:250px' value=''/><br /><input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='1'/>");					
+							document.getElementById('link_add').innerHTML = "<a onClick=\"jQuery('#loginDialog').css('visibility','visible').dialog('open');jQuery('#check_method_login').val(1);\">+ Add new topic</a>";
+						}						
                                         loadNotification();
                                 });
 }
@@ -64,6 +65,19 @@ function submitLogin() {
 		loadToolbar("toolbar");
 	});
 }*/
+//Set value when user register successfully email
+function set_value(){
+    loadNotification();
+    loadToolbar("toolbar");
+    load_qanda(0);
+    if(jQuery('li').index(jQuery("#link_add")) != -1){
+        if(document.getElementById('link_add').value == 0){
+            document.getElementById('link_add').value = 1;
+            document.getElementById('link_add').innerHTML = "<a onClick=\"jQuery('#composeDialog').css('visibility','visible').dialog('open')\">+ Add new topic</a>";
+        }
+    }    
+}
+//end
 function submitLogin(dom,check) {	
 	jQuery.post("/requests/postLogin.php", jQuery("#"+dom).serialize(), 
 			function(response){
@@ -75,25 +89,38 @@ function submitLogin(dom,check) {
                                 }
 				else{
 					if(response != '' && response != 'success'){
-						loadToolbar("toolbar");
-						if(document.getElementById('link_add').value == 0){
-							document.getElementById('link_add').value = 1;
-							document.getElementById('link_add').innerHTML = "<a onClick=\"jQuery('#composeDialog').css('visibility','visible').dialog('open')\">+ Add new topic</a>";
-						}
+
+                                                var str = jQuery("#"+dom).serialize().split("&");
+                                                var name = str[0].split("=");
+                                                jQuery("#name_user").val(name[1]);
+                                                
+                                                if(jQuery('input').index(jQuery("#check_method_login")) != -1){
+                                                     if(jQuery("#check_method_login").val()==1){
+                                                         jQuery("#editpost").val("index");
+                                                     }
+                                                }
+                                                
 						document.getElementById('id_user').value = response;
-						jQuery('#field_not_login_comment').html("<input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='2'/>");
-						jQuery('#FillEmailDialog').css('visibility','visible').dialog('open');
+
+                                                jQuery('#FillEmailDialog').css('visibility','visible').dialog('open');
 					}
 					else if(response == 'success'){
-						loadToolbar("toolbar");
-                                                load_qanda(0);
-						if(document.getElementById('link_add').value == 0){
-							document.getElementById('link_add').value = 1;
-							document.getElementById('link_add').innerHTML = "<a onClick=\"jQuery('#composeDialog').css('visibility','visible').dialog('open')\">+ Add new topic</a>";
-						}
-						jQuery('#field_not_login_comment').html("<input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='2'/>");
-					}
-                                        loadNotification();
+                                                if(jQuery('input').index(jQuery("#check_method_login")) != -1){
+                                                    if(jQuery("#check_method_login").val()==0){
+                                                        var str = jQuery("#"+dom).serialize().split("&");
+                                                        var name = str[0].split("=");
+                                                        window.location="feed.php?username="+name[1];
+                                                    }
+                                                    else{
+                                                        set_value();
+                                                    }
+                                                }
+                                                else{
+                                                    var str = jQuery("#"+dom).serialize().split("&");
+                                                    var name = str[0].split("=");
+                                                    window.location="feed.php?username="+name[1];                                                   
+                                                }
+                                            }                                        
 				}
 	});
 }
@@ -101,8 +128,6 @@ function submitLogin(dom,check) {
 </script>
 <?php
 include("forms/composeForm.php");
-include("forms/askquestion.php");
-include("forms/replyquestion.php");
 include("forms/loginForm.php");
 include("forms/register_email.php");
 include("footer.php");

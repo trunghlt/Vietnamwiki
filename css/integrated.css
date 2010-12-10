@@ -1269,7 +1269,9 @@ div.demo-description {
 	margin:0px;
 	padding:0px;
 }
-
+.phantrang{
+    text-align: center;
+}
 #qanda{
     width: 180px;
     float: left;
@@ -1312,4 +1314,23 @@ div.demo-description {
     margin: 5px;
     overflow: inherit;
 }
-
+._like{
+    background-color:#EFEFEF;
+    border:1px solid #C1C1C1;
+    font-weight:normal;
+    height:14px;
+    margin-left:1px;
+    min-width:15px;
+    padding:1px 2px;
+    text-align:center;
+}
+._liked{
+    background-color:#EFEFEF;
+    border:1px solid #C1C1C1;
+    font-weight:normal;
+    height:14px;
+    margin-left:1px;
+    min-width:15px;
+    padding:1px 2px;
+    text-align:center;
+}
