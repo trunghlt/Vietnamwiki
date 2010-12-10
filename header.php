@@ -156,9 +156,11 @@ function load()
 {
   if(GBrowserIsCompatible())
   {
-	  //mapDivs = document.getElementById("map");
-	  mapDivs = document.getElementsByClassName("map");
+        mapDivs = jQuery.makeArray(jQuery(".map").get());//document.getElementsByClassName("map");
+          
+        if(mapDivs.length>0){
 	  for (i = 0; i < mapDivs.length; i++) {
+              
 		  var info = mapDivs[i].innerHTML.split(":")[1].split(",", 5);
 		  var map = new GMap2(mapDivs[i]);
 		  var center = new GLatLng(parseFloat(info[0]),parseFloat(info[1]));
@@ -168,6 +170,7 @@ function load()
 		  customUI.maptypes.hybrid = false;
 		  map.setUI(customUI);
 	  }
+        }
   }
 }
 function addLoadEvent(func) 
@@ -214,7 +217,7 @@ var mySlide = new Array();
 var composeDialog, editDialog, loginDialog, invalidLoginDialog, 
 	deleteConfirmDialog, commentDialog, photoUploadDialog, photoEditDialog, tendayWeatherDialog,
 	restoreConfirmDialog, reviewDialog, mustRateAlert, reviewLowerBound,post_review;
-var currentDestItem, currentIndexItem, currentMySlide, commentSlide;
+var currentDestItem, currentIndexItem, currentMySlide, commentSlide,Email_question,Fill_EmailDialog;
 var URL = "http://www.vietnamwiki.net";
 <?php if ($onload_js) { echo $onload_js; } ?>
 jQuery(document).ready(function(){

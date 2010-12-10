@@ -4,6 +4,7 @@ function upload_image_click() {
 		photoUploadDialog.css('visibility','visible').dialog("open");
 	}
 	else {
+                jQuery("#type_login").val(2);
                 loginDialog.css('visibility','visible').dialog("open");
 	}	
 }

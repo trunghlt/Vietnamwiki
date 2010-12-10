@@ -24,17 +24,18 @@ Return array result
 ***************************************************************/
 
 	public function get_result(){
-		if($this->re!=null){
-                    if(mysql_num_rows($this->re)>0){
+		if($this->re){
+                    if(mysql_num_rows($this->re)){
 			while($row = mysql_fetch_assoc($this->re))
 				$row2[] = $row;
+                        return $row2;
                     }
-                    else
-                       $row2=0;
+                    //else
+                      // $row2=0;
 		}
-                else
-                    $row2=0;
-		return @$row2;
+               // else
+                    //$row2=0;
+		return 0;
 	}
 
 /***************************************************************
@@ -52,8 +53,10 @@ Return num
 	public function get_num(){
 		if($this->re){
 			$num = mysql_num_rows($this->re);
-			return @$num;
+                        if($num)
+                            return $num;
 		}
+                return 0;
 		
 	}
 /***************************************************************
@@ -74,7 +77,10 @@ Update table
 ***************************************************************/
 	function update($table,$arr,$where){
 		foreach($arr as $key=>$value){
-			$str[] = "$key = '$value'";
+                        if(is_string($value))
+                            $str[] = "$key = '$value'";
+                        else
+                            $str[] = "$key = $value";
 		}
 		$str2 = implode(",",$str);
 		$this->query("update $table set $str2 where $where");
@@ -165,8 +171,11 @@ Return value in array
 	
 		$sql = "select $col from $table $where $order $limit";
 		$this->query($sql);
-
-		return $this->get_result();
+                $result = $this->get_result();
+                if(is_array($result)){
+                    return $result;
+                }
+		return 0;
 	}
 }
 ?>

@@ -64,7 +64,11 @@ else{
 $f = new Follow;
 if($type==1){
 			$arr = $f->query_string($user_id_info);
-			$num = $arr['n'];
+                        if(is_array($arr)){
+                            $num = $arr['n'];
+                        }
+                        else
+                            $num = 0;
 			
 			if ($num == 0) {
 				echo "You haven't posted any topics yet";

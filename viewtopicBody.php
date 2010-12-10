@@ -234,7 +234,9 @@ function signOut() {
                                         loadNotification();
 					loadEdittingRibbon(<?php echo $post_id?>, "ribbon");
 					jQuery('#field_not_login_comment').html("Email :<br /><input class='field' name='fill_email_comment' id='fill_email_comment' type='text' style='width:250px' value=''/><br />Name :<br /><input class='field' name='fill_name_comment' id='fill_name_comment' type='text' style='width:250px' value=''/><br /><input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='1'/>");
-				});
+                                        jQuery('#type_login').val(1);
+                                        jQuery('#editpost').val('login');
+                                });
 }
 /*function getflashhn() {
 	jQuery.post("requests/get_flash_hn.php",{},
@@ -242,6 +244,15 @@ function signOut() {
 					jQuery('#flash_hn').html(response);
 				});
 }*/
+//Set value when user register successfully email
+function set_value(){
+    loadToolbar("toolbar");
+    loadEdittingRibbon(<?php echo $post_id?>, "ribbon");
+    jQuery('#field_not_login_comment').html("<input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='2'/>");
+    load_qanda(0);
+    loadNotification();
+}
+//end
 function submitLogin(dom,check) {	
 	jQuery.post("/requests/postLogin.php", jQuery("#"+dom).serialize(), 
 			function(response){
@@ -255,35 +266,39 @@ function submitLogin(dom,check) {
                                 else
 				{
 					if(response != '' && response != 'success'){
-						loadToolbar("toolbar");
-						loadEdittingRibbon(<?php echo $post_id?>, "ribbon");
 						document.getElementById('id_user').value = response;
+                                                
+                                                var str = jQuery("#"+dom).serialize().split("&");
+                                                var name = str[0].split("=");
+                                                jQuery("#name_user").val(name[1]);
+                                                
 						if(check==2){
 							document.getElementById('editpost').value = 'editpost';
 						}
-						jQuery('#field_not_login_comment').html("<input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='2'/>");						
-						jQuery('#FillEmailDialog').css('visibility','visible').dialog('open');
+                                                
+                                                jQuery('#FillEmailDialog').css('visibility','visible').dialog("open");
 					}
 					else if(response == 'success'){
-						loadToolbar("toolbar");
-						if(check==2){
-							edit_login.dialog('close');
+						if(check==2){                                                        
+							//edit_login.dialog('close');
+                                                        loginDialog.dialog("close");
 							jQuery('#editDialog').css('visibility','visible').dialog('open');
+                                                        set_value();
 						}
-						loadEdittingRibbon(<?php echo $post_id?>, "ribbon");
-						jQuery('#field_not_login_comment').html("<input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='2'/>");
-                                                load_qanda(0);
+                                                else{                                                    
+                                                    var str = jQuery("#"+dom).serialize().split("&");
+                                                    var name = str[0].split("=");
+                                                    window.location="feed.php?username="+name[1];
+                                                }
                                                
 					}
 					else
 					{
-						jQuery('#field_not_login_comment').html("<input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='2'/>");
-                                               
-						load_qanda(0);
-                                                if(check==2)
-							edit_login.dialog('close');							
+						//jQuery('#field_not_login_comment').html("<input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='2'/>");
+						//load_qanda(0);
+                                                //if(check==2)
+							//edit_login.dialog('close');
 					}
-                                        loadNotification();
 				}
 	});
 }

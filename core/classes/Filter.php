@@ -19,7 +19,9 @@ class Filter {
 		return preg_match("/[-+]?[0-9]+\.?[0-9]*/", $n)? $n : Filter::dieToInvalidInput();
 	}
 	
-	
+	public static function dieToInvalidInput(){
+            return (header("location:index.php"));
+        }
 	public static function valueIfIsset($s) {
 		if (isset($s)) 
 			return $s;

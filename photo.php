@@ -33,10 +33,19 @@ function signOut() {
 					loadToolbar("toolbar");
                                         loadNotification();
                                         jQuery(".editpho").html("<div align=\"center\" id=\"editpho\"><!-- --></div>");
+                                        jQuery('#type_login').val(1);
+                                        jQuery('#editpost').val('login'); 
 				});
 }
-function submitLogin() {
-        jQuery.post("/requests/postLogin.php", jQuery("#loginForm").serialize(),function(response){            
+//Set value when user register successfully email
+function set_value(){
+    jQuery(".editpho").html("<a href=\"#\" class=\"small_link\" onclick=\"imageEditClick(<?php echo $img["id"]?>)\"> [edit] </a>");
+    loadNotification();
+    loadToolbar("toolbar");
+}
+//end
+function submitLogin(dom,check) {
+        jQuery.post("/requests/postLogin.php", jQuery("#"+dom).serialize(),function(response){
                 if(response==-2)
                         alert("This user has been banned");
                 else if(response == 'false'){
@@ -44,11 +53,29 @@ function submitLogin() {
                 }
                 else{
                         if(response != '' && response != 'success'){
+                                document.getElementById('id_user').value = response;
+
+                                var str = jQuery("#"+dom).serialize().split("&");
+                                var name = str[0].split("=");
+                                jQuery("#name_user").val(name[1]);
+
+                                if(check==2){
+                                        document.getElementById('editpost').value = 'photo';
+                                }
                                 jQuery('#FillEmailDialog').css('visibility','visible').dialog('open');
                         }
-                          loadToolbar("toolbar");
-                          loadNotification();
-                          jQuery(".editpho").html("<a	href=\"#\" class=\"small_link\" onclick=\"imageEditClick(<?php echo $img["id"]?>)\"> [edit] </a>");
+                        else if(response == 'success'){
+                                if(check==2){
+                                        edit_login.dialog('close');
+                                        jQuery('#editDialog').css('visibility','visible').dialog('open');
+                                        set_value();
+                                }
+                                else{
+                                    var str = jQuery("#"+dom).serialize().split("&");
+                                    var name = str[0].split("=");
+                                    window.location="feed.php?username="+name[1];
+                                }
+                        }
                 }
         });
 }

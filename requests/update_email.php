@@ -11,6 +11,7 @@ if($id && $email){
 	$email = $_POST['email'];
 	if(check_email($email)=='ok' && $id!=''){
 			$user_info->update_email($id,$email);
+                        login($id);
 			echo 'ok';
 	}
 	else echo check_email($email);

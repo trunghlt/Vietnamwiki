@@ -106,14 +106,22 @@ function signOut() {
 				function(response) {
 					loadToolbar("toolbar");
                                         loadNotification();
-				document.getElementById('reviewText').value="";
-				document.getElementById('field_not_login').innerHTML="Email :<br /><input class='field' name='fill_email_review' id='fill_email_review' type='text' style='width:250px' value=''/><br />Name :<br /><input class='field' name='fill_name_review' id='fill_name_review' type='text' style='width:250px' value=''/><br /><input class='field' name='check_login' id='check_login' type='hidden' value='1'/>";
+                                        jQuery('#type_login').val(1);
+                                        document.getElementById('reviewText').value="";
+                                        document.getElementById('field_not_login').innerHTML="Email :<br /><input class='field' name='fill_email_review' id='fill_email_review' type='text' style='width:250px' value=''/><br />Name :<br /><input class='field' name='fill_name_review' id='fill_name_review' type='text' style='width:250px' value=''/><br /><input class='field' name='check_login' id='check_login' type='hidden' value='1'/>";
 				});
 }
-
+//Set value when user register successfully email
+function set_value(){
+    loadToolbar("toolbar");
+    document.getElementById('reviewText').value="";
+    jQuery('#field_not_login').html("<input class='field' name='check_login' id='check_login' type='hidden' value='2'/>");
+    loadNotification();
+}
+//end
 function submitLogin() {
         jQuery.post("requests/postLogin.php",jQuery('#loginForm').serialize(),function(response){
- 		loadToolbar("toolbar");
+ 		
                 if(response==-2)
                         alert("This user has been banned");
                 else if(response == 'false'){
@@ -121,39 +129,15 @@ function submitLogin() {
                 }
                 else{
                         if(response != '' && response != 'success'){
+                                document.getElementById('id_user').value = response;
                                 jQuery('#FillEmailDialog').css('visibility','visible').dialog('open');
-                                document.getElementById('reviewText').value="";
-                                jQuery('#field_not_login').html("<input class='field' name='check_login' id='check_login' type='hidden' value='2'/>");
                         }
                         else if(response == 'success'){
-                                document.getElementById('reviewText').value="";
-                                jQuery('#field_not_login').html("<input class='field' name='check_login' id='check_login' type='hidden' value='2'/>");
+                                set_value();
                         }
-                        loadNotification();
+                        
                 }
         });
-	/*var loginForm = $("loginForm");
-	loginForm.set("send", {	url: "requests/postLogin.php", evalScripts: true});
-	loginForm.send();
-	loginForm.get("send").addEvent("onComplete", function(response){
-		loadToolbar("toolbar");
-				if(response==-2)
-					alert("This user has been banned");
-				else{
-					if(response != '' && response != 'success'){
-						jQuery('#FillEmailDialog').css('visibility','visible');
-						Fill_EmailDialog.dialog('open');
-						document.getElementById('reviewText').value="";
-						jQuery('#field_not_login').html("<input class='field' name='check_login' id='check_login' type='hidden' value='2'/>");						
-					}
-					else{
-						document.getElementById('reviewText').value="";
-						jQuery('#field_not_login').html("<input class='field' name='check_login' id='check_login' type='hidden' value='2'/>");						
-					}
-				}
-					
-
-	});*/
 }
 </script>
 

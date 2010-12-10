@@ -264,34 +264,39 @@ function submitLogin(dom,check) {
                                 }
 				else
 				{
-					if(response != '' && response != 'success'){
-						loadToolbar("toolbar");
-						loadDraftRibbon(<?php echo $editionId?>, "ribbon");
+					if(response != '' && response != 'success'){						
 						document.getElementById('id_user').value = response;
-						if(check==2){
-							document.getElementById('editpost').value = 'editpost';
-						}						
-						Fill_EmailDialog.dialog('open');
+
+                                                var str = jQuery("#"+dom).serialize().split("&");
+                                                var name = str[0].split("=");
+                                                jQuery("#name_user").val(name[1]);
+                                                
+						document.getElementById('editpost').value = 'draft';
+                                                
+						jQuery('#FillEmailDialog').css('visibility','visible').dialog('open');
 					}
-					else if(response == 'success'){
-						loadToolbar("toolbar");
-						if(check==2){
-							edit_login.dialog('close');
-							editDialog.dialog('open');						
-						}						
-						loadDraftRibbon(<?php echo $editionId?>, "ribbon");
-						jQuery('#field_not_login_comment').html("<input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='2'/>");					
+					else if(response == 'success'){	
+						loginDialog.dialog("close");
+						set_value();
+											
 					}
 					else
 					{
-						if(check==2)
-							edit_login.dialog('close');							
+						//if(check==2)
+						//	edit_login.dialog('close');
 					}
-                                        loadNotification();
+                                        
 				}
 	});
 }
-
+//Set value when user register successfully email
+function set_value(){
+    loadDraftRibbon(<?php echo $editionId?>, "ribbon");
+    jQuery('#field_not_login_comment').html("<input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='2'/>");
+    loadNotification();
+    loadToolbar("toolbar");
+}
+//end
 function submitRestoreDraft(){
 	jQuery.post("/requests/restoreDraft.php", 
 				{editionId: <?php echo $editionId?>,type:document.getElementById('type').value},
@@ -326,11 +331,8 @@ include("forms/loginForm.php");
 include("forms/composeForm.php");
 include("forms/editForm.php");
 include("forms/commentForm.php");
-include("forms/comment_login.php");
 include("forms/deleteConfirmForm.php");
 include("forms/register_email.php");
-include("forms/fill_comment_email_form.php");
-include("forms/fill_comment_name_form.php");
 include("footer.php");
 ?>
 

@@ -43,18 +43,26 @@ function updateCommentText(reviewText) {
 
 function submitComment(){
         jQuery.post('requests/updateCommentList.php', jQuery('#commentForm').serialize(), function(response){
-            jQuery('#commentList').html(response);
+            jQuery('#commentList').html(response);            
         });
 }
 
 jQuery(document).ready(function(){
-	Email_Comment = jQuery("#EmailComment1").dialog({autoOpen: false});
+	Email_Comment = jQuery("#EmailComment1").dialog({
+                                autoOpen: false,
+                                buttons:{
+                                    Cancel: function() {
+                                        jQuery(this).dialog('close');
+                                    }
+                                }
+                        });
 	commentDialog = jQuery("#commentDialog").dialog({
 		autoOpen: false,
 		height: 'auto',
 		width: '300',
 		modal: true,
 		resizable:false,
+                open:function(){commentDialog.dialog("destroy");},
 		overlay: {
 			backgroundColor: '#000',
 			opacity: 0.5
