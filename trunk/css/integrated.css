@@ -536,6 +536,7 @@ table.leftmenu{
 }
 td.right{
     width: 180px;
+	background-color: rgba(243, 243, 243, 0.898438);
 }
 #destinationDiv{
 	margin-left: 10px;	
