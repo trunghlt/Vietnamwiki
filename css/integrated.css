@@ -614,18 +614,19 @@ a.none{
 }
 
 .comment_head  {
-	color : #333333;
+	color : #333;
 	padding-top: 2px;
 	padding-bottom: 2px;
 	border-top: 1px solid #9B9B9B;
 	font-size : 13px;
 	font-weight : bold;
 	font-family : Arial, Helvetica, serif;
-	background: #F3F3F3 none repeat scroll 0 0;
+	background: #DDD none repeat scroll 0 0;
 }
 
 .comment_block {
 	border-bottom: 1px solid #7B9EBD;
+	background: rgba(243, 243, 243, 0.898438);
 }
 
 .comment_block div.comment:last-child{
