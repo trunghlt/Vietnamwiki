@@ -27,7 +27,7 @@ include('destination.php');
 	</div>
 </div>
 </td>
-<td classs="right">
+<td class="right">
     <?php include('listquestion.php');?>
 </td>
 </tr>
