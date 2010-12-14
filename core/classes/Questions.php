@@ -30,7 +30,7 @@ Variables
 /***************************************************************
 delete current memcaches
 ***************************************************************/
-        function deleteMencache(){
+        public static function deleteMencache(){
 		Mem::$memcache->delete("ques");
                 Mem::$memcache->delete("ques_like");
         }
@@ -96,7 +96,7 @@ add new record
                                 "ip"=>$this->ip
                             );
                 $q->add('question', $arr);
-                $this->deleteMencache();
+                self::deleteMencache();
 	}
 /***************************************************************
 delete table question
@@ -113,7 +113,7 @@ delete table question with condition
 		$q = new Active;
 		$q->delete('question',"id=$id");
                 $q->delete("answer","question_id=$id");
-                $this->deleteMencache();
+                self::deleteMencache();
 	}
 /***************************************************************
 edit a record in table question
@@ -132,8 +132,39 @@ edit a record in table question
                                 "ip"=>$this->ip
                             );
                 $q->update('question', $arr,"id=$this->id");
-                $this->deleteMencache();
+                self::deleteMencache();
 	}
+/***************************************************************
+Get question by id
+ * $id : id's question
+***************************************************************/
+        public static function getQById($id){
+            $u = new User;
+            $arr_query = array('id'=>$id);
+            $n_row = self::query($arr_query,"","");
+            $i= 0;
+            $arr = array();
+            if (is_array($n_row)) {
+		        foreach ($n_row as $v){
+		            $arr = array( 'id'=>$v['id'],
+		                          'user_id'=>$v['user_id'],
+		                          'username'=>$v['username'],
+		                          'email'=>$v['email'],
+		                          'content'=>$v['content'],
+		                          'topic_id'=>$v['topic_id'],
+		                          'index_id'=>$v['index_id'],
+		                          'dest_id'=>$v['dest_id'],
+		                          'date'=>$v['date'],
+		                          'ip'=>$v['ip'],
+		                          'avatar'=>$u->getUserAvatar($v),
+                                          'like_q'=>$v['like_q'],
+		                          'name'=>$u->getname($v)
+		                                 );
+		        }
+                        return $arr;
+            }
+            return 0;
+        }
 /***************************************************************
 Get question
  * type:

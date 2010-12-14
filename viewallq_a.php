@@ -22,6 +22,18 @@ include('ajaxLoad.php');
     width: 800px;
     margin-bottom: 10px;
 }
+.phantrang ul{
+    margin:0px;
+    padding: 0px;
+    list-style-type: none;
+}
+.phantrang ul li{
+    display: inline;    
+}
+.phantrang ul li a{
+    color: #CC0000;
+    width: 50px;
+}
 </style>
     <td class="center" style="width:820px;">
 		<div id="menuWrapper"><div id="toolbar"><?php getToolbarHTML();?></div></div>
@@ -48,7 +60,11 @@ include('ajaxLoad.php');
 </table>
 <script type="text/javascript">
  jQuery(document).ready(function(){
-     load_qanda(0);
+     <?php if(isset($_GET['s'])) {?>
+        load_qanda(<?php echo $_GET['s'];?>);
+      <?php }else {?>
+        load_qanda(0);
+        <?php }?>
 });
 function signOut() {
 	jQuery.post("/requests/logout.php", {},
@@ -95,7 +111,7 @@ function submitLogin(dom,check) {
         jQuery('#questionDialog').remove();
         jQuery('#answerDialog').remove();
         jQuery("#Emailquestion").remove();
-        jQuery.post("/requests/QandA.php",{start:id,num_row:10,type:jQuery("#method_sort").val(),sort:1},function(response){jQuery("#view_qanda").html(response);});
+        jQuery.post("/requests/QandA.php",{start:id,num_row:10,type:jQuery("#method_sort").val(),sort:1,type_view:1},function(response){jQuery("#view_qanda").html(response);});
     }
     function question(){
        jQuery('#questionDialog').css('visibility','visible').dialog('open');
@@ -104,14 +120,24 @@ function submitLogin(dom,check) {
  	jQuery('#answerDialog').css('visibility','visible').dialog('open');
         jQuery('#questionId').val(id);
     }
-    function sortanswer(id){
-        jQuery.post("/requests/sortAnswer.php",{id_q:id},function(response){
-                                    if(response!="" && response!=null)
-                                        jQuery("#q"+id).html(response);
+    function sortanswer(id,_type){
+        jQuery.post("/requests/sortAnswer.php",{id_q:id,type:_type},function(response){                                    
+                                    if(response!="" && response!=null){
+                                        if(_type==2)
+                                            jQuery("#q"+id).html(response);
+                                        else if(_type==1){
+                                            jQuery("#l_q_"+id).html(response);
+                                        }
+                                    }
                                 });
     }
-    function like(_id,_type,_v){
-        jQuery.post("/requests/like.php",{id:_id,type:_type,value:_v},function(response){load_qanda(0);});
+    function like(_id,_type,_v,_sort){
+        jQuery.post("/requests/like.php",{id:_id,type:_type,value:_v},function(response){
+                         if(_type==2)
+                            sortanswer(_sort,2);
+                         else if(_type==1)
+                            sortanswer(_sort,1);
+                    });
     }
 </script>
 <?php

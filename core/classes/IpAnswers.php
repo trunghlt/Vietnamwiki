@@ -44,6 +44,7 @@ add new record
                             );
                 $this->id = $q->add('ip_answers', $arr);
                 $q->update('answer', $arr2,"id=".$id);
+                Answers::deleteMencache();
 	}
 /***************************************************************
 delete table ip answer
@@ -75,6 +76,7 @@ edit a record in table ip answer
                             );
                 $q->update('ip_answers', $arr,"ip='".$this->ip."'");
                 $q->update('answer', $arr2,"id=".$id);
+                Answers::deleteMencache();
 	}
 
 /***************************************************************

@@ -54,9 +54,14 @@ else
 $sort = 0;
 if(isset($_POST["sort"]))
 {
-    if(is_numeric($_POST["sort"]) && $_POST["sort"]==1)
+    if(is_numeric($_POST["sort"]) && $_POST["sort"]==1){
         $sort = $_POST["sort"];
+        
+    }
+    $tag_viewall = '';
 }
+else
+    $tag_viewall = '<a href="/viewallq_a.php" style="color:#CC0000;" >View All</a>';
 /*
  * type:
  *      = 1 : sort question by time
@@ -106,20 +111,20 @@ switch($type){
             echo "<ul>";
             foreach ($q_s as $key=>$v){
                 if($key >= $s && $key < $r ){
-                    if($sort==1){
+                   /* if($sort==1){
                         $sort_str = "&nbsp;&nbsp;<a style='cursor: pointer;' onclick='sortanswer($v[id]);'><img src='../css/images/demo-spindown-open.gif' /></a>";
                     }
                     else
-                        $sort_str = '';
+                        $sort_str = '';*/
                     /////////////////////////////
                     if(checkLike($v['id'],1)==1){
-                        $like_str_q = "&nbsp;&nbsp;<span id='like_q_$v[id]' class='_liked'>Like</span>&nbsp;";
+                        $like_str_q = "&nbsp;&nbsp;<span id='like_q_$v[id]'><img src='../css/images/liked.gif' width=14px height=14px /></span>&nbsp;";
                     }
                     else{
-                        $like_str_q = "&nbsp;&nbsp;<a style='cursor: pointer;' onclick='like($v[id],1,$v[like_q]);' id='like_q_$v[id]'><img src='../css/images/like.jpg' /></a> &nbsp;&nbsp;";
+                        $like_str_q = "&nbsp;&nbsp;<a style='cursor: pointer;' onclick='like($v[id],1,$v[like_q],$v[id]);' id='like_q_$v[id]'><img src='../css/images/like.jpg' width=14px height=14px /></a> &nbsp;&nbsp;";
                     }
 
-                    echo "<li><div class='question'><img src='".$v['avatar']."' height=30 width=30 align='left'/>$v[name]:".$v['content']."&nbsp;&nbsp;<a style='cursor: pointer; color: #DB1C00;text-decoration: underline;' onclick='answer($v[id]);' >reply</a>$sort_str<br />$like_str_q<span id='like_num_$v[id]' class='_like'>$v[like_q]</span></div>";
+                    echo "<li><div class='question' id='l_q_$v[id]'><img src='".$v['avatar']."' height=30 width=30 align='left'/>$v[name]:".$v['content']."&nbsp;&nbsp;<a style='cursor: pointer; color: #DB1C00;text-decoration: underline;' onclick='answer($v[id]);' >reply</a><br />$like_str_q<span id='like_num_$v[id]' class='_like'>$v[like_q]</span></div>";
 
                     if(is_array($a_r)){
                         echo "<ul id='q$v[id]'>";
@@ -127,10 +132,10 @@ switch($type){
                         {
                             ////////////////////////////
                             if(checkLike($v2['id'],2)==1){
-                                $like_str_a = "&nbsp;&nbsp;<span id='like_a_$v2[id]' class='_liked'>Like</span>&nbsp;";
+                                $like_str_a = "&nbsp;&nbsp;<span id='like_a_$v2[id]' ><img src='../css/images/liked.gif' width=14px height=14px /></span>&nbsp;";
                             }
                             else{
-                                $like_str_a = "&nbsp;&nbsp;<a style='cursor: pointer;' onclick='like($v2[id],2,$v2[like_a]);' id='like_a_$v2[id]'><img src='../css/images/like.jpg' /></a> &nbsp;&nbsp;";
+                                $like_str_a = "&nbsp;&nbsp;<a style='cursor: pointer;' onclick='like($v2[id],2,$v2[like_a],$v[id]);' id='like_a_$v2[id]'><img src='../css/images/like.jpg' width=14px height=14px /></a> &nbsp;&nbsp;";
                             }
                             /////////////////////////////
                             if($v2['question_id']==$v['id'])
@@ -148,15 +153,61 @@ switch($type){
 ?>
 <br />
 <div class="phantrang">
-<?php if($s>0){?>
+<?php
+/*
+ * $_POST["type_view"] :
+ *                      = 1 : view all
+ *                      = 2 : main page
+ */
+    if(isset($_POST["type_view"])){
+     if(is_numeric($_POST["type_view"]))
+         $type_view = $_POST["type_view"];
+     else
+         $type_view = 2;
+    }
+    if($type_view == 2){
+     if($s>0){
+?>
     <div class='prev'><a onclick="load_qanda(<?php echo $s-$row_per_page;?>);" style=" cursor: pointer; color: #CC0000; text-decoration: underline;">&laquo; Prev</a></div>
 <?php } if(($s+$row_per_page) <= $n_row) {?>
 <div class='next'><a  onclick="load_qanda(<?php echo $s+$row_per_page;?>);" style=" cursor: pointer; color: #CC0000; text-decoration: underline;">&nbsp;Next &raquo;</a></div>
 <?php }?>
+
+<?php
+    }
+    else if($type_view == 1){
+        echo "<ul>";
+if($num_page > 1){
+	$tranghh = ($s/$row_per_page)+1;
+        if($s>0){
+?>
+            <li><a href="/viewallq_a.php?s=<?php echo $s-$num_row;?>" style="color:#CC0000;">&laquo; Prev</a>&nbsp;&nbsp;&nbsp;</li>
+<?php
+        }
+	for($i = 1; $i <= $num_page; $i++){
+		if($i != $tranghh){
+?>
+            <li><a href="/viewallq_a.php?s=<?php echo ($i-1)*$row_per_page;?>"><?=$i?></a>&nbsp;&nbsp;&nbsp;</li>
+<?php
+                }
+		else
+			echo "<li>$i&nbsp;&nbsp;&nbsp;</li>";
+
+	}
+
+     if($s+$num_row < $n_row) {?>
+            <li><a href="/viewallq_a.php?s=<?php echo $s+$num_row;?>" style="color:#CC0000;">Next &raquo;</a></li>
+<?php
+        }
+    }
+}
+    echo "</ul>";
+    echo $tag_viewall;
+?>
 <div style='clear:left;'><!-- --></div>
 </div>
 <?php
-            }
+}
                 if(isset($_POST["post_id"]))
                     $post_id = $_POST["post_id"];
                 if(isset($_POST["index_id"]))

@@ -28,7 +28,7 @@ Variables
 /***************************************************************
 delete current memcaches
 ***************************************************************/
-        function deleteMencache(){
+        public static function deleteMencache(){
 		Mem::$memcache->delete("ans");
         }
 /***************************************************************
@@ -86,7 +86,7 @@ add new record
                                 "ip"=>$this->ip
                             );
                 $this->id = $q->add('answer', $arr);
-                $this->deleteMencache();
+                self::deleteMencache();
 	}
 /***************************************************************
 delete table answer
@@ -101,7 +101,7 @@ delete table answer with condition
 	public function delete_id($id) {
 		$q = new Active;
 		$q->delete('answer',"id=$id");
-                $this->deleteMencache();
+                self::deleteMencache();
 	}
         
 /***************************************************************
@@ -119,7 +119,7 @@ edit a record in table answer
                                 "ip"=>$this->ip
                             );
                 $q->update('answer', $arr,"id=$this->id");
-                $this->deleteMencache();;
+                self::deleteMencache();;
 	}
 
 /***************************************************************
