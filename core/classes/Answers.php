@@ -129,7 +129,7 @@ Get answer
        public static function getA($id=0){
             $u = new User;
             if($id==0){
-                $n_row = self::query();
+                $n_row = self::query("","","like_a desc, date desc");
             }
             else
             {

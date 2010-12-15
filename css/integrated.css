@@ -1317,24 +1317,23 @@ div.demo-description {
     overflow: inherit;
 }
 ._like{
-    background-color:#EFEFEF;
-    border:1px solid #C1C1C1;
-    font-weight:normal;
-    height:10px;
-    font-size: 10px;
-    margin-left:1px;
-    min-width:15px;
-    padding:1px 2px;
-    text-align:center;
+    background:url("images/liked.gif") no-repeat;
+    padding:0px 17px 0px 7px;
+    display: inline;
+    line-height: 19px;
+    background-position: 100% 0px;
+    font-size:9px;
+    background-color:#627AAD;
+    color:white;
 }
 ._liked{
-    background-color:#EFEFEF;
-    border:1px solid #C1C1C1;
-    font-weight:normal;
-    height:10px;
-    font-size: 10px;
-    margin-left:1px;
-    min-width:15px;
-    padding:1px 2px;
-    text-align:center;
+    
+    background:url("images/liked.gif") no-repeat;
+    background-color:#E6E6E6;
+    padding:0px 17px 0px 7px;
+    display: inline;
+    line-height: 19px;
+    background-position: 100% 0px;
+    font-size:9px;
+    color:black;
 }
