@@ -1316,24 +1316,23 @@ div.demo-description {
     margin: 5px;
     overflow: inherit;
 }
-._like{
-    background:url("images/liked.gif") no-repeat;
+._like,._liked{
+    background:url("images/t.gif") no-repeat;
     padding:0px 17px 0px 7px;
     display: inline;
     line-height: 19px;
     background-position: 100% 0px;
-    font-size:9px;
-    background-color:#627AAD;
-    color:white;
+    font-size:11px;
+    background-color:#CAD4E7;
+    color:#db1c00;
 }
-._liked{
-    
-    background:url("images/liked.gif") no-repeat;
-    background-color:#E6E6E6;
+._like:hover{
+    background:url("images/t.gif") no-repeat;
     padding:0px 17px 0px 7px;
     display: inline;
     line-height: 19px;
     background-position: 100% 0px;
-    font-size:9px;
-    color:black;
+    font-size:11px;
+    background-color: #db1c00;
+    color:white;
 }
