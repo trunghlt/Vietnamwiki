@@ -40,15 +40,29 @@ include('ajaxLoad.php');
     width: 50px;
 }
 </style>
+<?php
+    $type_sort = 1;
+    $s = 0;
+    if(isset($_GET["type_sort"])){
+        if(is_numeric($_GET["type_sort"])){
+            $type_sort = $_GET["type_sort"];
+        }
+    }
+    if(isset($_GET["s"])){
+        if(is_numeric($_GET["s"])){
+            $s = $_GET["s"];
+        }
+    }
+?>
     <td class="center" style="width:820px;">
 		<div id="menuWrapper"><div id="toolbar"><?php getToolbarHTML();?></div></div>
 		<div id="contentTable">
                     <div>
                         <h1>Questions and Answers</h1>
                         <div class="sort">
-                            <select id="method_sort" onchange="load_qanda(0);">
-                                <option value="1" seleted>Sort Question By Time</option>
-                                <option value="2">Sort Question By Like</option>
+                            <select id="method_sort" onchange="load_qanda(<?php echo $s;?>);">
+                                <option value="1" <?php if($type_sort==1) echo "selected";?> >Sort Question By Time</option>
+                                <option value="2" <?php if($type_sort==2) echo "selected";?> >Sort Question By Like</option>
                             </select>
                         </div>
                         <div id="qanda" style="width:820px !important;"><div id="view_qanda"><!-- --></div></div>
@@ -65,11 +79,7 @@ include('ajaxLoad.php');
 </table>
 <script type="text/javascript">
  jQuery(document).ready(function(){
-     <?php if(isset($_GET['s'])) {?>
-        load_qanda(<?php echo $_GET['s'];?>);
-      <?php }else {?>
-        load_qanda(0);
-        <?php }?>
+        load_qanda(<?php echo $s;?>);
 });
 function signOut() {
 	jQuery.post("/requests/logout.php", {},

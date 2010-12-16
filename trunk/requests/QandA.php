@@ -181,13 +181,13 @@ if($num_page > 1){
 	$tranghh = ($s/$row_per_page)+1;
         if($s>0){
 ?>
-            <li><a href="/viewallq_a.php?s=<?php echo $s-$num_row;?>" style="color:#CC0000;">&laquo; Prev</a>&nbsp;&nbsp;&nbsp;</li>
+            <li><a href="/viewallq_a.php?s=<?php echo $s-$num_row;?>&type_sort=<?php echo $type;?>" style="color:#CC0000;">&laquo; Prev</a>&nbsp;&nbsp;&nbsp;</li>
 <?php
         }
 	for($i = 1; $i <= $num_page; $i++){
 		if($i != $tranghh){
 ?>
-            <li><a href="/viewallq_a.php?s=<?php echo ($i-1)*$row_per_page;?>"><?=$i?></a>&nbsp;&nbsp;&nbsp;</li>
+            <li><a href="/viewallq_a.php?s=<?php echo ($i-1)*$row_per_page;?>&type_sort=<?php echo $type;?>"><?=$i?></a>&nbsp;&nbsp;&nbsp;</li>
 <?php
                 }
 		else
@@ -196,7 +196,7 @@ if($num_page > 1){
 	}
 
      if($s+$num_row < $n_row) {?>
-            <li><a href="/viewallq_a.php?s=<?php echo $s+$num_row;?>" style="color:#CC0000;">Next &raquo;</a></li>
+            <li><a href="/viewallq_a.php?s=<?php echo $s+$num_row;?>&type_sort=<?php echo $type;?>" style="color:#CC0000;">Next &raquo;</a></li>
 <?php
         }
     }
