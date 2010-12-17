@@ -4,7 +4,9 @@ include("../core/common.php");
 include("../core/classes/Db.php");
 include("../core/classes/User.php");
 include("../core/classes/Email.php");
+include('../core/classes/Filter.php');
 include("../libraries/sendmail.php");
+
 
 if(c_email($_POST['user_email'])){
     $em = $_POST['user_email'];
