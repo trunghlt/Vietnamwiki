@@ -25,7 +25,7 @@ Class connect email  in database
 
 ***************************************************************/		
 		static public function query($id=''){
-                        $row2 = NULL;
+                        $row2 = array();
 			if($id!=''){
 				$where = "where id=$id"; 
 			}
@@ -33,10 +33,15 @@ Class connect email  in database
 				$where='';
 			$str = "select * from email $where";
 			$re = mysql_query($str);
-			while($row = mysql_fetch_assoc($re)){
-				$row2 = $row;
-			}
-			return @$row2;
+                        if($re){
+                            if(mysql_num_rows($re)){
+                                while($row = mysql_fetch_assoc($re)){
+                                    $row2 = $row;
+                                }
+                                return @$row2;
+                            }                            
+                        }
+                        return 0;
 		}
 
 /***************************************************************

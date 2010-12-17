@@ -55,6 +55,7 @@ include("forms/deleteConfirmForm.php");
 include("forms/loginForm.php");
 include('dialog.php');
 include("forms/register_email.php");
+include("forms/resetPass.php");
 include("footer.php");
 ?>
 
