@@ -15,7 +15,7 @@ if(c_email($_POST['user_email'])){
         if(is_array($arr)){
             $message = str_replace('{user}',$arr['username'],$email['message']);
             $message = str_replace('{pass}',$arr['password'],$message);
-            sendmail($email['email'],$email['subject'],$message,0,$email['from']);
+            sendmail($em,$email['subject'],$message,0,$email['from']);
             echo 'true';
         }
         else

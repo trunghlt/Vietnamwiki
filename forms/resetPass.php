@@ -41,7 +41,8 @@ function submitreEmail(dom){
 						else if(data == 'wrongemail'){
 							alert("Email not exist");
 						}
-                                                else{
+                                                else if(data=='true'){
+                                                    alert("Your information have been sent");
                                                     resetDialog.dialog('close');
                                                 }
 				});
