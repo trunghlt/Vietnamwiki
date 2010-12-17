@@ -45,6 +45,7 @@ function submitreEmail(dom){
                                                     alert("Your information have been sent");
                                                     resetDialog.dialog('close');
                                                 }
+                                                alert(data);
 				});
 }
 </script>
