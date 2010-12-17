@@ -43,7 +43,7 @@ function chkLogin() {
                         }
 	  	}
 		else 
-			if($id === -2){
+			if($id == -2){
 		 		echo $id;
 			}
 		 	else 

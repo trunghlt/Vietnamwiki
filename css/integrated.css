@@ -1256,7 +1256,7 @@ div.demo-description {
 #reviewLowerBound,#FillEmailDialog,#commentDialog,#EmailComment1,#editloginDialog,#confirm,#deleteConfirmDialog{
 	visibility:hidden;
 }
-#restoreConfirmDialog,#rej_confirm,#sendmail,#photoUploadDialog,.index_des{
+#restoreConfirmDialog,#rej_confirm,#sendmail,#photoUploadDialog,.index_des,#resetDialog,#questionDialog,#answerDialog{
 	visibility:hidden;
 }
 .des{

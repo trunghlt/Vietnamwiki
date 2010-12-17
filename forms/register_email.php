@@ -36,6 +36,7 @@ jQuery(document).ready(function(){
 function submitEmail(dom){
 	jQuery.post('../requests/update_email.php',jQuery("#"+dom).serialize(),
 					function(data){
+                                              
 						if(data == 'ok')
 						{
 							alert('Add Email Success');

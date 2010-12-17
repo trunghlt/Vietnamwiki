@@ -163,15 +163,25 @@ class User {
 	Assign values of an array into user's properties
 	- $arr: the input array
 	-----------------------------------------------------------*/
-	function query_username($username) {
+	function query_username($username='',$email='') {
 		$q = new db();
-		$q->query(" SELECT *
-					FROM users
-					WHERE username='$username'");
-		if($q->n>0 && $q->re){
+                $row = array();
+                if($email==''){
+                    $q->query(" SELECT *
+                                            FROM users
+                                            WHERE username='$username'");
+                }
+                else if($username==''){
+                    $q->query(" SELECT *
+                                            FROM users
+                                            WHERE email='$email'");
+                }
+		if($q->re){
+                    if($q->n){
 			while($r = mysql_fetch_assoc($q->re))
 				$row = $r;
 			return @$row;
+                    }
 		}
 		else
 			return 0;

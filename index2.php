@@ -130,5 +130,6 @@ function submitLogin(dom,check) {
 include("forms/composeForm.php");
 include("forms/loginForm.php");
 include("forms/register_email.php");
+include("forms/resetPass.php");
 include("footer.php");
 ?>

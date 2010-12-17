@@ -256,6 +256,7 @@ function set_value(){
 function submitLogin(dom,check) {	
 	jQuery.post("/requests/postLogin.php", jQuery("#"+dom).serialize(), 
 			function(response){
+                                
 				if(response == -2)
 				{
 					alert("This user has been banned");

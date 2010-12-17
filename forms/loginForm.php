@@ -31,6 +31,10 @@ jQuery(document).ready(function(){
 			SignUp: function(){
 				jQuery(this).dialog('close');
 				window.location = '/signup.php';				
+			},
+                        "Forgot Pass":function(){
+				jQuery(this).dialog('close');
+				resetDialog.css('visibility','visible').dialog('open');
 			}
 		}		
 	});

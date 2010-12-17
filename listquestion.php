@@ -1,16 +1,20 @@
 <div id='qanda'>
 <?php
-    
-    if($index_name=="Overview"){
+    if(isset($index_name)){
+        if($index_name=="Overview"){
 ?>
-    <div class="head3" style="margin-left: 0px; width: 168px;padding:6px">Questions and Answers</div>
+            <div class="head3" style="margin-left: 0px; width: 168px;padding:6px">Questions and Answers</div>
 <?php
-    }else{
+        }else{
 ?>
-    <div class="head3" style="margin-left: 0px; width: 187px; max-width: 187px;padding:6px">Questions and Answers</div>
+        <div class="head3" style="margin-left: 0px; width: 168px; max-width: 187px;padding:6px">Questions and Answers</div>
 <?php
+        }
     }
+    else{
 ?>
+        <div class="head3" style="margin-left: 0px; width: 168px; max-width: 187px;padding:6px">Questions and Answers</div>
+<?php }?>
 <div class="button" style="margin-top: 10px; margin-left: 35px;"><a onclick='question();' >Ask a question</a></div>
 <div style="clear: both"></div>
 <!--<div class="button" style="margin-top: 10px; float: left;"><a href="/viewallq_a.php" >View All</a></div>-->
