@@ -79,6 +79,7 @@ include("forms/loginForm.php");
 include("forms/composeForm.php");
 include("forms/reviewform.php");
 include("forms/register_email.php");
+include("forms/resetPass.php");
 include("footer.php");
 ?>
 <script type="text/javascript">

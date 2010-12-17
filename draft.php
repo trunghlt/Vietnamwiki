@@ -315,9 +315,7 @@ function editClick() {
 </script>
 <?php include("commentListPainter.php"); ?>
 </td>
-<td classs="right">
-    <?php include('listquestion.php');?>
-</td>
+
 </tr>
 <tr>
 <td colspan=3>
@@ -333,6 +331,7 @@ include("forms/editForm.php");
 include("forms/commentForm.php");
 include("forms/deleteConfirmForm.php");
 include("forms/register_email.php");
+include("forms/resetPass.php");
 include("footer.php");
 ?>
 
