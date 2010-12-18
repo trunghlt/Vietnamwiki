@@ -18,6 +18,7 @@ define('TEMP_UPLOAD_FOLDER', 'upload2/upload/');
 define('COL', 3);
 define('ROW', 3);
 
+
 include('permalink.php');
 include("APIs.php");
 include('fbconnect.php');

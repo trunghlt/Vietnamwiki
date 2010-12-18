@@ -1306,7 +1306,7 @@ div.demo-description {
 }
 .question{
     text-align: left;
-    width: 180px;
+    width: 170px;
     margin-bottom: 10px;
 }
 #qanda img{
@@ -1316,9 +1316,17 @@ div.demo-description {
     margin: 5px;
     overflow: inherit;
 }
+
+
+.like_wrapper {
+	background-color: rgb(210, 210, 210);
+	padding-right: 3px;
+	margin-left: 5px;	
+}
+
 ._like,._liked{
     background:url("images/liked.gif") no-repeat;
-    padding:0px 17px 0px 7px;
+    padding:0px 16px 0px 3px;
     display: inline;
     line-height: 19px;
     background-position: 100% 0px;
@@ -1327,7 +1335,7 @@ div.demo-description {
 }
 ._like:hover{
     background:url("images/liked.gif") no-repeat;
-    padding:0px 17px 0px 7px;
+    padding:0px 16px 0px 3px;
     display: inline;
     line-height: 19px;
     background-position: 100% 0px;

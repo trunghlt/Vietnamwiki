@@ -55,13 +55,13 @@ if($type==2){
             {
                 ////////////////////////////
                 if(checkLike($v2['id'],2)==1){
-                    $like_str_a = "<span id='like_a_$v2[id]'><span id='like_num_a_$v2[id]' class='_liked'>$v2[like_a]</span></span>";
+                    $like_str_a = "<span class='like_wrapper'><span id='like_a_$v2[id]'><span id='like_num_a_$v2[id]' class='_liked'>$v2[like_a]</span></span></span>";
                 }
                 else{
-                    $like_str_a = "<a style='cursor: pointer;' onclick='like($v2[id],2,$v2[like_a],$id_q);' id='like_a_$v2[id]'><span id='like_num_a_$v2[id]' class='_like'>$v2[like_a]</span></a>";
+                    $like_str_a = "<span class='like_wrapper'><a style='cursor: pointer;' onclick='like($v2[id],2,$v2[like_a],$id_q);' id='like_a_$v2[id]'><span id='like_num_a_$v2[id]' class='_like'>$v2[like_a]</span></a></span>";
                 }
                 /////////////////////////////
-               echo "<li><img src='".$v2['avatar']."' height=30 width=30 align='left'/>$v2[name] <span style='font-weight: normal;font-style: italic;' >said</span>: ".$v2["content"]." $like_str_a</li>";
+               echo "<li><img src='".$v2['avatar']."' height=30 width=30 align='left'/>$v2[name]:".$v2["content"]." $like_str_a</li>";
             }
         }
     }
@@ -73,13 +73,13 @@ else if($type==1){
         if(is_array($v)){
                 ////////////////////////////
                 if(checkLike($v['id'],1)==1){
-                    $like_str_q = "<span id='like_q_$v[id]' ><span id='like_num_$v[id]' class='_liked'>$v[like_q]</span></span>";
+                    $like_str_q = "<span class='like_wrapper'><span id='like_q_$v[id]' ><span id='like_num_$v[id]' class='_liked'>$v[like_q]</span></span></span>";
                 }
                 else{
-                    $like_str_q = "<a style='cursor: pointer;' onclick='like($v[id],1,$v[like_q],$v[id]);' id='like_q_$v[id]'><span id='like_num_$v[id]' class='_like'>$v[like_q]</span></a>";
+                    $like_str_q = "<span class='like_wrapper'><a style='cursor: pointer;' onclick='like($v[id],1,$v[like_q],$v[id]);' id='like_q_$v[id]'><span id='like_num_$v[id]' class='_like'>$v[like_q]</span></a></span>";
                 }
                 /////////////////////////////
-               echo "<img src='".$v['avatar']."' height=30 width=30 align='left'/>$v[name] <span style='font-weight: normal;font-style: italic;'>asked</span>: ".$v['content']."&nbsp;&nbsp;<a style='cursor: pointer; color: #DB1C00;text-decoration: underline;' onclick='answer($v[id]);' >reply</a> $like_str_q";
+               echo "<img src='".$v['avatar']."' height=30 width=30 align='left'/>$v[name]:".$v['content']."&nbsp;&nbsp;<a style='cursor: pointer; color: #DB1C00;text-decoration: underline;' onclick='answer($v[id]);' >reply</a> $like_str_q";
         }
     }
 }

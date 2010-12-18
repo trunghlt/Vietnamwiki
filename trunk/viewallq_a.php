@@ -24,8 +24,6 @@ include('ajaxLoad.php');
     text-align: left;
     width: 800px;
     margin-bottom: 10px;
-    font-style: italic;
-    font-weight: bold;
 }
 .phantrang ul{
     margin:0px;
