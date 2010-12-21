@@ -256,13 +256,15 @@ function set_value(){
 function submitLogin(dom,check) {	
 	jQuery.post("/requests/postLogin.php", jQuery("#"+dom).serialize(), 
 			function(response){
-                                
-				if(response == -2)
+                                response = jQuery.trim(response);
+				if(parseInt(response)==-2)
 				{
-					alert("This user has been banned");
+                                    jQuery("#dialog_notification").html("This user has been banned");
+                                    dialog_notification.dialog('open');
 				}
 				else if(response == 'false'){
-                                    alert("Login's fail");
+                                    jQuery("#dialog_notification").html("Login's fail");
+                                    dialog_notification.dialog('open');
                                 }
                                 else
 				{
