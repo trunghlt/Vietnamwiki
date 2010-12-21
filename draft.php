@@ -257,10 +257,16 @@ function signOut() {
 function submitLogin(dom,check) {	
 	jQuery.post("/requests/postLogin.php", jQuery("#"+dom).serialize(), 
 			function(response){
-				if(response==-2)
-					alert("This user has been banned");
-				else if(response == 'false'){
-                                    alert("Login's fail");
+                                response = jQuery.trim(response);
+				if(parseInt(response)==-2){
+                                    jQuery("#dialog_notification").html("This user has been banned");
+                                    dialog_notification.dialog('open');
+					//alert("This user has been banned");
+                                }
+ 				else if(response == 'false'){
+                                    jQuery("#dialog_notification").html("Login's fail");
+                                    dialog_notification.dialog('open');
+                                   // alert("Login's fail");
                                 }
 				else
 				{

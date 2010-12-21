@@ -47,7 +47,8 @@ function loadNotification(){
 </script>
 <?php
 include("feedback.php");
-include("googleAnalytical.php")
+include("googleAnalytical.php");
+include("dialog_notification.php");
 ?>
 </div>
 </body>
