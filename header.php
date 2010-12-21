@@ -217,7 +217,7 @@ var mySlide = new Array();
 var composeDialog, editDialog, loginDialog, invalidLoginDialog, 
 	deleteConfirmDialog, commentDialog, photoUploadDialog, photoEditDialog, tendayWeatherDialog,
 	restoreConfirmDialog, reviewDialog, mustRateAlert, reviewLowerBound,post_review;
-var currentDestItem, currentIndexItem, currentMySlide, commentSlide,Email_question,Fill_EmailDialog,resetDialog;
+var currentDestItem, currentIndexItem, currentMySlide, commentSlide,Email_question,Fill_EmailDialog,resetDialog,dialog_notification;
 var URL = "http://www.vietnamwiki.net";
 <?php if ($onload_js) { echo $onload_js; } ?>
 jQuery(document).ready(function(){

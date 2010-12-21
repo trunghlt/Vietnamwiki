@@ -46,10 +46,15 @@ function set_value(){
 //end
 function submitLogin(dom,check) {
         jQuery.post("/requests/postLogin.php", jQuery("#"+dom).serialize(),function(response){
-                if(response==-2)
-                        alert("This user has been banned");
+                response = jQuery.trim(response);
+                if(parseInt(response)==-2)
+                {
+                    jQuery("#dialog_notification").html("This user has been banned");
+                    dialog_notification.dialog('open');
+                }
                 else if(response == 'false'){
-                    alert("Login's fail");
+                    jQuery("#dialog_notification").html("Login's fail");
+                    dialog_notification.dialog('open');
                 }
                 else{
                         if(response != '' && response != 'success'){
@@ -66,8 +71,8 @@ function submitLogin(dom,check) {
                         }
                         else if(response == 'success'){
                                 if(check==2){
-                                        edit_login.dialog('close');
-                                        jQuery('#editDialog').css('visibility','visible').dialog('open');
+                                        loginDialog.dialog('close');
+                                       
                                         set_value();
                                 }
                                 else{
@@ -81,7 +86,6 @@ function submitLogin(dom,check) {
 }
 </script>
 <?php
-include("forms/composeForm.php");
 include("forms/loginForm.php");
 include("forms/register_email.php");
 include("forms/resetPass.php");

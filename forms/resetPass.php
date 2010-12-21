@@ -1,6 +1,6 @@
 <div id="resetDialog" title="Reset Password">
 	<form id = "resetForm">
-		<p>Please fill your email to which your information will be sent</p>
+		<p>To reset your password, type the full email address you use to sign in to your VietnamWiki Account.</p>
 		<label for="email">Email: </label>
 		<input class="field" name="user_email" id="user_email" type="text" style="width:250px" /><br />
 	</form>
@@ -19,7 +19,7 @@ jQuery(document).ready(function(){
 			opacity: 0.5
 		},
 		buttons: {
-			"Retrieve pass": function() {
+			"Retrieve": function() {
 				submitreEmail('resetForm');
 			},
 			Cancel: function() {
@@ -36,14 +36,17 @@ function submitreEmail(dom){
                                                 data = jQuery.trim(data);
 						if(data == 'format')
 						{
-                                                    alert("Wrong email");
+                                                    jQuery("#dialog_notification").html("Wrong email");
+                                                    dialog_notification.dialog('open');
 						}
 						else if(data == 'wrongemail'){
-							alert("Email not exist");
+                                                    jQuery("#dialog_notification").html("Email doesn't not exist");
+                                                    dialog_notification.dialog('open');
 						}
                                                 else if(data=='true'){
-                                                    alert("Your information have been sent");
                                                     resetDialog.dialog('close');
+                                                    jQuery("#dialog_notification").html("Your account detail have been sent");
+                                                    dialog_notification.dialog('open');
                                                 }
 				});
 }
