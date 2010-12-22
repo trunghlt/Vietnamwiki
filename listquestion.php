@@ -29,6 +29,7 @@ jQuery(document).ready(function(){
         jQuery('#questionDialog').remove();
         jQuery('#answerDialog').remove();
         jQuery("#Emailquestion").remove();
+        
        // jQuery("#Emailanswer1").remove();
         <?php
             if(isset($post_id) && $post_id>0){
@@ -42,8 +43,8 @@ jQuery(document).ready(function(){
             else if(isset($index_id) && $index_id>0){
                 $post_q = new PostElement;
                 $row_q = $post_q->query("",$index_id);
-          ?>
-                jQuery.post("requests/QandA.php", {start:id,post_id:<?php echo $row_q[0]['post_id'];?>,index_id:<?php echo $index_id;?>,destination:<?php echo $dest_id;?>,num_row:5,type:1,type_view:2},
+          ?>                
+                  jQuery.post("requests/QandA.php", {start:id,post_id:<?php echo (is_array($row_q))?$row_q[0]['post_id']:0;?>,index_id:<?php echo $index_id;?>,destination:<?php echo $dest_id;?>,num_row:5,type:1,type_view:2},
                                         function(response) {
                                                 jQuery('#view_qanda').html(response);
                                         });

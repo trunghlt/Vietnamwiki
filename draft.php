@@ -300,6 +300,7 @@ function set_value(){
     loadDraftRibbon(<?php echo $editionId?>, "ribbon");
     jQuery('#field_not_login_comment').html("<input class='field' name='check_login_comment' id='check_login_comment' type='hidden' value='2'/>");
     loadNotification();
+    load_qanda(0);
     loadToolbar("toolbar");
 }
 //end
@@ -321,7 +322,9 @@ function editClick() {
 </script>
 <?php include("commentListPainter.php"); ?>
 </td>
-
+     <td class="right">
+        <?php include('listquestion.php');?>
+    </td>
 </tr>
 <tr>
 <td colspan=3>
