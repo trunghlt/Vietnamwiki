@@ -67,11 +67,14 @@ class PostElement {
                 }
                 elseif($id=='' && $index!=''){
                      $q->query("SELECT * FROM posts where index_id=$index");
-                    if($q->n ==0)
-                            return 0;
-                    while($r = mysql_fetch_assoc($q->re))
-                            $row[] = $r;
-                    return @$row;
+                    if($q->re){
+                        if($q->n){
+                            while($r = mysql_fetch_assoc($q->re))
+                                $row[] = $r;
+                            return @$row;
+                        }
+                    }
+                    return 0;                    
                 }
 	}
 	
