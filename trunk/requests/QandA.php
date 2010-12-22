@@ -204,7 +204,7 @@ if($num_page > 1){
     }
 }
     echo "</ul>";
-    #echo $tag_viewall;
+    echo $tag_viewall;
 ?>
 <div style='clear:left;'><!-- --></div>
 </div>

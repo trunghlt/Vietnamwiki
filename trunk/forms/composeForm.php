@@ -94,6 +94,13 @@ jQuery(document).ready(function(){
 			'Submit': function() {
 				submitComposeForm();
 			},
+   			Preview: function() {
+                                var textEditorFrame = document.getElementById("textComposeFrame");
+                                var frameWindow = textEditorFrame.contentWindow;
+                                var frameDocument = frameWindow.document;
+                                var mce = frameWindow.tinyMCE.activeEditor;
+                                 mce.execCommand('mcePreview');
+			},
 			Cancel: function() {
 				jQuery(this).dialog('close');
 			}
