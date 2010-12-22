@@ -45,7 +45,7 @@ function submitreEmail(dom){
 						}
                                                 else if(data=='true'){
                                                     resetDialog.dialog('close');
-                                                    jQuery("#dialog_notification").html("Your account detail have been sent");
+                                                    jQuery("#dialog_notification").html("Your account detail have been sent to your email address "+jQuery("#user_email").val());
                                                     dialog_notification.dialog('open');
                                                 }
 				});
