@@ -7,6 +7,7 @@
                 <input class="filed" name="type_login" id="type_login" type="hidden" value="1" />
 	</form>
 	<div style="padding-top: 10px;"><?php echo render_fbconnect_button();?></div>
+        <div style="padding-top: 10px;"><span style="cursor: pointer; color: #DB1C00; text-decoration: underline;" onclick="showforgot_pass();return false;">Forgot Password</span></div>
 </div>
 <script language="javascript">
 jQuery(document).ready(function(){ 
@@ -31,13 +32,17 @@ jQuery(document).ready(function(){
 			SignUp: function(){
 				jQuery(this).dialog('close');
 				window.location = '/signup.php';				
-			},
-                        "Forgot Pass":function(){
-				jQuery(this).dialog('close');
-				resetDialog.css('visibility','visible').dialog('open');
 			}
+//                        "Forgot Pass":function(){
+//				jQuery(this).dialog('close');
+//				resetDialog.css('visibility','visible').dialog('open');
+//			}
 		}		
 	});
 
 });
+    function showforgot_pass(){
+            loginDialog.dialog('close');
+            resetDialog.css('visibility','visible').dialog('open');
+    }
 </script>
