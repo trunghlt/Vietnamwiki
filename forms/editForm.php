@@ -76,6 +76,13 @@ jQuery(document).ready(function(){
 			'Submit': function() {
 				if(submitEditForm()) jQuery(this).dialog('close');
 			},
+   			Preview: function() {
+                                var textEditorFrame = document.getElementById("textEditFrame");
+                                var frameWindow = textEditorFrame.contentWindow;
+                                var frameDocument = frameWindow.document;
+                                var mce = frameWindow.tinyMCE.activeEditor;
+                                 mce.execCommand('mcePreview');
+			},
 			Cancel: function() {
 				jQuery(this).dialog('close');
 			}
