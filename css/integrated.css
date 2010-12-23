@@ -705,15 +705,6 @@ h3  {
 	background-color : #990000;
 }
 
-b  {
-	color : black;
-	font-weight : bold;
-	font-size : 12px;
-	font-family : Arial, Helvetica, serif;
-	line-height : 18px;
-}
-
-
 span.style5 {
 	color : gray;
 	font-weight : normal;
@@ -1314,7 +1305,7 @@ div.demo-description {
 }
 #view_qanda{
     margin: 5px;
-    overflow: inherit;
+    overflow: hidden;
 }
 
 

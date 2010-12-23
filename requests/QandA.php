@@ -124,7 +124,7 @@ switch($type){
                         $like_str_q = "<span class='like_wrapper'><a style='cursor: pointer;' onclick='like($v[id],1,$v[like_q],$v[id]);' id='like_q_$v[id]'><span id='like_num_$v[id]' class='_like'>$v[like_q]</span></a></span> &nbsp;&nbsp;";
                     }
 
-                    echo "<li><div class='question' id='l_q_$v[id]'><img src='".$v['avatar']."' height=30 width=30 align='left'/>$v[name]:".$v['content']."&nbsp;&nbsp;<a style='cursor: pointer; color: #DB1C00;text-decoration: underline;' onclick='answer($v[id]);' >reply</a> $like_str_q</div>";
+                    echo "<li><div class='question' id='l_q_$v[id]'><img src='".$v['avatar']."' height=30 width=30 align='left'/>$v[name]: ".$v['content']."&nbsp;&nbsp;<a style='cursor: pointer; color: #DB1C00;text-decoration: underline;' onclick='answer($v[id]);' >reply</a> $like_str_q</div>";
 
                     if(is_array($a_r)){
                         echo "<ul id='q$v[id]'>";
@@ -139,7 +139,7 @@ switch($type){
                             }
                             /////////////////////////////
                             if($v2['question_id']==$v['id'])
-                                echo "<li><img src='".$v2['avatar']."' height=30 width=30 align='left'/>$v2[name]:".$v2["content"]." $like_str_a</li>";
+                                echo "<li><img src='".$v2['avatar']."' height=30 width=30 align='left'/>$v2[name]: ".$v2["content"]." $like_str_a</li>";
 
 
                         }
@@ -194,7 +194,6 @@ if($num_page > 1){
                 }
 		else
 			echo "<li>$i&nbsp;&nbsp;&nbsp;</li>";
-
 	}
 
      if($s+$num_row < $n_row) {?>
