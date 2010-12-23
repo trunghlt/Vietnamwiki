@@ -1,11 +1,7 @@
 <br />
 <br />
 <div align="center"><embed src="/images/1.swf" type="application/x-shockwave-flash" wmode="transparent" allowscriptaccess="none" height="300" width="450"> </div> 
-<br/>
-<div align="center"><span class="style1">This website is developed by some people who want to recommend to you seriously about an amazing Vietnam</span></div>
-
-<br/><br/>
-
+<p/>
 
 <style type="text/css">
 div.teamProfile {
@@ -17,7 +13,6 @@ div.teamProfile {
 		margin-right: 20px;
 		width: 70px;
 		text-align: center;
-		height: 100px;
 	}
 	
 	div.teamProfile  div.description{
@@ -31,11 +26,21 @@ div.teamProfile {
 		}
 </style>
 
+<div style="padding: 5px; background-color: rgb(233,233,233); font-size: 16px;">
+	<p><a href="/"><b>VietnamWiki.net</b></a> is born out of a simple idea: to provide useful local insight into travelling in Vietnam. Our website aims to provide a platform for open user-contributed information and to foster a vibrant community of people from all over the world connected by one same passion for the beauty of Vietnam.</p>
+
+	<p><a href="/"><b>VietnamWiki.net</b></a> concept is also based on a simple rationale. Life is constantly on the move and it is especially fast-paced in a growing country with vast potential. While basic historical and factual information about a place, a people may be found in your standard travel guide, it is the ever evolving cultural aspects, the rich authenticity and the colourful offerings that make any travel experience unique and unforgettable. </p>
+
+	<p>This is what we hope to do: opening Vietnam up to the world in an unprecedented way. We believe the hidden gem of South East Asia is at its best when shared. </p>
+
+	<p>Start your journey to Vietnam here. Join us in celebrating life.</p>
+</div>
+
 <h1>The Team</h1>
 
 <div class="teamProfile">
 	<div class="ava">
-		<img src="http://farm3.static.flickr.com/2757/4118004433_2eb0624e56_s.jpg"/>		
+		<img width="80" height="auto" src="http://sphotos.ak.fbcdn.net/hphotos-ak-snc3/hs301.snc3/28675_407504360688_720015688_4737224_1807445_n.jpg"/>		
 	</div>
 	<div class="description">
 		<div class="name">Trung Huynh</div>
@@ -50,7 +55,7 @@ div.teamProfile {
 
 <div class="teamProfile">
 	<div class="ava">
-		<img style="width: 50px; height = 140px;" src="http://photos-g.ak.fbcdn.net/hphotos-ak-snc1/hs260.snc1/10732_146501786692_507096692_2780210_1730685_n.jpg"/>		
+		<img style="width: 80px; height:auto;" src="http://photos-g.ak.fbcdn.net/hphotos-ak-snc1/hs260.snc1/10732_146501786692_507096692_2780210_1730685_n.jpg"/>		
 	</div>
 	<div class="description">
 		<div class="name">Quoc Nguyen</div>
@@ -63,7 +68,7 @@ div.teamProfile {
 
 <div class="teamProfile">
 	<div class="ava">
-		<img style="width: 60px; height = 100px;" src="http://photos-g.ak.fbcdn.net/hphotos-ak-snc3/hs011.snc3/11865_179255355735_640930735_3250160_1903367_n.jpg"/>		
+		<img style="width: 80px; height: auto;" src="http://photos-g.ak.fbcdn.net/hphotos-ak-snc3/hs011.snc3/11865_179255355735_640930735_3250160_1903367_n.jpg"/>		
 	</div>
 	<div class="description">
 		<div class="name">Trang Dang</div>
@@ -72,7 +77,7 @@ div.teamProfile {
 	</div>
 </div>
 <div style="clear: both"></div>
-<div>and other team members including Uyen Nguyen (editor), Hang Phan (editor) and Hieu Tran (web developer).</div>
+<p>and other team members including Uyen Nguyen (editor), Hang Phan (editor) and Hieu Tran (web developer).</p>
 
 
 <br /><br /><br /> <br/>

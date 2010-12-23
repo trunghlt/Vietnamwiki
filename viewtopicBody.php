@@ -52,8 +52,7 @@ else
 ?>
 
 <div id="postContent">
-<?php 
-	
+	<?php 	
 	//get number of pages
 	$content = htmlspecialchars_decode($content, ENT_QUOTES);
 	$content = str_replace("|", "&", $content);		 
@@ -118,7 +117,7 @@ else
 	
 	echo "<div id='postContent_relative'>";
 		echo $s;
-	echo "</div";
+	echo "</div>";
 	
 	//reference
 	if($reference!='')	{

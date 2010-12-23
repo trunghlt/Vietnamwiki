@@ -85,9 +85,7 @@ foreach ($r as $row) {
 	<?php
 	$href = getPostPermalink($row["post_id"]);
 	echo "<a href='{$href}' class=\"head2\">$title</a><br>";      
-	$s = $content;      
-	$s = MakeTextViewable($s);      
-	echo $s ; 
+	echo $content; 
 	?>
                                 <div class="clear"></div>
 	</div>

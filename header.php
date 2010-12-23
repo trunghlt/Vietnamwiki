@@ -241,7 +241,7 @@ jQuery(document).ready(function(){
 		jQuery(this).css("display", "none");
 		jQuery(this).fullBg();
 		jQuery(this).fadeIn(500);
-	}).attr("src", "images/backgrounds/aodai.jpg");
+	}).attr("src", "http://www.vietnamwiki.net/images/backgrounds/aodai.jpg");
 	
 });
 </script>	
