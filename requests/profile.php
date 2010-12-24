@@ -85,33 +85,38 @@ if($type==1){
 			
 			$result = $f->query_string($user_id_info,"",$start,$row_per_page);
 			echo "<div class='comment_block'>";					
+                if(is_array($result)){
+                    array_pop($result);
+                    $e = new Edition;
 
-		array_pop($result);
-		$e = new Edition;
-								
-		foreach($result as $key=>$post){
-				$r = $e->query_post($post['post_id'],$post['user_id'],$type);
-				if(isset($r) && $r!='')
-					foreach($r as $row){ 
-						get_index_des($post['value'],$post['id'],1,$row['index_id'],$post['post_id'],$row['post_subject']);
-					}
-		}
-			echo "<br />";
-			if($num_page > 1){
-				$current_page = ($start/$row_per_page)+1;
-				for($i=1 ; $i <= $num_page; $i++)
-				{
-					if($current_page != $i){
-						$k = ($i-1)*$row_per_page;
-					?>
-						<a href='#' onclick="get_page(<?php echo $k?>,1,'followpost',<?php echo $user_id_info?>)" ><?php echo $i?></a>
-					<?php
-					}
-					else
-						echo " ".$i." ";
-				}
-			}
-			echo "</div>";
+                    foreach($result as $key=>$post){
+                                    $r = $e->query_post($post['post_id'],$post['user_id'],$type);
+                                    if(isset($r) && $r!='')
+                                            foreach($r as $row){
+                                                    get_index_des($post['value'],$post['id'],1,$row['index_id'],$post['post_id'],$row['post_subject']);
+                                            }
+                    }
+                            echo "<br />";
+                            if($num_page > 1){
+                                    $current_page = ($start/$row_per_page)+1;
+                                    for($i=1 ; $i <= $num_page; $i++)
+                                    {
+                                            if($current_page != $i){
+                                                    $k = ($i-1)*$row_per_page;
+                                            ?>
+                                                    <a href='#' onclick="get_page(<?php echo $k?>,1,'followpost',<?php echo $user_id_info?>)" ><?php echo $i?></a>
+                                            <?php
+                                            }
+                                            else
+                                                    echo " ".$i." ";
+                                    }
+                            }
+                            echo "</div>";
+                }
+                else{
+                    echo "You haven't posted any topics yet";
+                    return;
+                }
 }
 else if($type == 0){
 $f = new Follow;
@@ -136,6 +141,11 @@ $f = new Follow;
 			foreach($num1 as $value){
 				
 				$arr = $f->query_string($user_id_info,$value['post_id'],$start1,$row_per_page);
+                                if(!is_array($arr))
+                                {
+                                    echo "You haven't posted any topics yet";
+                                    return;
+                                }
 				array_pop($arr);
 				
 					foreach($arr as $value2)
