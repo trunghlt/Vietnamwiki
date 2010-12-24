@@ -59,7 +59,6 @@ class Message {
 		$q->query("INSERT INTO messages
 				(s_id, r_id, content, post_time)
 				VALUE ('".$s_id."','".$r_id."','".$mess."','".$post_time."')");
-		mysql_free_result($q->re);
 	}
 
 /***************************************************************
