@@ -34,16 +34,16 @@ function loadNotification(){
             loadNotification();
         });
     }
-        window.onbeforeunload = function(){
-                jQuery.ajax({
-                                async: false,
-                                type: "POST",
-                                url: "/requests/logoutUser.php",
-                                data: "",
-                                success: function(data){
-                                }
-                });
-        };
+//        window.onbeforeunload = function(){
+//                jQuery.ajax({
+//                                async: false,
+//                                type: "POST",
+//                                url: "/requests/logoutUser.php",
+//                                data: "",
+//                                success: function(data){
+//                                }
+//                });
+//        };
 </script>
 <?php
 include("feedback.php");

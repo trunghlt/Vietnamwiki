@@ -77,11 +77,9 @@ class Review {
 					(user_id, post_id, rate_value, review_text, review_date_time,name,email)
 					VALUES ({$this->userId}, {$this->postId}, {$this->rateValue}, '{$mysql["reviewText"]}', {$this->reviewDateTime},'{$this->name}','{$this->email}')");		
 		$this->id = mysql_insert_id();
-		$memcache = new Memcache;
-		$memcache->connect("127.0.0.1", 11211);
-		$review = $memcache->get("review_".$this->postId);
+                $review = Mem::$memcache->get("review_".$this->postId);
 			if($review != NULL)
-					$memcache->delete("review_".$this->postId);			
+					Mem::$memcache->delete("review_".$this->postId);
 	}
 	
 	public function save() {
@@ -93,11 +91,43 @@ class Review {
 						review_text = {$this->reviewText},
 						review_date_time = {$this->reviewDateTime}
 					WHERE id = {$this->id}");
-		$memcache = new Memcache;
-		$memcache->connect("127.0.0.1", 11211);
-		$review = $memcache->get("review_".$this->postId);
+		$review = Mem::$memcache->get("review_".$this->postId);
 			if($review != NULL)
-					$memcache->delete("review_".$this->postId);					
+					Mem::$memcache->delete("review_".$this->postId);
 	}
+        /*--------------------------------------------------------------
+	Check review with a specific id
+	- $postId: id of the post
+	->return a bool
+	-------------------------------------------------------------*/
+        public static function checkReviewByPostId($postId){
+            $q = new db;
+            $array = array();
+            $q->query("Select * from reviews WHERE post_id = {$postId}");
+            if($q->re){
+                if($q->n>0)
+                        return true;
+            }
+            return false;
+        }
+        /*--------------------------------------------------------------
+	Get review list in a post with time
+	- $time: compare review's time
+	->return a list of review elements
+	-------------------------------------------------------------*/
+        public static function getByTime($time){
+            $q = new db;
+            $array = array();
+            $q->query("Select distinct post_id from reviews where review_date_time > ".$time." ORDER BY review_date_time DESC");
+            if($q->re)
+            {
+                if($q->n>0){
+                    while($r = mysql_fetch_assoc($q->re))
+                        $array[] = $r;
+                    return $array;
+                }
+            }
+            return 0;
+        }
 }
 ?>

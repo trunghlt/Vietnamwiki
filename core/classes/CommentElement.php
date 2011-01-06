@@ -75,5 +75,24 @@ class CommentElement{
 		return @$r;
 		
 	}
+        /*--------------------------------------------------------------
+	Get comment list in a post with time
+	- $time: compare comment's time
+	->return a list of comment elements
+	-------------------------------------------------------------*/
+        public static function getByTime($time){
+            $q = new db;
+            $array = array();
+            $q->query("Select distinct post_id from comments where comment_time > ".$time." ORDER BY comment_time DESC");
+            if($q->re)
+            {
+                if($q->n>0){
+                    while($r = mysql_fetch_assoc($q->re))
+                        $array[] = $r;
+                    return $array;
+                }
+            }
+            return 0;
+        }
 }
 ?>

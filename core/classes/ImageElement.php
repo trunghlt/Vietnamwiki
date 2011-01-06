@@ -34,7 +34,25 @@ class ImageElement{
 						filename	= '".$this->fileName."'
 					WHERE id = ".$this->id);
 	}
-	
+        /*--------------------------------------------------------------
+	Get image list in a destination with time
+	- $time: compare with uploaded time
+	->return a list of image elements
+	-------------------------------------------------------------*/
+        public static function getByTime($time){
+            $q = new db;
+            $array = array();
+            $q->query("Select distinct dest_id from images where uploaded_at > ".$time." ORDER BY uploaded_at DESC");
+            if($q->re)
+            {
+                if($q->n>0){
+                    while($r = mysql_fetch_assoc($q->re))
+                        $array[] = $r;
+                    return $array;
+                }
+            }
+            return 0;
+        }
 	public static function filterId($id) {
 		return $id;
 	}

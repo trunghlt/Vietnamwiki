@@ -127,7 +127,7 @@ function login($id) {
 	$sql = "UPDATE sessions
 			SET user_id = '".$id."' , logged_in = '1'
 			WHERE ip = '".$ip."'";
-	$re = mysql_query($sql) or die(mysql_error());					
+	$re = mysql_query($sql) or die(mysql_error());        
 }
 
 function set_new_confirm_id($session_id) {

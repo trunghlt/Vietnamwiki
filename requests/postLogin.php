@@ -2,6 +2,7 @@
 include("../core/common.php");
 include("../core/init.php");
 include("../core/classes/Db.php");
+include("../core/classes/User.php");
 function chkInject($s) {
 	return (htmlSpecialChars($s, ENT_QUOTES) != $s);
 }
@@ -39,6 +40,7 @@ function chkLogin() {
 			}
 			else{
                                 login($id);
+                                User::updateTimeLogin($id);
 				echo 'success';                                
                         }
 	  	}
