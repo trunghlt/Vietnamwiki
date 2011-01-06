@@ -2,6 +2,10 @@
 include('./core/common.php');
 include('./core/init.php');
 include('./core/classes.php');
+if(filterNumeric($_GET["id"]))
+    $check_id = $_GET["id"];
+if(!Review::checkReviewByPostId($check_id))
+    die_to_index ();
 include('./core/session.php');
 include('./core/filters.php');
 include("preprocess.php");

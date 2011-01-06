@@ -4,6 +4,8 @@ include('core/init.php');
 include('core/session.php');
 include('core/filters.php');
 include('core/classes.php');
+if(filterNumeric($_GET["dest_id"]) && filterNumeric($_GET["page"]))
+    $check_dest_id = $_GET["dest_id"];
 include('preprocess.php');
 include('header.php'); 
 include('destination.php');
