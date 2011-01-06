@@ -256,7 +256,17 @@ class User {
         }
         public static function updateTimeLogin($id){
 		$q = new db();
-		$q->query("UPDATE users SET lastLogin=".time()." WHERE id=".$id);
+                $q->query("SELECT curLogin from users WHERE id=".$id);
+                if($q->re){
+                    if($q->n>0){
+                        $r = mysql_fetch_assoc($q->re);
+                        $q->query("UPDATE users SET lastLogin=".$r['curLogin']." WHERE id=".$id);
+                    }
+                    else {
+                        $q->query("UPDATE users SET lastLogin=0 WHERE id=".$id);
+                    }
+                }		
+                $q->query("UPDATE users SET curLogin=".time()." WHERE id=".$id);
         }
 }
 $user_info = new User;

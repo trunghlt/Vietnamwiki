@@ -45,6 +45,8 @@ class PostElement {
                     $q->query("	SELECT *
                                             FROM posts_texts
                                             WHERE post_id = ".$this->id);
+                    if(!$q->re)
+                            return 0;
                     if($q->n ==0)
                             return 0;
                     $r = mysql_fetch_array($q->re);
@@ -241,5 +243,24 @@ class PostElement {
 			return $q->n;
 		return 0;
 	}
+        /*--------------------------------------------------------------
+	Get posts list with time
+	- $time: compare post's time
+	->return a list of post elements
+	-------------------------------------------------------------*/
+        public static function getByTime($time){
+            $q = new db;
+            $array = array();
+            $q->query("Select * from posts where post_time > ".$time." ORDER BY post_time DESC");
+            if($q->re)
+            {
+                if($q->n>0){
+                    while($r = mysql_fetch_assoc($q->re))
+                        $array[] = $r;
+                    return $array;
+                }
+            }
+            return 0;
+        }
 }
 ?>
