@@ -23,6 +23,20 @@ include('header.php');
 include('destination.php');
 
 ?>
+<style>
+.phantrang ul{
+    margin:0px;
+    padding: 0px;
+    list-style-type: none;
+}
+.phantrang ul li{
+    display: inline;
+}
+.phantrang ul li a{
+    color: #CC0000;
+    width: 50px;
+}
+</style>
     <td class="center" style="width:820px;">
 		<div id="menuWrapper"><div id="toolbar"><?php getToolbarHTML();?></div></div>
 		<div id="contentTable">
@@ -67,6 +81,9 @@ include('destination.php');
         jQuery.post("/requests/load_new_feed.php",{feed_type:2,time:<?=$user_filtered["lastLogin"]?>},function(response){jQuery("#new_comments").html(response);});
         jQuery.post("/requests/load_new_feed.php",{feed_type:3,time:<?=$user_filtered["lastLogin"]?>},function(response){jQuery("#new_reviews").html(response);});
         jQuery.post("/requests/load_new_feed.php",{feed_type:4,time:<?=$user_filtered["lastLogin"]?>},function(response){jQuery("#new_uploaded_images").html(response);});
+    }
+    function loadPage(_s,_f_t,_t,_p){
+        jQuery.post("/requests/load_new_feed.php",{s:_s,feed_type:_f_t,time:_t},function(response){jQuery("#"+_p).html(response);});
     }
 </script>
 <?php
