@@ -3,7 +3,7 @@
 		<div style="line-height:11px; padding-top:15px">
 		<a style="text-decoration:none;" href="/"><span class="logo">VietnamWiki.Net</span></a>
 		<br />
-			<form action="search_display.php" id="cse-search-box">
+			<form action="search_display.php" id="cse-search-box" autocomplete="off">
 				<input style="padding: 2px 5px; height: 20px; font-size: 16px;" type="text" id="search_text" name="search_text"  />
 				<input style="font-size: 16px; padding: 1px 10px;" type="submit" name="sa" value="Search"/>
 			</form>

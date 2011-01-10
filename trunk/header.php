@@ -63,6 +63,8 @@ content = "<?php echo getSummary()?>" />
     
 <!--<script type="text/javascript" src="/js/mootools-1.2.3-core-yc.js"></script>-->
 <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js"></script>
+<script language="JavaScript" src="js/jquery.autocomplete.js" ></script>
+<link rel="stylesheet" type="text/css" href="css/jquery.autocomplete.css" />
 <script type="text/javascript" src="/js/integrated.js"></script>
 <script type="text/javascript" src="js/jquery/fancybox/jquery.fancybox-1.2.6.pack.js"></script>
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<?=$GOOGLE_API_KEY?>" type="text/javascript"></script>
