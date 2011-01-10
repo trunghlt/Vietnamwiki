@@ -23,6 +23,13 @@ jQuery(document).ready(function(){
 			}		
 		}
 	});
+		jQuery("#search_text").autocomplete("requests/findsearch.php",{
+                        width: 410,
+                        max: 10,
+                        highlight: false,
+                        scroll: true,
+                        scrollHeight: 300
+                });
 });
 function loadNotification(){
     jQuery.post("/requests/notification.php", {},function(data){
