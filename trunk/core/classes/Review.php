@@ -121,7 +121,13 @@ class Review {
             $q->query("Select distinct post_id from reviews where review_date_time > ".$time." ORDER BY review_date_time DESC");
             if($q->re)
             {
-                if($q->n>0){
+                if($q->n>1){
+                    while($r = mysql_fetch_assoc($q->re))
+                        $array[] = $r;
+                    return $array;
+                }
+                else{
+                    $q->query("Select distinct post_id from reviews ORDER BY review_date_time DESC limit 0,10");
                     while($r = mysql_fetch_assoc($q->re))
                         $array[] = $r;
                     return $array;

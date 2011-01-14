@@ -35,6 +35,30 @@ class ImageElement{
 					WHERE id = ".$this->id);
 	}
         /*--------------------------------------------------------------
+	Get image list with a string
+	- $str: compare with tag's string
+        - $type :
+         * 1 : search has limit
+	->return a list of image elements
+	-------------------------------------------------------------*/
+        public static function searchImage($str,$type=0){
+            $q = new db;
+            $array = array();
+            if($type==1)
+                $q->query("Select * from images where tags LIKE '%".$str."%' ORDER BY uploaded_at DESC limit 0,5");
+            else
+                $q->query("Select * from images where tags LIKE '%".$str."%' ORDER BY uploaded_at DESC");
+            if($q->re)
+            {
+                if($q->n>0){
+                    while($r = mysql_fetch_assoc($q->re))
+                        $array[] = $r;
+                    return $array;
+                }
+            }
+            return 0;
+        }
+        /*--------------------------------------------------------------
 	Get image list in a destination with time
 	- $time: compare with uploaded time
 	->return a list of image elements
@@ -45,7 +69,13 @@ class ImageElement{
             $q->query("Select distinct dest_id from images where uploaded_at > ".$time." ORDER BY uploaded_at DESC");
             if($q->re)
             {
-                if($q->n>0){
+                if($q->n>1){
+                    while($r = mysql_fetch_assoc($q->re))
+                        $array[] = $r;
+                    return $array;
+                }
+                else{
+                    $q->query("Select distinct dest_id from images ORDER BY uploaded_at DESC limit 0,10");
                     while($r = mysql_fetch_assoc($q->re))
                         $array[] = $r;
                     return $array;
