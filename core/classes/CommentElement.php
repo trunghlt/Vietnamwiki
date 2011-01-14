@@ -86,7 +86,13 @@ class CommentElement{
             $q->query("Select distinct post_id from comments where comment_time > ".$time." ORDER BY comment_time DESC");
             if($q->re)
             {
-                if($q->n>0){
+                if($q->n>1){
+                    while($r = mysql_fetch_assoc($q->re))
+                        $array[] = $r;
+                    return $array;
+                }
+                else{
+                    $q->query("Select distinct post_id from comments ORDER BY comment_time DESC limit 0,10");
                     while($r = mysql_fetch_assoc($q->re))
                         $array[] = $r;
                     return $array;
