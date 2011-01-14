@@ -74,6 +74,27 @@ class DestinationElement {
 		while($row = mysql_fetch_assoc($q->re))
 			$r[] = $row;
 		return @$r;
-	}	
+	}
+        /*--------------------------------------------------------------
+	Get des list with a string
+	- $str: search string in des
+        - $type :
+         * 1 : search has limit
+	->return a list of des
+	-------------------------------------------------------------*/
+        public static function searchDes($str){
+            $q = new db;
+            $array = array();
+            $q->query("Select * from destinations where EngName LIKE '%$str%' limit 0,5");
+            if($q->re)
+            {
+                if($q->n>0){
+                    while($r = mysql_fetch_assoc($q->re))
+                        $array[] = $r;
+                    return $array;
+                }
+            }
+            return 0;
+        }
 }
 ?>

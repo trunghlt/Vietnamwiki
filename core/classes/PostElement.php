@@ -254,6 +254,36 @@ class PostElement {
             $q->query("Select * from posts where post_time > ".$time." ORDER BY post_time DESC");
             if($q->re)
             {
+                if($q->n>1){
+                    while($r = mysql_fetch_assoc($q->re))
+                        $array[] = $r;
+                    return $array;
+                }
+                else{
+                    $q->query("Select * from posts ORDER BY post_time DESC limit 0,10");
+                    while($r = mysql_fetch_assoc($q->re))
+                        $array[] = $r;
+                    return $array;
+                }
+            }
+            return 0;
+        }
+        /*--------------------------------------------------------------
+	Get post list with a string
+	- $str: search string in post_subject
+        - $type :
+         * 1 : search has limit
+	->return a list of post
+	-------------------------------------------------------------*/
+        public static function searchPost($str,$type=0){
+            $q = new db;
+            $array = array();
+            if($type==1)
+                $q->query("Select distinct post_subject from posts_texts where post_subject LIKE '%$str%' || post_summary LIKE '%$str%' || post_text LIKE '%$str%' limit 0,5");
+            else
+                $q->query("Select * from posts_texts where post_subject LIKE '%$str%' || post_summary LIKE '%$str%' || post_text LIKE '%$str%'");
+            if($q->re)
+            {
                 if($q->n>0){
                     while($r = mysql_fetch_assoc($q->re))
                         $array[] = $r;
