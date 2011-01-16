@@ -168,7 +168,7 @@ html, body {
 }
 	#contentTable #postContent {
 		margin-top: 0px;
-		padding: 10px;
+		padding: 5px;
 		overflow-x: hidden;
 	}
 	#contentTable #postContent #postContent_relative{
