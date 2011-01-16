@@ -88,9 +88,9 @@ While ($row = mysql_fetch_array($result)) {
 jQuery(document).ready(function() {
     jQuery(".index_des").css("display", "none");
     jQuery(".des").click(function() {
-        jQuery(".index_active").toggle("slow");
-        $this= jQuery(this);
+        $this = jQuery(this);
         if (!$this.hasClass("des_active")) {
+            jQuery(".index_active").hide("slow");
             jQuery(".des_active").addClass("des");
             jQuery(".des_active").removeClass("des_active");            
             jQuery(".index_active").addClass("index_des");
@@ -99,7 +99,7 @@ jQuery(document).ready(function() {
             $this.addClass("des_active");
             $this.next().find(".index_des").addClass("index_active");
             $this.next().find(".index_des").removeClass("index_des");
-            $this.next().find(".index_active").toggle("slow");
+            $this.next().find(".index_active").show("slow");
         }
     });
 });    
