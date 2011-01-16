@@ -38,13 +38,11 @@ $n = 0;
 $numrow = mysql_num_rows($result);
 While ($row = mysql_fetch_array($result)) {
 	$destId = $row["id"];
-    $n++; ?>
-
-			<?php 	 
-			$class = ($row["id"] == $destination)? "active" : "linksmall";
-			$href = ($n < $numrow)? ("index2.php?id=".$row['id']) : "about.php";
-			?>
- 	<tr id="des_<?php echo $row["id"]?>" class="des">
+    $n++;
+    $is_selected = $row["id"] == $destination;
+	$class = $is_selected? "active" : "linksmall";
+	?>
+ 	<tr id="des_<?=$row["id"]?>" class="des">
 	 	<td width="23px">
 		 	<img style="margin-left: 5px;" src="/css/images/bg/arrow.jpg"/>
 		 </td>
@@ -55,63 +53,27 @@ While ($row = mysql_fetch_array($result)) {
 		</td>
 	</tr>		
 	<tr><td colspan="2" height="0">
-		<div id="itemList_<?php echo $row["id"]?>" name="itemList_<?php echo $row["id"]?>" class="index_des">
-		<ul class="itemList">
-			<?php $i = 0;
-			if (isset($indexMenus[$destId])) {
-				for ($i = 0; $i < sizeof($indexMenus[$destId]); $i++) {
-					$r = $indexMenus[$destId][$i];
-					$indexItemClass = ($photo==0 && $r["id"] == $index_id)? "activeIndex" : "linksmall";
-					?>
-					<li class="indexItem">
-						<?php if ($r["name"] == "Map") { ?>
-							<a class="<?php echo $indexItemClass?> iframe" href="map.php?id=<?php echo $destId?>">Map</a>
-						<?php } else {?>
-							<a id="indexLink<?php echo $r["id"]?>" class="<?php echo $indexItemClass?>" href="<?php echo getIndexPermalink($r["id"])?>">
-							<?php echo $r["name"];?>
-							</a>
-						<?php } ?>
-					</li>
-			<?php }	
-			} ?>
-			<li class="indexItem" >
-			<a class="<?php $class= ($photo==1&&$destination==$row["id"])? "activeIndex":"linksmall"; echo $class ?>" 
-				href="photo.php?dest_id=<?php echo $row["id"]?>&page=1">
-				Photo
-			</a>
-			</li>
-		</ul>
+		<div id="itemList_<?php echo $row["id"]?>" name="itemList_<?php echo $row["id"]?>" class="<?=$is_selected? "index_active":"index_des"?>">
+		    <ul class="itemList">
+			    <?php $i = 0;
+			    if (isset($indexMenus[$destId])) {
+				    for ($i = 0; $i < sizeof($indexMenus[$destId]); $i++) {
+					    $r = $indexMenus[$destId][$i];
+					    $indexItemClass = ($photo==0 && $r["id"] == $index_id)? "activeIndex" : "linksmall";
+					    ?>
+					    <li class="indexItem">
+						    <?php if ($r["name"] == "Map") { ?>
+							    <a class="<?php echo $indexItemClass?> iframe" href="map.php?id=<?php echo $destId?>">Map</a>
+						    <?php } else {?>
+							    <a id="indexLink<?php echo $r["id"]?>" class="<?php echo $indexItemClass?>" href="<?php echo getIndexPermalink($r["id"])?>"><?php echo $r["name"];?></a>
+						    <?php } ?>
+					    </li>
+			    <?php }	
+			    } ?>
+			    <li class="indexItem" ><a class="<?php $class= ($photo==1&&$destination==$row["id"])? "activeIndex":"linksmall"; echo $class ?>" href="photo.php?dest_id=<?php echo $row["id"]?>&page=1">Photo</a></li>
+		    </ul>
 		</div>
-		<script language="javascript">
-			<?php if ($row["id"] != $destination) { ?>
-				jQuery("#itemList_<?php echo $row["id"]?>").hide();
-				jQuery("#itemList_<?php echo $row["id"]?>").attr('class','index_des');
-			<?php } ?> 
-			jQuery("#destItem_<?php echo $row["id"]?>").click(function(){
-				jQuery("#itemList_<?php echo $row["id"]?>").toggle('slow');
-				if(jQuery(".des_active").size()==0){
-					jQuery("#itemList_<?php echo $row["id"]?>").attr('class','index_active');
-					jQuery("#des_<?php echo $row["id"]?>").attr('class','des_active');
-				}
-				else{
-					jQuery(".des_active").each(function (){
-							var id = jQuery(".des_active").find('a').attr('id');
-							var id_sub = id.substring(id.indexOf('_')+1,id.length);
-							if(id_sub!=<?php echo $row["id"]?>){
-								jQuery("#itemList_"+id_sub+"").toggle('slow');
-								jQuery("#itemList_"+id_sub+"").attr('class','index_des');
-								jQuery("#des_"+id_sub+"").attr('class','des');
-								jQuery("#des_<?php echo $row["id"]?>").attr('class','des_active');
-								jQuery("#itemList_<?php echo $row["id"]?>").attr('class','index_active');
-							}
-							else{
-								jQuery("#itemList_<?php echo $row["id"]?>").attr('class','index_active');
-								jQuery("#des_<?php echo $row["id"]?>").attr('class','des');
-							}
-					});
-				}
-			});
-		</script>
+
 	 </td>
 	 </tr>
 	 <tr><td height="1" bgcolor="#e7e6e6" colspan="2"></td></tr>
@@ -121,7 +83,24 @@ While ($row = mysql_fetch_array($result)) {
 ?>
 </tbody>
 </table>
+
 <script>
-jQuery("#des_<?php echo $destination?>").attr('class','des_active');
-jQuery("#itemList_<?php echo $destination?>").attr('class','index_active');
+jQuery(document).ready(function() {
+    jQuery(".index_des").css("display", "none");
+    jQuery(".des").click(function() {
+        jQuery(".index_active").toggle("slow");
+        $this= jQuery(this);
+        if (!$this.hasClass("des_active")) {
+            jQuery(".des_active").addClass("des");
+            jQuery(".des_active").removeClass("des_active");            
+            jQuery(".index_active").addClass("index_des");
+            jQuery(".index_active").removeClass("index_active");
+            $this.removeClass("des");
+            $this.addClass("des_active");
+            $this.next().find(".index_des").addClass("index_active");
+            $this.next().find(".index_des").removeClass("index_des");
+            $this.next().find(".index_active").toggle("slow");
+        }
+    });
+});    
 </script>
