@@ -420,7 +420,7 @@ function cen(a ,b) {
 		<AREA SHAPE = "DEFAULT" NOHREF>
 		</MAP>	
 		<div align="center">
-			<a style="color:#ACA741; color: #ACA741;" href="/Vietnam_general-General-Vietnam-P32">I don't know where to go ?!</a>
+			<a style="color:#ACA741; color: #ACA741;" href="/Vietnam_general-Overview-Vietnam-P32">I don't know where to go ?!</a>
 		</div>
 		</td>
 	<td width="263">
