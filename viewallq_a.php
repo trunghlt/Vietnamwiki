@@ -8,6 +8,11 @@ include('core/session.php');
 	$ip = $_SERVER['REMOTE_ADDR'];
 	process($session_id, $ip);
 include('core/filters.php');
+include('libraries/TalkPHP_Gravatar.php');
+include("core/classes/Questions.php");
+include("core/classes/Answers.php");
+include("core/classes/IpAnswers.php");
+include("core/classes/IpQuestions.php");
 include('header.php');
 include('destination.php');
 include('ajaxLoad.php');
@@ -39,6 +44,11 @@ include('ajaxLoad.php');
 }
 </style>
 <?php
+/*
+ * type:
+ *      = 1 : sort question by time
+ *      = 2 : sort question by like
+ */
     $type_sort = 1;
     $s = 0;
     if(isset($_GET["type_sort"])){
@@ -63,7 +73,7 @@ include('ajaxLoad.php');
                                 <option value="2" <?php if($type_sort==2) echo "selected";?> >Sort Question By Like</option>
                             </select>
                         </div>
-                        <div id="qanda" style="width:820px !important;"><div id="view_qanda"><!-- --></div></div>
+                        <div id="qanda" style="width:820px !important;"><div id="view_qanda"><?php include("q_a_all_body.php");?></div></div>
                     </div>
 		</div>
 	</td>
@@ -76,9 +86,9 @@ include('ajaxLoad.php');
 </tbody>
 </table>
 <script type="text/javascript">
- jQuery(document).ready(function(){
-        load_qanda(<?php echo $s;?>);
-});
+// jQuery(document).ready(function(){
+//       // load_qanda(<?php //echo $s;?>);
+//});
 function signOut() {
 	jQuery.post("/requests/logout.php", {},
 				function(response) {
@@ -99,12 +109,10 @@ function submitLogin(dom,check) {
 				if(parseInt(response)==-2){
                                     jQuery("#dialog_notification").html("This user has been banned");
                                     dialog_notification.dialog('open');
-					//alert("This user has been banned");
                                 }
  				else if(response == 'false'){
                                     jQuery("#dialog_notification").html("Login's fail");
                                     dialog_notification.dialog('open');
-                                   // alert("Login's fail");
                                 }
                                 else
 				{
@@ -128,7 +136,7 @@ function submitLogin(dom,check) {
         jQuery('#questionDialog').remove();
         jQuery('#answerDialog').remove();
         jQuery("#Emailquestion").remove();
-        jQuery.post("/requests/QandA.php",{start:id,num_row:10,type:jQuery("#method_sort").val(),sort:1,type_view:1},function(response){jQuery("#view_qanda").html(response);});
+        window.location = "/viewallq_a.php?s="+id+"&type_sort="+jQuery("#method_sort").val();
     }
     function question(){
        jQuery('#questionDialog').css('visibility','visible').dialog('open');
@@ -162,5 +170,7 @@ include("forms/composeForm.php");
 include("forms/loginForm.php");
 include("forms/register_email.php");
 include("forms/resetPass.php");
+include("forms/askquestion.php");
+include("forms/replyquestion.php");
 include("footer.php");
 ?>
