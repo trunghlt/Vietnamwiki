@@ -107,14 +107,20 @@ class User {
 	public static function check_user($user_id,$post_id=''){
 		$q = new db;
 			$q->query('select * from users where id='.$user_id.' and level=1');
-			if($q->n==0)
-			{
-				if($post_id!=''){
-                                    $q->query('select * from follow where user_id='.$user_id.' and post_id='.$post_id);
-                                            return $q->n;
-                                }
-			}
-			return $q->n;
+                        if($q->re){
+                            if($q->n==0)
+                            {
+                                    if($post_id!=''){
+                                        $q->query('select * from follow where user_id='.$user_id.' and post_id='.$post_id);
+                                        if($q->re)
+                                                return $q->n;
+                                        else
+                                            return 0;
+                                    }
+                            }
+                            return $q->n;
+                        }
+                        return 0;
 	}
 	public static function check_user_post($user_id,$post_id=''){
 		$q = new db;
@@ -177,7 +183,7 @@ class User {
                                             WHERE email='$email'");
                 }
 		if($q->re){
-                    if($q->n){
+                    if($q->n>0){
 			while($r = mysql_fetch_assoc($q->re))
 				$row = $r;
 			return @$row;
@@ -191,12 +197,16 @@ class User {
 		$q->query(" SELECT *
 					FROM users
 					WHERE id=$id");
-		if($q->n>0){			
+                if($q->re){
+                    if($q->n>0){
 			while($r = mysql_fetch_assoc($q->re))
 				$row = $r;
-		}
-		else
-			return 0;
+                    }
+                    else
+                            return 0;
+                }
+                else
+                     return 0;
 		return @$row;
 	}
         // Get User's avatar
@@ -235,12 +245,16 @@ class User {
 		$q->query(" SELECT *
 					FROM users
 					WHERE level=$level");
-		if($q->n>0){			
+                if($q->re){
+                    if($q->n>0){
 			while($r = mysql_fetch_assoc($q->re))
 				$row[] = $r;
-		}
-		else
+                    }
+                    else
 			return 0;
+                }
+                else
+                    return 0;
 		return @$row;		
 	}
         function getname($v){
