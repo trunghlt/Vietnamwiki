@@ -14,7 +14,14 @@ class Review {
 	public $name;
 	public $email;
 	public static $currentReviewListByPostId;
-	
+/*
+ * delete Solr
+ */
+        public static function deleteSolr(){
+		$solr = new Solr;
+                $solr->delete_all_solr(2);
+        }
+        
 	public function query($id) {
 		$this->id = $id;
 		$q = new db;
@@ -78,8 +85,10 @@ class Review {
 					VALUES ({$this->userId}, {$this->postId}, {$this->rateValue}, '{$mysql["reviewText"]}', {$this->reviewDateTime},'{$this->name}','{$this->email}')");		
 		$this->id = mysql_insert_id();
                 $review = Mem::$memcache->get("review_".$this->postId);
-			if($review != NULL)
+			if($review != NULL){
 					Mem::$memcache->delete("review_".$this->postId);
+                        }
+                self::deleteSolr();
 	}
 	
 	public function save() {
@@ -94,6 +103,7 @@ class Review {
 		$review = Mem::$memcache->get("review_".$this->postId);
 			if($review != NULL)
 					Mem::$memcache->delete("review_".$this->postId);
+                        self::deleteSolr();
 	}
         /*--------------------------------------------------------------
 	Check review with a specific id

@@ -3,6 +3,8 @@ session_start();
 $session_id = session_id();
 include('core/common.php');
 include('core/init.php');
+include( 'libraries/Apache/Solr/Service.php' );
+include('core/classes/Solr.php');
 include('core/classes.php');
 include('core/session.php');
 	$ip = $_SERVER['REMOTE_ADDR'];
@@ -10,6 +12,7 @@ include('core/session.php');
 include('header.php'); 
 include('destination.php');
 include('ajaxLoad.php');
+
 ?> 
 
 	<td  class="center" valign="top" style="width:820px;">
