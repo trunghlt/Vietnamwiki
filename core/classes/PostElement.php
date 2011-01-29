@@ -37,7 +37,14 @@ class PostElement {
 	public static function filterReference($reference) {
 		return $reference;
 	}
-		
+/*
+ * delete Solr
+ */
+        public static function deleteSolr(){
+		$solr = new Solr;
+                $solr->delete_all_solr(3);
+        }
+        
 	public function query($id='',$index='') {
 		$q = new db;
                 if($id!='' && $index==''){
