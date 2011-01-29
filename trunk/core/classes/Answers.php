@@ -25,6 +25,13 @@ Variables
 	public $date;
         public $ip;
         public $like_a;
+/*
+ * delete Solr
+ */
+        public static function deleteSolr(){
+		$solr = new Solr;
+                $solr->delete_all_solr(0);
+        }
 /***************************************************************
 delete current memcaches
 ***************************************************************/
@@ -87,6 +94,7 @@ add new record
                             );
                 $this->id = $q->add('answer', $arr);
                 self::deleteMencache();
+                self::deleteSolr();
 	}
 /***************************************************************
 delete table answer
@@ -102,6 +110,7 @@ delete table answer with condition
 		$q = new Active;
 		$q->delete('answer',"id=$id");
                 self::deleteMencache();
+                self::deleteSolr();
 	}
         
 /***************************************************************
@@ -119,7 +128,8 @@ edit a record in table answer
                                 "ip"=>$this->ip
                             );
                 $q->update('answer', $arr,"id=$this->id");
-                self::deleteMencache();;
+                self::deleteMencache();
+                self::deleteSolr();
 	}
 
 /***************************************************************
