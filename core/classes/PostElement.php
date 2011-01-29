@@ -120,8 +120,9 @@ class PostElement {
 								VALUE ('".$this->authorUsername."','create','".$this->id."','".time()."')");
 					$index = Mem::$memcache->get("index_".$this->indexId);
 					if($index != NULL)
-						Mem::$memcache->delete("index_".$this->id);
+						Mem::$memcache->delete("index_".$this->indexId);
 					Follow::set($user_id,$this->indexId);
+                                        self::deleteSolr();
 				}
 				else{
 					$this->id = 0;					
@@ -152,6 +153,7 @@ class PostElement {
 					$index = Mem::$memcache->get("index_".$this->indexId);
 					if($index != NULL)
 						Mem::$memcache->delete("index_".$this->indexId);
+                                        self::deleteSolr();
 			}
 		}
 	}
@@ -163,7 +165,8 @@ class PostElement {
 		$q->query(" DELETE FROM posts
 					WHERE post_id = ".$this->id);
 		$q->query(" DELETE FROM follow
-					WHERE post_id = ".$this->id);						
+					WHERE post_id = ".$this->id);
+                self::deleteSolr();
 	}	
         public 	function method_update($user_id = ''){
             $q = new db;
@@ -182,6 +185,7 @@ class PostElement {
                                         SET index_id = ".$this->indexId."
                                         WHERE post_id = ".$this->id);
                 $this->draft = $this->content;
+                self::deleteSolr();
                 return 0;
         }
 	public function save($user_id="") {
