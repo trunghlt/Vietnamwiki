@@ -39,7 +39,7 @@ $base_fb_url     = 'connect.facebook.com';
  */
 $feed_bundle_id  = 99999999;
 $MEMCACHED_PORT = 11212;
-$HOST_SOLR = "localhost";
-$PORT_SOLR = "8083";
+$HOST_SOLR = "109.123.66.160";
+$PORT_SOLR = "8983";
 $SERVER_SOLR = "solr";
 ?>
