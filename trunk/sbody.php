@@ -10,7 +10,8 @@ function get_value_in_text(){
 	return $arr = file('file.txt');
 }
 function change_value($v){
-		return mysql_real_escape_string(str_replace(" ",'',strtolower($v)));
+		//return mysql_real_escape_string(str_replace(" ", "+", $v));
+    return mysql_real_escape_string($v);
 }
 
       $st = (isset($_REQUEST["search_text"]))?$_REQUEST["search_text"]:"vietnam";
@@ -18,7 +19,7 @@ function change_value($v){
 
 		$st = htmlspecialchars($st, ENT_QUOTES);
 
-		$str = change_value($st);
+		$st = change_value($st);
 
 
 		$type_view = isset($_REQUEST["type_view"])? (is_numeric($_REQUEST["type_view"])?$_REQUEST["type_view"]:4 ): 4;
@@ -203,6 +204,8 @@ function change_value($v){
 			echo "</div>";
 		}
 	}
+        else
+           echo "<span class='style2'>No entry has been found</span><br/><br/>";
  }
  ?>
  </div>
