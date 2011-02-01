@@ -102,27 +102,27 @@ class Solr{
 							$parts[$i]['small_img'] = $r['post_small_img_url'];
 							$parts[$i]['big_img'] = $r['post_big_img_url'];
 							$parts[$i]['date'] = $r['post_time'];
-							$parts[$i]['title'] = $r['post_subject'];
-							$parts[$i]['content'] = $r['post_summary'];
+							$parts[$i]['title'] = trim($r['post_subject']);
+							$parts[$i]['content'] = trim($r['post_summary']);
 						}
 						elseif($num_solr==2){
 							$parts[$i]['id'] = "review_".$r['id'];
 							$parts[$i]['cat'] = $this->solr_path[$num_solr];
 							$parts[$i]['date'] = $r['review_date_time'];
-							$parts[$i]['content'] = $r['review_text'];
+							$parts[$i]['content'] = trim($r['review_text']);
 						}
 						elseif($num_solr==1){
 							$parts[$i]['id'] = "question_".$r['id'];
 							$parts[$i]['cat'] = $this->solr_path[$num_solr];
 							$parts[$i]['date'] = $r['date'];
-							$parts[$i]['content'] = $r['content'];
+							$parts[$i]['content'] = trim($r['content']);
 						}
 						elseif($num_solr==0){
 							$parts[$i]['id'] = "answer_".$r['id'];
 							$parts[$i]['cat'] = $this->solr_path[$num_solr];
 							$parts[$i]['date'] = $r['date'];
 							$parts[$i]['question_id'] = $r['question_id'];
-							$parts[$i]['content'] = $r['content'];
+							$parts[$i]['content'] = trim($r['content']);
 						}
 						$i = $i+1;
 					}
@@ -156,7 +156,7 @@ class Solr{
 		$num = 0;
 		if(is_numeric($num_solr)){
 			if($str!='')
-				$query = array("content: ".$str." AND cat: ".$this->solr_path[$num_solr]);
+				$query = array("content: '".$str."' AND cat:".$this->solr_path[$num_solr]);
 			else
 				$query = array('cat:'.$this->solr_path[$num_solr]);
 			if($type_sort!=null){
@@ -167,7 +167,7 @@ class Solr{
 					$response = $solr->search( $query, $offset, $limit,array('sort' => $str_sort,'fl'=>"*,score","hl"=>"true","hl.fragsize"=>250,'hl.fl'=>'content',"hl.mergeContiguous"=>"true","hl.simple.pre"=>"<span class='highlighted'>","hl.simple.post"=>"</span>") );
 				}
 				else{
-					$response = $solr->search( $query, $offset, $limit,array('sort' => "score asc","hl"=>"true","hl.fragsize"=>250,'hl.fl'=>'content',"hl.mergeContiguous"=>"true","hl.simple.pre"=>"<span class='highlighted'>","hl.simple.post"=>"</span>"));
+					$response = $solr->search( $query, $offset, $limit,array('sort' => "score asc","hl"=>"true",'hl.fl'=>'content',"hl.mergeContiguous"=>"true","hl.simple.pre"=>"<span class='highlighted'>","hl.simple.post"=>"</span>",));
 				}
 				$arr = array();
 				if ( $response->getHttpStatus() == 200 ) {
