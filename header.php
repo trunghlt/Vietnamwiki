@@ -77,8 +77,6 @@ content = "<?php echo getSummary()?>" />
 <!--[if lt IE 7]>
 <link rel="stylesheet" type="text/css" href="css/ie7/skin.css" />
 <![endif]-->
-<link rel="stylesheet" type="text/css" href="css/tango/skin.css" />
-<script type="text/javascript" src="js/jquery.jcarousel.js"></script>
 <style>
 /*******TIP WINDOW*******/
 #tipWindow {
