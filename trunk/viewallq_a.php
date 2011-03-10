@@ -23,7 +23,7 @@ include('ajaxLoad.php');
         font-size: 14px;
     }
     #view_qanda > ul > li {
-        border-bottom: double;
+        padding-bottom: 5px;
     }
 .question{
     text-align: left;
