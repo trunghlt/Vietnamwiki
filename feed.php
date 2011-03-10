@@ -1,4 +1,6 @@
 <?php
+header("location:/Vietnam_general-Overview-I40");
+
 include('core/common.php');
 include('core/init.php');
 include('core/classes.php');

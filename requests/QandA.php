@@ -145,7 +145,9 @@ switch($type){
                         }
                         echo "</ul>";
                     }
-                    echo "<div class='clear'></div></li>";
+                    ?>
+                    <div style='clear: both; border: none;'></div></li>
+                    <?
                 }
             }
             echo "</ul>";
