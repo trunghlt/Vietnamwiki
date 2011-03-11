@@ -40,7 +40,7 @@ div.teamProfile {
 
 <div class="teamProfile">
 	<div class="ava">
-		<img width="80" height="auto" src="http://sphotos.ak.fbcdn.net/hphotos-ak-snc3/hs301.snc3/28675_407504360688_720015688_4737224_1807445_n.jpg"/>		
+		<img width="80" height="auto" src="http://a8.sphotos.ak.fbcdn.net/hphotos-ak-snc4/76822_461857000688_720015688_6021789_2577618_n.jpg"/>		
 	</div>
 	<div class="description">
 		<div class="name">Trung Huynh</div>

@@ -24,6 +24,8 @@ html, body {
 	height: 100%;
 }
 
+.highlighted {background: #ff7;}
+
 #grandWrapper {
 	position: absolute;
 	height: auto !important;
@@ -562,18 +564,11 @@ a.linksmall:hover {
 	border-bottom: #000000 1px solid;
 }
 
-.index_des a.linksmall{
-	color: #0645AD;
-	font-family: Arial, Helvetica, serif;
-	font-size:12px;
-	text-decoration:none;
-}
-
 .index_active {
 	width: 160px;
 }
 
-.index_active .linksmall{
+.index_des a.linksmall, .index_active .linksmall{
 	color: #333;
 	font-family: Arial, Helvetica, serif;
 	font-size: 12px;
@@ -1247,7 +1242,7 @@ div.demo-description {
 #reviewLowerBound,#FillEmailDialog,#commentDialog,#EmailComment1,#editloginDialog,#confirm,#deleteConfirmDialog{
 	visibility:hidden;
 }
-#restoreConfirmDialog,#rej_confirm,#sendmail,#photoUploadDialog,.index_des,#resetDialog,#questionDialog,#answerDialog{
+#restoreConfirmDialog,#rej_confirm,#sendmail,#photoUploadDialog, #resetDialog,#questionDialog,#answerDialog{
 	visibility:hidden;
 }
 .des{
@@ -1282,8 +1277,14 @@ div.demo-description {
 }
 
 #view_qanda > ul > li {
-    border-bottom: 1px #DDD solid;
 }
+
+    #view_qanda img {
+        width: 30px;
+        height: 30px;
+        padding: 0 0;
+        margin-right: 5px;
+    }
 
 #qanda ul li{
     padding-top: 10px;
@@ -1300,9 +1301,6 @@ div.demo-description {
     width: 170px;
     margin-bottom: 10px;
 }
-#qanda img{
-    padding: 3px 2px 2px 0px;
-}
 #view_qanda{
     margin: 5px;
     overflow: hidden;
@@ -1314,6 +1312,9 @@ div.demo-description {
 	padding-right: 3px;
 	margin-left: 5px;	
 }
+    .like_wrapper:hover {
+        background-color: #db1c00;
+    }
 
 ._like,._liked{
     background:url("images/liked.gif") no-repeat;
@@ -1331,6 +1332,5 @@ div.demo-description {
     line-height: 19px;
     background-position: 100% 0px;
     font-size:11px;
-    background-color: #db1c00;
     color:white;
 }

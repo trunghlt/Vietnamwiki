@@ -31,6 +31,7 @@ function checkLike($id,$type){
    $num_row = 10;
 
 
+
 switch($type_sort){
     case 1:{
         $q_s = Mem::$memcache->get("ques");
@@ -78,10 +79,18 @@ switch($type_sort){
                         $like_str_q = "<span class='like_wrapper'><a style='cursor: pointer;' onclick='like($v[id],1,$v[like_q],$v[id]);' id='like_q_$v[id]'><span id='like_num_$v[id]' class='_like'>$v[like_q]</span></a></span> &nbsp;&nbsp;";
                     }
 
-                    echo "<li><div class='question' id='l_q_$v[id]'><img src='".$v['avatar']."' height=30 width=30 align='left'/>$v[name]: ".$v['content']."&nbsp;&nbsp;<a style='cursor: pointer; color: #DB1C00;text-decoration: underline;' onclick='answer($v[id]);' >reply</a> $like_str_q</div>";
-
+                    
+                    //echo "<li><div class='question' id='l_q_$v[id]'><img src='".$v['avatar']."' align='left'/>$v[name] ".$v['content']."&nbsp;&nbsp;<a style='cursor: pointer; color: #DB1C00;text-decoration: underline;' onclick='answer($v[id]);' >reply</a> $like_str_q</div>";
+                    ?>
+                    <li>
+                        <div class='question' id='l_q_<?=$v["id"]?>'>
+                            <img src="<?=$v['avatar']?>" align="left"/>
+                            <?=$v["name"]?>  <?=$v["content"]?>  &nbsp;&nbsp;<a style='cursor: pointer; color: #DB1C00;text-decoration: underline;' onclick="answer(<?=$v["id"]?>);">reply</a><?=$like_str_q?><br/>
+                            <div style="clear: both"></div>
+                        </div>
+                    <?
                     if(is_array($a_r)){
-                        echo "<ul id='q$v[id]'>";
+                        echo "<ul id='$v[id]'>";
                         foreach ($a_r as $v2)
                         {
                             ////////////////////////////
@@ -92,9 +101,13 @@ switch($type_sort){
                                 $like_str_a = "<span class='like_wrapper'><a style='cursor: pointer;' onclick='like($v2[id],2,$v2[like_a],$v[id]);' id='like_a_$v2[id]'><span id='like_num_a_$v2[id]' class='_like'>$v2[like_a]</span></a></span>";
                             }
                             /////////////////////////////
-                            if($v2['question_id']==$v['id'])
-                                echo "<li><img src='".$v2['avatar']."' height=30 width=30 align='left'/>$v2[name]: ".$v2["content"]." $like_str_a</li>";
-
+                            if($v2['question_id']==$v['id']) {?>
+                                <li class="answer">
+                                    <img src='<?=$v2["avatar"]?>' align='left'/>
+                                    <span class="content"><?=$v2["name"]?>  <?=$v2["content"]?> <?=$like_str_a?></span>
+                                </li>
+                                <div style="clear: both"></div>
+                            <?}
 
                         }
                         echo "</ul>";

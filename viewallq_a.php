@@ -29,7 +29,13 @@ include('ajaxLoad.php');
     text-align: left;
     width: 800px;
     margin-bottom: 10px;
+    background: #EEE;
+    padding: 10px;
 }
+
+.anwser {
+}
+
 .phantrang ul{
     margin:0px;
     padding: 0px;
@@ -42,6 +48,14 @@ include('ajaxLoad.php');
     color: #CC0000;
     width: 50px;
 }
+
+div.sort {border-bottom: 1px solid #777; margin-top: 20px; border-spacing: 0; height: 30px;}
+    div.sort span.header {color: #900; font-size: 20px;}
+    div.sort .tabs {float: right; border-spacing: 0; height: 31px; margin-right: 50px;}
+        div.sort .tabs span {font-size: 16px; float: left; line-height: 33px; color: #777;}
+        div.sort .tabs a {border: 1px solid #777; margin-left: 20px; line-height: 33px; font-size: 12px; text-decoration: none; padding: 5px; }
+        div.sort .tabs a.current {border-bottom: 1px solid white; font-size: 16px;}
+    
 </style>
 <?php
 /*
@@ -66,13 +80,15 @@ include('ajaxLoad.php');
 		<div id="menuWrapper"><div id="toolbar"><?php getToolbarHTML();?></div></div>
 		<div id="contentTable">
                     <div>
-                        <h1>Questions and Answers</h1>
                         <div class="sort">
-                            <select id="method_sort" onchange="load_qanda(<?php echo $s;?>);">
-                                <option value="1" <?php if($type_sort==1) echo "selected";?> >Sort Question By Time</option>
-                                <option value="2" <?php if($type_sort==2) echo "selected";?> >Sort Question By Like</option>
-                            </select>
-                        </div>
+                            <span class="header">Questions and Answers</span>
+                            <div class="tabs">
+                                <span>Sorted by </span>
+                                <a class='<?=$type_sort==1? "current":""?>' href="/viewallq_a.php?s=0&type_sort=1"/>Newest</a>
+                                <a class='<?=$type_sort==2? "current":""?>' href="/viewallq_a.php?s=0&type_sort=2"/>Like</a>
+                            </div>
+                            <div style="clear: both"></div>
+                        </div>                        
                         <div id="qanda" style="width:820px !important;"><div id="view_qanda"><?php include("q_a_all_body.php");?></div></div>
                     </div>
 		</div>

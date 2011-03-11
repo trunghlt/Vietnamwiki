@@ -1,10 +1,3 @@
-<style>
-	.highlighted{
-		color:red;
-	}
-</style>
-<div class="seach_body">
-<h1>Search result:</h1>
 <?php
 function get_value_in_text(){
 	return $arr = file('file.txt');
