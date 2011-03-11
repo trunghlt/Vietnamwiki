@@ -172,9 +172,9 @@ switch($type){
     if($type_view == 2){
      if($s>0){
 ?>
-    <div class='prev'><a onclick="load_qanda(<?php echo $s-$row_per_page;?>);" style=" cursor: pointer; color: #CC0000; text-decoration: underline;">&laquo; Prev</a></div>
+&nbsp;&nbsp;<a onclick="loadQandA({start: <?=$s-$row_per_page;?>});" style=" cursor: pointer; color: #CC0000; text-decoration: underline;">&laquo;Prev</a>&nbsp;&nbsp;
 <?php } if(($s+$row_per_page) <= $n_row) {?>
-<div class='next'><a  onclick="load_qanda(<?php echo $s+$row_per_page;?>);" style=" cursor: pointer; color: #CC0000; text-decoration: underline;">&nbsp;Next &raquo;</a></div>
+    &nbsp;&nbsp;<a  onclick="loadQandA({start: <?=($s+$row_per_page);?>});" style=" cursor: pointer; color: #CC0000; text-decoration: underline;">Next &raquo;</a>&nbsp;&nbsp;
 <?php }?>
 
 <?php

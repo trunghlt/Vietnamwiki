@@ -17,13 +17,9 @@ include('destination.php');
 	<div id='col2'>
 		<table class="contentTable"><tbody><tr><td >
 		<h1>Recruiting</h1>
-		<p>VietnamWiki group is looking for: </p>
-		<ul>
-			<li>Part-time travel writers.</li>
-			<li>Part-time web developers.</li>
-		</ul>
+		<p>VietnamWiki team are looking for: </p>
 		
-		<h2>Part-time travel writer</h2>
+		<h2>Volunteer travel writers</h2>
         <img src="http://www.clker.com/cliparts/2/6/8/4/122361306154509854shokunin_backpacker_on_a_phone.svg.hi.png" style="width: 140px; height: auto; float: left; margin-right: 50px;"/>
         <p>The role is to do research and to write articles about traveling information to Vietnam for the website in English. We do not require much from applicants. If you feel you have these following abilities and characteristics, please send your CV (in English) to vietnamwiki@gmail.com:</p>
         <ul>
@@ -39,7 +35,7 @@ include('destination.php');
         <p><strong>Important:</strong> Please indicate clearly what relevant modules you have taken in your high school, university and their marks (if available).</p>
 
         <p>Once you send your CV (or any queries) to us, we will try our best to reply in 2 working days.</p>
-
+<?/*
 	    <h2>Part-time web developer</h2>
         <img src="http://www.wanderingsandmusings.com/wp-content/uploads/2008/08/ninja.jpg" style="width: 200px; height: auto; float: left;"/>
 	    <p>The role is to develop the website using PHP, MySQL, Javascript and JQuery. We do not require much from applicants. If you feel you have these following abilities and characteristics, please send your CV (in English) to vietnamwiki@gmail.com:</p>
@@ -56,6 +52,7 @@ include('destination.php');
 	    <p><strong>Important:</strong> Please indicate clearly what relevant modules you have taken in your high school, university and their marks (if available).</p>
 
 	    <p>Once you send your CV (or any queries) to us, we will try our best to reply in 2 working days.</p>
+*/?>
 	</td><tr></tbody></table>
 </div>
 </td>
