@@ -69,13 +69,13 @@ else
 	$pnum = substr_count($content, $ps) + 1;
 
 	//content
-			function strpos_n($x, $c, $n) {
-				$p = strpos($x, $c);
-				for ($i = 2; $i <= $n; $i++) {
-					$p = strpos($x, $c, $p + 1);
-				}
-				return $p;
-			}
+	function strpos_n($x, $c, $n) {
+		$p = strpos($x, $c);
+		for ($i = 2; $i <= $n; $i++) {
+			$p = strpos($x, $c, $p + 1);
+		}
+		return $p;
+	}
 	$start = ($page == 1)? 0 : strpos_n($content, $ps, $page - 1) + 1;
 	$end = ($page == $pnum)? strlen($content) - 1 : strpos_n($content, $ps, $page) - 1;
 	$len = $end - $start + 1;
@@ -110,11 +110,25 @@ else
 	}
 ?>
 
-	<iframe src="http://www.facebook.com/plugins/like.php?href=<?=$like_url?>&amp;layout=button_count&amp;show_faces=true&amp;width=90&amp;action=like&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px; float:right;" allowTransparency="true"></iframe>
-<?
-	//title
-	echo "<h1>$title</h1>";      
-	
+	<div class="title_wrapper">
+	    <span class="header"><?=$title?></h1>
+	    
+        <?//should be deprecated by a php function
+    	$clean["postId"] = $post_id;
+        $currentUser = new User;
+    	$currentUser->query(myUser_id(myip())); 
+        ?>
+        <?if ((!$postElement->locked)||($currentUser->level == 1)|| User::check_user_post($currentUser->id, $clean["postId"])) { ?>
+		    <a class='link' id='edit_link' onClick='editClick()'>[Edit]</a>			
+		<?} else { ?>
+            <a class='link' onClick="jQuery('#type_login').val(2);loginDialog.css('visibility','visible').dialog('open')">[Edit]</a>		
+        <?}?>
+        
+        
+	    <iframe src="http://www.facebook.com/plugins/like.php?href=<?=$like_url?>&amp;layout=button_count&amp;show_faces=true&amp;width=90&amp;action=like&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px; float:right;" allowTransparency="true"></iframe>
+	    <div style="clear: both"></div>
+	</div>
+	<?
 	echo "<div id='postContent_relative'>";
 		echo $s;
 	echo "</div>";
