@@ -66,18 +66,8 @@ div.teamProfile {
 
 <div style="clear: both"></div>
 
-<div class="teamProfile">
-	<div class="ava">
-		<img style="width: 80px; height: auto;" src="http://photos-g.ak.fbcdn.net/hphotos-ak-snc3/hs011.snc3/11865_179255355735_640930735_3250160_1903367_n.jpg"/>		
-	</div>
-	<div class="description">
-		<div class="name">Trang Dang</div>
-		Trang is pursuing her MBM in the University of Bristol, UK. She spent 18 years in <a href="/Da_Nang-General-Da_Nang_general_information-P10">Da Nang</a> and 4 years in <a href="/Ho_Chi_Minh-General-Ho_Chi_Minh_general_information-P11">Ho Chi Minh</a> before coming to the UK. She loves her litle home town <a href="/Hoi_An__My_Son-General-Hoi_An-P9">Hoi An</a> and knows every bit of it.
-		Ah, believe it or not, she thinks she can fly !!!
-	</div>
-</div>
 <div style="clear: both"></div>
-<p>and other team members including Uyen Nguyen (editor), Hang Phan (editor) and Hieu Tran (web developer).</p>
+<p>and other team members including  Hieu Tran (developer), Trang Dang (editor), Uyen Nguyen (editor), Hang Phan (editor).</p>
 
 
 <br /><br /><br /> <br/>
