@@ -182,10 +182,10 @@ class Solr{
 			}
 
 				if($str_sort!=""){
-					$response = $solr->search( $query, $offset, $limit,array('sort' => $str_sort,'fl'=>"*,score","hl"=>"true","hl.fragsize"=>250,'hl.fl'=>'content',"hl.mergeContiguous"=>"true","hl.simple.pre"=>"<span class='highlighted'>","hl.simple.post"=>"</span>") );
+					$response = $solr->search( $query, $offset, $limit,array('sort' => $str_sort,'fl'=>"*,score","hl"=>"true","hl.fragsize"=>250,'hl.fl'=>'content,summary,destination,index,title',"hl.mergeContiguous"=>"true","hl.simple.pre"=>"<span class='highlighted'>","hl.simple.post"=>"</span>") );
 				}
 				else{
-					$response = $solr->search( $query, $offset, $limit,array("hl"=>"true",'hl.fl'=>'content',"hl.mergeContiguous"=>"true","hl.fragsize"=>250,"hl.simple.pre"=>"<span class='highlighted'>","hl.simple.post"=>"</span>",));
+					$response = $solr->search( $query, $offset, $limit,array("hl"=>"true",'hl.fl'=>'content,summary,destination,index,title',"hl.mergeContiguous"=>"true","hl.fragsize"=>250,"hl.simple.pre"=>"<span class='highlighted'>","hl.simple.post"=>"</span>",));
 				}
 				$arr = array();
 				if ( $response->getHttpStatus() == 200 ) {
