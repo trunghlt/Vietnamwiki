@@ -81,6 +81,7 @@ class Solr{
 	*/
         public function add_data($num_solr){
             $q = new Db;
+			$q2 = new Db;
             if(!is_numeric($num_solr)){
                 if($num_solr > 3 || $num_solr < 0)
                     return 0;
@@ -99,17 +100,34 @@ class Solr{
 						if($num_solr==3){
 							$parts[$i]['id'] = "article_".$r['post_id'];
 							$parts[$i]['cat'] = $this->solr_path[$num_solr];
+							$q2->query("select index_menu.name,destinations.EngName from index_menu,destinations where index_menu.id = ".$r['index_id']." and destinations.id = index_menu.dest_id");
+							$r2 = mysql_fetch_assoc($q2->re);
+							$parts[$i]['destination'] = $r2['EngName'];
+							$parts[$i]['index'] = $r2['name'];
 							$parts[$i]['small_img'] = $r['post_small_img_url'];
 							$parts[$i]['big_img'] = $r['post_big_img_url'];
 							$parts[$i]['date'] = $r['post_time'];
-							$parts[$i]['title'] = trim($r['post_subject']);
-							$parts[$i]['content'] = trim($r['post_summary']);
+							$parts[$i]['title'] = $r['post_subject'];
+							$parts[$i]['summary'] = $r['post_summary'];
+							$parts[$i]['content'] = $r['post_text'];
 						}
 						elseif($num_solr==2){
 							$parts[$i]['id'] = "review_".$r['id'];
 							$parts[$i]['cat'] = $this->solr_path[$num_solr];
 							$parts[$i]['date'] = $r['review_date_time'];
-							$parts[$i]['content'] = trim($r['review_text']);
+							
+							$q2->query("select posts_texts.post_subject,posts.index_id from posts_texts,reviews,posts where posts_texts.post_id = reviews.post_id and posts_texts.post_id = posts.post_id");
+							$r2 = mysql_fetch_assoc($q2->re);
+							
+							$title = $r2['post_subject'];
+							
+							$q2->query("select index_menu.name,destinations.EngName from index_menu,destinations where index_menu.id = ".$r2['index_id']." and destinations.id = index_menu.dest_id");
+							$r2 = mysql_fetch_assoc($q2->re);
+							
+							$parts[$i]['destination'] = $r2['EngName'];
+							$parts[$i]['index'] = $r2['name'];	
+							$parts[$i]['title'] = $title;
+							$parts[$i]['content'] = $r['review_text'];	
 						}
 						elseif($num_solr==1){
 							$parts[$i]['id'] = "question_".$r['id'];
