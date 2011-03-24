@@ -66,7 +66,6 @@ div.teamProfile {
 
 <div style="clear: both"></div>
 
-<div style="clear: both"></div>
 <p>and other team members including  Hieu Tran (developer), Trang Dang (editor), Uyen Nguyen (editor), Hang Phan (editor).</p>
 
 
