@@ -685,6 +685,16 @@ h1  {
 	border-color : gray;
 }
 
+div.title_wrapper { border-bottom: 1px solid #777; margin-bottom: 20px; margin-top: 10px;}
+
+    h1.viewtopic_title {
+        float: left;
+    }
+    
+    span.header {color: #900; font-size: 20px;}
+
+
+
 h2  {
 	color : #990000;
 	font-size : 16px;
@@ -1279,8 +1289,6 @@ div.demo-description {
 #view_qanda > ul > li {
 }
 
-
-
     #view_qanda img {
         width: 30px;
         height: 30px;
@@ -1292,7 +1300,7 @@ div.demo-description {
     padding-top: 10px;
 }
 #qanda ul li ul{
-    margin-left: 30px;
+    margin-left: 50px;
 }
 #qanda ul li ul li{
     margin-bottom: 10px;

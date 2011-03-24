@@ -48,7 +48,9 @@ While ($row = mysql_fetch_array($result)) {
 		 </td>
 		<td>
 			<p style='margin-bottom: 2px; margin-top: 2px;'>
-				<a id="destItem_<?php echo $row["id"]?>" class='<?php echo $class?>' style="cursor:pointer;"><?php echo $row["EngName"]?></a>
+				<a id="destItem_<?php echo $row['id']?>" class='<?php echo $class?>' style="cursor:pointer;">
+				    <?php echo $row["EngName"]?>
+			    </a>
 			</p>
 		</td>
 	</tr>		
