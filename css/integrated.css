@@ -685,7 +685,6 @@ h1  {
 	border-color : gray;
 }
 
-
 div.title_wrapper { border-bottom: 1px solid #777; margin-bottom: 20px; margin-top: 10px;}
 
     h1.viewtopic_title {
@@ -761,6 +760,7 @@ td  {
 	font-family : Arial, Helvetica, serif;
 }
 
+<<<<<<< HEAD:css/integrated.css
 div.founder_words {
     background: #FFF;
     border: 1px solid #AAA;
@@ -771,6 +771,8 @@ div.founder_words {
 }
 
 
+=======
+>>>>>>> github/master:css/integrated.css
 a.latestact {
 	color : Olive;
 	font-size : 11px;
