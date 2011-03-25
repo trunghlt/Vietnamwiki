@@ -104,7 +104,7 @@ function change_value($v){
 				$bigImgURL = htmlspecialchars_decode($row["post_big_img_url"], ENT_QUOTES);
 
 			?>
-			<div style="clear:left;">
+			<div style="clear:both;">
 			<div style="float: left; margin-right: 10px;">
 				<?php if ( $smallImgURL!="" && (rtrim($bigImgURL) != "") ) { ?>
 					<a rel="lightbox" href="<?php echo $bigImgURL?>">
@@ -134,7 +134,12 @@ function change_value($v){
 			$s = str_replace("\'","'",$s);
 			$s = str_replace('\"','"',$s);
 			$s = str_replace('|','&',$s);
-			echo $s . "</p>";
+		    
+		    # Temporary fix for broken html snippet of search
+		    echo $row["summary"] . "</p>";
+		    # ---- genuine version ------
+			# echo $s . "</p>";
+			
 				if(isset($sorl2)){
 				  if($type_view==0)
 					$arr2 = $sorl2->get_a_q(1,$row['question_id']);

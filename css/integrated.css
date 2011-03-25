@@ -760,7 +760,6 @@ td  {
 	font-family : Arial, Helvetica, serif;
 }
 
-<<<<<<< HEAD:css/integrated.css
 div.founder_words {
     background: #FFF;
     border: 1px solid #AAA;
@@ -771,8 +770,6 @@ div.founder_words {
 }
 
 
-=======
->>>>>>> github/master:css/integrated.css
 a.latestact {
 	color : Olive;
 	font-size : 11px;
@@ -1313,7 +1310,7 @@ div.demo-description {
     padding-top: 10px;
 }
 #qanda ul li ul{
-    margin-left: 50px;
+    margin-left: 30px;
 }
 #qanda ul li ul li{
     margin-bottom: 10px;

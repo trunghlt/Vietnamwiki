@@ -192,6 +192,7 @@ class Solr{
 					if ( $response->response->numFound > 0 ) {
 						$num = $response->response->numFound;
 						foreach ( $response->response->docs as $doc ) {
+						    $summary = isset($doc->summary)? $doc->summary:"";						    
 							if(isset($doc->small_img)){
 								$small_img = $doc->small_img;
 							}
@@ -227,7 +228,8 @@ class Solr{
 											'post_small_img_url'=> $small_img,
 											'question_id'=>$question_id,
 											'post_big_img_url'=> $big_img,
-											'summary' => $content_hight[0]
+											'hightlighted_content' => $content_hight[0],
+											'summary' => $summary
 										);
 							$arr[] = $temp;
 						}
