@@ -109,14 +109,14 @@ class Solr{
 							$parts[$i]['date'] = $r['post_time'];
 							$parts[$i]['title'] = $r['post_subject'];
 							$parts[$i]['summary'] = $r['post_summary'];
-							$parts[$i]['content'] = $r['post_text'];
+							$parts[$i]['content'] = $r2['EngName']." ".$r2['name']." ".$r['post_text'];
 						}
 						elseif($num_solr==2){
 							$parts[$i]['id'] = "review_".$r['id'];
 							$parts[$i]['cat'] = $this->solr_path[$num_solr];
 							$parts[$i]['date'] = $r['review_date_time'];
-							
-							$q2->query("select posts_texts.post_subject,posts.index_id from posts_texts,reviews,posts where posts_texts.post_id = reviews.post_id and posts_texts.post_id = posts.post_id");
+							$parts[$i]['post_id'] = $r['post_id'];
+							$q2->query("select posts_texts.post_subject,posts.index_id from posts_texts,posts where posts_texts.post_id = $r[post_id] and posts.post_id = $r[post_id]");
 							$r2 = mysql_fetch_assoc($q2->re);
 							
 							$title = $r2['post_subject'];
@@ -172,9 +172,10 @@ class Solr{
 		}
 		$str_sort = '';
 		$num = 0;
+		$link = "";
 		if(is_numeric($num_solr)){
 			if($str!='')
-				$query = array("content: '".$str."' AND cat:".$this->solr_path[$num_solr]);
+				$query = array("content: \"".$str."\" AND cat:".$this->solr_path[$num_solr]);
 			else
 				$query = array('cat:'.$this->solr_path[$num_solr]);
 			if($type_sort!=null){
@@ -182,7 +183,7 @@ class Solr{
 			}
 
 				if($str_sort!=""){
-					$response = $solr->search( $query, $offset, $limit,array('sort' => $str_sort,'fl'=>"*,score","hl"=>"true","hl.fragsize"=>250,'hl.fl'=>'content,summary,destination,index,title',"hl.mergeContiguous"=>"true","hl.simple.pre"=>"<span class='highlighted'>","hl.simple.post"=>"</span>") );
+					$response = $solr->search( $query, $offset, $limit,array('sort' => $str_sort,'fl'=>"*,score","hl"=>"true","hl.fragsize"=>250,'hl.fl'=>'content',"hl.mergeContiguous"=>"true","hl.simple.pre"=>"<span class='highlighted'>","hl.simple.post"=>"</span>") );
 				}
 				else{
 					$response = $solr->search( $query, $offset, $limit,array("hl"=>"true",'hl.fl'=>'content,summary,destination,index,title',"hl.mergeContiguous"=>"true","hl.fragsize"=>250,"hl.simple.pre"=>"<span class='highlighted'>","hl.simple.post"=>"</span>",));
@@ -213,6 +214,8 @@ class Solr{
 							}
 							else
 								$content_hight[0] = $doc->content;
+							$content = filter_content_html($content_hight[0]);
+							$summary = filter_content_html(isset($doc->summary)? $doc->summary:"");								
 							if(isset($doc->question_id))
 								$question_id = $doc->question_id;
 							else
@@ -221,14 +224,19 @@ class Solr{
 								$subject = $doc->title;
 							else
 								$subject = $doc->cat;
+							if($num_solr==3)
+								$link = getPostPermaLink($id[1]);
+							else if($num_solr==2)
+								$link = "review.php?&id=".$doc->post_id;
 							$temp = array(
 											'id' => $id[1],
-											'subject' => $subject,
-											'date' => $doc->date,
-											'post_small_img_url'=> $small_img,
+											'subject' => htmlspecialchars_decode($subject,ENT_QUOTES),
+											'link'=> $link,
+											'date' => date("d M, Y H:i",$doc->date),
+											'post_small_img_url'=> rtrim(htmlspecialchars_decode($small_img),ENT_QUOTES),
 											'question_id'=>$question_id,
-											'post_big_img_url'=> $big_img,
-											'hightlighted_content' => $content_hight[0],
+											'post_big_img_url'=> rtrim(htmlspecialchars_decode($big_img),ENT_QUOTES),
+											'hightlighted_content' => $content,
 											'summary' => $summary
 										);
 							$arr[] = $temp;
@@ -278,9 +286,9 @@ class Solr{
 							$id = explode('_',$doc->id);
 							$temp = array(
 											'id' => $id[1],
-											'subject' => $doc->cat,
-											'date' => $doc->date,
-											'summary' => $doc->content
+											'subject' => htmlspecialchars_decode($doc->cat,ENT_QUOTES),
+											'date' => date("d M, Y H:i",$doc->date),
+											'summary' => filter_content_html($doc->content)
 										);
 							$arr[] = $temp;
 						}
