@@ -366,6 +366,16 @@ function update_image($id, $loc, $des, $tags) {
 		$str = str_replace('</frame>',' ',$str);
 		return $str;
 	}
+	function filter_content_html($s){
+		if($s!=""){
+			$s = htmlspecialchars_decode($s,ENT_QUOTES);
+			$s = str_replace("\'","'",$s);
+			$s = str_replace('\"','"',$s);
+			$s = str_replace('|','&',$s);
+			return $s;
+		}
+		return "";
+	}
 // check email
 function c_email($s){
 	$str = "/[a-zA-Z0-9._]+\@[a-zA-Z0-9]{2,}\.[a-zA-Z]{2,}/";	
