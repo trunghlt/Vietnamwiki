@@ -118,12 +118,13 @@ else
         $currentUser = new User;
     	$currentUser->query(myUser_id(myip())); 
         ?>
-        <?if ((!$postElement->locked)||($currentUser->level == 1)|| User::check_user_post($currentUser->id, $clean["postId"])) { ?>
-		    <a class='link' id='edit_link' onClick='editClick()'>[Edit]</a>			
-		<?} else { ?>
+        <?if (logged_in() || chkFbLoggedIn()) {
+            if ((!$postElement->locked)||($currentUser->level == 1)|| User::check_user_post($currentUser->id, $clean["postId"])) { ?>
+		        <a class='link' id='edit_link' onClick='editClick()'>[Edit]</a>			
+	        <?}
+		} else { ?>
             <a class='link' onClick="jQuery('#type_login').val(2);loginDialog.css('visibility','visible').dialog('open')">[Edit]</a>		
         <?}?>
-        
         
 	    <iframe src="http://www.facebook.com/plugins/like.php?href=<?=$like_url?>&amp;layout=button_count&amp;show_faces=true&amp;width=90&amp;action=like&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px; float:right;" allowTransparency="true"></iframe>
 	    <div style="clear: both"></div>
